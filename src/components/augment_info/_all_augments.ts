@@ -17,20 +17,18 @@ function addAugmentToPool(
     arr: Array<Array<Augment>>,
     target: Array<{ group: string; augments: Array<Augment> }>,
 ): void {
-    let group: string = "";
+    let group: string = arr[0][0].group;
     let augments: Array<Augment> = [];
-
-    arr.forEach((aug_arr) => {
-        aug_arr.forEach((aug) => {
+    arr.forEach((aug_lvl) => {
+        aug_lvl.forEach((aug) => {
             augments.push(aug);
-            group = aug.group;
         });
     });
+
     target.push({ group, augments });
 }
 
-let all_augments: Array<{ group: string; augments: Array<Augment> }> =
-    [];
+let all_augments: Array<{ group: string; augments: Array<Augment> }> = [];
 
 const AUG_GROUP = [
     basic,

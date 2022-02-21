@@ -1,6 +1,6 @@
 import { EFFECTS as eff, Augment, createMultipleAugments } from "./_base";
 
-const GROUP = "BASIC";
+export const GROUP = "BASIC";
 
 export let basic: Array<Array<Augment>> = [];
 

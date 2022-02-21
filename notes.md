@@ -14,6 +14,11 @@
           - name
           - effect
       - stat display
+        - BP
+        - HP | PP
+        - mel pot | rng pot | tec pot
+        - pot floor | dmg resist
+        - aliment resist
     - **Weapon field**
       - weapon selector
         - weapon data

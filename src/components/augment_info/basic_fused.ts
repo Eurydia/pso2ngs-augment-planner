@@ -1,6 +1,6 @@
 import { EFFECTS as eff, Augment } from "./_base";
 
-const GROUP = "BASIC_FUSED";
+export const GROUP = "BASIC_FUSED";
 
 export let basic_fused: Array<Array<Augment>> = [];
 
