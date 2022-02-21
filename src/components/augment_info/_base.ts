@@ -59,7 +59,7 @@ export class Augment {
     }
 }
 
-export type AugmentInteface = {
+export type AugmentInterface = {
     name: string;
     level: number;
     effects: Array<{ name: string; amount: number }>;

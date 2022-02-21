@@ -1,25 +1,40 @@
 import { Component } from "react";
 import Select from "react-select";
-import { AugmentInteface } from "./augment_info/_base";
-import { all_augments } from "./augment_info/_all_augments";
+import { AugmentInterface } from "./augment_info/_base";
+import all_augments from "./augment_info/_all_augments";
 import { intToRoman } from "./util";
 
 type Option = {
     label: string;
     value: string;
-    aug?: AugmentInteface;
+    aug: AugmentInterface;
 };
 
-let options: Array<Option> = [];
-all_augments.forEach((aug) => {
-    const aug_level = intToRoman(aug.level);
-    const label = `${aug.name} ${aug_level}`;
-    const value = label;
-    options.push({ label, value, aug });
+type OptionGroup = {
+    label: string;
+    options: Array<Option>;
+};
+
+let options_group: Array<OptionGroup> = [];
+all_augments.forEach((group) => {
+    let opts: Array<Option> = [];
+
+    const AUGS = group.augments;
+    AUGS.forEach((aug) => {
+        const lvl_roman = intToRoman(aug.level);
+        const label = `${aug.name} ${lvl_roman}`;
+        const value = label;
+        opts.push({ label, value, aug });
+    });
+
+    options_group.push({
+        label: group.group.replace("_", " "),
+        options: opts,
+    });
 });
 
-class MultiSelect extends Component<any, any> {
-    state = {
+class MultiSelect extends Component {
+    state: { selectedOption: null | Array<Option> } = {
         selectedOption: null,
     };
 
@@ -30,8 +45,20 @@ class MultiSelect extends Component<any, any> {
         if (sel_augs.length < 2) {
             return;
         }
-        const new_aug = sel_augs.pop();
-        const n_info = new_aug?.aug;
+        const new_aug = sel_augs.pop() || [
+            {
+                label: "",
+                value: "",
+                aug: {
+                    name: "",
+                    level: -1,
+                    effect: [{ name: "", amount: -1 }],
+                    battlepower: -1,
+                    group: "",
+                },
+            },
+        ];
+        const n_info = new_aug.aug;
 
         let to_remove = [];
         for (let i = 0; i < sel_augs.length; i++) {
@@ -92,7 +119,7 @@ class MultiSelect extends Component<any, any> {
                 value={selectedOption}
                 // I'm not dealing with this
                 onChange={this.handleChange}
-                options={options}
+                options={options_group}
                 placeholder="No augment selected"
                 closeMenuOnSelect={false}
                 isMulti

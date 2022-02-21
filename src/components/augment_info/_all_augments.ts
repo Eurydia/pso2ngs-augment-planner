@@ -15,16 +15,22 @@ import { addi } from "./addi";
 
 function addAugmentToPool(
     arr: Array<Array<Augment>>,
-    target: Array<Augment>,
+    target: Array<{ group: string; augments: Array<Augment> }>,
 ): void {
+    let group: string = "";
+    let augments: Array<Augment> = [];
+
     arr.forEach((aug_arr) => {
         aug_arr.forEach((aug) => {
-            target.push(aug);
+            augments.push(aug);
+            group = aug.group;
         });
     });
+    target.push({ group, augments });
 }
 
-export let all_augments: Array<Augment> = [];
+let all_augments: Array<{ group: string; augments: Array<Augment> }> =
+    [];
 
 const AUG_GROUP = [
     basic,
@@ -44,7 +50,7 @@ const AUG_GROUP = [
 AUG_GROUP.forEach((aug) => {
     addAugmentToPool(aug, all_augments);
 });
-
+export default all_augments;
 // fs.writeFileSync(
 //     "./src/components/augment_info/augments_data.json",
 //     JSON.stringify(all_augments),

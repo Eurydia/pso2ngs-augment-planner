@@ -1,4 +1,4 @@
-import MultiSelect from "./components/multiselect";
+import MultiSelect from "./components/MultiSelect";
 import "./App.css";
 
 function App() {
