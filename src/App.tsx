@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App">
             <StatDisplay />
-            <AugmentMultiSelect className="capitalize" />
+            <AugmentMultiSelect />
         </div>
     );
 }

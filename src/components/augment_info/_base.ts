@@ -1,20 +1,57 @@
 //Augment Effects
-const HP = "HP";
-const PP = "PP";
+type EffectStackingType = "multiply" | "add";
+type Effect = { name: string; stacking: EffectStackingType };
 
-const MEL_POTENCY = "MEL_POTENTCY";
-const RNG_POTENCY = "RNG_POTENCY";
-const TEC_POTENCY = "TEC_POTENTCY";
-const FLOOR_POTENCY = "FLOOR_POTENCY_INCREASE";
-
-const DMG_RESIST = "DMG_RESIST";
-const BURN_RESIST = "BURN_RESIST";
-const FREEZE_RESIST = "FREEZE_RESIST";
-const SHOCK_RESIST = "SHOCK_RESIST";
-const BLIND_RESIST = "BLIND_RESIST";
-const PANIC_RESIST = "PANIC_RESIST";
-const POISON_RESIST = "POISON_RESIST";
-const PHYSICAL_DOWN_RESIST = "PHYSICAL_DOWN_RESIST";
+const HP: Effect = { name: "HP", stacking: "add" };
+const PP: Effect = { name: "PP", stacking: "add" };
+const MEL_POTENCY: Effect = {
+    name: "MEL_POTENTCY",
+    stacking: "multiply",
+};
+const RNG_POTENCY: Effect = {
+    name: "RNG_POTENCY",
+    stacking: "multiply",
+};
+const TEC_POTENCY: Effect = {
+    name: "TEC_POTENTCY",
+    stacking: "multiply",
+};
+const FLOOR_POTENCY: Effect = {
+    name: "FLOOR_POTENCY_INCREASE",
+    stacking: "multiply",
+};
+const DMG_RESIST: Effect = {
+    name: "DMG_RESIST",
+    stacking: "multiply",
+};
+const BURN_RESIST: Effect = {
+    name: "BURN_RESIST",
+    stacking: "multiply",
+};
+const FREEZE_RESIST: Effect = {
+    name: "FREEZE_RESIST",
+    stacking: "multiply",
+};
+const SHOCK_RESIST: Effect = {
+    name: "SHOCK_RESIST",
+    stacking: "multiply",
+};
+const BLIND_RESIST: Effect = {
+    name: "BLIND_RESIST",
+    stacking: "multiply",
+};
+const PANIC_RESIST: Effect = {
+    name: "PANIC_RESIST",
+    stacking: "multiply",
+};
+const POISON_RESIST: Effect = {
+    name: "POISON_RESIST",
+    stacking: "multiply",
+};
+const PHYSICAL_DOWN_RESIST: Effect = {
+    name: "PHYSICAL_DOWN_RESIST",
+    stacking: "multiply",
+};
 
 export const EFFECTS = {
     HP,
@@ -33,63 +70,50 @@ export const EFFECTS = {
     PHYSICAL_DOWN_RESIST,
 };
 
-//Augment base class
-export class Augment {
+type AugmentEffect = {
+    effect: Effect;
+    amount: number;
+};
+
+export type Augment = {
     name: string;
     level: number;
-    effects: Array<{ name: string; amount: number }>;
-    battlepower: number;
-    group: string;
-
-    constructor(
-        name: string,
-        level: number,
-        effects: { [key: string]: number },
-        battlepower: number,
-        group: string,
-    ) {
-        this.name = name;
-        this.level = level;
-        this.effects = [];
-        this.battlepower = battlepower;
-        this.group = group;
-        for (const key in effects) {
-            this.effects.push({ name: key, amount: effects[key] });
-        }
-    }
-}
-
-export type AugmentInterface = {
-    name: string;
-    level: number;
-    effects: Array<{ name: string; amount: number }>;
+    effects: Array<AugmentEffect>;
     battlepower: number;
     group: string;
 };
 
 export function createMultipleAugments(
-    level_count: number,
     name: string,
-    effects: { [key: string]: Array<number> },
-    battlepower: Array<number>,
+    levels: number,
+    effect_lvl: Array<{ effect: Effect; amount: Array<number> }>,
+    battlepowers: Array<number>,
     group: string,
 ): Array<Augment> {
     // Store created augments
     let augments: Array<Augment> = [];
 
     // for each level specified create a new augment
-    for (let i = 0; i < level_count; i++) {
-        let aug_eff: { [ket: string]: number } = {};
-        Object.entries(effects).forEach(
-            ([key, val]) => (aug_eff[key] = val[i]),
-        );
-        const AUG_LEVEL = i + 1;
-        const AUG_BP = battlepower[i];
+    for (let i = 0; i < levels; i++) {
+        let effects: Array<AugmentEffect> = [];
+
+        effect_lvl.forEach((eff) => {
+            effects.push({
+                effect: eff.effect,
+                amount: eff.amount[i],
+            });
+        });
+        const level = i + 1;
+        const battlepower = battlepowers[i];
 
         // add augment array
-        augments.push(
-            new Augment(name, AUG_LEVEL, aug_eff, AUG_BP, group),
-        );
+        augments.push({
+            name,
+            level,
+            effects,
+            battlepower,
+            group,
+        });
     }
     return augments;
 }

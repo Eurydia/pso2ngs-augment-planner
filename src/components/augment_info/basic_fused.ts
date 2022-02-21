@@ -19,20 +19,18 @@ const prefix = [
 
 let fused_augments: Array<Augment> = [];
 
-primary.forEach((pri) => {
-    prefix.forEach((pre) => {
-        fused_augments.push(
-            new Augment(
-                `${pre.name} ${pri.name}`,
-                0,
-                {
-                    [pre.effect]: pre.amount,
-                    [pri.effect]: pri.amount,
-                },
-                8,
-                GROUP,
-            ),
-        );
+primary.forEach((primary) => {
+    prefix.forEach((prefix) => {
+        fused_augments.push({
+            name: `${prefix.name} ${primary.name}`,
+            level: 0,
+            effects: [
+                { effect: prefix.effect, amount: prefix.amount },
+                { effect: primary.effect, amount: primary.amount },
+            ],
+            battlepower: 8,
+            group: GROUP,
+        });
     });
 });
 

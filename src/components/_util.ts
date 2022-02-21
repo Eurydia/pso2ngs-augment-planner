@@ -30,3 +30,27 @@ export function intToRoman(num: number): string {
 
     return result;
 }
+
+export type Option = {
+    label: string;
+    value: string;
+    aug: AugmentInterface;
+};
+
+export type OptionGroup = {
+    label: string;
+    options: Array<Option>;
+};
+
+// Dummy option
+export const NEVER_OPTION = {
+    label: "",
+    value: "",
+    aug: {
+        name: "",
+        level: -1,
+        effects: [],
+        battlepower: -1,
+        group: "",
+    },
+};

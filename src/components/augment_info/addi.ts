@@ -19,58 +19,51 @@ const prefix = [
     { name: "gua", effect: eff.DMG_RESIST, amount: 1.025 },
 ];
 
-primary.forEach((pri) => {
-    prefix.forEach((pre) => {
-        _addi.push(
-            new Augment(
-                `addi ${pre.name}${pri.name}`,
-                0,
-                {
-                    [pre.effect]: pre.amount,
-                    [pri.effect]: pri.amount,
-                },
-                10,
-                GROUP,
-            ),
-        );
+primary.forEach((primary) => {
+    prefix.forEach((prefix) => {
+        _addi.push({
+            name: `addi ${prefix.name}${primary.name}`,
+            level: 0,
+            effects: [
+                { effect: prefix.effect, amount: prefix.amount },
+                { effect: primary.effect, amount: primary.amount },
+            ],
+            battlepower: 10,
+            group: GROUP,
+        });
     });
 });
 
 primary.forEach((aug) => {
-    _addi.push(
-        new Augment(
-            `addi staspi${aug.name}`,
-            0,
-            {
-                [eff.HP]: 10,
-                [eff.PP]: 3,
-                [aug.effect]: aug.amount,
-            },
-            10,
-            GROUP,
-        ),
-    );
+    _addi.push({
+        name: `addi staspi${aug.name}`,
+        level: 0,
+        effects: [
+            { effect: eff.HP, amount: 10 },
+            { effect: eff.PP, amount: 3 },
+            { effect: aug.effect, amount: aug.amount },
+        ],
+        battlepower: 10,
+        group: GROUP,
+    });
 });
 
 primary.forEach((aug) => {
-    _addi.push(
-        new Augment(
-            `addi ward${aug.name}`,
-            0,
-            {
-                [aug.effect]: aug.amount,
-                [eff.BURN_RESIST]: 1.2,
-                [eff.FREEZE_RESIST]: 1.2,
-                [eff.SHOCK_RESIST]: 1.2,
-                [eff.BLIND_RESIST]: 1.2,
-                [eff.PANIC_RESIST]: 1.2,
-                [eff.POISON_RESIST]: 1.2,
-                [eff.PANIC_RESIST]: 1.2,
-            },
-            10,
-            GROUP,
-        ),
-    );
+    _addi.push({
+        name: `addi ward${aug.name}`,
+        level: 0,
+        effects: [
+            { effect: aug.effect, amount: aug.amount },
+            { effect: eff.BURN_RESIST, amount: 1.2 },
+            { effect: eff.FREEZE_RESIST, amount: 1.2 },
+            { effect: eff.SHOCK_RESIST, amount: 1.2 },
+            { effect: eff.BLIND_RESIST, amount: 1.2 },
+            { effect: eff.PANIC_RESIST, amount: 1.2 },
+            { effect: eff.POISON_RESIST, amount: 1.2 },
+            { effect: eff.PANIC_RESIST, amount: 1.2 },
+        ],
+        battlepower: 10,
+        group: GROUP,
+    });
 });
-
 addi.push(_addi);

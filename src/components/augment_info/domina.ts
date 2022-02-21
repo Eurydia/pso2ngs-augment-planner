@@ -5,36 +5,34 @@ const GROUP = "DOMINA";
 export let domina: Array<Array<Augment>> = [];
 
 let ael: Array<Augment> = [];
-ael.push(
-    new Augment(
-        "ael domina",
-        0,
-        {
-            [eff.HP]: 5,
-            [eff.PP]: 3,
-            [eff.MEL_POTENCY]: 1.015,
-            [eff.RNG_POTENCY]: 1.015,
-            [eff.TEC_POTENCY]: 1.015,
-        },
-        8,
-        GROUP,
-    ),
-);
+const AEL_POT = 1.015;
+ael.push({
+    name: "ael domina",
+    level: 0,
+    effects: [
+        { effect: eff.HP, amount: 5 },
+        { effect: eff.PP, amount: 3 },
+        { effect: eff.MEL_POTENCY, amount: AEL_POT },
+        { effect: eff.RNG_POTENCY, amount: AEL_POT },
+        { effect: eff.TEC_POTENCY, amount: AEL_POT },
+    ],
+    battlepower: 8,
+    group: GROUP,
+});
 domina.push(ael);
 
 let ret: Array<Augment> = [];
-ael.push(
-    new Augment(
-        "ret domina",
-        0,
-        {
-            [eff.HP]: 15,
-            [eff.MEL_POTENCY]: 1.015,
-            [eff.RNG_POTENCY]: 1.015,
-            [eff.TEC_POTENCY]: 1.015,
-        },
-        10,
-        GROUP,
-    ),
-);
+const RET_POT = 1.015;
+ael.push({
+    name: "ret domina",
+    level: 0,
+    effects: [
+        { effect: eff.HP, amount: 15 },
+        { effect: eff.MEL_POTENCY, amount: RET_POT },
+        { effect: eff.RNG_POTENCY, amount: RET_POT },
+        { effect: eff.TEC_POTENCY, amount: RET_POT },
+    ],
+    battlepower: 10,
+    group: GROUP,
+});
 domina.push(ret);

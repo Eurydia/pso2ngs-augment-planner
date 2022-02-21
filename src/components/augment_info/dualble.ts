@@ -1,4 +1,8 @@
-import { Augment, createMultipleAugments, EFFECTS as eff } from "./_base";
+import {
+    Augment,
+    createMultipleAugments,
+    EFFECTS as eff,
+} from "./_base";
 
 const GROUP = "DUALBLE";
 
@@ -9,8 +13,8 @@ const BP = [4, 5, 6];
 
 dualble.push(
     createMultipleAugments(
-        3,
         "melra dualble",
+        3,
         {
             [eff.MEL_POTENCY]: POT_LEVEL,
             [eff.RNG_POTENCY]: POT_LEVEL,
