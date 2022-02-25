@@ -18,7 +18,7 @@ const TEC_POTENCY: EffectType = {
     stacking: "multiply",
 };
 const FLOOR_POTENCY: EffectType = {
-    name: "FLOOR_POTENCY_INCREASE",
+    name: "FLOOR_POTENCY",
     stacking: "multiply",
 };
 const DMG_RESIST: EffectType = {

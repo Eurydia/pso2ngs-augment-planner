@@ -1,24 +1,31 @@
 import { Component } from "react";
-import { Effect, EFFECTS, EffectType } from "../info/_effect";
+import { Effect, EFFECTS as eff, EffectType } from "../info/_effect";
 
 function statsToDisplays(
     ref: { [key: string]: EffectType },
     to_display: StatsDisplayValue = {},
     display_class_name: string = "",
-): JSX.Element[] {
-    let divs: JSX.Element[] = [];
-    let k = 0;
-    for (const _key in ref) {
-        const { name: key, stacking } = ref[_key];
-        const FORMATTED_NAME = key.toLowerCase().replaceAll("_", " ");
+): { [key: string]: JSX.Element[] } {
+    const resource = [eff.HP, eff.PP];
+    const weapon = [eff.MEL_POTENCY, eff.RNG_POTENCY, eff.TEC_POTENCY];
+    const whatever = [eff.FLOOR_POTENCY, eff.DMG_RESIST];
 
-        const BASE = stacking === "add" ? 0 : 1;
+    let divs: { [key: string]: JSX.Element[] } = {
+        resource: [],
+        weapon: [],
+        whatever: [],
+        ailment: [],
+    };
+    let i = 0;
+    for (const _key in ref) {
+        const { name, stacking } = ref[_key];
+        const FORMATTED_NAME = name.toLowerCase().replaceAll("_", " ");
 
         let amount: number;
-        if (to_display[key] !== undefined) {
-            amount = to_display[key].amount;
+        if (to_display[name] !== undefined) {
+            amount = to_display[name].amount;
         } else {
-            amount = BASE;
+            amount = stacking === "add" ? 0 : 1;
         }
 
         // const SIGN = amount >= BASE ? "+" : "";
@@ -37,13 +44,31 @@ function statsToDisplays(
             formatted_amount = amount.toString();
         }
 
-        divs.push(
-            <div key={k} className={display_class_name}>
-                {FORMATTED_NAME}: {/* {SIGN} */}
-                {formatted_amount}
+        let category: string;
+        if (resource.indexOf(ref[_key]) !== -1) {
+            category = "resource";
+        } else if (weapon.indexOf(ref[_key]) !== -1) {
+            category = "weapon";
+        } else if (whatever.indexOf(ref[_key]) !== -1) {
+            category = "whatever";
+        } else {
+            category = "ailment";
+        }
+
+        divs[category].push(
+            <div key={i} className={display_class_name}>
+                <img
+                    src="https://pso2na.arks-visiphone.com/images/8/8d/NGSUIItemSchwarzrossoArmor.png"
+                    crossOrigin="anonymous"
+                    alt="melee icon"
+                />
+                <span>
+                    {FORMATTED_NAME}: {/* {SIGN} */}
+                    {formatted_amount}
+                </span>
             </div>,
         );
-        k++;
+        i++;
     }
 
     return divs;
@@ -60,10 +85,18 @@ type StatsDisplayProps = {
 class StatsDisplay extends Component<StatsDisplayProps, {}> {
     render() {
         const { stats } = this.props;
-        const DISPLAYS = statsToDisplays(EFFECTS, stats);
+        const { resource, weapon, whatever, ailment } = statsToDisplays(
+            eff,
+            stats,
+            "px-4 py-2",
+        );
+
         return (
-            <div className="container min-w-fit grid grid-cols-3 text-lg gap-4 text-left capitalize shadow-lg shadow-blue-300 indent-5">
-                {DISPLAYS}
+            <div className="container gap-4 text-lg text-left capitalize border-2 rounded-md border-blue-300 divide-y-2 divide-solid">
+                <div className="grid grid-cols-2">{resource}</div>
+                <div className="grid grid-cols-2">{weapon}</div>
+                <div className="grid grid-cols-2">{whatever}</div>
+                <div className="grid grid-cols-2">{ailment}</div>
             </div>
         );
     }
