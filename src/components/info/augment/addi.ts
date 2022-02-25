@@ -1,27 +1,27 @@
-import { EFFECTS as eff, Augment } from "./_base";
+import Augment, { AugmentGroup } from "./_base";
+import { EFFECTS as eff, ALL_AILMENT_RESIST } from "../_effect";
 
 const GROUP = "ADDI";
 
-export let addi: Array<Array<Augment>> = [];
+let augments: Array<Augment> = [];
 
-let _addi: Array<Augment> = [];
-
-const primary = [
-    { name: "mel", effect: eff.MEL_POTENCY, amount: 1.025 },
-    { name: "ra", effect: eff.RNG_POTENCY, amount: 1.025 },
-    { name: "tech", effect: eff.TEC_POTENCY, amount: 1.025 },
+const PRIMARY_POT = 1.025;
+const PRIMARY = [
+    { name: "mel", effect: eff.MEL_POTENCY, amount: PRIMARY_POT },
+    { name: "ra", effect: eff.RNG_POTENCY, amount: PRIMARY_POT },
+    { name: "tech", effect: eff.TEC_POTENCY, amount: PRIMARY_POT },
 ];
 
-const prefix = [
+const PREFIX = [
     { name: "sta", effect: eff.HP, amount: 20 },
     { name: "spi", effect: eff.PP, amount: 6 },
     { name: "deft", effect: eff.FLOOR_POTENCY, amount: 1.025 },
     { name: "gua", effect: eff.DMG_RESIST, amount: 1.025 },
 ];
 
-primary.forEach((primary) => {
-    prefix.forEach((prefix) => {
-        _addi.push({
+PRIMARY.forEach((primary) => {
+    PREFIX.forEach((prefix) => {
+        augments.push({
             name: `addi ${prefix.name}${primary.name}`,
             level: 0,
             effects: [
@@ -34,8 +34,8 @@ primary.forEach((primary) => {
     });
 });
 
-primary.forEach((aug) => {
-    _addi.push({
+PRIMARY.forEach((aug) => {
+    augments.push({
         name: `addi staspi${aug.name}`,
         level: 0,
         effects: [
@@ -48,22 +48,27 @@ primary.forEach((aug) => {
     });
 });
 
-primary.forEach((aug) => {
-    _addi.push({
+PRIMARY.forEach((aug) => {
+    augments.push({
         name: `addi ward${aug.name}`,
         level: 0,
         effects: [
             { effect: aug.effect, amount: aug.amount },
-            { effect: eff.BURN_RESIST, amount: 1.2 },
-            { effect: eff.FREEZE_RESIST, amount: 1.2 },
-            { effect: eff.SHOCK_RESIST, amount: 1.2 },
-            { effect: eff.BLIND_RESIST, amount: 1.2 },
-            { effect: eff.PANIC_RESIST, amount: 1.2 },
-            { effect: eff.POISON_RESIST, amount: 1.2 },
-            { effect: eff.PANIC_RESIST, amount: 1.2 },
+            ...ALL_AILMENT_RESIST.map((effect) => {
+                return {
+                    effect,
+                    amount: 1.2,
+                };
+            }),
         ],
         battlepower: 10,
         group: GROUP,
     });
 });
-addi.push(_addi);
+
+const ADDI: AugmentGroup = {
+    name: GROUP,
+    augments,
+};
+
+export default ADDI;

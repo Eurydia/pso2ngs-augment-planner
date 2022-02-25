@@ -1,12 +1,10 @@
 import "./App.css";
-import AugmentMultiSelect from "./components/AugmentMultiSelect";
-import StatDisplay from "./components/StatDisplay";
+import CharacterPlanner from "./components/CharacterPlanner";
 
 function App() {
     return (
         <div className="App">
-            <StatDisplay />
-            <AugmentMultiSelect />
+            <CharacterPlanner />
         </div>
     );
 }
