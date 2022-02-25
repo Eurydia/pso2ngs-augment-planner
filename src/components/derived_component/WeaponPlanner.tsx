@@ -24,7 +24,8 @@ type UnitPlannerProps = {
 class UnitPlanner extends Component<UnitPlannerProps, {}> {
     constructor(props: UnitPlannerProps) {
         super(props);
-        this.handleAugmentChange = this.handleAugmentChange.bind(this);
+        this.handleAugmentChange =
+            this.handleAugmentChange.bind(this);
         this.handleWeaponChange = this.handleWeaponChange.bind(this);
     }
 
@@ -40,11 +41,11 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
         const { _id, augmentValue, weaponValue, stats } = this.props;
         return (
             <div>
-                {/* <WeaponSelector
+                <WeaponSelector
                     _id={`${_id}-unit-selector`}
                     value={weaponValue}
                     onOptionChange={this.handleWeaponChange}
-                /> */}
+                />
                 <AugmentSelector
                     _id={`${_id}-augment-selector`}
                     values={augmentValue}

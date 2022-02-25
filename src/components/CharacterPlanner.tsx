@@ -7,10 +7,10 @@ import { UnitSelectorOption } from "./base_component/UnitSelector";
 import StatsDisplay, {
     StatsDisplayValue,
 } from "./base_component/StatsDisplay";
+import { WeaponSelectorOption } from "./base_component/WeaponSelector";
 
 import { findViolatedAugmentIndex, getTotalEffect } from "./_util";
 import { Effect } from "./info/_effect";
-import { WeaponSelectorOption } from "./base_component/WeaponSelector";
 
 type StringKey<T> = {
     [key: string]: T;
@@ -47,8 +47,10 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
             },
         };
 
-        this.handleEquipmentChange = this.handleEquipmentChange.bind(this);
-        this.handleAugmentChange = this.handleAugmentChange.bind(this);
+        this.handleEquipmentChange =
+            this.handleEquipmentChange.bind(this);
+        this.handleAugmentChange =
+            this.handleAugmentChange.bind(this);
         this.handlePlannerEffectsChange =
             this.handlePlannerEffectsChange.bind(this);
     }
@@ -105,11 +107,12 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         this.setState(
             ({ augmentValues, equipmentValues, plannerEffects }) => {
                 // augment part
-                const OPTION_INDEX_TO_REMOVE = findViolatedAugmentIndex(
-                    values.map(({ value }) => {
-                        return value;
-                    }),
-                );
+                const OPTION_INDEX_TO_REMOVE =
+                    findViolatedAugmentIndex(
+                        values.map(({ value }) => {
+                            return value;
+                        }),
+                    );
                 const FILTERED_OPTIONS: AugmentSelectorOption[] =
                     values.filter((val, index) => {
                         return !(index in OPTION_INDEX_TO_REMOVE);
@@ -124,7 +127,8 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                         planner_effect.push(eff);
                     });
                 });
-                const this_planner_unit = equipmentValues[planner_index];
+                const this_planner_unit =
+                    equipmentValues[planner_index];
                 let this_planner_unit_effect: Effect[] =
                     this_planner_unit === undefined
                         ? []
@@ -132,7 +136,8 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                 this_planner_unit_effect.forEach((eff) => {
                     planner_effect.push(eff);
                 });
-                const THIS_PLANNER_EFFECT = getTotalEffect(planner_effect);
+                const THIS_PLANNER_EFFECT =
+                    getTotalEffect(planner_effect);
 
                 // -------------------------------------------------------------------
                 // update state
@@ -179,7 +184,8 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                 equipment.effects.forEach((eff) => {
                     planner_effect.push(eff);
                 });
-                const THIS_PLANNER_EFFECT = getTotalEffect(planner_effect);
+                const THIS_PLANNER_EFFECT =
+                    getTotalEffect(planner_effect);
 
                 // -------------------------------------------------------------------
                 // update state part
@@ -206,15 +212,15 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
             this.state;
 
         const PLANNERS = [
-            // <WeaponPlanner
-            //     _id="weapon-0"
-            //     augmentValue={augmentValues[0]}
-            //     weaponValue={equipmentValues["weapon-0"]}
-            //     stats={plannerEffects["weapon-0"]}
-            //     onAugmentChange={this.handleAugmentChange}
-            //     onWeaponChange={this.handleEquipmentChange}
-            //     key={0}
-            // />,
+            <WeaponPlanner
+                _id="weapon-0"
+                augmentValue={augmentValues[0]}
+                weaponValue={equipmentValues["weapon-0"]}
+                stats={plannerEffects["weapon-0"]}
+                onAugmentChange={this.handleAugmentChange}
+                onWeaponChange={this.handleEquipmentChange}
+                key={0}
+            />,
         ];
         for (let i = 1; i < 4; i++) {
             const _ID = `armor-${i}`;

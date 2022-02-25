@@ -69,7 +69,8 @@ export function getTotalEffect(effects: Effect[]): {
         const { name, stacking } = effect;
 
         if (name in total_effects) {
-            const { effect, amount: prev_amount } = total_effects[name];
+            const { effect, amount: prev_amount } =
+                total_effects[name];
             const new_amount =
                 stacking === "multiply"
                     ? prev_amount * amount
@@ -81,7 +82,6 @@ export function getTotalEffect(effects: Effect[]): {
         } else {
             total_effects[name] = eff;
         }
-        console.log(total_effects[name]);
     });
 
     return total_effects;

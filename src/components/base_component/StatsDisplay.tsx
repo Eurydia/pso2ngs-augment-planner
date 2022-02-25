@@ -8,10 +8,11 @@ function statsToDisplays(
 ): JSX.Element[] {
     let divs: JSX.Element[] = [];
     let k = 0;
-    for (const key in ref) {
+    for (const _key in ref) {
+        const { name: key, stacking } = ref[_key];
         const FORMATTED_NAME = key.toLowerCase().replaceAll("_", " ");
 
-        const BASE = ref[key].stacking === "add" ? 0 : 1;
+        const BASE = stacking === "add" ? 0 : 1;
 
         let amount: number;
         if (to_display[key] !== undefined) {
@@ -20,10 +21,10 @@ function statsToDisplays(
             amount = BASE;
         }
 
-        const SIGN = amount >= BASE ? "+" : "";
+        // const SIGN = amount >= BASE ? "+" : "";
         let formatted_amount: string;
-        if (ref[key].stacking === "multiply") {
-            const new_amount = (amount - 1) * 1000;
+        if (stacking === "multiply") {
+            const new_amount = amount * 1000;
             const rounded = Math.round(new_amount) / 10;
             let prec: number;
             if (rounded < 10) {
@@ -38,7 +39,7 @@ function statsToDisplays(
 
         divs.push(
             <div key={k} className={display_class_name}>
-                {FORMATTED_NAME}: {SIGN}
+                {FORMATTED_NAME}: {/* {SIGN} */}
                 {formatted_amount}
             </div>,
         );
