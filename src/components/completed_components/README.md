@@ -1,6 +1,6 @@
-### Page structure
+# Augment planner structure
 
-- Page
+- Planner
   - **Equipment field**
     - **Armor field** \* 3
       - armor selector
@@ -27,7 +27,7 @@
   - **Total stat display**
     - stat display
 
-### Possible features
+# Possible features
 
 - build maker + compare builds
 - fixa support?

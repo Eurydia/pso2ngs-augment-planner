@@ -112,7 +112,7 @@ class AugmentSelector extends Component<AugmentSelectorProps, {}> {
                     value={values}
                     options={OPTIONS}
                     id={_id}
-                    placeholder="🐬 No augment selected."
+                    placeholder="No augment"
                     onChange={this.handleChange}
                     isMulti={true}
                 />

@@ -47,18 +47,17 @@ export type StatsDisplayValue = {
 
 type StatsDisplayProps = {
     stats: StatsDisplayValue;
-    statsFor: string;
 };
 
 class StatsDisplay extends Component<StatsDisplayProps, {}> {
     render() {
-        const { stats, statsFor } = this.props;
+        const { stats } = this.props;
         const f_stats = statsToDisplays(stats, EFFECTS);
-        console.log(f_stats);
+
         return (
             <div>
-                <div>{statsFor} stats</div>
-                <div className="h-fit min-w-full mx-auto rounded-md border-2 text-lg capitalize divide-y-2 divide-solid px-4 shadow-lg shadow-blue-400/40">
+                <div>stats</div>
+                <div className="h-fit min-w-full px-4 mx-auto rounded-lg text-xl divide-y-2 divide-gray-400">
                     <div className="container py-2 grid grid-cols-2">
                         <div>🩸 HP: {f_stats.HP}</div>
                         <div>
@@ -66,39 +65,27 @@ class StatsDisplay extends Component<StatsDisplayProps, {}> {
                         </div>
                     </div>
                     <div className="container py-2 grid grid-cols-2">
-                        <div>
+                        <div className="gap-2 container">
                             🔪 MEL potency: {f_stats.MEL_POTENCY}
                         </div>
-                        <div>
-                            🔫 RNG potency: {f_stats.RNG_POTENCY}
-                        </div>
-                        <div>
-                            🔮 TEC potency: {f_stats.TEC_POTENCY}
-                        </div>
+                        <div>🔫 RNG potency: {f_stats.RNG_POTENCY}</div>
+                        <div>🔮 TEC potency: {f_stats.TEC_POTENCY}</div>
                     </div>
                     <div className="container py-2 grid grid-cols-2">
                         <div>
-                            📈 floor potency: {f_stats.FLOOR_POTENCY}{" "}
-                            (max: 100%)
+                            📈 floor potency: {f_stats.FLOOR_POTENCY} (max:
+                            100%)
                         </div>
                         <div>💪 DMG resist: {f_stats.DMG_RESIST}</div>
                     </div>
                     <div className="container py-2 grid grid-cols-2">
-                        <div>
-                            🥵 burn resist: {f_stats.BURN_RESIST}
-                        </div>
+                        <div>🥵 burn resist: {f_stats.BURN_RESIST}</div>
                         <div>
                             🥶 freeze resist: {f_stats.FREEZE_RESIST}
                         </div>
-                        <div>
-                            😱 shock resist: {f_stats.SHOCK_RESIST}
-                        </div>
-                        <div>
-                            😵 blind resist: {f_stats.BLIND_RESIST}
-                        </div>
-                        <div>
-                            😳 panic resist: {f_stats.PANIC_RESIST}
-                        </div>
+                        <div>😱 shock resist: {f_stats.SHOCK_RESIST}</div>
+                        <div>😵 blind resist: {f_stats.BLIND_RESIST}</div>
+                        <div>😳 panic resist: {f_stats.PANIC_RESIST}</div>
                         <div>
                             🤢 poison resist: {f_stats.POISON_RESIST}
                         </div>

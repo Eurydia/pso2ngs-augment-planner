@@ -1,7 +1,7 @@
-import Augment from "./info/augment/_base";
-import { GROUP as BASIC_GROUP } from "./info/augment/basic";
-import { GROUP as BASIC_FUSED_GROUP } from "./info/augment/basic_fused";
-import { Effect } from "./info/_effect";
+import Augment from "../info/augment/_base";
+import { GROUP as BASIC_GROUP } from "../info/augment/basic";
+import { GROUP as BASIC_FUSED_GROUP } from "../info/augment/basic_fused";
+import { Effect } from "../info/_effect";
 
 function isSame(aug_one: string, aug_two: string): boolean {
     return aug_one === aug_two;
@@ -69,8 +69,7 @@ export function getTotalEffect(effects: Effect[]): {
         const { name, stacking } = effect;
 
         if (name in total_effects) {
-            const { effect, amount: prev_amount } =
-                total_effects[name];
+            const { effect, amount: prev_amount } = total_effects[name];
             const new_amount =
                 stacking === "multiply"
                     ? prev_amount * amount

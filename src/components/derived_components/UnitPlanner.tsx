@@ -3,15 +3,15 @@ import { MultiValue, SingleValue } from "react-select";
 
 import UnitSelector, {
     UnitSelectorOption,
-} from "../base_component/UnitSelector";
+} from "../base_components/UnitSelector";
 
 import AugmentSelector, {
     AugmentSelectorOption,
-} from "../base_component/AugmentSelector";
+} from "../base_components/AugmentSelector";
 
 import StatsDisplay, {
     StatsDisplayValue,
-} from "../base_component/StatsDisplay";
+} from "../base_components/StatsDisplay";
 
 type UnitPlannerProps = {
     _id: string;
@@ -26,8 +26,7 @@ type UnitPlannerProps = {
 class UnitPlanner extends Component<UnitPlannerProps, {}> {
     constructor(props: UnitPlannerProps) {
         super(props);
-        this.handleAugmentChange =
-            this.handleAugmentChange.bind(this);
+        this.handleAugmentChange = this.handleAugmentChange.bind(this);
         this.handleUnitChange = this.handleUnitChange.bind(this);
     }
 
@@ -43,7 +42,7 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
         const { _id, plannerName, augmentValue, unitValue, stats } =
             this.props;
         return (
-            <div className="grid gap-2 p-4 text-xl text-left">
+            <div className="grid gap-2 p-4 text-xl bg-white/80 rounded-lg shadow-lg shadow-gray-500/80">
                 <div className="font-bold">{plannerName} config</div>
                 <UnitSelector
                     _id={`${_id}-unit-selector`}
@@ -55,7 +54,7 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
                     values={augmentValue}
                     onOptionChange={this.handleAugmentChange}
                 />
-                <StatsDisplay stats={stats} statsFor={plannerName} />
+                <StatsDisplay stats={stats} />
             </div>
         );
     }

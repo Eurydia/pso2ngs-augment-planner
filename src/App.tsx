@@ -1,10 +1,10 @@
 import "./App.css";
-import CharacterPlanner from "./components/CharacterPlanner";
+import AugmentPlanner from "./components/completed_components/AugmentPlanner";
 
 function App() {
     return (
         <div className="App">
-            <CharacterPlanner />
+            <AugmentPlanner />
         </div>
     );
 }

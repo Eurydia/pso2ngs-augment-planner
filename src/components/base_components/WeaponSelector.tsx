@@ -2,7 +2,7 @@ import { Component } from "react";
 import Select, { SingleValue } from "react-select";
 import Weapon, { WeaponGroup } from "../info/weapon/_base";
 import ALL_WEAPON from "../info/weapon/_all";
-import NO_WEAPON from "../info/weapon/no_weapon";
+import NON_ELEMENTAL from "../info/weapon/non_elemental";
 
 // -------------------------------------------------------------------------
 // Helper functions to help create select options
@@ -68,7 +68,7 @@ class WeaponSelector extends Component<WeaponSelectorProps, {}> {
                     id={_id}
                     value={value}
                     defaultValue={unitToSelectOption(
-                        NO_WEAPON.weapons[0],
+                        NON_ELEMENTAL.weapons[0],
                     )}
                     options={OPTIONS}
                     isMulti={false}

@@ -2,7 +2,7 @@ import { Component } from "react";
 import Select, { SingleValue } from "react-select";
 import Unit, { UnitGroup } from "../info/unit/_base";
 import ALL_UNITS from "../info/unit/_all";
-import ZERO_STAR_UNTIS from "../info/unit/zero_star";
+import ONE_STAR_UNITS from "../info/unit/one_star";
 
 // -------------------------------------------------------------------------
 // Helper functions to help create select options
@@ -70,7 +70,7 @@ class UnitSelector extends Component<UnitSelectorProps, {}> {
                     id={_id}
                     value={value}
                     defaultValue={unitToSelectOption(
-                        ZERO_STAR_UNTIS.units[0],
+                        ONE_STAR_UNITS.units[0],
                     )}
                     options={OPTIONS}
                     isMulti={false}

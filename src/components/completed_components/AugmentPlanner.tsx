@@ -1,65 +1,65 @@
 import { Component } from "react";
-import UnitPlanner from "./derived_component/UnitPlanner";
-import WeaponPlanner from "./derived_component/WeaponPlanner";
+import UnitPlanner from "../derived_components/UnitPlanner";
+import WeaponPlanner from "../derived_components/WeaponPlanner";
 
-import { AugmentSelectorOption } from "./base_component/AugmentSelector";
-import { UnitSelectorOption } from "./base_component/UnitSelector";
+import { AugmentSelectorOption } from "../base_components/AugmentSelector";
+import { UnitSelectorOption } from "../base_components/UnitSelector";
 import StatsDisplay, {
     StatsDisplayValue,
-} from "./base_component/StatsDisplay";
-import { WeaponSelectorOption } from "./base_component/WeaponSelector";
+} from "../base_components/StatsDisplay";
+import { WeaponSelectorOption } from "../base_components/WeaponSelector";
 
 import { findViolatedAugmentIndex, getTotalEffect } from "./_util";
-import { Effect } from "./info/_effect";
+import { Effect } from "../info/_effect";
+import About from "./About";
 
 type StringKey<T> = {
     [key: string]: T;
 };
 
-type CharacterPlannerState = {
+type AugmentPlannerState = {
     augmentValues: StringKey<AugmentSelectorOption[]>;
     equipmentValues: StringKey<UnitSelectorOption | undefined>;
-    plannerEffects: StringKey<StatsDisplayValue>;
+    plannerStats: StringKey<StatsDisplayValue>;
 };
 
-class CharacterPlanner extends Component<{}, CharacterPlannerState> {
+class AugmentPlanner extends Component<{}, AugmentPlannerState> {
+    _keys!: string[];
     constructor(props: {}) {
         super(props);
-        this.state = {
-            augmentValues: {
-                "weapon-0": [],
-                "armor-1": [],
-                "armor-2": [],
-                "armor-3": [],
-            },
-            equipmentValues: {
-                "weapon-0": undefined,
-                "armor-1": undefined,
-                "armor-2": undefined,
-                "armor-3": undefined,
-            },
-            plannerEffects: {
-                "weapon-0": {},
-                "armor-1": {},
-                "armor-2": {},
-                "armor-3": {},
-                "total-eff": {},
-            },
+
+        this._keys = ["weapon-0", "armor-1", "armor-2", "armor-3"];
+
+        let augmentValues: { [key: string]: AugmentSelectorOption[] } = {};
+        let equipmentValues: StringKey<UnitSelectorOption | undefined> =
+            {};
+        let plannerStats: StringKey<StatsDisplayValue> = {
+            "total-eff": {},
         };
 
-        this.handleEquipmentChange =
-            this.handleEquipmentChange.bind(this);
-        this.handleAugmentChange =
-            this.handleAugmentChange.bind(this);
+        this._keys.forEach((key) => {
+            augmentValues[key] = [];
+            equipmentValues[key] = undefined;
+            plannerStats[key] = {};
+        });
+
+        this.state = {
+            augmentValues,
+            equipmentValues,
+            plannerStats,
+        };
+
+        this.handleEquipmentChange = this.handleEquipmentChange.bind(this);
+        this.handleAugmentChange = this.handleAugmentChange.bind(this);
         this.handlePlannerEffectsChange =
             this.handlePlannerEffectsChange.bind(this);
     }
 
     handlePlannerEffectsChange() {
         this.setState(
-            ({ augmentValues, equipmentValues, plannerEffects }) => {
+            ({ augmentValues, equipmentValues, plannerStats }) => {
                 let effects: Effect[] = [];
-                for (const key in augmentValues) {
+                this._keys.forEach((key) => {
                     const augment_value_key = augmentValues[key];
                     augment_value_key.forEach((aug_opt) => {
                         if (aug_opt) {
@@ -81,18 +81,16 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                             effects.push(eff);
                         });
                     }
-                }
+                });
                 const TOTAL_EFFECTS = getTotalEffect(effects);
+
                 // -------------------------------------------------------------------
                 // update state part
-
-                let _plannerEffects = { ...plannerEffects };
-                _plannerEffects["total-eff"] = TOTAL_EFFECTS;
+                let _plannerStats = { ...plannerStats };
+                _plannerStats["total-eff"] = TOTAL_EFFECTS;
 
                 let _state = {
-                    augmentValues,
-                    equipmentValues,
-                    plannerEffects: _plannerEffects,
+                    plannerStats: _plannerStats,
                 };
 
                 return _state;
@@ -105,14 +103,13 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         planner_index: string,
     ) {
         this.setState(
-            ({ augmentValues, equipmentValues, plannerEffects }) => {
+            ({ augmentValues, equipmentValues, plannerStats }) => {
                 // augment part
-                const OPTION_INDEX_TO_REMOVE =
-                    findViolatedAugmentIndex(
-                        values.map(({ value }) => {
-                            return value;
-                        }),
-                    );
+                const OPTION_INDEX_TO_REMOVE = findViolatedAugmentIndex(
+                    values.map(({ value }) => {
+                        return value;
+                    }),
+                );
                 const FILTERED_OPTIONS: AugmentSelectorOption[] =
                     values.filter((val, index) => {
                         return !(index in OPTION_INDEX_TO_REMOVE);
@@ -127,8 +124,7 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                         planner_effect.push(eff);
                     });
                 });
-                const this_planner_unit =
-                    equipmentValues[planner_index];
+                const this_planner_unit = equipmentValues[planner_index];
                 let this_planner_unit_effect: Effect[] =
                     this_planner_unit === undefined
                         ? []
@@ -136,8 +132,7 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                 this_planner_unit_effect.forEach((eff) => {
                     planner_effect.push(eff);
                 });
-                const THIS_PLANNER_EFFECT =
-                    getTotalEffect(planner_effect);
+                const THIS_PLANNER_EFFECT = getTotalEffect(planner_effect);
 
                 // -------------------------------------------------------------------
                 // update state
@@ -146,15 +141,14 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                 _augmentValues[planner_index] = FILTERED_OPTIONS;
 
                 // update the planner effect with THIS_PLANNER_EFFECT
-                let _plannerEffect = { ...plannerEffects };
-                _plannerEffect[planner_index] = THIS_PLANNER_EFFECT;
+                let _plannerStats = { ...plannerStats };
+                _plannerStats[planner_index] = THIS_PLANNER_EFFECT;
 
                 // use _state as a dummy value
                 // then return it
                 let _state = {
                     augmentValues: _augmentValues,
-                    equipmentValues,
-                    plannerEffects: _plannerEffect,
+                    plannerStats: _plannerStats,
                 };
 
                 return _state;
@@ -168,7 +162,7 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         planner_index: string,
     ) {
         this.setState(
-            ({ augmentValues, equipmentValues, plannerEffects }) => {
+            ({ augmentValues, equipmentValues, plannerStats }) => {
                 // -------------------------------------------------------------------
                 // combine effects on this planner's augment and unit
                 let planner_effect: Effect[] = [];
@@ -184,21 +178,19 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
                 equipment.effects.forEach((eff) => {
                     planner_effect.push(eff);
                 });
-                const THIS_PLANNER_EFFECT =
-                    getTotalEffect(planner_effect);
+                const THIS_PLANNER_EFFECT = getTotalEffect(planner_effect);
 
                 // -------------------------------------------------------------------
                 // update state part
                 let _equipmentValues = { ...equipmentValues };
                 _equipmentValues[planner_index] = value;
 
-                let _plannerEffect = { ...plannerEffects };
-                _plannerEffect[planner_index] = THIS_PLANNER_EFFECT;
+                let _plannerStats = { ...plannerStats };
+                _plannerStats[planner_index] = THIS_PLANNER_EFFECT;
 
                 let _state = {
-                    augmentValues,
                     equipmentValues: _equipmentValues,
-                    plannerEffects: _plannerEffect,
+                    plannerStats: _plannerStats,
                 };
 
                 return _state;
@@ -208,23 +200,27 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
     }
 
     render() {
-        const { augmentValues, equipmentValues, plannerEffects } =
-            this.state;
+        const {
+            augmentValues,
+            equipmentValues,
+            plannerStats: plannerEffects,
+        } = this.state;
 
+        const weapon_id = this._keys[0];
         const PLANNERS = [
             <WeaponPlanner
-                _id="weapon-0"
+                _id={weapon_id}
                 plannerName="Weapon"
-                augmentValue={augmentValues[0]}
-                weaponValue={equipmentValues["weapon-0"]}
-                stats={plannerEffects["weapon-0"]}
+                augmentValue={augmentValues[weapon_id]}
+                weaponValue={equipmentValues[weapon_id]}
+                stats={plannerEffects[weapon_id]}
                 onAugmentChange={this.handleAugmentChange}
                 onWeaponChange={this.handleEquipmentChange}
                 key={0}
             />,
         ];
         for (let i = 1; i < 4; i++) {
-            const _ID = `armor-${i}`;
+            const _ID = this._keys[i];
             PLANNERS.push(
                 <UnitPlanner
                     _id={_ID}
@@ -240,15 +236,16 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         }
 
         return (
-            <div className="grid grid-cols-2 p-4 text-left text-2xl capitalize">
-                <div>{PLANNERS}</div>
-                <div className="container ">
-                    <div className="sticky top-12 ">
-                        <StatsDisplay
-                            stats={plannerEffects["total-eff"]}
-                            statsFor="Total Stats"
-                        />
-                        <div>ho</div>
+            <div className="container mx-auto py-4 px-8 bg-blue-300/50 grid grid-cols-2 gap-4 text-left text-2xl capitalize">
+                <div className="grid gap-4">{PLANNERS}</div>
+                <div>
+                    <div className="sticky top-4 gap-4 grid">
+                        <div className="bg-white/80 rounded-lg shadow-lg shadow-grey-500/80 p-4 text-2xl">
+                            <StatsDisplay
+                                stats={plannerEffects["total-eff"]}
+                            />
+                        </div>
+                        <About />
                     </div>
                 </div>
             </div>
@@ -256,4 +253,4 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
     }
 }
 
-export default CharacterPlanner;
+export default AugmentPlanner;
