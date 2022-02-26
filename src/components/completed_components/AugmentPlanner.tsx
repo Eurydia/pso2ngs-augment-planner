@@ -1,6 +1,7 @@
 import { Component } from "react";
 import UnitPlanner from "../derived_components/UnitPlanner";
 import WeaponPlanner from "../derived_components/WeaponPlanner";
+import About from "./About";
 
 import { AugmentSelectorOption } from "../base_components/AugmentSelector";
 import { UnitSelectorOption } from "../base_components/UnitSelector";
@@ -11,7 +12,8 @@ import { WeaponSelectorOption } from "../base_components/WeaponSelector";
 
 import { findViolatedAugmentIndex, getTotalEffect } from "./_util";
 import { Effect } from "../info/_effect";
-import About from "./About";
+import ONE_STAR_UNIT from "../info/unit/one_star";
+import NON_ELEMENTAL from "../info/weapon/non_elemental";
 
 type StringKey<T> = {
     [key: string]: T;
@@ -28,8 +30,6 @@ class AugmentPlanner extends Component<{}, AugmentPlannerState> {
     constructor(props: {}) {
         super(props);
 
-        this._keys = ["weapon-0", "armor-1", "armor-2", "armor-3"];
-
         let augmentValues: { [key: string]: AugmentSelectorOption[] } = {};
         let equipmentValues: StringKey<UnitSelectorOption | undefined> =
             {};
@@ -37,6 +37,7 @@ class AugmentPlanner extends Component<{}, AugmentPlannerState> {
             "total-eff": {},
         };
 
+        this._keys = ["weapon-0", "armor-1", "armor-2", "armor-3"];
         this._keys.forEach((key) => {
             augmentValues[key] = [];
             equipmentValues[key] = undefined;
