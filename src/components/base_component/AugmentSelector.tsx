@@ -92,12 +92,6 @@ type AugmentSelectorProps = {
     onOptionChange: Function;
 };
 
-const STYLE = {
-    labelText: "👉Select your augments.",
-    className: "text-lg capitalize text-left",
-    placeholder: "🐬No augment selected.",
-};
-
 class AugmentSelector extends Component<AugmentSelectorProps, {}> {
     constructor(props: AugmentSelectorProps) {
         super(props);
@@ -110,17 +104,15 @@ class AugmentSelector extends Component<AugmentSelectorProps, {}> {
 
     render() {
         const { _id, values } = this.props;
-        const { labelText, className, placeholder } = STYLE;
 
         return (
             <div>
-                <label htmlFor={_id}>{labelText}</label>
+                <label htmlFor={_id}>Select your augments.</label>
                 <Select
                     value={values}
                     options={OPTIONS}
                     id={_id}
-                    className={className}
-                    placeholder={placeholder}
+                    placeholder="🐬 No augment selected."
                     onChange={this.handleChange}
                     isMulti={true}
                 />

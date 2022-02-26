@@ -14,6 +14,7 @@ import StatsDisplay, {
 
 type UnitPlannerProps = {
     _id: string;
+    plannerName: string;
     augmentValue: AugmentSelectorOption[];
     weaponValue: WeaponSelectorOption | undefined;
     stats: StatsDisplayValue;
@@ -38,9 +39,11 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
     }
 
     render() {
-        const { _id, augmentValue, weaponValue, stats } = this.props;
+        const { _id, plannerName, augmentValue, weaponValue, stats } =
+            this.props;
         return (
-            <div>
+            <div className="grid gap-2 p-4 text-left text-xl">
+                <div className="font-bold">{plannerName} config</div>
                 <WeaponSelector
                     _id={`${_id}-unit-selector`}
                     value={weaponValue}
@@ -51,7 +54,7 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
                     values={augmentValue}
                     onOptionChange={this.handleAugmentChange}
                 />
-                <StatsDisplay stats={stats} />
+                <StatsDisplay stats={stats} statsFor={plannerName} />
             </div>
         );
     }

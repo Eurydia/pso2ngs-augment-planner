@@ -214,6 +214,7 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         const PLANNERS = [
             <WeaponPlanner
                 _id="weapon-0"
+                plannerName="Weapon"
                 augmentValue={augmentValues[0]}
                 weaponValue={equipmentValues["weapon-0"]}
                 stats={plannerEffects["weapon-0"]}
@@ -227,6 +228,7 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
             PLANNERS.push(
                 <UnitPlanner
                     _id={_ID}
+                    plannerName={`Unit #${i}`}
                     augmentValue={augmentValues[_ID]}
                     unitValue={equipmentValues[_ID]}
                     stats={plannerEffects[_ID]}
@@ -238,9 +240,17 @@ class CharacterPlanner extends Component<{}, CharacterPlannerState> {
         }
 
         return (
-            <div className="container grid grid-cols-2 gap-4">
-                <div className="grid grid-1 gap-4">{PLANNERS}</div>
-                <StatsDisplay stats={plannerEffects["total-eff"]} />
+            <div className="grid grid-cols-2 p-4 text-left text-2xl capitalize">
+                <div>{PLANNERS}</div>
+                <div className="container ">
+                    <div className="sticky top-12 ">
+                        <StatsDisplay
+                            stats={plannerEffects["total-eff"]}
+                            statsFor="Total Stats"
+                        />
+                        <div>ho</div>
+                    </div>
+                </div>
             </div>
         );
     }

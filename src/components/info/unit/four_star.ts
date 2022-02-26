@@ -4,6 +4,7 @@ import {
     EFFECTS as eff,
     DOUBLE_OFF_EFF,
     ALL_AILMENT_RESIST,
+    TRIPLE_OFF_EFF,
 } from "../_effect";
 
 let units: Unit[] = [];
@@ -13,9 +14,9 @@ units.push({
     effects: [{ effect: eff.PP, amount: 6 }],
 });
 
-ARMOR_SUFFIX.forEach((suffox, index) => {
+ARMOR_SUFFIX.forEach((suffix, index) => {
     units.push({
-        name: `qual de armor ${suffox}`,
+        name: `qual de armor ${suffix}`,
         effects: [
             { effect: eff.PP, amount: 4 },
             ...DOUBLE_OFF_EFF[index].map((effect) => {
@@ -28,8 +29,8 @@ ARMOR_SUFFIX.forEach((suffox, index) => {
 units.push({
     name: "cattleya armor",
     effects: [
-        { effect: eff.HP, amount: 10 },
-        { effect: eff.PP, amount: 1 },
+        { effect: eff.HP, amount: 20 },
+        { effect: eff.PP, amount: 2 },
     ],
 });
 
@@ -59,6 +60,12 @@ units.push({
     effects: [
         { effect: eff.HP, amount: -20 },
         { effect: eff.PP, amount: 10 },
+        ...TRIPLE_OFF_EFF.map((effect) => {
+            return {
+                effect,
+                amount: 1.02,
+            };
+        }),
         ...ALL_AILMENT_RESIST.map((effect) => {
             return {
                 effect,

@@ -15,6 +15,7 @@ import StatsDisplay, {
 
 type UnitPlannerProps = {
     _id: string;
+    plannerName: string;
     augmentValue: AugmentSelectorOption[];
     unitValue: UnitSelectorOption | undefined;
     stats: StatsDisplayValue;
@@ -25,7 +26,8 @@ type UnitPlannerProps = {
 class UnitPlanner extends Component<UnitPlannerProps, {}> {
     constructor(props: UnitPlannerProps) {
         super(props);
-        this.handleAugmentChange = this.handleAugmentChange.bind(this);
+        this.handleAugmentChange =
+            this.handleAugmentChange.bind(this);
         this.handleUnitChange = this.handleUnitChange.bind(this);
     }
 
@@ -38,9 +40,11 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
     }
 
     render() {
-        const { _id, augmentValue, unitValue, stats } = this.props;
+        const { _id, plannerName, augmentValue, unitValue, stats } =
+            this.props;
         return (
-            <div className="container grid-cols-1 gap-4">
+            <div className="grid gap-2 p-4 text-xl text-left">
+                <div className="font-bold">{plannerName} config</div>
                 <UnitSelector
                     _id={`${_id}-unit-selector`}
                     value={unitValue}
@@ -51,7 +55,7 @@ class UnitPlanner extends Component<UnitPlannerProps, {}> {
                     values={augmentValue}
                     onOptionChange={this.handleAugmentChange}
                 />
-                <StatsDisplay stats={stats} />
+                <StatsDisplay stats={stats} statsFor={plannerName} />
             </div>
         );
     }

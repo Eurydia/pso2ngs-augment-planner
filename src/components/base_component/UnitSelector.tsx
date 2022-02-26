@@ -49,11 +49,6 @@ type UnitSelectorProps = {
     onOptionChange: Function;
 };
 
-const STYLE = {
-    labelText: "👉Select your unit.",
-    className: "text-lg capitalize text-left",
-};
-
 class UnitSelector extends Component<UnitSelectorProps, {}> {
     constructor(props: UnitSelectorProps) {
         super(props);
@@ -66,10 +61,11 @@ class UnitSelector extends Component<UnitSelectorProps, {}> {
 
     render() {
         const { _id, value } = this.props;
-        const { labelText, className } = STYLE;
         return (
             <div>
-                <label htmlFor={_id}>{labelText}</label>
+                <label htmlFor={_id} className="text-xl">
+                    Select your unit.
+                </label>
                 <Select
                     id={_id}
                     value={value}
@@ -77,7 +73,6 @@ class UnitSelector extends Component<UnitSelectorProps, {}> {
                         ZERO_STAR_UNTIS.units[0],
                     )}
                     options={OPTIONS}
-                    className={className}
                     isMulti={false}
                     onChange={this.handleChange}
                 />

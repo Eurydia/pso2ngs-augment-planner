@@ -1,37 +1,28 @@
 import { Component } from "react";
-import { Effect, EFFECTS as eff, EffectType } from "../info/_effect";
+import { Effect, EFFECTS, EffectType } from "../info/_effect";
 
 function statsToDisplays(
-    ref: { [key: string]: EffectType },
-    to_display: StatsDisplayValue = {},
-    display_class_name: string = "",
-): { [key: string]: JSX.Element[] } {
-    const resource = [eff.HP, eff.PP];
-    const weapon = [eff.MEL_POTENCY, eff.RNG_POTENCY, eff.TEC_POTENCY];
-    const whatever = [eff.FLOOR_POTENCY, eff.DMG_RESIST];
-
-    let divs: { [key: string]: JSX.Element[] } = {
-        resource: [],
-        weapon: [],
-        whatever: [],
-        ailment: [],
-    };
-    let i = 0;
+    stats: StatsDisplayValue = {},
+    ref: { [key: string]: EffectType } = {},
+): { [key: string]: string } {
+    let effects: { [key: string]: string } = {};
     for (const _key in ref) {
         const { name, stacking } = ref[_key];
-        const FORMATTED_NAME = name.toLowerCase().replaceAll("_", " ");
+        // const FORMATTED_NAME = name
+        //     .toLowerCase()
+        //     .replaceAll("_", " ");
 
         let amount: number;
-        if (to_display[name] !== undefined) {
-            amount = to_display[name].amount;
+        if (stats[name] !== undefined) {
+            amount = stats[name].amount;
         } else {
-            amount = stacking === "add" ? 0 : 1;
+            amount = stacking === "multiply" ? 1 : 0;
         }
 
-        // const SIGN = amount >= BASE ? "+" : "";
+        let sign: string;
         let formatted_amount: string;
         if (stacking === "multiply") {
-            const new_amount = amount * 1000;
+            const new_amount = (amount - 1) * 1000;
             const rounded = Math.round(new_amount) / 10;
             let prec: number;
             if (rounded < 10) {
@@ -39,39 +30,15 @@ function statsToDisplays(
             } else {
                 prec = 3;
             }
+            sign = amount >= 1 ? "+" : "";
             formatted_amount = `${rounded.toPrecision(prec)}%`;
         } else {
+            sign = amount >= 0 ? "+" : "";
             formatted_amount = amount.toString();
         }
-
-        let category: string;
-        if (resource.indexOf(ref[_key]) !== -1) {
-            category = "resource";
-        } else if (weapon.indexOf(ref[_key]) !== -1) {
-            category = "weapon";
-        } else if (whatever.indexOf(ref[_key]) !== -1) {
-            category = "whatever";
-        } else {
-            category = "ailment";
-        }
-
-        divs[category].push(
-            <div key={i} className={display_class_name}>
-                <img
-                    src="https://pso2na.arks-visiphone.com/images/8/8d/NGSUIItemSchwarzrossoArmor.png"
-                    crossOrigin="anonymous"
-                    alt="melee icon"
-                />
-                <span>
-                    {FORMATTED_NAME}: {/* {SIGN} */}
-                    {formatted_amount}
-                </span>
-            </div>,
-        );
-        i++;
+        effects[name] = `${sign}${formatted_amount}`;
     }
-
-    return divs;
+    return effects;
 }
 
 export type StatsDisplayValue = {
@@ -80,23 +47,67 @@ export type StatsDisplayValue = {
 
 type StatsDisplayProps = {
     stats: StatsDisplayValue;
+    statsFor: string;
 };
 
 class StatsDisplay extends Component<StatsDisplayProps, {}> {
     render() {
-        const { stats } = this.props;
-        const { resource, weapon, whatever, ailment } = statsToDisplays(
-            eff,
-            stats,
-            "px-4 py-2",
-        );
-
+        const { stats, statsFor } = this.props;
+        const f_stats = statsToDisplays(stats, EFFECTS);
+        console.log(f_stats);
         return (
-            <div className="container gap-4 text-lg text-left capitalize border-2 rounded-md border-blue-300 divide-y-2 divide-solid">
-                <div className="grid grid-cols-2">{resource}</div>
-                <div className="grid grid-cols-2">{weapon}</div>
-                <div className="grid grid-cols-2">{whatever}</div>
-                <div className="grid grid-cols-2">{ailment}</div>
+            <div>
+                <div>{statsFor} stats</div>
+                <div className="h-fit min-w-full mx-auto rounded-md border-2 text-lg capitalize divide-y-2 divide-solid px-4 shadow-lg shadow-blue-400/40">
+                    <div className="container py-2 grid grid-cols-2">
+                        <div>🩸 HP: {f_stats.HP}</div>
+                        <div>
+                            💦 PP: <span>{f_stats.PP}</span>
+                        </div>
+                    </div>
+                    <div className="container py-2 grid grid-cols-2">
+                        <div>
+                            🔪 MEL potency: {f_stats.MEL_POTENCY}
+                        </div>
+                        <div>
+                            🔫 RNG potency: {f_stats.RNG_POTENCY}
+                        </div>
+                        <div>
+                            🔮 TEC potency: {f_stats.TEC_POTENCY}
+                        </div>
+                    </div>
+                    <div className="container py-2 grid grid-cols-2">
+                        <div>
+                            📈 floor potency: {f_stats.FLOOR_POTENCY}{" "}
+                            (max: 100%)
+                        </div>
+                        <div>💪 DMG resist: {f_stats.DMG_RESIST}</div>
+                    </div>
+                    <div className="container py-2 grid grid-cols-2">
+                        <div>
+                            🥵 burn resist: {f_stats.BURN_RESIST}
+                        </div>
+                        <div>
+                            🥶 freeze resist: {f_stats.FREEZE_RESIST}
+                        </div>
+                        <div>
+                            😱 shock resist: {f_stats.SHOCK_RESIST}
+                        </div>
+                        <div>
+                            😵 blind resist: {f_stats.BLIND_RESIST}
+                        </div>
+                        <div>
+                            😳 panic resist: {f_stats.PANIC_RESIST}
+                        </div>
+                        <div>
+                            🤢 poison resist: {f_stats.POISON_RESIST}
+                        </div>
+                        <div>
+                            🤕 physical down resist:{" "}
+                            {f_stats.PHYSICAL_DOWN_RESIST}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

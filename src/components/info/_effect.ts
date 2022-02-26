@@ -1,12 +1,15 @@
 // Base effects
 type EffectStackingType = "multiply" | "add";
 
-export type EffectType = { name: string; stacking: EffectStackingType };
+export type EffectType = {
+    name: string;
+    stacking: EffectStackingType;
+};
 
 const HP: EffectType = { name: "HP", stacking: "add" };
 const PP: EffectType = { name: "PP", stacking: "add" };
 const MEL_POTENCY: EffectType = {
-    name: "MEL_POTENTCY",
+    name: "MEL_POTENCY",
     stacking: "multiply",
 };
 const RNG_POTENCY: EffectType = {
@@ -14,7 +17,7 @@ const RNG_POTENCY: EffectType = {
     stacking: "multiply",
 };
 const TEC_POTENCY: EffectType = {
-    name: "TEC_POTENTCY",
+    name: "TEC_POTENCY",
     stacking: "multiply",
 };
 const FLOOR_POTENCY: EffectType = {

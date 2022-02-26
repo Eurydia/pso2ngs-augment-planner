@@ -5,7 +5,7 @@ let weapon: Weapon[] = [];
 
 weapon.push({
     name: "elemental",
-    effects: [{ effect: eff.FLOOR_POTENCY, amount: 0.7 }],
+    effects: [{ effect: eff.FLOOR_POTENCY, amount: 1.7 }],
 });
 
 const ELEMENTAL: WeaponGroup = {

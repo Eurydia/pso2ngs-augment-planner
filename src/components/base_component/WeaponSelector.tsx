@@ -49,11 +49,6 @@ type WeaponSelectorProps = {
     onOptionChange: Function;
 };
 
-const STYLE = {
-    labelText: "👉Select your weapon.",
-    className: "text-lg capitalize text-left",
-};
-
 class WeaponSelector extends Component<WeaponSelectorProps, {}> {
     constructor(props: WeaponSelectorProps) {
         super(props);
@@ -66,16 +61,16 @@ class WeaponSelector extends Component<WeaponSelectorProps, {}> {
 
     render() {
         const { _id, value } = this.props;
-        const { labelText, className } = STYLE;
         return (
             <div>
-                <label htmlFor={_id}>{labelText}</label>
+                <label htmlFor={_id}>Select your weapon.</label>
                 <Select
                     id={_id}
                     value={value}
-                    defaultValue={unitToSelectOption(NO_WEAPON.weapons[0])}
+                    defaultValue={unitToSelectOption(
+                        NO_WEAPON.weapons[0],
+                    )}
                     options={OPTIONS}
-                    className={className}
                     isMulti={false}
                     onChange={this.handleChange}
                 />
