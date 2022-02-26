@@ -2,6 +2,7 @@ import { Component } from "react";
 import Select, { SingleValue } from "react-select";
 import Unit, { UnitGroup } from "../info/unit/_base";
 import ALL_UNITS from "../info/unit/_all";
+import ONE_STAR_UNITS from "../info/unit/one_star";
 
 // -------------------------------------------------------------------------
 // Helper functions to help create select options
@@ -60,6 +61,9 @@ class UnitSelector extends Component<UnitSelectorProps, {}> {
 
     render() {
         const { _id, value } = this.props;
+        if (value === undefined) {
+            this.handleChange(OPTIONS[0].options[0]);
+        }
         return (
             <div>
                 <label htmlFor={_id} className="text-xl">
@@ -68,9 +72,9 @@ class UnitSelector extends Component<UnitSelectorProps, {}> {
                 <Select
                     id={_id}
                     value={value}
-                    // defaultValue={unitToSelectOption(
-                    //     ONE_STAR_UNITS.units[0],
-                    // )}
+                    defaultValue={unitToSelectOption(
+                        ONE_STAR_UNITS.units[0],
+                    )}
                     options={OPTIONS}
                     isMulti={false}
                     onChange={this.handleChange}

@@ -7,7 +7,7 @@ import FOUR_STAR_UNIT from "./four_star";
 import FIVE_STAR_UNIT from "./five_star";
 
 const ALL_UNITS: UnitGroup[] = [
-    ZERO_STAR_UNTIS,
+    // ZERO_STAR_UNTIS,
     ONE_STAR_UNITS,
     TWO_STAR_UNITS,
     THREE_STAR_UNITS,
