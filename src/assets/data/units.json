@@ -1,0 +1,235 @@
+[
+    {
+        "name": "primm armor",
+        "effs": [{ "eff": "HP", "amt": 10, "con": "" }],
+        "group": 1
+    },
+    {
+        "name": "tzvia armor",
+        "effs": [{ "eff": "PP", "amt": 2, "con": "" }],
+        "group": 2
+    },
+    {
+        "name": "silver primm armor",
+        "effs": [{ "eff": "PP", "amt": 2, "con": "" }],
+        "group": 2
+    },
+    {
+        "name": "theseus armor",
+        "effs": [
+            { "eff": "HP", "amt": 10, "con": "" },
+            { "eff": "PP", "amt": 1, "con": "" }
+        ],
+        "group": 3
+    },
+    {
+        "name": "gold primm armor",
+        "effs": [
+            { "eff": "HP", "amt": 10, "con": "" },
+            { "eff": "PP", "amt": 1, "con": "" }
+        ],
+        "group": 3
+    },
+    {
+        "name": "qual de armor",
+        "effs": [{ "eff": "PP", "amt": 6, "con": "" }],
+        "group": 4
+    },
+    {
+        "name": "qual de armor arga",
+        "effs": [
+            { "eff": "PP", "amt": 4, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "qual de armor belta",
+        "effs": [
+            { "eff": "PP", "amt": 4, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "qual de armor sheza",
+        "effs": [
+            { "eff": "PP", "amt": 4, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "cattleya armor",
+        "effs": [
+            { "eff": "HP", "amt": 20, "con": "" },
+            { "eff": "PP", "amt": 2, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "vialto armor",
+        "effs": [
+            { "eff": "HP", "amt": 30, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "vialto armor arga",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "vialto armor belta",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "vialto armor sheza",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "geant armor",
+        "effs": [
+            { "eff": "HP", "amt": -20, "con": "" },
+            { "eff": "PP", "amt": 10, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.02, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.02, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.02, "con": "" },
+            { "eff": "BURN_RES", "amt": 0.5, "con": "" },
+            { "eff": "FREEZE_RES", "amt": 0.5, "con": "" },
+            { "eff": "SHOCK_RES", "amt": 0.5, "con": "" },
+            { "eff": "BLIND_RES", "amt": 0.5, "con": "" },
+            { "eff": "PANIC_RES", "amt": 0.5, "con": "" },
+            { "eff": "POISON_RES", "amt": 0.5, "con": "" },
+            { "eff": "PHYSICAL_DOWN_RES", "amt": 0.5, "con": "" }
+        ],
+        "group": 4
+    },
+    {
+        "name": "vidal armor",
+        "effs": [{ "eff": "HP", "amt": 70, "con": "" }],
+        "group": 5
+    },
+    {
+        "name": "vijf armor",
+        "effs": [
+            { "eff": "HP", "amt": 30, "con": "" },
+            { "eff": "PP", "amt": 4, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "vijf armor arga",
+        "effs": [
+            { "eff": "HP", "amt": 20, "con": "" },
+            { "eff": "PP", "amt": 7, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "vijf armor belta",
+        "effs": [
+            { "eff": "HP", "amt": 20, "con": "" },
+            { "eff": "PP", "amt": 7, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "vijf armor sheza",
+        "effs": [
+            { "eff": "HP", "amt": 20, "con": "" },
+            { "eff": "PP", "amt": 7, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "vios armor",
+        "effs": [
+            { "eff": "PP", "amt": 8, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.01, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.01, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "vindalun armor",
+        "effs": [{ "eff": "HP", "amt": 70, "con": "" }],
+        "group": 5
+    },
+    {
+        "name": "greas armor",
+        "effs": [
+            { "eff": "HP", "amt": -40, "con": "" },
+            { "eff": "PP", "amt": 13, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.02, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.02, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.02, "con": "" },
+            { "eff": "BURN_RES", "amt": 0.5, "con": "" },
+            { "eff": "FREEZE_RES", "amt": 0.5, "con": "" },
+            { "eff": "SHOCK_RES", "amt": 0.5, "con": "" },
+            { "eff": "BLIND_RES", "amt": 0.5, "con": "" },
+            { "eff": "PANIC_RES", "amt": 0.5, "con": "" },
+            { "eff": "POISON_RES", "amt": 0.5, "con": "" },
+            { "eff": "PHYSICAL_DOWN_RES", "amt": 0.5, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "schwarzest armor",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "PP", "amt": 3, "con": "" },
+            { "eff": "MEL_POT", "amt": 1.02, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "schwarzgarde armor",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "PP", "amt": 3, "con": "" },
+            { "eff": "RNG_POT", "amt": 1.02, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    },
+    {
+        "name": "schwarzrosso armor",
+        "effs": [
+            { "eff": "HP", "amt": 25, "con": "" },
+            { "eff": "PP", "amt": 3, "con": "" },
+            { "eff": "TEC_POT", "amt": 1.02, "con": "" },
+            { "eff": "DAMAGE_RES", "amt": 1.01, "con": "" }
+        ],
+        "group": 5
+    }
+]

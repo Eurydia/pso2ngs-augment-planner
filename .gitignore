@@ -76,6 +76,5 @@ typings/
 .fusebox/
 
 _data/result/
-data/
 *.pyc
 venv/

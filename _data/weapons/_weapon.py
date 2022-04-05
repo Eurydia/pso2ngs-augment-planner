@@ -7,5 +7,5 @@ from effect import Effect
 @dataclass
 class Weapon:
     name: str
-    effects: Tuple[Effect, ...]
+    effs: Tuple[Effect, ...]
     group: str

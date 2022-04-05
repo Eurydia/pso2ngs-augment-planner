@@ -13,9 +13,9 @@ from typing import Iterable, List, Tuple
 
 @dataclass
 class Effect:
-    effect: str
-    amount: float
-    condition: str = ""
+    eff: str
+    amt: float
+    con: str = ""
 
 
 def effects_with_amount(

@@ -9,9 +9,9 @@ from effect import Effect
 class Augment:
     name: str
     level: int
-    effects: Tuple[Effect, ...]
+    effs: Tuple[Effect, ...]
     group: str
-    conflict_groups: Tuple[str, ...]
+    conflict: Tuple[str, ...]
 
 
 @dataclass
@@ -21,9 +21,7 @@ class EffectMultiLevel:
     condition: str = ""
 
     def getLevel(self, level: int) -> Effect:
-        return Effect(
-            self.effect, self.amounts[level], self.condition
-        )
+        return Effect(self.effect, self.amounts[level], self.condition)
 
 
 def multi_with_amount(
@@ -33,9 +31,7 @@ def multi_with_amount(
 ) -> Tuple[EffectMultiLevel]:
     return tuple(
         map(
-            lambda eff: EffectMultiLevel(
-                eff, amounts, condition
-            ),
+            lambda eff: EffectMultiLevel(eff, amounts, condition),
             effs,
         )
     )
@@ -57,9 +53,7 @@ def augment_from_list(
 
     for level in range(levels):
 
-        effs = tuple(
-            (eff.getLevel(level) for eff in multi_level_effs)
-        )
+        effs = tuple((eff.getLevel(level) for eff in multi_level_effs))
 
         aug = Augment(
             name,
