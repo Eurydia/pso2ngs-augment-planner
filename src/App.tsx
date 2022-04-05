@@ -1,5 +1,5 @@
 import "./App.css";
-import AugmentPlanner from "./components/completed_components/AugmentPlanner";
+import AugmentPlanner from "../components/completed_components/AugmentPlanner";
 
 function App() {
     return (

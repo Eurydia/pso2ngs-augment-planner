@@ -9,15 +9,14 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url("assets/img/totsugeki.jpg");
-    background-size: cover;
-    background-attachment: fixed;
+
+    @apply bg-fixed bg-cover bg-[url("assets/img/totsugeki.jpg")];
 }
 
-a {
+/* a {
     @apply text-blue-400 underline hover:text-orange-400;
 }
 
 label {
     @apply normal-case;
-}
+} */

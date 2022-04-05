@@ -1,0 +1,53 @@
+# from effect import EffectType, ADD
+
+# HP = EffectType("HP", ADD)
+# PP = EffectType("PP", ADD)
+
+# MEL_POT = EffectType("MEL_POT")
+# RNG_POT = EffectType("RNG_POT")
+# TEC_POT = EffectType("TEC_POT")
+
+# FLOOR_POT = EffectType("FLOOR_POT")
+
+# DMG_RES = EffectType("DAMAGE_RES")
+
+# BURN_RES = EffectType("BURN_RES")
+# FREEZE_RES = EffectType("FREEZE_RES")
+# SHOCK_RES = EffectType("SHOCK_RES")
+# BLIND_RES = EffectType("BLIND_RES")
+# PANIC_RES = EffectType("PANIC_RES")
+# POISON_RES = EffectType("POISON_RES")
+# PHYSICAL_RES = EffectType("PHYSICAL_DOWN_RES")
+
+HP = "HP"
+PP = "PP"
+
+MEL_POT = "MEL_POT"
+RNG_POT = "RNG_POT"
+TEC_POT = "TEC_POT"
+
+FLOOR_POT = "FLOOR_POT"
+
+DMG_RES = "DAMAGE_RES"
+
+BURN_RES = "BURN_RES"
+FREEZE_RES = "FREEZE_RES"
+SHOCK_RES = "SHOCK_RES"
+BLIND_RES = "BLIND_RES"
+PANIC_RES = "PANIC_RES"
+POISON_RES = "POISON_RES"
+PHYSICAL_RES = "PHYSICAL_DOWN_RES"
+
+
+OFFENSIVE_POT = (MEL_POT, RNG_POT, TEC_POT)
+AILMENT_RES = (
+    BURN_RES,
+    FREEZE_RES,
+    SHOCK_RES,
+    BLIND_RES,
+    PANIC_RES,
+    POISON_RES,
+    PHYSICAL_RES,
+)
+
+ADDITIVE_EFFECT_TYPE = (HP, PP)
