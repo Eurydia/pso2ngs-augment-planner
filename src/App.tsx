@@ -8,7 +8,7 @@ const theme = createTheme();
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <Container>
+            <Container maxWidth="md">
                 <AugmentBuilder />
             </Container>
         </ThemeProvider>

@@ -1,5 +1,6 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { isAddEffect, EFFECT_NAME_TRANSLATE } from "../util";
@@ -36,51 +37,47 @@ const getOptionEffectText = (effect: Effect) => {
     const text = `${name} ${sign}${value}`;
 
     return (
-        <Grid item key={text}>
-            <Typography fontSize="body2.fontSize">{text}</Typography>
-        </Grid>
+        <Typography key={text} fontSize="body2.fontSize">
+            {text}
+        </Typography>
     );
 };
 
 export const renderOption = (props: any, option: AugmentData) => {
     const { name, level, effs, condition } = option;
 
-    const _level = level === 0 ? "" : level.toString();
-    const header = `${name} ${_level}`;
+    const roman_level = convertToRoman(level);
+    const header = `${name} ${roman_level}`;
 
     let _condition = <React.Fragment></React.Fragment>;
     if (condition !== "") {
         _condition = (
-            <Grid item textTransform="lowercase">
+            <Typography
+                fontSize="body2.fontSize"
+                textTransform="lowercase"
+            >
                 {condition}
-            </Grid>
+            </Typography>
         );
     }
+
     return (
-        <Grid
-            {...props}
-            container
-            textTransform="capitalize"
-            direction="row"
-        >
-            <Grid item>
-                <Typography fontWeight="medium" fontSize="body1.fontSize">
+        <Box {...props} textTransform="capitalize">
+            <Stack>
+                <Typography
+                    fontWeight="medium"
+                    fontSize="body1.fontSize"
+                >
                     {header}
                 </Typography>
-            </Grid>
-            <Grid
-                container
-                item
-                direction="column"
-                xs={12}
-                paddingLeft={2}
-            >
-                {effs.map((eff) => {
-                    return getOptionEffectText(eff);
-                })}
-                {_condition}
-            </Grid>
-        </Grid>
+                <Stack paddingLeft={2}>
+                    {effs.map((eff) => {
+                        return getOptionEffectText(eff);
+                    })}
+                    {_condition}
+                </Stack>
+            </Stack>
+        </Box>
     );
 };
 // ---------------------------------------------
@@ -138,6 +135,7 @@ export const parseStats = (stats: { [key: string]: number }) => {
     return res;
 };
 // ---------------------------------------------
+
 // ---------------------------------------------
 // called by handle change
 // deals with augment selection logic
@@ -170,5 +168,41 @@ export const validateValues = (values: (string | AugmentData)[]) => {
     _values.reverse();
     return _values;
 };
+// ---------------------------------------------
 
 // ---------------------------------------------
+
+const convertToRoman = (num: number) => {
+    if (num === 0) {
+        return "";
+    }
+
+    const roman_keys: { [key: string]: number } = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1,
+    };
+    let _num = num;
+    let roman = "";
+
+    for (const key of Object.keys(roman_keys)) {
+        const q = Math.floor(_num / roman_keys[key]);
+        _num -= q * roman_keys[key];
+        roman += key.repeat(q);
+    }
+    return roman;
+};
+
+export const getOptionLabel = (option: AugmentData) => {
+    return `${option.name} ${convertToRoman(option.level)}`;
+};

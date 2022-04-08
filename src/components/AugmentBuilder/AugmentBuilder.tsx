@@ -5,12 +5,14 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 import {
     renderOption,
     getTotalStats,
     parseStats,
     validateValues,
+    getOptionLabel,
 } from "./helper";
 
 import StatsDisplay from "../StatsDisplay";
@@ -34,15 +36,18 @@ export default function AugmentBuilder() {
     };
 
     return (
-        <Grid container direction="row">
-            <Grid item xs={5}>
+        <Grid container direction="row" columns={10}>
+            <Grid item xs={4}>
                 <Stack spacing={2}>
-                    <TextField label="Augment group name" />
+                    <Typography fontSize="h5.fontSize">
+                        Augment Builder
+                    </Typography>
+                    <TextField variant="filled" label="Preset name" />
                     <TextField
                         multiline
+                        variant="filled"
                         rows={5}
-                        maxRows={5}
-                        label="Augment group description"
+                        label="Description"
                     />
                     <Autocomplete
                         fullWidth
@@ -51,13 +56,7 @@ export default function AugmentBuilder() {
                         filterSelectedOptions
                         value={values}
                         options={DATA}
-                        // isOptionEqualToValue={(
-                        //     option: AugmentData,
-                        //     value: AugmentData,
-                        // ) => option === value}
-                        getOptionLabel={(option: AugmentData) => {
-                            return `${option.name} ${option.level || ""}`;
-                        }}
+                        getOptionLabel={getOptionLabel}
                         groupBy={(option) => option.group}
                         // `renderOption` renders options on dropdown
                         renderOption={renderOption}
@@ -81,8 +80,7 @@ export default function AugmentBuilder() {
                     <Button variant="outlined">clear</Button>
                 </Stack>
             </Grid>
-
-            <Grid item xs={7}>
+            <Grid item xs={6}>
                 <StatsDisplay {...stats} />
             </Grid>
         </Grid>

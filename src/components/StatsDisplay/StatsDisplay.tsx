@@ -24,6 +24,7 @@ interface StatsProps {
 export default function StatsDisplay(props: StatsProps) {
     return (
         <Stack
+            textTransform="capitalize"
             spacing={2}
             divider={<Divider orientation="horizontal" flexItem />}
         >
@@ -37,26 +38,42 @@ export default function StatsDisplay(props: StatsProps) {
                 <StatItem name={name.TEC_POT} value={props.TEC_POT} />
             </StatsGroup>
             <StatsGroup>
-                <StatItem name={name.FLOOR_POT} value={props.FLOOR_POT} />
+                <StatItem
+                    name={name.FLOOR_POT}
+                    value={props.FLOOR_POT}
+                />
                 <StatItem
                     name={name.DAMAGE_RES}
                     value={props.DAMAGE_RES}
                 />
             </StatsGroup>
             <StatsGroup>
-                <StatItem name={name.BURN_RES} value={props.BURN_RES} />
+                <StatItem
+                    name={name.BURN_RES}
+                    value={props.BURN_RES}
+                />
                 <StatItem
                     name={name.FREEZE_RES}
                     value={props.FREEZE_RES}
                 />
-                <StatItem name={name.SHOCK_RES} value={props.SHOCK_RES} />
-                <StatItem name={name.BLIND_RES} value={props.BLIND_RES} />
-                <StatItem name={name.PANIC_RES} value={props.PANIC_RES} />
+                <StatItem
+                    name={name.SHOCK_RES}
+                    value={props.SHOCK_RES}
+                />
+                <StatItem
+                    name={name.BLIND_RES}
+                    value={props.BLIND_RES}
+                />
+                <StatItem
+                    name={name.PANIC_RES}
+                    value={props.PANIC_RES}
+                />
                 <StatItem
                     name={name.POISON_RES}
                     value={props.POISON_RES}
                 />
                 <StatItem
+                    xs={2}
                     name={name.PHYDOWN_RES}
                     value={props.PHYDOWN_RES}
                 />
