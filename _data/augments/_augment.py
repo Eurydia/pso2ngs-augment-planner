@@ -12,26 +12,28 @@ class Augment:
     effs: Tuple[Effect, ...]
     group: str
     conflict: Tuple[str, ...]
+    condition: str = ""
 
 
 @dataclass
 class EffectMultiLevel:
     effect: str
     amounts: Tuple[float, ...]
-    condition: str = ""
 
     def getLevel(self, level: int) -> Effect:
-        return Effect(self.effect, self.amounts[level], self.condition)
+        return Effect(
+            self.effect,
+            self.amounts[level],
+        )
 
 
 def multi_with_amount(
     effs: Iterable[str],
     amounts: Tuple[float, ...],
-    condition: str = "",
 ) -> Tuple[EffectMultiLevel]:
     return tuple(
         map(
-            lambda eff: EffectMultiLevel(eff, amounts, condition),
+            lambda eff: EffectMultiLevel(eff, amounts),
             effs,
         )
     )
@@ -43,6 +45,7 @@ def augment_from_list(
     multi_level_effs: Tuple[EffectMultiLevel, ...],
     group: str,
     conflict: Tuple[str, ...],
+    condition: str = "",
 ) -> Tuple[Augment]:
     augs: List[Augment] = []
 
@@ -53,7 +56,9 @@ def augment_from_list(
 
     for level in range(levels):
 
-        effs = tuple((eff.getLevel(level) for eff in multi_level_effs))
+        effs = tuple(
+            (eff.getLevel(level) for eff in multi_level_effs)
+        )
 
         aug = Augment(
             name,
@@ -61,6 +66,7 @@ def augment_from_list(
             effs,
             group,
             _conflict,
+            condition,
         )
 
         augs.append(aug)

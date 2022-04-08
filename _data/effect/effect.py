@@ -15,18 +15,16 @@ from typing import Iterable, List, Tuple
 class Effect:
     eff: str
     amt: float
-    con: str = ""
 
 
 def effects_with_amount(
     effs: Iterable[str],
     amount: float,
-    condition: str = "",
 ) -> Tuple[Effect]:
 
     res: List[Effect] = []
     for eff in effs:
-        new_effect = Effect(eff, amount, condition)
+        new_effect = Effect(eff, amount)
         res.append(new_effect)
 
     return tuple(res)

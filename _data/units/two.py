@@ -7,7 +7,10 @@ from effect import *
 
 units: List[Unit] = []
 
-units.append(Unit("tzvia armor", (Effect(PP, 2),), RARITY))
 units.append(
-    Unit("silver primm armor", (Effect(PP, 2),), RARITY)
+    Unit(
+        "tzvia armor/silver primm armor",
+        (Effect(PP, 2),),
+        RARITY,
+    )
 )

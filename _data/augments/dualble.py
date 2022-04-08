@@ -16,7 +16,7 @@ CONFLICT = (GROUP,)
 augments: List[Augment] = []
 
 
-_name = ("melra", "meltect", "ratech")
+_name = ("melra", "meltech", "ratech")
 _amount = (1.0075, 1.0125, 1.0175)
 
 for name, effs in zip(_name, combinations(OFFENSIVE_POT, 2)):

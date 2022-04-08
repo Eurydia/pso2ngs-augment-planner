@@ -9,17 +9,7 @@ units: List[Unit] = []
 
 units.append(
     Unit(
-        "theseus armor",
-        (
-            Effect(HP, 10),
-            Effect(PP, 1),
-        ),
-        RARITY,
-    )
-)
-units.append(
-    Unit(
-        "gold primm armor",
+        "theseus armor/gold primm armor",
         (
             Effect(HP, 10),
             Effect(PP, 1),

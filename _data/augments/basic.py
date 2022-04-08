@@ -72,11 +72,11 @@ augments.extend(
     )
 )
 
-_mastery_amount = (1.005, 1.01, 1.015)
+_mastery_amount = (1.005, 1.01, 1.015, 1.025)
 augments.extend(
     augment_from_list(
         "mastery",
-        3,
+        4,
         (
             *multi_with_amount(OFFENSIVE_POT, _mastery_amount),
             EffectMultiLevel(FLOOR_POT, _mastery_amount),

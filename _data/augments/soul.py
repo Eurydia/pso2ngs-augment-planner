@@ -66,7 +66,7 @@ for name, eff in zip(_boss_one, OFFENSIVE_POT):
             3,
             (
                 EffectMultiLevel(PP, (5, 5, 5)),
-                EffectMultiLevel(eff, (1, 1.02, 1.025)),
+                EffectMultiLevel(eff, (1.01, 1.02, 1.025)),
             ),
             GROUP,
             CONFLICT,
@@ -82,7 +82,7 @@ for name, eff in zip(_boss_two, OFFENSIVE_POT):
             3,
             (
                 EffectMultiLevel(HP, (15, 15, 15)),
-                EffectMultiLevel(eff, (1, 1.02, 1.025)),
+                EffectMultiLevel(eff, (1.01, 1.02, 1.025)),
             ),
             GROUP,
             CONFLICT,
@@ -100,7 +100,6 @@ augments.extend(
             *multi_with_amount(
                 OFFENSIVE_POT, (1.0125, 1.0175, 1.0225)
             ),
-
         ),
         GROUP,
         CONFLICT,
