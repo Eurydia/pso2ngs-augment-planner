@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
 
 import {
     renderOption,
@@ -33,8 +35,15 @@ export default function AugmentBuilder() {
 
     return (
         <Grid container direction="row">
-            <Grid container item xs={5}>
-                <Grid item xs={12}>
+            <Grid item xs={5}>
+                <Stack spacing={2}>
+                    <TextField label="Augment group name" />
+                    <TextField
+                        multiline
+                        rows={5}
+                        maxRows={5}
+                        label="Augment group description"
+                    />
                     <Autocomplete
                         fullWidth
                         freeSolo
@@ -68,8 +77,11 @@ export default function AugmentBuilder() {
                             textTransform: "capitalize",
                         }}
                     />
-                </Grid>
+                    <Button variant="contained">Save</Button>
+                    <Button variant="outlined">clear</Button>
+                </Stack>
             </Grid>
+
             <Grid item xs={7}>
                 <StatsDisplay {...stats} />
             </Grid>
