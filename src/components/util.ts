@@ -34,3 +34,34 @@ export const EFFECT_NAME_TRANSLATE: { [key: string]: string } = {
 export const isAddEffect = (effect: string) => {
     return effect === EFFECT_NAME.HP || effect === EFFECT_NAME.PP;
 };
+
+export const convertToRoman = (num: number) => {
+    if (num === 0) {
+        return "";
+    }
+
+    const roman_keys: { [key: string]: number } = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1,
+    };
+    let _num = num;
+    let roman = "";
+
+    for (const key of Object.keys(roman_keys)) {
+        const q = Math.floor(_num / roman_keys[key]);
+        _num -= q * roman_keys[key];
+        roman += key.repeat(q);
+    }
+    return roman;
+};
