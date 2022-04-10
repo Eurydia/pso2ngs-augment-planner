@@ -1,12 +1,12 @@
 const DATA = [
     {
         name: "non elemental weapon",
-        effs: [{ eff: "FLOOR_POT", amt: 0.75 }],
-        group: "NON_ELEMENTAL",
+        effs: [{ eff: "FLOOR_POT", amt: 1.75 }],
+        group: "NORMAL",
     },
     {
         name: "elemental weapon",
-        effs: [{ eff: "FLOOR_POT", amt: 0.7 }],
+        effs: [{ eff: "FLOOR_POT", amt: 1.7 }],
         group: "ELEMENTAL",
     },
 ];

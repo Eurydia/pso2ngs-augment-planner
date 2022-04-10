@@ -34,12 +34,8 @@ export const OptionEffect = ({ effect }: OptionEffectProps) => {
     const name = EFFECT_NAME_TRANSLATE[eff];
     const text = `${name} ${sign}${value}`;
 
-    const key = `${eff}${amt}`;
     return (
-        <Typography
-            key={key}
-            fontSize={theme.typography.body2.fontSize}
-        >
+        <Typography fontSize={theme.typography.body2.fontSize}>
             {text}
         </Typography>
     );

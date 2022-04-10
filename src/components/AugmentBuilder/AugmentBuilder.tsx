@@ -6,11 +6,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import { getTotalStats, parseStats } from "./helper";
-
 import StatsDisplay from "../StatsDisplay";
 import AugmentPicker from "../AugmentPicker";
-import { AugmentData } from "../util";
+import { AugmentData, getTotalStats, parseStats } from "../util";
 
 export default function AugmentBuilder() {
     const initial_stats: { [key: string]: string } = {};

@@ -9,7 +9,7 @@ weapons: List[Weapon] = []
 weapons.append(
     Weapon(
         "non elemental weapon",
-        (Effect(FLOOR_POT, 0.75),),
+        (Effect(FLOOR_POT, 1.75),),
         WEAPON_GRP,
     )
 )

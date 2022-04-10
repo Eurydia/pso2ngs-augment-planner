@@ -20,8 +20,11 @@ const StyledAutocompleteOption = (
     const { s_props, name, effs, condition } = props;
     const theme = useTheme();
 
-    const subheaders = effs.map((val) => (
-        <OptionEffect effect={val}></OptionEffect>
+    const subheaders = effs.map((val, index) => (
+        <OptionEffect
+            effect={val}
+            key={`${val.eff}-${index}`}
+        ></OptionEffect>
     ));
 
     return (
@@ -35,10 +38,7 @@ const StyledAutocompleteOption = (
                 </Typography>
                 <Stack paddingLeft={2}>
                     {subheaders}
-                    <Typography
-                        fontSize={theme.typography.body1.fontSize}
-                        textTransform="lowercase"
-                    >
+                    <Typography fontSize={theme.typography.body1.fontSize}>
                         {condition}
                     </Typography>
                 </Stack>

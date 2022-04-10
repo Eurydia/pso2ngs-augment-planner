@@ -14,18 +14,8 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="md">
-                <Accordian>
-                    <AccordianSummary>Augment Builder</AccordianSummary>
-                    <AccordianDetails>
-                        <AugmentBuilder />
-                    </AccordianDetails>
-                </Accordian>
-                <Accordian>
-                    <AccordianSummary>Augment Builder</AccordianSummary>
-                    <AccordianDetails>
-                        <LoadoutBuilder />
-                    </AccordianDetails>
-                </Accordian>
+                <AugmentBuilder />
+                <LoadoutBuilder />
             </Container>
         </ThemeProvider>
     );

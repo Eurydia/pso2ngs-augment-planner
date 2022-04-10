@@ -32,7 +32,6 @@ const AugmentPicker = (props: AugmentPickerProps) => {
     return (
         <Autocomplete
             fullWidth
-            freeSolo
             multiple
             filterSelectedOptions
             value={autocompleteValues}
@@ -42,8 +41,8 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             groupBy={(option) => option.group}
             // `renderOption` renders options on dropdown
             renderOption={(props: any, option: AugmentData) => {
-                const roman = convertToRoman(option.level);
-                const name = `${option.name} ${roman}`;
+                const roman_level = convertToRoman(option.level);
+                const name = `${option.name} ${roman_level}`;
                 const { effs, condition } = option;
                 return (
                     <StyledAutocompleteOption
@@ -51,6 +50,7 @@ const AugmentPicker = (props: AugmentPickerProps) => {
                         name={name}
                         effs={effs}
                         condition={condition}
+                        key={name}
                     />
                 );
             }}

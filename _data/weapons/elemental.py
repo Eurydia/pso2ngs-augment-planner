@@ -8,6 +8,6 @@ weapons: List[Weapon] = []
 
 weapons.append(
     Weapon(
-        "elemental weapon", (Effect(FLOOR_POT, 0.7),), WEAPON_GRP
+        "elemental weapon", (Effect(FLOOR_POT, 1.7),), WEAPON_GRP
     )
 )
