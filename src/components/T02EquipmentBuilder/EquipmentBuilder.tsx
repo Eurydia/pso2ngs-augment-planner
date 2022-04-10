@@ -1,11 +1,8 @@
-import Stack from "@mui/material/Stack";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
-import EquipmentPicker from "../EquipmentPicker";
-import AugmentPicker from "../AugmentPicker";
+import EquipmentPicker from "../T01EquipmentPicker";
+import AugmentPicker from "../T01AugmentPicker";
 
 interface EquipmentBuilderProps {
     weapons: boolean;
@@ -16,7 +13,7 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     const theme = useTheme();
 
     return (
-        <Box padding={2}>
+        <Box width={1}>
             <EquipmentPicker
                 weapons={props.weapons}
                 armors={props.armors}

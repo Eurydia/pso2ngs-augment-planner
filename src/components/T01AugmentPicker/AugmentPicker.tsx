@@ -4,7 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 import { getOptionLabel, validateValues } from "./helper";
-import StyledAutocompleteOption from "../StyledAutocompleteOption";
+import StyledAutocompleteOption from "../T01StyledAutocompleteOption";
 import { convertToRoman, AugmentData } from "../util";
 import DATA from "../../assets/data/augments";
 

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { capitalize } from "@mui/material";
 
-import StyledAutocompleteOption from "../StyledAutocompleteOption";
-import { default as WEAPONS } from "../../assets/data/weapons";
-import { default as UNITS } from "../../assets/data/units";
+import { prepareAdornment, findMatching } from "./helper";
+
+import StyledAutocompleteOption from "../T01StyledAutocompleteOption";
 import { EquipmentData } from "../util";
 
 interface EquipmentPickerProps {
     weapons: boolean;
     armors: boolean;
-    // onChange: Function;
+    onChange: Function;
 }
 
 const EquipmentPicker = (props: EquipmentPickerProps) => {
@@ -20,37 +20,19 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
         initial_value,
     );
 
-    let label = "";
-    let placeholder = "";
-    let options: EquipmentData[] = [];
-    if (props.weapons) {
-        label = "Weapons";
-        placeholder = "No weapon selected";
-        options = WEAPONS;
-    } else if (props.armors) {
-        label = "Units";
-        placeholder = "No unit selected";
-        options = UNITS;
-    } else {
-        label = "Equipment";
-        placeholder = "No equipment selected";
-        options = [...WEAPONS, ...UNITS];
-    }
+    const { label, placeholder, options } = prepareAdornment(
+        props.weapons,
+        props.armors,
+    );
 
     const handleChange = (
         e: React.SyntheticEvent,
         v: string,
         r: string,
     ) => {
-        let match_found: EquipmentData | null = initial_value;
-        for (let i = 0; i < options.length; i++) {
-            const { name } = options[i];
-            if (v.toLocaleLowerCase() === name) {
-                match_found = options[i];
-                break;
-            }
-        }
+        const match_found = findMatching(v, options);
         setValue(match_found);
+        props.onChange(value);
     };
 
     return (
