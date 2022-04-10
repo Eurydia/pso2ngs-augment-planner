@@ -1,28 +1,42 @@
 import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
-import { default as UNITS } from "../../assets/data/units";
-import { default as WEAPONS } from "../../assets/data/weapons";
-import { EquipmentData } from "../../assets/data/types";
+import StyledAutocompleteOption from "../StyledAutocompleteOption";
+import { EquipmentData } from "../util";
+import { default as W } from "../../assets/data/weapons";
+import { default as U } from "../../assets/data/units";
 
-interface EquipmentPickerProps {
-    weapons?: boolean;
-    armors?: boolean;
-}
-
-const EquipmentPicker = (props: EquipmentPickerProps) => {
-    let options: EquipmentData[] = [];
-    if (props.weapons !== undefined) {
-        options = WEAPONS;
-    }
-    if (props.armors !== undefined) {
-        options = [...UNITS];
-    }
+const EquipmentPicker = () => {
+    let options: EquipmentData[] = [...W, ...U];
 
     return (
         <Autocomplete
+            fullWidth
             freeSolo
-            getOptionLabel={(option) => option.name}
             options={options}
+            getOptionLabel={(option) => option.name}
+            renderOption={(props: any, option: EquipmentData) => {
+                const { name, effs } = option;
+                return (
+                    <StyledAutocompleteOption
+                        s_props={props}
+                        name={name}
+                        effs={effs}
+                        condition=""
+                    />
+                );
+            }}
+            groupBy={(option) => option.group}
+            renderInput={(params: any) => {
+                return (
+                    <TextField
+                        {...params}
+                        variant="filled"
+                        // helperText="some result may be hidden."
+                        label="Equipment"
+                    />
+                );
+            }}
         />
     );
 };

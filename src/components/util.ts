@@ -31,6 +31,26 @@ export const EFFECT_NAME_TRANSLATE: { [key: string]: string } = {
     PHYDOWN_RES: "🤕 physical down resist",
 };
 
+export interface Effect {
+    eff: string;
+    amt: number;
+}
+
+export interface AugmentData {
+    name: string;
+    level: number;
+    effs: Effect[];
+    group: string;
+    conflict: string[];
+    condition: string;
+}
+
+export interface EquipmentData {
+    name: string;
+    effs: Effect[];
+    group: string;
+}
+
 export const isAddEffect = (effect: string) => {
     return effect === EFFECT_NAME.HP || effect === EFFECT_NAME.PP;
 };

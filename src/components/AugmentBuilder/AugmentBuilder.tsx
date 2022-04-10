@@ -10,7 +10,7 @@ import { getTotalStats, parseStats } from "./helper";
 
 import StatsDisplay from "../StatsDisplay";
 import AugmentPicker from "../AugmentPicker";
-import { AugmentData } from "../../assets/data/augments";
+import { AugmentData } from "../util";
 
 export default function AugmentBuilder() {
     const initial_stats: { [key: string]: string } = {};

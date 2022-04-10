@@ -1,15 +1,13 @@
-import { EquipmentData } from "./types";
-
-const DATA: EquipmentData[] = [
+const DATA = [
     {
         name: "primm armor",
         effs: [{ eff: "HP", amt: 10 }],
-        group: 1,
+        group: "1*",
     },
     {
         name: "tzvia armor/silver primm armor",
         effs: [{ eff: "PP", amt: 2 }],
-        group: 2,
+        group: "2*",
     },
     {
         name: "theseus armor/gold primm armor",
@@ -17,12 +15,12 @@ const DATA: EquipmentData[] = [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 1 },
         ],
-        group: 3,
+        group: "3*",
     },
     {
         name: "qual de armor",
         effs: [{ eff: "PP", amt: 6 }],
-        group: 4,
+        group: "4*",
     },
     {
         name: "qual de armor arga",
@@ -31,7 +29,7 @@ const DATA: EquipmentData[] = [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "RNG_POT", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "qual de armor belta",
@@ -40,7 +38,7 @@ const DATA: EquipmentData[] = [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "qual de armor sheza",
@@ -49,7 +47,7 @@ const DATA: EquipmentData[] = [
             { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "cattleya armor",
@@ -57,7 +55,7 @@ const DATA: EquipmentData[] = [
             { eff: "HP", amt: 20 },
             { eff: "PP", amt: 2 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "vialto armor",
@@ -65,7 +63,7 @@ const DATA: EquipmentData[] = [
             { eff: "HP", amt: 30 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "vialto armor arga",
@@ -75,7 +73,7 @@ const DATA: EquipmentData[] = [
             { eff: "RNG_POT", amt: 1.01 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "vialto armor belta",
@@ -85,7 +83,7 @@ const DATA: EquipmentData[] = [
             { eff: "TEC_POT", amt: 1.01 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "vialto armor sheza",
@@ -95,7 +93,7 @@ const DATA: EquipmentData[] = [
             { eff: "TEC_POT", amt: 1.01 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "geant armor",
@@ -113,12 +111,12 @@ const DATA: EquipmentData[] = [
             { eff: "POISON_RES", amt: 0.5 },
             { eff: "PHYDOWN_RES", amt: 0.5 },
         ],
-        group: 4,
+        group: "4*",
     },
     {
         name: "vidal armor",
         effs: [{ eff: "HP", amt: 70 }],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vijf armor",
@@ -126,7 +124,7 @@ const DATA: EquipmentData[] = [
             { eff: "HP", amt: 30 },
             { eff: "PP", amt: 4 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vijf armor arga",
@@ -136,7 +134,7 @@ const DATA: EquipmentData[] = [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "RNG_POT", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vijf armor belta",
@@ -146,7 +144,7 @@ const DATA: EquipmentData[] = [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vijf armor sheza",
@@ -156,7 +154,7 @@ const DATA: EquipmentData[] = [
             { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vios armor",
@@ -166,12 +164,12 @@ const DATA: EquipmentData[] = [
             { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "vindalun armor",
         effs: [{ eff: "HP", amt: 70 }],
-        group: 5,
+        group: "5*",
     },
     {
         name: "greas armor",
@@ -189,7 +187,7 @@ const DATA: EquipmentData[] = [
             { eff: "POISON_RES", amt: 0.5 },
             { eff: "PHYDOWN_RES", amt: 0.5 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "schwarzest armor",
@@ -199,7 +197,7 @@ const DATA: EquipmentData[] = [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "schwarzgarde armor",
@@ -209,7 +207,7 @@ const DATA: EquipmentData[] = [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
     {
         name: "schwarzrosso armor",
@@ -219,7 +217,7 @@ const DATA: EquipmentData[] = [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
-        group: 5,
+        group: "5*",
     },
 ];
 

@@ -8,7 +8,7 @@ from effect import Effect
 class Unit:
     name: str
     effs: Tuple[Effect, ...]
-    group: int
+    group: str
 
 
 SUFFIX = ("arga", "belta", "sheza")

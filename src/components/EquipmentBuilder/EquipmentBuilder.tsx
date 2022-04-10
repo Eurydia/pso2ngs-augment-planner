@@ -1,14 +1,14 @@
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
 
+import EquipmentPicker from "../EquipmentPicker";
 import AugmentPicker from "../AugmentPicker";
 
 const EquipmentBuilder = () => {
     return (
         <Box>
-            <Select />
+            <EquipmentPicker />
             <Autocomplete
                 renderInput={(params: any) => {
                     return (

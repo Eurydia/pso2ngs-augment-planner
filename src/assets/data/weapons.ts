@@ -1,6 +1,4 @@
-import { EquipmentData } from "./types";
-
-const DATA: EquipmentData[] = [
+const DATA = [
     {
         name: "non elemental weapon",
         effs: [{ eff: "FLOOR_POT", amt: 0.75 }],

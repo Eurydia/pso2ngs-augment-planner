@@ -1,10 +1,4 @@
-import { isAddEffect } from "../util";
-import { AugmentData } from "../../assets/data/augments";
-
-// ---------------------------------------------
-// called by render option
-
-// ---------------------------------------------
+import { isAddEffect, AugmentData } from "../util";
 
 // ---------------------------------------------
 // called by handle change

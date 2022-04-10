@@ -1,6 +1,4 @@
-import { AugmentData } from "./types";
-
-const DATA: AugmentData[] = [
+const DATA = [
     {
         name: "stamina",
         level: 1,

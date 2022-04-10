@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-import { getOptionLabel, renderOption, validateValues } from "./helper";
-
+import { getOptionLabel, validateValues } from "./helper";
+import StyledAutocompleteOption from "../StyledAutocompleteOption";
+import { convertToRoman, AugmentData } from "../util";
 import DATA from "../../assets/data/augments";
-import { AugmentData } from "../../assets/data/types";
 
 interface AugmentPickerProps {
     onChange: Function;
@@ -41,7 +41,19 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             onChange={handleChange}
             groupBy={(option) => option.group}
             // `renderOption` renders options on dropdown
-            renderOption={renderOption}
+            renderOption={(props: any, option: AugmentData) => {
+                const roman = convertToRoman(option.level);
+                const name = `${option.name} ${roman}`;
+                const { effs, condition } = option;
+                return (
+                    <StyledAutocompleteOption
+                        s_props={props}
+                        name={name}
+                        effs={effs}
+                        condition={condition}
+                    />
+                );
+            }}
             // `renderInput` renders the input field itself
             renderInput={(params: any) => {
                 return (
