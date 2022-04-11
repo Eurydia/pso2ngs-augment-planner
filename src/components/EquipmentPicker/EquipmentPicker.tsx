@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-import { prepareAdornment, findMatching } from "./helper";
-
-import StyledAutocompleteOption from "../T01StyledAutocompleteOption";
+import {
+    prepareAdornment,
+    findMatching,
+    renderOption,
+    getOptionLabel,
+} from "./helper";
 import { EquipmentData } from "../util";
 
 interface EquipmentPickerProps {
     weapons: boolean;
     armors: boolean;
-    onChange: Function;
+    value: EquipmentData | null;
+    onChange: (value: EquipmentData | null) => void;
 }
 
 const EquipmentPicker = (props: EquipmentPickerProps) => {
-    const initial_value = null;
-    const [value, setValue] = useState<EquipmentData | null>(
-        initial_value,
-    );
-
+    const { weapons, armors, value } = props;
     const { label, placeholder, options } = prepareAdornment(
-        props.weapons,
-        props.armors,
+        weapons,
+        armors,
     );
 
     const handleChange = (
@@ -31,8 +31,7 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
         r: string,
     ) => {
         const match_found = findMatching(v, options);
-        setValue(match_found);
-        props.onChange(value);
+        props.onChange(match_found);
     };
 
     return (
@@ -41,25 +40,15 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
             filterSelectedOptions
             value={value}
             options={options}
-            groupBy={(option) => option.group}
-            getOptionLabel={(option) => option.name}
             onInputChange={handleChange}
-            renderOption={(props: any, option: EquipmentData) => {
-                const { name, effs } = option;
-                return (
-                    <StyledAutocompleteOption
-                        s_props={props}
-                        name={name}
-                        effs={effs}
-                        condition=""
-                        key={name}
-                    />
-                );
-            }}
+            renderOption={renderOption}
+            getOptionLabel={getOptionLabel}
+            groupBy={(option) => option.group}
             renderInput={(params: any) => {
                 return (
                     <TextField
                         {...params}
+                        // make the input field into a titlecase
                         inputProps={{
                             ...params.inputProps,
                             style: {
@@ -67,7 +56,6 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
                             },
                         }}
                         variant="filled"
-                        // helperText="some result may be hidden."
                         label={label}
                         placeholder={placeholder}
                     />

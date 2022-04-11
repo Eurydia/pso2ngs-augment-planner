@@ -1,16 +1,8 @@
-import Typography from "@mui/material/Typography";
-import useTheme from "@mui/material/styles/useTheme";
-
 import { EFFECT_NAME_TRANSLATE, isAddEffect, Effect } from "../util";
 // ---------------------------------------------
 // For effects on an option
-interface OptionEffectProps {
-    effect: Effect;
-}
-
-export const OptionEffect = ({ effect }: OptionEffectProps) => {
+export const parseEffect = (effect: Effect) => {
     const { eff, amt } = effect;
-    const theme = useTheme();
 
     let value: string;
     let sign: string = "+";
@@ -34,10 +26,6 @@ export const OptionEffect = ({ effect }: OptionEffectProps) => {
     const name = EFFECT_NAME_TRANSLATE[eff];
     const text = `${name} ${sign}${value}`;
 
-    return (
-        <Typography fontSize={theme.typography.body2.fontSize}>
-            {text}
-        </Typography>
-    );
+    return text;
 };
 // ---------------------------------------------

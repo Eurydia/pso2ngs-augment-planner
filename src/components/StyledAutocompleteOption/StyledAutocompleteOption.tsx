@@ -1,9 +1,11 @@
+import React from "react";
+
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { OptionEffect } from "./helper";
+import { parseEffect } from "./helper";
 
 import { Effect } from "../util";
 
@@ -17,14 +19,17 @@ interface StyledAutocompleteOptionProps {
 const StyledAutocompleteOption = (
     props: StyledAutocompleteOptionProps,
 ) => {
-    const { s_props, name, effs, condition } = props;
     const theme = useTheme();
+    const { s_props, name, effs, condition } = props;
 
-    const subheaders = effs.map((val, index) => (
-        <OptionEffect
-            effect={val}
-            key={`${val.eff}-${index}`}
-        ></OptionEffect>
+    const subheaders = effs.map((eff, index) => (
+        <Typography
+            key={`${name}-${index}`}
+            paddingLeft={2}
+            fontSize={theme.typography.body2.fontSize}
+        >
+            {parseEffect(eff)}
+        </Typography>
     ));
 
     return (
@@ -36,12 +41,13 @@ const StyledAutocompleteOption = (
                 >
                     {name}
                 </Typography>
-                <Stack paddingLeft={2}>
-                    {subheaders}
-                    <Typography fontSize={theme.typography.body1.fontSize}>
-                        {condition}
-                    </Typography>
-                </Stack>
+                {subheaders}
+                <Typography
+                    paddingLeft={2}
+                    fontSize={theme.typography.body1.fontSize}
+                >
+                    {condition}
+                </Typography>
             </Stack>
         </Box>
     );

@@ -1,4 +1,26 @@
+import StyledAutocompleteOption from "../StyledAutocompleteOption";
 import { convertToRoman, AugmentData } from "../util";
+
+// ---------------------------------------------
+// For rendering options on dropdown
+export const renderOption = (props: any, option: AugmentData) => {
+    const roman_level = convertToRoman(option.level);
+    let name = option.name;
+    if (roman_level !== "") {
+        name += ` ${roman_level}`;
+    }
+    const { effs, condition } = option;
+    return (
+        <StyledAutocompleteOption
+            s_props={props}
+            name={name}
+            effs={effs}
+            condition={condition}
+            key={name}
+        />
+    );
+};
+// ---------------------------------------------
 
 // ---------------------------------------------
 // For rendering input on input field
