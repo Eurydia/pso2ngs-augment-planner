@@ -3,8 +3,13 @@ import React from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-import { getOptionLabel, validateValues, renderOption } from "./helper";
-import { AugmentData } from "../util";
+import {
+    getOptionLabel,
+    validateAugments,
+    renderOption,
+    filterOptions,
+} from "./helper";
+import { AugmentData } from "../../types";
 import DATA from "../../assets/data/augments";
 
 interface AugmentPickerProps {
@@ -14,12 +19,14 @@ interface AugmentPickerProps {
 }
 
 const AugmentPicker = (props: AugmentPickerProps) => {
+    const { values, disabled } = props;
+
     const handleChange = (
         event: React.SyntheticEvent,
         values: (string | AugmentData)[],
         reason: string,
     ) => {
-        const validated = validateValues(values);
+        const validated = validateAugments(values);
         props.onChange(validated);
     };
 
@@ -28,12 +35,17 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             fullWidth
             multiple
             filterSelectedOptions
-            disabled={props.disabled}
             options={DATA}
-            value={props.values}
+            disabled={disabled}
+            value={values}
             getOptionLabel={getOptionLabel}
             onChange={handleChange}
             renderOption={renderOption}
+            filterOptions={filterOptions}
+            // isOptionEqualToValue={(option, value) =>
+            //     option.name === value.name &&
+            //     option.level === value.level
+            // }
             groupBy={(option) => option.group}
             renderInput={(params: any) => {
                 return (
@@ -41,6 +53,7 @@ const AugmentPicker = (props: AugmentPickerProps) => {
                         {...params}
                         variant="filled"
                         label="Augment"
+                        placeholder='try "pp + rng + 3"'
                     />
                 );
             }}

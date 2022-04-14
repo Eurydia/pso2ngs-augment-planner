@@ -1,4 +1,6 @@
-import { EFFECT_NAME_TRANSLATE, isAddEffect, Effect } from "../util";
+import { EFFECT_NAME_TRANSLATE, isAddEffect } from "../../util";
+import { Effect } from "../../types";
+
 // ---------------------------------------------
 // For effects on an option
 export const parseEffect = (effect: Effect) => {
@@ -23,9 +25,8 @@ export const parseEffect = (effect: Effect) => {
         value = `${temp_value.toPrecision(3)}%`;
     }
 
-    const name = EFFECT_NAME_TRANSLATE[eff];
-    const text = `${name} ${sign}${value}`;
-
+    const { name, emoji } = EFFECT_NAME_TRANSLATE[eff];
+    const text = `${emoji} ${name} ${sign}${value}`;
     return text;
 };
 // ---------------------------------------------

@@ -1,14 +1,15 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
 
 export const StatItem = (props: {
-    name: string;
+    name: { emoji: string; name: string };
     value?: string;
     isAdd?: boolean;
     xs?: number;
 }) => {
+    const theme = useTheme();
     const { name, value, isAdd, xs } = props;
-
     let _value = value;
     if (value === undefined) {
         if (isAdd !== undefined) {
@@ -17,12 +18,13 @@ export const StatItem = (props: {
             _value = "+0.0%";
         }
     }
-
-    const text = `${name}: ${_value}`;
-
+    const text = `${name.emoji} ${name.name}: ${_value}`;
     return (
         <Grid item xs={xs || 1}>
-            <Typography padding={1} fontSize="body1.fontSize">
+            <Typography
+                padding={1}
+                fontSize={theme.typography.body1.fontSize}
+            >
                 {text}
             </Typography>
         </Grid>

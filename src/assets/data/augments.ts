@@ -1365,8 +1365,8 @@ const DATA = [
         name: "sta might",
         level: 0,
         effs: [
-            { eff: "MEL_POT", amt: 1.02 },
             { eff: "HP", amt: 15 },
+            { eff: "MEL_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1376,8 +1376,8 @@ const DATA = [
         name: "spi might",
         level: 0,
         effs: [
-            { eff: "MEL_POT", amt: 1.02 },
             { eff: "PP", amt: 5 },
+            { eff: "MEL_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1409,8 +1409,8 @@ const DATA = [
         name: "sta precision",
         level: 0,
         effs: [
-            { eff: "RNG_POT", amt: 1.02 },
             { eff: "HP", amt: 15 },
+            { eff: "RNG_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1420,8 +1420,8 @@ const DATA = [
         name: "spi precision",
         level: 0,
         effs: [
-            { eff: "RNG_POT", amt: 1.02 },
             { eff: "PP", amt: 5 },
+            { eff: "RNG_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1453,8 +1453,8 @@ const DATA = [
         name: "sta technique",
         level: 0,
         effs: [
-            { eff: "TEC_POT", amt: 1.02 },
             { eff: "HP", amt: 15 },
+            { eff: "TEC_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1464,8 +1464,8 @@ const DATA = [
         name: "spi technique",
         level: 0,
         effs: [
-            { eff: "TEC_POT", amt: 1.02 },
             { eff: "PP", amt: 5 },
+            { eff: "TEC_POT", amt: 1.02 },
         ],
         group: "FUSED",
         conflict: ["FUSED", "BASIC"],
@@ -1497,8 +1497,8 @@ const DATA = [
         name: "addi stamel",
         level: 0,
         effs: [
-            { eff: "MEL_POT", amt: 1.025 },
             { eff: "HP", amt: 20 },
+            { eff: "MEL_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],
@@ -1508,8 +1508,8 @@ const DATA = [
         name: "addi spimel",
         level: 0,
         effs: [
-            { eff: "MEL_POT", amt: 1.025 },
             { eff: "PP", amt: 6 },
+            { eff: "MEL_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],
@@ -1541,8 +1541,8 @@ const DATA = [
         name: "addi stara",
         level: 0,
         effs: [
-            { eff: "RNG_POT", amt: 1.025 },
             { eff: "HP", amt: 20 },
+            { eff: "RNG_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],
@@ -1552,8 +1552,8 @@ const DATA = [
         name: "addi spira",
         level: 0,
         effs: [
-            { eff: "RNG_POT", amt: 1.025 },
             { eff: "PP", amt: 6 },
+            { eff: "RNG_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],
@@ -1585,8 +1585,8 @@ const DATA = [
         name: "addi statech",
         level: 0,
         effs: [
-            { eff: "TEC_POT", amt: 1.025 },
             { eff: "HP", amt: 20 },
+            { eff: "TEC_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],
@@ -1596,8 +1596,8 @@ const DATA = [
         name: "addi spitech",
         level: 0,
         effs: [
-            { eff: "TEC_POT", amt: 1.025 },
             { eff: "PP", amt: 6 },
+            { eff: "TEC_POT", amt: 1.025 },
         ],
         group: "ADDI",
         conflict: ["ADDI"],

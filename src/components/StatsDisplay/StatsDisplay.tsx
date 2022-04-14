@@ -2,7 +2,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 import { StatsGroup, StatItem } from "./helper";
-import { EFFECT_NAME_TRANSLATE as name } from "../util";
+import { EFFECT_NAME_TRANSLATE as name } from "../../util";
 
 interface StatsProps {
     HP?: string;

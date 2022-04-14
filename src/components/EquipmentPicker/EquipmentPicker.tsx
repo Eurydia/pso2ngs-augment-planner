@@ -8,22 +8,21 @@ import {
     findMatching,
     renderOption,
     getOptionLabel,
+    filterOptions,
 } from "./helper";
-import { EquipmentData } from "../util";
+import { EquipmentData } from "../../types";
+
+export type EquipmentPickerVariant = "both" | "weapons" | "armors";
 
 interface EquipmentPickerProps {
-    weapons: boolean;
-    armors: boolean;
+    variant: EquipmentPickerVariant;
     value: EquipmentData | null;
     onChange: (value: EquipmentData | null) => void;
 }
 
 const EquipmentPicker = (props: EquipmentPickerProps) => {
-    const { weapons, armors, value } = props;
-    const { label, placeholder, options } = prepareAdornment(
-        weapons,
-        armors,
-    );
+    const { variant, value } = props;
+    const { label, placeholder, options } = prepareAdornment(variant);
 
     const handleChange = (
         e: React.SyntheticEvent,
@@ -43,18 +42,19 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
             onInputChange={handleChange}
             renderOption={renderOption}
             getOptionLabel={getOptionLabel}
+            filterOptions={filterOptions}
             groupBy={(option) => option.group}
             renderInput={(params: any) => {
                 return (
                     <TextField
                         {...params}
                         // make the input field into a titlecase
-                        inputProps={{
-                            ...params.inputProps,
-                            style: {
-                                textTransform: "capitalize",
-                            },
-                        }}
+                        // inputProps={{
+                        //     ...params.inputProps,
+                        //     style: {
+                        //         textTransform: "capitalize",
+                        //     },
+                        // }}
                         variant="filled"
                         label={label}
                         placeholder={placeholder}

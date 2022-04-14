@@ -26,14 +26,17 @@ _secondary_effs = (
 )
 
 for pri_name, pri_eff in zip(_primary_names, _primary_effs):
-    for sec_name, sec_eff in zip(
-        _secondary_names, _secondary_effs
-    ):
+    for sec_name, sec_eff in zip(_secondary_names, _secondary_effs):
+        if sec_name == "sta" or sec_name == "spi":
+            effects = (sec_eff, pri_eff)
+        else:
+            effects = (pri_eff, sec_eff)
+
         augments.append(
             Augment(
                 f"addi {sec_name}{pri_name}",
                 0,
-                (pri_eff, sec_eff),
+                effects,
                 GROUP,
                 CONFLICT,
             )

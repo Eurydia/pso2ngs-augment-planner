@@ -1,24 +1,34 @@
+import { FilterOptionsState } from "@mui/material";
+
+import { matchSorter } from "match-sorter";
+
+import StyledAutocompleteOption from "../StyledAutocompleteOption";
+import {
+    isAddEffect,
+    parseStat,
+    EFFECT_NAME_TRANSLATE,
+} from "../../util";
+import { EquipmentData } from "../../types";
 import { default as WEAPONS } from "../../assets/data/weapons";
 import { default as UNITS } from "../../assets/data/units";
-import StyledAutocompleteOption from "../StyledAutocompleteOption";
-import { EquipmentData } from "../util";
 
 // ---------------------------------------------
 // Return text field adorments
-export const prepareAdornment = (weapons: boolean, armors: boolean) => {
+export const prepareAdornment = (
+    variant: "both" | "weapons" | "armors",
+) => {
     let label = "";
     let placeholder = "";
-    let options: EquipmentData[] = [];
-
-    if (weapons && armors) {
+    let options: EquipmentData[];
+    if (variant === "both") {
         label = "Equipment";
         placeholder = "No equipment selected";
         options = [...WEAPONS, ...UNITS];
-    } else if (armors) {
+    } else if (variant === "armors") {
         label = "Units";
         placeholder = "No unit selected";
         options = UNITS;
-    } else if (weapons) {
+    } else {
         label = "Weapons";
         placeholder = "No weapon selected";
         options = WEAPONS;
@@ -29,29 +39,39 @@ export const prepareAdornment = (weapons: boolean, armors: boolean) => {
 
 // ---------------------------------------------
 // Using the text field value to match with an Equipment Data
-export const findMatching = (value: string, options: EquipmentData[]) => {
-    let match_found: EquipmentData | null = null;
-    for (let i = 0; i < options.length; i++) {
-        const { name } = options[i];
-        if (value.toLocaleLowerCase() === name) {
-            match_found = options[i];
-            break;
+export const findMatching = (
+    value: string,
+    options: EquipmentData[],
+) => {
+    for (const option of options) {
+        const { name } = option;
+        if (value.toLowerCase() === name) {
+            return option;
         }
     }
-    return match_found;
+    return null;
 };
 // ---------------------------------------------
 
 // ---------------------------------------------
 export const renderOption = (props: any, option: EquipmentData) => {
-    const { name, effs } = option;
+    const { name: title, effs: effects } = option;
+    let subheaders: string[] = [];
+    for (const effect of effects) {
+        const { eff, amt } = effect;
+        const parsed_amt = parseStat(amt, isAddEffect(eff));
+        const { emoji, name } = EFFECT_NAME_TRANSLATE[eff];
+        const subheader = `${emoji} ${name} ${parsed_amt}`;
+        subheaders.push(subheader);
+    }
+
     return (
         <StyledAutocompleteOption
-            key={name}
+            key={title}
             s_props={props}
-            name={name}
-            effs={effs}
-            condition=""
+            header={title}
+            capitalizeHeader={true}
+            subheaders={subheaders}
         />
     );
 };
@@ -60,5 +80,53 @@ export const renderOption = (props: any, option: EquipmentData) => {
 // ---------------------------------------------
 export const getOptionLabel = (option: EquipmentData) => {
     return option.name;
+};
+// ---------------------------------------------
+
+// ---------------------------------------------
+const compare_groups = (a: EquipmentData, b: EquipmentData) => {
+    if (a.group > b.group) {
+        return 1;
+    } else if (a.group < b.group) {
+        return -1;
+    }
+    return 0;
+};
+// Users can search using
+// Equipment name
+// equipment group
+// effect name
+// terms are seperated at evert `+` symbol
+export const filterOptions = (
+    options: EquipmentData[],
+    state: FilterOptionsState<EquipmentData>,
+) => {
+    const value = state.inputValue.normalize();
+    if (!value || !value.length) {
+        return options;
+    }
+
+    const terms = state.inputValue
+        .split("+")
+        .map((term) => term.trim())
+        .filter((term) => Boolean(term));
+    if (!terms) {
+        return options;
+    }
+
+    const found = terms.reduceRight(
+        (res, term) =>
+            matchSorter(res, term, {
+                keys: [
+                    "name",
+                    "group",
+                    (item) =>
+                        item.effs.map((i) => i.eff.replace("_", " ")),
+                ],
+            }),
+        options,
+    );
+    const sorted = found.sort((a, b) => compare_groups(a, b));
+    return sorted;
 };
 // ---------------------------------------------

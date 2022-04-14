@@ -14,9 +14,7 @@ augments: List[Augment] = []
 
 _primary_names = ("might", "precision", "technique")
 _primary_amount = 1.02
-_primary_effs = effects_with_amount(
-    OFFENSIVE_POT, _primary_amount
-)
+_primary_effs = effects_with_amount(OFFENSIVE_POT, _primary_amount)
 
 
 _secondary_names = ("sta", "spi", "deft", "gua")
@@ -28,14 +26,22 @@ _secondary_effs = (
 )
 
 for pri_name, pri_eff in zip(_primary_names, _primary_effs):
-    for sec_name, sec_eff in zip(
-        _secondary_names, _secondary_effs
-    ):
+    for sec_name, sec_eff in zip(_secondary_names, _secondary_effs):
+        if sec_name == "sta" or sec_name == "spi":
+            effect = (
+                sec_eff,
+                pri_eff,
+            )
+        else:
+            effect = (
+                pri_eff,
+                sec_eff,
+            )
         augments.append(
             Augment(
                 f"{sec_name} {pri_name}",
                 0,
-                (pri_eff, sec_eff),
+                effect,
                 GROUP,
                 CONFLICT,
             )
