@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
@@ -66,13 +67,14 @@ export const renderOption = (props: any, option: EquipmentData) => {
     }
 
     return (
-        <StyledAutocompleteOption
-            key={title}
-            s_props={props}
-            header={title}
-            capitalizeHeader={true}
-            subheaders={subheaders}
-        />
+        <Box {...props}>
+            <StyledAutocompleteOption
+                capitalizeHeader
+                key={title}
+                header={title}
+                subheaders={subheaders}
+            />
+        </Box>
     );
 };
 // ---------------------------------------------

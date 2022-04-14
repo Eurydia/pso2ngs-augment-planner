@@ -6,9 +6,8 @@ import Box from "@mui/material/Box";
 import useTheme from "@mui/material/styles/useTheme";
 
 interface StyledAutocompleteOptionProps {
-    s_props: any;
     header: string;
-    capitalizeHeader: boolean;
+    capitalizeHeader?: boolean;
     subheaders: string[];
 }
 
@@ -16,7 +15,7 @@ const StyledAutocompleteOption = (
     props: StyledAutocompleteOptionProps,
 ) => {
     const theme = useTheme();
-    const { s_props, header, subheaders } = props;
+    const { header, subheaders } = props;
 
     const typo_subheaders = subheaders.map((text, index) => (
         <Typography
@@ -33,7 +32,7 @@ const StyledAutocompleteOption = (
         : "none";
 
     return (
-        <Box {...s_props}>
+        <React.Fragment>
             <Stack spacing={1}>
                 <Typography
                     fontWeight={theme.typography.fontWeightMedium}
@@ -46,11 +45,11 @@ const StyledAutocompleteOption = (
                 {/* <Typography
                     paddingLeft={2}
                     fontSize={theme.typography.body1.fontSize}
-                >
+                    >
                     {condition || ""}
                 </Typography> */}
             </Stack>
-        </Box>
+        </React.Fragment>
     );
 };
 

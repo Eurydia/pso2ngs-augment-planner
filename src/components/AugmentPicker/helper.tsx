@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
@@ -29,13 +30,14 @@ export const renderOption = (props: any, option: AugmentData) => {
     }
     subheaders.push(condition);
     return (
-        <StyledAutocompleteOption
-            key={header}
-            s_props={props}
-            header={header}
-            capitalizeHeader={true}
-            subheaders={subheaders}
-        />
+        <Box {...props}>
+            <StyledAutocompleteOption
+                key={header}
+                capitalizeHeader
+                header={header}
+                subheaders={subheaders}
+            />
+        </Box>
     );
 };
 // ---------------------------------------------

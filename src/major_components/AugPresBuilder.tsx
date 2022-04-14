@@ -27,16 +27,6 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     // -------------------------------------
 
     // -------------------------------------
-    // prepare input props
-    const name_max_length = 40;
-    const desc_max_length = 200;
-    const name_color =
-        name.length > name_max_length ? "warning" : "primary";
-    const desc_color =
-        description.length > desc_max_length ? "warning" : "primary";
-    // -------------------------------------
-
-    // -------------------------------------
     // retrieving and parsing total stats from augments
     const all_effs = getEffectsForStats(augments);
     const total_stats = getTotalStats(all_effs);
@@ -73,14 +63,12 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
             >
                 <Stack spacing={1} minWidth={0.4}>
                     <NameInputField
-                        maxLength={name_max_length}
-                        color={name_color}
+                        maxLength={40}
                         value={name}
                         onChange={setName}
                     />
                     <DescInputField
-                        maxLength={desc_max_length}
-                        color={desc_color}
+                        maxLength={200}
                         value={description}
                         onChange={setDesc}
                     />

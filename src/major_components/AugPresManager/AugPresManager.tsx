@@ -1,80 +1,114 @@
-import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import CommentIcon from "@mui/icons-material/Comment";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Card, { CardProps } from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import {
+    Typography,
+    Grid,
+    Paper,
+    useTheme,
+    CardActions,
+    IconButton,
+    Tooltip,
+} from "@mui/material";
+import * as icon from "@mui/icons-material";
 
-const AugmentPresManager = () => {
-    const [checked, setChecked] = React.useState([0]);
+import { AugmentPreset, AugmentSignature } from "../../types";
+import { blue, indigo, yellow } from "@mui/material/colors";
 
-    const handleToggle = (value: number) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
+interface CustomeCardProps extends CardProps {
+    title_: string;
+    description: string;
+    augments: AugmentSignature[];
+}
+const CustomCard = (props: CustomeCardProps) => {
+    const theme = useTheme();
 
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
+    const display_augments = props.augments.map((aug) => {
+        const key = `${aug.name} ${aug.level}`;
+        return <Typography key={key}>{key}</Typography>;
+    });
+    const desc = props.description ? `"${props.description}"` : "";
     return (
-        <List
-            sx={{
-                width: "100%",
-                maxWidth: 360,
-                bgcolor: "background.paper",
-            }}
+        <Card
+            raised
+            // sx={{
+            //     backgroundColor: indigo["100"],
+            // }}
         >
-            {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
-
-                return (
-                    <ListItem
-                        key={value}
-                        secondaryAction={
-                            <IconButton
-                                edge="end"
-                                aria-label="comments"
-                            >
-                                <CommentIcon />
-                            </IconButton>
-                        }
-                        disablePadding
+            {/* <CardHeader title={props.title_} /> */}
+            <CardContent>
+                <Stack spacing={2}>
+                    <Typography
+                        fontSize={theme.typography.h6.fontSize}
+                        fontWeight={theme.typography.fontWeightMedium}
+                        color={blue["A400"]}
+                        sx={{
+                            wordWrap: "break-word",
+                        }}
                     >
-                        <ListItemButton
-                            role={undefined}
-                            onClick={handleToggle(value)}
-                            dense
-                        >
-                            <ListItemIcon>
-                                <Checkbox
-                                    edge="start"
-                                    checked={
-                                        checked.indexOf(value) !== -1
-                                    }
-                                    tabIndex={-1}
-                                    inputProps={{
-                                        "aria-labelledby": labelId,
-                                    }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText
-                                id={labelId}
-                                primary={`Line item ${value + 1}`}
-                            />
-                        </ListItemButton>
-                    </ListItem>
-                );
-            })}
-        </List>
+                        {props.title_}
+                    </Typography>
+                    <Typography fontStyle="italic">{desc}</Typography>
+                    <Stack textTransform="capitalize">
+                        {display_augments}
+                    </Stack>
+                </Stack>
+            </CardContent>
+            <CardActions>
+                <Tooltip title="Edit">
+                    <IconButton>
+                        <icon.Edit />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Duplicate">
+                    <IconButton>
+                        <icon.CopyAllRounded />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Save">
+                    <IconButton>
+                        <icon.Download />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                    <IconButton>
+                        <icon.Delete color="error" />
+                    </IconButton>
+                </Tooltip>
+            </CardActions>
+        </Card>
     );
 };
 
-export default AugmentPresManager;
+interface AugPresManagerProps {
+    augmentPresets: AugmentPreset[];
+}
+const AugPresManager = (props: AugPresManagerProps) => {
+    const cards = props.augmentPresets.map((preset) => {
+        return (
+            <Grid item xs={1} padding={1} key={preset.name}>
+                <CustomCard
+                    title_={preset.name}
+                    description={preset.description}
+                    augments={preset.augments}
+                />
+            </Grid>
+        );
+    });
+    return (
+        <Grid
+            container
+            columns={{ xs: 1, sm: 2, md: 3 }}
+            sx={{
+                maxHeight: "500px",
+                overflow: "auto",
+            }}
+        >
+            {cards}
+        </Grid>
+    );
+};
+
+export default AugPresManager;

@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
@@ -37,13 +38,13 @@ export const renderOption = (props: any, option: AugmentPreset) => {
     }
 
     return (
-        <StyledAutoCompleteOption
-            s_props={props}
-            key={header}
-            header={header}
-            capitalizeHeader={false}
-            subheaders={subheaders}
-        />
+        <Box {...props}>
+            <StyledAutoCompleteOption
+                key={header}
+                header={header}
+                subheaders={subheaders}
+            />
+        </Box>
     );
 };
 // ---------------------------------------------

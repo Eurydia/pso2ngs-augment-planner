@@ -77,7 +77,7 @@ const App = () => {
                 }}
             >
                 <PaperBackground header="Augment Preset Manager">
-                    <AugPresManager />
+                    <AugPresManager augmentPresets={augPresets} />
                 </PaperBackground>
                 <PaperBackground header="Augment Preset Builder">
                     <AugPresBuilder
