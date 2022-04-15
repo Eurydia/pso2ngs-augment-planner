@@ -7,23 +7,45 @@ import StatsDisplay from "../components/StatsDisplay";
 import AugmentPicker from "../components/AugmentPicker";
 import {
     augmentToSignature,
+    augmentFromSignature,
     getEffectsForStats,
     getTotalStats,
     parseStats,
 } from "../util";
-import { AugmentData, AugmentPreset } from "../types";
+import {
+    AugmentData,
+    AugmentPreset,
+    AugmentSignature,
+} from "../types";
 import { NameInputField, DescInputField } from "./InputComponents";
 
 interface AugPresBuilderProps {
+    initPreset?: AugmentPreset;
     onPresetSave: (preset: AugmentPreset) => void;
 }
 
 const AugPresBuilder = (props: AugPresBuilderProps) => {
     // -------------------------------------
+    // preparing initial states
+    let initial_name = "";
+    let initial_desc = "";
+    let initial_augments: AugmentData[] = [];
+    if (props.initPreset) {
+        initial_name = props.initPreset.name;
+        initial_desc = props.initPreset.description;
+        for (const signature of props.initPreset.augments) {
+            const augment = augmentFromSignature(signature);
+            if (augment !== null) {
+                initial_augments.push(augment);
+            }
+        }
+    }
+
     // preparing states
-    const [name, setName] = useState("");
-    const [description, setDesc] = useState("");
-    const [augments, setAugments] = useState<AugmentData[]>([]);
+    const [name, setName] = useState(initial_name);
+    const [description, setDesc] = useState(initial_desc);
+    const [augments, setAugments] =
+        useState<AugmentData[]>(initial_augments);
     // -------------------------------------
 
     // -------------------------------------

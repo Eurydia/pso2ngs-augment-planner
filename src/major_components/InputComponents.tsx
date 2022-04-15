@@ -20,16 +20,16 @@ export const NameInputField = (props: PresetInputProps) => {
     }
     return (
         <TextField
-            color={color}
             required
             variant="filled"
             label="Name"
+            color={color}
             helperText={`(max ${props.maxLength} characters)`}
             value={props.value}
             onChange={(e) => {
                 const value = e.target.value
                     .normalize()
-                    .substring(0, props.maxLength);
+                    .slice(0, props.maxLength);
                 props.onChange(value);
             }}
         />
@@ -44,12 +44,11 @@ export const DescInputField = (props: PresetInputProps) => {
             variant="filled"
             label="Description"
             helperText={`(max ${props.maxLength} characters)`}
-            // color={props.color}
             value={props.value}
             onChange={(e) => {
                 const value = e.target.value
                     .normalize()
-                    .substring(0, props.maxLength);
+                    .slice(0, props.maxLength);
                 props.onChange(value);
             }}
         />
