@@ -9,6 +9,9 @@ import ReactDOM from "react-dom";
 import { SnackbarProvider } from "notistack";
 
 import App from "./App/App";
+import giveGift from "./gift";
+
+giveGift();
 
 ReactDOM.render(
     <React.StrictMode>
