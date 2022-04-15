@@ -36,7 +36,7 @@ const complimentary_presets = [
 
 export default function giveGift() {
     const gift = localStorage.getItem("gift");
-    if (gift === undefined) {
+    if (gift === null) {
         localStorage.set(
             "augmentPreset",
             JSON.stringify(complimentary_presets),
