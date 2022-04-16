@@ -31,7 +31,7 @@ export const EFFECT_NAME_TRANSLATE: {
     MEL_POT: { emoji: "🔪", name: "MEL pot" },
     RNG_POT: { emoji: "🔫", name: "RNG pot" },
     TEC_POT: { emoji: "🔮", name: "TEC pot" },
-    FLOOR_POT: { emoji: "📈", name: "floor pot" },
+    FLOOR_POT: { emoji: "📈", name: "FLR pot" },
     DAMAGE_RES: { emoji: "💪", name: "DMG res" },
     BURN_RES: { emoji: "🥵", name: "BRN res" },
     FREEZE_RES: { emoji: "🥶", name: "FRZ res" },
