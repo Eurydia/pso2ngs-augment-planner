@@ -6,6 +6,8 @@ import {
     pink,
     grey,
     deepOrange,
+    yellow,
+    indigo,
 } from "@mui/material/colors";
 
 // declare module "@mui/material/styles" {
@@ -19,7 +21,7 @@ import {
 const theme = createTheme({
     palette: {
         primary: {
-            main: deepPurple["A400"],
+            main: deepPurple["A700"],
             light: deepPurple[50],
             contrastText: "#FFFFFF",
         },
@@ -28,7 +30,7 @@ const theme = createTheme({
         },
 
         background: {
-            default: "#FFFFFF",
+            default: deepPurple["50"],
         },
         warning: {
             main: pink["A400"],

@@ -1,9 +1,10 @@
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 import React from "react";
 
+// ----------------------------------------------
+// stats item
 export interface StatItemValue {
     value: string;
     diff?: string;
@@ -19,6 +20,7 @@ interface StatItemProps {
 
 export const StatItem = (props: StatItemProps) => {
     const theme = useTheme();
+
     let _value: string;
     if (props.value === undefined) {
         if (props.isAdd) {
@@ -30,36 +32,41 @@ export const StatItem = (props: StatItemProps) => {
         _value = props.value.value;
     }
 
-    let diff_typo = <React.Fragment></React.Fragment>;
     let diff_color = theme.palette.primary.main;
-    if (props.value?.diff) {
-        if (props.value?.negative) {
-            diff_color = theme.palette.secondary.main;
-        }
-        diff_typo = (
-            <Typography
-                component="span"
-                sx={{
-                    paddingLeft: 1,
-                    color: diff_color,
-                    fontWeight: theme.typography.fontWeightMedium,
-                }}
-            >
-                {`(${props.value.diff})`}
-            </Typography>
-        );
+    if (props.value?.negative) {
+        diff_color = theme.palette.secondary.main;
     }
 
     return (
         <Grid item xs={props.column || 1}>
-            <Typography variant="body1" sx={{ padding: 1 }}>
+            <Typography
+                component="p"
+                sx={{
+                    padding: 1,
+                    fontWeight: theme.typography.fontWeightMedium,
+                    fontSize: theme.typography.body1.fontSize,
+                }}
+            >
                 {`${props.head.emoji} ${props.head.name}: ${_value}`}
-                {diff_typo}
+                <Typography
+                    component="span"
+                    sx={{
+                        color: diff_color,
+                        paddingLeft: 1,
+                        fontSize: "inherit",
+                        fontWeight: theme.typography.fontWeightBold,
+                    }}
+                >
+                    {props.value?.diff ? `(${props.value.diff})` : ""}
+                </Typography>
             </Typography>
         </Grid>
     );
 };
+// ----------------------------------------------
 
+// ----------------------------------------------
+// group the stats
 export const StatsGroup = (props: { children: React.ReactNode }) => {
     return (
         <Grid container columns={2}>
@@ -67,3 +74,4 @@ export const StatsGroup = (props: { children: React.ReactNode }) => {
         </Grid>
     );
 };
+// ----------------------------------------------

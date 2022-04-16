@@ -2,19 +2,16 @@ import React, { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import useTheme from "@mui/material/styles/useTheme";
 
-import StatsDisplay from "../components/StatsDisplay";
-import AugmentPicker from "../components/AugmentPicker";
-import {
-    augmentToSignature,
-    augmentFromSignature,
-    getEffectsForStats,
-    getTotalStats,
-    parseStats,
-} from "../util";
-import { AugmentData, AugmentPreset } from "../types";
-import { NameInputField, DescInputField } from "./InputComponents";
+import Save from "@mui/icons-material/Save";
+import Clear from "@mui/icons-material/Clear";
+
+import { prepareInitalStates, prepareStatsToDisplay } from "./helper";
+import StatsDisplay from "../../components/StatsDisplay";
+import AugmentPicker from "../../components/AugmentPicker";
+import { augmentToSignature } from "../../util";
+import { AugmentData, AugmentPreset } from "../../types";
+import { NameInputField, DescInputField } from "../InputComponents";
 
 interface AugPresBuilderProps {
     initPreset?: AugmentPreset;
@@ -22,36 +19,18 @@ interface AugPresBuilderProps {
 }
 
 const AugPresBuilder = (props: AugPresBuilderProps) => {
-    const theme = useTheme();
     // -------------------------------------
-    // preparing initial states
-    let initial_name = "";
-    let initial_desc = "";
-    let initial_augments: AugmentData[] = [];
-    if (props.initPreset) {
-        initial_name = props.initPreset.name;
-        initial_desc = props.initPreset.description;
-        for (const signature of props.initPreset.augments) {
-            const augment = augmentFromSignature(signature);
-            if (augment !== null) {
-                initial_augments.push(augment);
-            }
-        }
-    }
+    // prepare initial states
+    const { initial_name, initial_desc, initial_augments } =
+        prepareInitalStates(props.initPreset);
+    // -------------------------------------
 
-    // preparing states
+    // -------------------------------------
+    // prepare states
     const [name, setName] = useState(initial_name);
     const [description, setDesc] = useState(initial_desc);
     const [augments, setAugments] =
         useState<AugmentData[]>(initial_augments);
-    // -------------------------------------
-
-    // -------------------------------------
-    // retrieving and parsing total stats from augments
-    const all_effs = getEffectsForStats(augments);
-    const total_stats = getTotalStats(all_effs);
-    const parsed_stats: { [key: string]: string } =
-        parseStats(total_stats);
     // -------------------------------------
 
     // -------------------------------------
@@ -73,6 +52,8 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
         setAugments([]);
     };
     // -------------------------------------
+
+    const parsed_stats = prepareStatsToDisplay(augments);
 
     return (
         <React.Fragment>
@@ -97,19 +78,25 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
                         values={augments}
                         onChange={setAugments}
                     />
-                    <Button
-                        variant="contained"
-                        disabled={!Boolean(name)}
-                        onClick={handlePresetSave}
-                    >
-                        save
-                    </Button>
-                    <Button
-                        variant="text"
-                        onClick={handleResetFields}
-                    >
-                        clear
-                    </Button>
+                    <Stack direction="row">
+                        <Button
+                            sx={{ width: 0.62 }}
+                            startIcon={<Save />}
+                            variant="contained"
+                            disabled={!Boolean(name)}
+                            onClick={handlePresetSave}
+                        >
+                            save
+                        </Button>
+                        <Button
+                            sx={{ width: 0.38 }}
+                            startIcon={<Clear />}
+                            variant="outlined"
+                            onClick={handleResetFields}
+                        >
+                            clear
+                        </Button>
+                    </Stack>
                 </Stack>
                 <StatsDisplay {...parsed_stats} />
             </Stack>

@@ -72,7 +72,7 @@ interface CustomCardProps {
     augments: AugmentSignature[];
     index: number;
     onEdit: (index: number) => void;
-    onSave: (index: number) => void;
+    onExport: (index: number) => void;
     onDuplicate: (index: number) => void;
     onDelete: (index: number) => void;
 }
@@ -96,7 +96,7 @@ export const CustomCard = (props: CustomCardProps) => {
                     icon={<CopyAll />}
                 />
                 <IconWithTooltip
-                    onClick={() => props.onSave(props.index)}
+                    onClick={() => props.onExport(props.index)}
                     title="Save"
                     icon={<Download />}
                 />

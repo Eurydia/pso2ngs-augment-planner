@@ -6,7 +6,7 @@ import { AugmentPreset } from "../../types";
 interface AugPresManagerProps {
     augmentPresets: AugmentPreset[];
     onEdit: (index: number) => void;
-    onSave: (index: number) => void;
+    onExport: (index: number) => void;
     onDuplicate: (index: number) => void;
     onDelete: (index: number) => void;
 }
@@ -21,7 +21,7 @@ const AugPresManager = (props: AugPresManagerProps) => {
                     desc={preset.description}
                     augments={preset.augments}
                     onEdit={props.onEdit}
-                    onSave={props.onSave}
+                    onExport={props.onExport}
                     onDuplicate={props.onDuplicate}
                     onDelete={props.onDelete}
                 />
@@ -33,7 +33,7 @@ const AugPresManager = (props: AugPresManagerProps) => {
             container
             columns={{ xs: 1, sm: 2, md: 3 }}
             sx={{
-                maxHeight: "500px",
+                maxHeight: "750px",
                 overflow: "auto",
             }}
         >

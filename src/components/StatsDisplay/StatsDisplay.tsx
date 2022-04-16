@@ -1,5 +1,6 @@
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import useTheme from "@mui/material/styles/useTheme";
 
 import { StatsGroup, StatItem, StatItemValue } from "./helper";
 import { EFFECT_NAME_TRANSLATE as name } from "../../util";
@@ -22,11 +23,15 @@ interface StatsProps {
 }
 
 export default function StatsDisplay(props: StatsProps) {
+    const theme = useTheme();
     return (
         <Stack
-            textTransform="capitalize"
-            spacing={2}
+            spacing={1}
             divider={<Divider orientation="horizontal" flexItem />}
+            sx={{
+                paddingY: theme.spacing(1),
+                textTransform: "capitalize",
+            }}
         >
             <StatsGroup>
                 <StatItem isAdd head={name.HP} value={props.HP} />

@@ -1,7 +1,7 @@
 import { StatItemValue } from "../../components/StatsDisplay";
 import {
     getTotalStats,
-    getEffectsForStats,
+    collectEffects,
     isAddEffect,
     parseStat,
 } from "../../util";
@@ -17,14 +17,14 @@ export const compareStats = (
 ) => {
     // -----------------------
     // collect the effects of subject
-    const subject_effs = getEffectsForStats(
+    const subject_effs = collectEffects(
         [subject_equipment, ...subject_augment].filter((val) =>
             Boolean(val),
         ),
     );
     const subject_stats = getTotalStats(subject_effs);
     // and comparand
-    const compar_effs = getEffectsForStats(
+    const compar_effs = collectEffects(
         [comparand_equipment, ...comparand_augment].filter((val) =>
             Boolean(val),
         ),

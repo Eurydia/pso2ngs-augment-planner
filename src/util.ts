@@ -82,7 +82,7 @@ export const convertToRoman = (num: number) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-export const getEffectsForStats = (
+export const collectEffects = (
     objs: (AugmentData | EquipmentData | null)[],
 ) => {
     let effects: Effect[] = [];

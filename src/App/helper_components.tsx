@@ -8,65 +8,62 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import useTheme from "@mui/material/styles/useTheme";
 
+import Edit from "@mui/icons-material/Edit";
 import Upload from "@mui/icons-material/Upload";
 import Download from "@mui/icons-material/Download";
 
 // ---------------------------------
 // resuable paper for background
 interface PaperBackgroundProps {
-    header: string;
-    feature: React.ReactElement;
-    icon?: React.ReactElement;
+    title: string;
+    titleIcon: React.ReactElement;
+    headerOther?: React.ReactElement;
+    children: React.ReactElement;
 }
 export const PaperBackground = (props: PaperBackgroundProps) => {
     const theme = useTheme();
 
     return (
-        <Paper
-            elevation={8}
-            sx={{
-                paddingX: 4,
-                paddingY: 2,
-                backgroundColor: theme.palette.background.default,
-            }}
-        >
-            <Typography
+        <Paper elevation={8}>
+            <Box
                 sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: theme.typography.h4.fontSize,
-                    fontWeight: theme.typography.fontWeightBold,
+                    paddingX: 2,
+                    paddingY: 1,
+                    boxShadow: theme.shadows[4],
+                    backgroundColor: theme.palette.background.default,
                 }}
             >
-                {props.icon}
-                {props.header}
-            </Typography>
-            {props.feature}
+                <Stack
+                    direction={{ xs: "column", md: "row" }}
+                    justifyContent="space-between"
+                >
+                    <Typography
+                        component="h2"
+                        sx={{
+                            textTransform: "capitalize",
+                            color: theme.palette.primary.main,
+                            fontSize: theme.typography.h4.fontSize,
+                            fontWeight:
+                                theme.typography.fontWeightBold,
+                        }}
+                    >
+                        <Stack direction="row" alignItems="center">
+                            {props.titleIcon}
+                            {props.title}
+                        </Stack>
+                    </Typography>
+                    {props.headerOther}
+                </Stack>
+            </Box>
+            <Box
+                sx={{
+                    paddingX: 4,
+                    paddingY: 1,
+                }}
+            >
+                {props.children}
+            </Box>
         </Paper>
-    );
-};
-// ---------------------------------
-
-// ---------------------------------
-// Parsing and  reading the uploaded json
-interface ImportPresetButtonProps {
-    action: (value: string) => void;
-}
-const ImportPresetButton = (props: ImportPresetButtonProps) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const fileReader = new FileReader();
-            fileReader.readAsText(e.target.files[0], "UTF-8");
-            fileReader.onload = (e) =>
-                props.action(e.target?.result as string);
-        }
-    };
-    return (
-        <input
-            hidden
-            type="file"
-            accept=".json"
-            onChange={handleChange}
-        />
     );
 };
 // ---------------------------------
@@ -80,6 +77,14 @@ interface ImportExportButtonsProps {
 export const ImportExportButtons = (
     props: ImportExportButtonsProps,
 ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const fileReader = new FileReader();
+            fileReader.readAsText(e.target.files[0], "UTF-8");
+            fileReader.onload = (e) =>
+                props.importAction(e.target?.result as string);
+        }
+    };
     return (
         <React.Fragment>
             <Stack direction="row" spacing={2} paddingY={1}>
@@ -88,12 +93,17 @@ export const ImportExportButtons = (
                     component="label"
                     endIcon={<Upload />}
                 >
-                    <ImportPresetButton action={props.importAction} />
+                    <input
+                        hidden
+                        type="file"
+                        accept=".json"
+                        onChange={handleChange}
+                    />
                     Import preset(s)
                 </Button>
                 <Button
                     onClick={props.exportAction}
-                    variant="text"
+                    variant="outlined"
                     endIcon={<Download />}
                 >
                     export all
@@ -105,7 +115,7 @@ export const ImportExportButtons = (
 // ---------------------------------
 
 // ---------------------------------
-// The preset edit modal
+// modal to bring up when editing presets
 interface EditModalProps {
     open: boolean;
     onClose: () => void;
@@ -123,9 +133,11 @@ export const EditModal = (props: EditModalProps) => {
                 }}
             >
                 <PaperBackground
-                    header="Editing preset"
-                    feature={props.editor}
-                />
+                    titleIcon={<Edit />}
+                    title="Edit Preset"
+                >
+                    {props.editor}
+                </PaperBackground>
             </Box>
         </Modal>
     );
