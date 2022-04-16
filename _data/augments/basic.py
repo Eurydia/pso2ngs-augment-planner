@@ -83,6 +83,6 @@ augments.extend(
             EffectMultiLevel(DMG_RES, _mastery_amount),
         ),
         GROUP,
-        CONFLICT,
+        [],
     )
 )

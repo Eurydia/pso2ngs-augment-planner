@@ -178,7 +178,7 @@ const DATA = [
             { eff: "DAMAGE_RES", amt: 1.005 },
         ],
         group: "BASIC",
-        conflict: ["FUSED"],
+        conflict: [],
         condition: "",
     },
     {
@@ -192,7 +192,7 @@ const DATA = [
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
         group: "BASIC",
-        conflict: ["FUSED"],
+        conflict: [],
         condition: "",
     },
     {
@@ -206,7 +206,7 @@ const DATA = [
             { eff: "DAMAGE_RES", amt: 1.015 },
         ],
         group: "BASIC",
-        conflict: ["FUSED"],
+        conflict: [],
         condition: "",
     },
     {
@@ -220,7 +220,7 @@ const DATA = [
             { eff: "DAMAGE_RES", amt: 1.025 },
         ],
         group: "BASIC",
-        conflict: ["FUSED"],
+        conflict: [],
         condition: "",
     },
     {
