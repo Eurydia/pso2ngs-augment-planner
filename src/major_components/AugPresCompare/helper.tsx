@@ -1,3 +1,4 @@
+import { StatItemValue } from "../../components/StatsDisplay";
 import {
     getTotalStats,
     getEffectsForStats,
@@ -41,7 +42,7 @@ export const compareStats = (
     const keys = Array.from(keys_without_duplicate);
     // -----------------------
 
-    let stats: { [key: string]: string } = {};
+    let stats: { [key: string]: StatItemValue } = {};
     for (const key of keys) {
         const is_add_eff = isAddEffect(key);
         const default_value = is_add_eff ? 0 : 1;
@@ -54,7 +55,11 @@ export const compareStats = (
         const parsed_s_value = parseStat(s_value, is_add_eff);
         const parsed_difference = parseStat(difference, is_add_eff);
 
-        stats[key] = `${parsed_s_value} (${parsed_difference})`;
+        stats[key] = {
+            value: parsed_s_value,
+            diff: parsed_difference,
+            negative: difference < default_value,
+        };
     }
     return stats;
 };

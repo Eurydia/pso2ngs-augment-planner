@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import useTheme from "@mui/material/styles/useTheme";
 
 import StatsDisplay from "../components/StatsDisplay";
 import AugmentPicker from "../components/AugmentPicker";
@@ -12,11 +13,7 @@ import {
     getTotalStats,
     parseStats,
 } from "../util";
-import {
-    AugmentData,
-    AugmentPreset,
-    AugmentSignature,
-} from "../types";
+import { AugmentData, AugmentPreset } from "../types";
 import { NameInputField, DescInputField } from "./InputComponents";
 
 interface AugPresBuilderProps {
@@ -25,6 +22,7 @@ interface AugPresBuilderProps {
 }
 
 const AugPresBuilder = (props: AugPresBuilderProps) => {
+    const theme = useTheme();
     // -------------------------------------
     // preparing initial states
     let initial_name = "";
@@ -107,7 +105,7 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
                         save
                     </Button>
                     <Button
-                        variant="outlined"
+                        variant="text"
                         onClick={handleResetFields}
                     >
                         clear

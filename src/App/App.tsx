@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import createTheme from "@mui/material/styles/createTheme";
 import useTheme from "@mui/material/styles/useTheme";
 
 import Construction from "@mui/icons-material/Construction";
 import Compare from "@mui/icons-material/Compare";
 import Dashboard from "@mui/icons-material/Dashboard";
+import { default as main_theme } from "./theme";
 
 import { useSnackbar } from "notistack";
 import { saveAs } from "file-saver";
@@ -30,8 +30,6 @@ import AugPresBuilder from "../major_components/AugPresBuilder";
 import AugPresCompare from "../major_components/AugPresCompare/AugPresCompare";
 import AugPresManager from "../major_components/AugPresManager";
 import { AugmentPreset, TypeguardAugmentPreset } from "../types";
-
-const _theme = createTheme();
 
 const App = () => {
     const theme = useTheme();
@@ -146,7 +144,7 @@ const App = () => {
     // -------------------------------------
 
     return (
-        <ThemeProvider theme={_theme}>
+        <ThemeProvider theme={main_theme}>
             <Stack
                 spacing={2}
                 sx={{

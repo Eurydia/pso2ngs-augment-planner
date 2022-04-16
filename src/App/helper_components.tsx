@@ -22,11 +22,20 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
     const theme = useTheme();
 
     return (
-        <Paper elevation={8} sx={{ paddingX: 4, paddingY: 2 }}>
+        <Paper
+            elevation={8}
+            sx={{
+                paddingX: 4,
+                paddingY: 2,
+                backgroundColor: theme.palette.background.default,
+            }}
+        >
             <Typography
-                fontSize={theme.typography.h4.fontSize}
-                fontWeight={theme.typography.fontWeightBold}
-                // color={blue["A700"]}
+                sx={{
+                    color: theme.palette.primary.main,
+                    fontSize: theme.typography.h4.fontSize,
+                    fontWeight: theme.typography.fontWeightBold,
+                }}
             >
                 {props.icon}
                 {props.header}
@@ -84,7 +93,7 @@ export const ImportExportButtons = (
                 </Button>
                 <Button
                     onClick={props.exportAction}
-                    variant="outlined"
+                    variant="text"
                     endIcon={<Download />}
                 >
                     export all

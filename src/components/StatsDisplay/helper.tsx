@@ -1,31 +1,60 @@
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
+import React from "react";
 
-export const StatItem = (props: {
-    name: { emoji: string; name: string };
-    value?: string;
+export interface StatItemValue {
+    value: string;
+    diff?: string;
+    negative?: boolean;
+}
+
+interface StatItemProps {
+    head: { emoji: string; name: string };
+    value?: StatItemValue;
     isAdd?: boolean;
-    xs?: number;
-}) => {
+    column?: number;
+}
+
+export const StatItem = (props: StatItemProps) => {
     const theme = useTheme();
-    const { name, value, isAdd, xs } = props;
-    let _value = value;
-    if (value === undefined) {
-        if (isAdd !== undefined) {
+    let _value: string;
+    if (props.value === undefined) {
+        if (props.isAdd) {
             _value = "+0";
         } else {
             _value = "+0.0%";
         }
+    } else {
+        _value = props.value.value;
     }
-    const text = `${name.emoji} ${name.name}: ${_value}`;
-    return (
-        <Grid item xs={xs || 1}>
+
+    let diff_typo = <React.Fragment></React.Fragment>;
+    let diff_color = theme.palette.primary.main;
+    if (props.value?.diff) {
+        if (props.value?.negative) {
+            diff_color = theme.palette.secondary.main;
+        }
+        diff_typo = (
             <Typography
-                padding={1}
-                fontSize={theme.typography.body1.fontSize}
+                component="span"
+                sx={{
+                    paddingLeft: 1,
+                    color: diff_color,
+                    fontWeight: theme.typography.fontWeightMedium,
+                }}
             >
-                {text}
+                {`(${props.value.diff})`}
+            </Typography>
+        );
+    }
+
+    return (
+        <Grid item xs={props.column || 1}>
+            <Typography variant="body1" sx={{ padding: 1 }}>
+                {`${props.head.emoji} ${props.head.name}: ${_value}`}
+                {diff_typo}
             </Typography>
         </Grid>
     );

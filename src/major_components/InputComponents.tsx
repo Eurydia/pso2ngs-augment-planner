@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-import React from "react";
+import useTheme from "@mui/material/styles/useTheme";
 
 interface PresetInputProps {
     value: string;
@@ -14,6 +14,7 @@ interface PresetInputProps {
     onChange: (value: string) => void;
 }
 export const NameInputField = (props: PresetInputProps) => {
+    const theme = useTheme();
     let color: "primary" | "warning" = "primary";
     if (props.value === "") {
         color = "warning";
