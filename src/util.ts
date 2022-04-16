@@ -38,7 +38,7 @@ export const EFFECT_NAME_TRANSLATE: {
     SHOCK_RES: { emoji: "😱", name: "SHK res" },
     BLIND_RES: { emoji: "😵", name: "BLD res" },
     PANIC_RES: { emoji: "😳", name: "PNC res" },
-    POISON_RES: { emoji: "🤢", name: "POI res" },
+    POISON_RES: { emoji: "🤢", name: "PSN res" },
     PHYDOWN_RES: { emoji: "🤕", name: "PHYDWN res" },
 };
 
