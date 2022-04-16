@@ -67,19 +67,25 @@ export const validateAugments = (
     for (let i = values.length - 1; i >= 0; i--) {
         const curr_value = values[i];
 
-        if (
-            typeof curr_value === "string"
-            //  || !typeGuardAugmentData(curr_value)
-        ) {
+        if (typeof curr_value === "string") {
             continue;
         }
 
         let is_valid = true;
-        for (let j = 0; j < validated.length; j++) {
-            const previous_value = validated[j];
+
+        for (const prev_value of validated) {
+            const same_name = curr_value.name === prev_value.name;
+            const group_conflict = prev_value.conflict.includes(
+                curr_value.group,
+            );
+            const fused_and_mastery_exception =
+                (curr_value.name === "mastery" &&
+                    prev_value.group === "fused") ||
+                (curr_value.group === "fused" &&
+                    prev_value.name === "mastery");
             if (
-                curr_value.name === previous_value.name ||
-                previous_value.conflict.includes(curr_value.group)
+                same_name ||
+                (group_conflict && !fused_and_mastery_exception)
             ) {
                 is_valid = false;
                 break;
