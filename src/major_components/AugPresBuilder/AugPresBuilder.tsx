@@ -56,7 +56,7 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     const parsed_stats = prepareStatsToDisplay(augments);
 
     return (
-        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <Stack spacing={1} minWidth={0.4}>
                 <NameInputField
                     maxLength={40}

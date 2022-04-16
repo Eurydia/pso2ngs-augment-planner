@@ -124,7 +124,7 @@ export const EditModal = (props: EditModalProps) => {
     return (
         <Modal open={props.open} onClose={props.onClose}>
             <Container
-                maxWidth="md"
+                maxWidth="lg"
                 sx={{
                     marginTop: theme.spacing(10),
                 }}

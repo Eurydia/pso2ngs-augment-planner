@@ -32,14 +32,14 @@ export const EFFECT_NAME_TRANSLATE: {
     RNG_POT: { emoji: "🔫", name: "RNG pot" },
     TEC_POT: { emoji: "🔮", name: "TEC pot" },
     FLOOR_POT: { emoji: "📈", name: "floor pot" },
-    DAMAGE_RES: { emoji: "💪", name: "DMG resist" },
-    BURN_RES: { emoji: "🥵", name: "burn resist" },
-    FREEZE_RES: { emoji: "🥶", name: "freeze resist" },
-    SHOCK_RES: { emoji: "😱", name: "shock resist" },
-    BLIND_RES: { emoji: "😵", name: "blind resist" },
-    PANIC_RES: { emoji: "😳", name: "panic resist" },
-    POISON_RES: { emoji: "🤢", name: "poison resist" },
-    PHYDOWN_RES: { emoji: "🤕", name: "physical down resist" },
+    DAMAGE_RES: { emoji: "💪", name: "DMG res" },
+    BURN_RES: { emoji: "🥵", name: "BRN res" },
+    FREEZE_RES: { emoji: "🥶", name: "FRZ res" },
+    SHOCK_RES: { emoji: "😱", name: "SHK res" },
+    BLIND_RES: { emoji: "😵", name: "BLD res" },
+    PANIC_RES: { emoji: "😳", name: "PNC res" },
+    POISON_RES: { emoji: "🤢", name: "POI res" },
+    PHYDOWN_RES: { emoji: "🤕", name: "PHYDWN res" },
 };
 
 // ---------------------------------------------
