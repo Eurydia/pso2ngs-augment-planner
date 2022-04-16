@@ -17,18 +17,19 @@ import {
 export const renderOption = (props: any, option: AugmentData) => {
     const roman_level = convertToRoman(option.level);
     const header = `${option.name} ${roman_level}`.trimEnd();
-    const { effs: effects, condition } = option;
 
     let subheaders: string[] = [];
-    for (const effect of effects) {
-        const { eff, amt } = effect;
-        const parsed_amt = parseStat(amt, isAddEffect(eff));
-        const { emoji, name } = EFFECT_NAME_TRANSLATE[eff];
+    for (const effect of option.effs) {
+        const parsed_amt = parseStat(
+            effect.amt,
+            isAddEffect(effect.eff),
+        );
+        const { emoji, name } = EFFECT_NAME_TRANSLATE[effect.eff];
 
         const subheader = `${emoji} ${name} ${parsed_amt}`;
         subheaders.push(subheader);
     }
-    subheaders.push(condition);
+    subheaders.push(option.condition);
     return (
         <Box {...props}>
             <StyledAutocompleteOption

@@ -48,18 +48,14 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
                 return (
                     <TextField
                         {...params}
-                        // make the input field into a titlecase
-                        // inputProps={{
-                        //     ...params.inputProps,
-                        //     style: {
-                        //         textTransform: "capitalize",
-                        //     },
-                        // }}
                         variant="filled"
                         label={label}
                         placeholder={placeholder}
                     />
                 );
+            }}
+            sx={{
+                textTransform: "capitalize",
             }}
         />
     );

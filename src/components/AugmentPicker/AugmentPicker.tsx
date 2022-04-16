@@ -42,10 +42,6 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             onChange={handleChange}
             renderOption={renderOption}
             filterOptions={filterOptions}
-            // isOptionEqualToValue={(option, value) =>
-            //     option.name === value.name &&
-            //     option.level === value.level
-            // }
             groupBy={(option) => option.group}
             renderInput={(params: any) => {
                 return (
@@ -56,6 +52,9 @@ const AugmentPicker = (props: AugmentPickerProps) => {
                         placeholder='try "pp + rng + 3"'
                     />
                 );
+            }}
+            sx={{
+                textTransform: "capitalize",
             }}
         />
     );

@@ -27,7 +27,7 @@ export default function StatsDisplay(props: StatsProps) {
     return (
         <Stack
             spacing={1}
-            divider={<Divider orientation="horizontal" flexItem />}
+            divider={<Divider flexItem />}
             sx={{
                 paddingY: theme.spacing(1),
                 textTransform: "capitalize",

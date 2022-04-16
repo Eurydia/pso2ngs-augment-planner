@@ -21,12 +21,13 @@ import {
 const theme = createTheme({
     palette: {
         primary: {
-            main: deepPurple["A700"],
-            light: deepPurple[50],
+            light: deepPurple["200"],
+            main: deepPurple["A200"],
+            dark: deepPurple["A700"],
             contrastText: "#FFFFFF",
         },
         secondary: {
-            main: pink["A400"],
+            main: pink["400"],
         },
 
         background: {

@@ -56,51 +56,45 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     const parsed_stats = prepareStatsToDisplay(augments);
 
     return (
-        <React.Fragment>
-            <Stack
-                direction={{ xs: "column", md: "row" }}
-                paddingTop={2}
-                spacing={2}
-            >
-                <Stack spacing={1} minWidth={0.4}>
-                    <NameInputField
-                        maxLength={40}
-                        value={name}
-                        onChange={setName}
-                    />
-                    <DescInputField
-                        maxLength={200}
-                        value={description}
-                        onChange={setDesc}
-                    />
-                    <AugmentPicker
-                        disabled={false}
-                        values={augments}
-                        onChange={setAugments}
-                    />
-                    <Stack direction="row">
-                        <Button
-                            sx={{ width: 0.62 }}
-                            startIcon={<Save />}
-                            variant="contained"
-                            disabled={!Boolean(name)}
-                            onClick={handlePresetSave}
-                        >
-                            save
-                        </Button>
-                        <Button
-                            sx={{ width: 0.38 }}
-                            startIcon={<Clear />}
-                            variant="outlined"
-                            onClick={handleResetFields}
-                        >
-                            clear
-                        </Button>
-                    </Stack>
+        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+            <Stack spacing={1} minWidth={0.4}>
+                <NameInputField
+                    maxLength={40}
+                    value={name}
+                    onChange={setName}
+                />
+                <DescInputField
+                    maxLength={200}
+                    value={description}
+                    onChange={setDesc}
+                />
+                <AugmentPicker
+                    disabled={false}
+                    values={augments}
+                    onChange={setAugments}
+                />
+                <Stack direction="row" spacing={1}>
+                    <Button
+                        sx={{ width: 0.62 }}
+                        startIcon={<Save />}
+                        variant="contained"
+                        disabled={!Boolean(name)}
+                        onClick={handlePresetSave}
+                    >
+                        save
+                    </Button>
+                    <Button
+                        sx={{ width: 0.38 }}
+                        startIcon={<Clear />}
+                        variant="outlined"
+                        onClick={handleResetFields}
+                    >
+                        clear
+                    </Button>
                 </Stack>
-                <StatsDisplay {...parsed_stats} />
             </Stack>
-        </React.Fragment>
+            <StatsDisplay {...parsed_stats} />
+        </Stack>
     );
 };
 

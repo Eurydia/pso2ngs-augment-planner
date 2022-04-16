@@ -45,41 +45,35 @@ const AugPresCompare = (props: AugPresCompareProps) => {
     // ------------------------------------
 
     return (
-        <React.Fragment>
+        <Stack spacing={2}>
             <Stack
                 spacing={2}
-                paddingTop={2}
-                // direction={{ xs: "column", sm: "row" }}
+                minWidth={0.4}
+                direction={{ xs: "column", sm: "row" }}
             >
-                <Stack
-                    spacing={2}
-                    minWidth={0.4}
-                    direction={{ xs: "column", sm: "row" }}
-                >
-                    <EquipmentBuilder
-                        header="Subject"
-                        variant="both"
-                        allowEmptyEquipment={true}
-                        augPresets={props.augmentPresets}
-                        equipmentValue={subjEquipVal}
-                        augsValues={subjAugsVals}
-                        onEquipmentChange={setSubjEquipVal}
-                        onAugsChange={setSubjAugsVal}
-                    />
-                    <EquipmentBuilder
-                        header="Comparand"
-                        variant="both"
-                        allowEmptyEquipment={true}
-                        augPresets={props.augmentPresets}
-                        equipmentValue={compEquipVal}
-                        augsValues={compAugsVals}
-                        onEquipmentChange={setCompEquipVal}
-                        onAugsChange={setCompAugsVals}
-                    />
-                </Stack>
-                <StatsDisplay {...stats} />
+                <EquipmentBuilder
+                    header="Subject"
+                    variant="both"
+                    allowEmptyEquipment={true}
+                    augPresets={props.augmentPresets}
+                    equipmentValue={subjEquipVal}
+                    augsValues={subjAugsVals}
+                    onEquipmentChange={setSubjEquipVal}
+                    onAugsChange={setSubjAugsVal}
+                />
+                <EquipmentBuilder
+                    header="Comparand"
+                    variant="both"
+                    allowEmptyEquipment={true}
+                    augPresets={props.augmentPresets}
+                    equipmentValue={compEquipVal}
+                    augsValues={compAugsVals}
+                    onEquipmentChange={setCompEquipVal}
+                    onAugsChange={setCompAugsVals}
+                />
             </Stack>
-        </React.Fragment>
+            <StatsDisplay {...stats} />
+        </Stack>
     );
 };
 

@@ -30,12 +30,6 @@ interface EquipmentBuilderProps {
 const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     const theme = useTheme();
     // -----------------------------
-    // unpacking props
-    const { variant, allowEmptyEquipment, augPresets } = props;
-    const { equipmentValue, augsValues } = props;
-    // -----------------------------
-
-    // -----------------------------
     // prepare state
     const [augPresVal, setAugPresVal] =
         useState<AugmentPreset | null>(null);
@@ -62,26 +56,35 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     // if no equipment is selected, then augment picker
     // and augment preset pick should be disable.
     // However, this is ignored if the allowEmptyEquipment flag is true
-    const disabled = equipmentValue === null && !allowEmptyEquipment;
+    const disabled =
+        props.equipmentValue === null && !props.allowEmptyEquipment;
+
     return (
         <Stack width={1} spacing={1}>
-            <Typography fontSize={theme.typography.h6.fontSize}>
+            <Typography
+                component="h3"
+                sx={{
+                    fontSize: theme.typography.h5.fontSize,
+                    fontWeight: theme.typography.fontWeightBold,
+                    color: theme.palette.primary.main,
+                }}
+            >
                 {props.header || ""}
             </Typography>
             <EquipmentPicker
-                variant={variant}
-                value={equipmentValue}
+                variant={props.variant}
+                value={props.equipmentValue}
                 onChange={props.onEquipmentChange}
             />
             <AugmentPresetPicker
-                presets={augPresets}
+                presets={props.augPresets}
                 disabled={disabled}
                 value={augPresVal}
                 onChange={handlePresetChange}
             />
             <AugmentPicker
                 disabled={disabled}
-                values={augsValues}
+                values={props.augsValues}
                 onChange={handleAugmentChange}
             />
         </Stack>

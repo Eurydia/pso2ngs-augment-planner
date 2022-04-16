@@ -2,13 +2,14 @@ import React from "react";
 
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import useTheme from "@mui/material/styles/useTheme";
 
-import Edit from "@mui/icons-material/Edit";
+import BorderColor from "@mui/icons-material/BorderColor";
 import Upload from "@mui/icons-material/Upload";
 import Download from "@mui/icons-material/Download";
 
@@ -33,15 +34,12 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
                     backgroundColor: theme.palette.background.default,
                 }}
             >
-                <Stack
-                    direction={{ xs: "column", md: "row" }}
-                    justifyContent="space-between"
-                >
+                <Stack>
                     <Typography
                         component="h2"
                         sx={{
                             textTransform: "capitalize",
-                            color: theme.palette.primary.main,
+                            color: theme.palette.primary.dark,
                             fontSize: theme.typography.h4.fontSize,
                             fontWeight:
                                 theme.typography.fontWeightBold,
@@ -58,7 +56,7 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
             <Box
                 sx={{
                     paddingX: 4,
-                    paddingY: 1,
+                    paddingY: 2,
                 }}
             >
                 {props.children}
@@ -87,7 +85,7 @@ export const ImportExportButtons = (
     };
     return (
         <React.Fragment>
-            <Stack direction="row" spacing={2} paddingY={1}>
+            <Stack direction="row" spacing={1} paddingY={1}>
                 <Button
                     variant="contained"
                     component="label"
@@ -122,24 +120,23 @@ interface EditModalProps {
     editor: React.ReactElement;
 }
 export const EditModal = (props: EditModalProps) => {
+    const theme = useTheme();
     return (
         <Modal open={props.open} onClose={props.onClose}>
-            <Box
+            <Container
+                maxWidth="md"
                 sx={{
-                    position: "absolute" as "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
+                    marginTop: theme.spacing(10),
                 }}
             >
                 <PaperBackground
-                    titleIcon={<Edit />}
+                    titleIcon={<BorderColor />}
                     title="Edit Preset"
                 >
                     {props.editor}
                 </PaperBackground>
-            </Box>
+            </Container>
         </Modal>
     );
 };
-// ---------------------------------
+// --------------------------------

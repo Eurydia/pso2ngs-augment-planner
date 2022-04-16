@@ -25,7 +25,26 @@ import {
 import { AugmentSignature } from "../../types";
 
 // -------------------------------------------------------
-// Display augment with icons to represent the effects
+// icon with tool tip macro
+interface IconWithTooltipProps {
+    icon: React.ReactElement;
+    title: string;
+    onClick: () => void;
+}
+
+const IconWithTooltip = (props: IconWithTooltipProps) => {
+    return (
+        <Tooltip title={props.title}>
+            <IconButton size="medium" onClick={props.onClick}>
+                {props.icon}
+            </IconButton>
+        </Tooltip>
+    );
+};
+// -------------------------------------------------------
+
+// -------------------------------------------------------
+// prepare string with augment name and icons to represent its effects
 const prepareAugmentDisplay = (augments: AugmentSignature[]) => {
     let to_display: JSX.Element[] = [];
     for (const augment of augments) {
@@ -50,22 +69,6 @@ const prepareAugmentDisplay = (augments: AugmentSignature[]) => {
     return to_display;
 };
 
-interface IconWithTooltipProps {
-    icon: React.ReactElement;
-    title: string;
-    onClick: () => void;
-}
-
-const IconWithTooltip = (props: IconWithTooltipProps) => {
-    return (
-        <Tooltip title={props.title}>
-            <IconButton size="medium" onClick={props.onClick}>
-                {props.icon}
-            </IconButton>
-        </Tooltip>
-    );
-};
-
 interface CustomCardProps {
     header: string;
     desc: string;
@@ -79,31 +82,40 @@ interface CustomCardProps {
 // Card to display an augment preset
 export const CustomCard = (props: CustomCardProps) => {
     const theme = useTheme();
-    const augment_display = prepareAugmentDisplay(props.augments);
-    const desc = props.desc ? `"${props.desc}"` : "";
 
+    const augment_to_display = prepareAugmentDisplay(props.augments);
+
+    const button_sx = {
+        color: theme.palette.primary.light,
+    };
     return (
         <Card raised>
             <CardActions>
                 <IconWithTooltip
                     onClick={() => props.onEdit(props.index)}
                     title="Edit"
-                    icon={<Edit />}
+                    icon={<Edit sx={button_sx} />}
                 />
                 <IconWithTooltip
                     onClick={() => props.onDuplicate(props.index)}
                     title="Duplicate"
-                    icon={<CopyAll />}
+                    icon={<CopyAll sx={button_sx} />}
                 />
                 <IconWithTooltip
                     onClick={() => props.onExport(props.index)}
                     title="Save"
-                    icon={<Download />}
+                    icon={<Download sx={button_sx} />}
                 />
                 <IconWithTooltip
                     onClick={() => props.onDelete(props.index)}
                     title="Delete"
-                    icon={<Delete sx={{ color: pink["500"] }} />}
+                    icon={
+                        <Delete
+                            sx={{
+                                color: theme.palette.secondary.main,
+                            }}
+                        />
+                    }
                 />
             </CardActions>
             <CardContent>
@@ -111,13 +123,15 @@ export const CustomCard = (props: CustomCardProps) => {
                     <Typography
                         fontSize={theme.typography.h6.fontSize}
                         fontWeight={theme.typography.fontWeightBold}
-                        color={blue["A400"]}
+                        color={theme.palette.primary.main}
                     >
                         {props.header}
                     </Typography>
-                    <Typography fontStyle="italic">{desc}</Typography>
+                    <Typography fontStyle="italic">
+                        {props.desc ? `"${props.desc}"` : ""}
+                    </Typography>
                     <Stack textTransform="capitalize">
-                        {augment_display}
+                        {augment_to_display}
                     </Stack>
                 </Stack>
             </CardContent>

@@ -1,6 +1,6 @@
 {
     "name": "pso2ngs-augment-planner",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "private": true,
     "homepage": "https://eurydia.github.io/pso2ngs-augment-planner",
     "main": "src/index.tsx",
