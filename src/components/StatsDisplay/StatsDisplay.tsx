@@ -1,9 +1,13 @@
+import { memo } from "react";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { StatsGroup, StatItem, StatItemValue } from "./helper";
-import { EFFECT_NAME_TRANSLATE as name } from "../../util";
+import {
+    EFFECT_NAME_TRANSLATE as name,
+    propsIsEqual,
+} from "../../util";
 
 interface StatsProps {
     HP?: StatItemValue;
@@ -22,7 +26,7 @@ interface StatsProps {
     PHYDOWN_RES?: StatItemValue;
 }
 
-export default function StatsDisplay(props: StatsProps) {
+const StatsDisplay = (props: StatsProps) => {
     const theme = useTheme();
     return (
         <Stack
@@ -85,4 +89,6 @@ export default function StatsDisplay(props: StatsProps) {
             </StatsGroup>
         </Stack>
     );
-}
+};
+
+export default memo(StatsDisplay, propsIsEqual);

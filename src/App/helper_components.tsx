@@ -2,22 +2,25 @@ import React from "react";
 
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
 import useTheme from "@mui/material/styles/useTheme";
 
 import BorderColor from "@mui/icons-material/BorderColor";
 import Upload from "@mui/icons-material/Upload";
 import Download from "@mui/icons-material/Download";
+import Clear from "@mui/icons-material/Clear";
 
 // ---------------------------------
 // resuable paper for background
 interface PaperBackgroundProps {
-    title: string;
-    titleIcon: React.ReactElement;
+    title?: string;
+    titleIcon?: React.ReactElement;
     headerOther?: React.ReactElement;
     children: React.ReactElement;
 }
@@ -34,7 +37,19 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
                     backgroundColor: theme.palette.background.default,
                 }}
             >
-                <Stack>
+                <Stack
+                    direction={{
+                        xs: "column",
+                        sm: "column",
+                        md: "row",
+                    }}
+                    alignItems={{
+                        xs: "flex-start",
+                        sm: "flex-start",
+                        md: "center",
+                    }}
+                    justifyContent="space-between"
+                >
                     <Typography
                         component="h2"
                         sx={{
@@ -114,29 +129,60 @@ export const ImportExportButtons = (
 
 // ---------------------------------
 // modal to bring up when editing presets
-interface EditModalProps {
+interface EditDialogProps {
     open: boolean;
     onClose: () => void;
-    editor: React.ReactElement;
+    editor: {
+        title: string;
+        component: React.ReactElement;
+    };
 }
-export const EditModal = (props: EditModalProps) => {
+export const EditDialog = (props: EditDialogProps) => {
     const theme = useTheme();
     return (
-        <Modal open={props.open} onClose={props.onClose}>
-            <Container
-                maxWidth="lg"
+        <Dialog
+            open={props.open}
+            onClose={props.onClose}
+            maxWidth="md"
+        >
+            <DialogTitle
                 sx={{
-                    marginTop: theme.spacing(10),
+                    textTransform: "capitalize",
+                    paddingX: 2,
+                    paddingY: 1,
+                    boxShadow: theme.shadows[4],
+                    color: theme.palette.primary.dark,
+                    backgroundColor: theme.palette.background.default,
+                    fontSize: theme.typography.h4.fontSize,
+                    fontWeight: theme.typography.fontWeightBold,
                 }}
             >
-                <PaperBackground
-                    titleIcon={<BorderColor />}
-                    title="Edit Preset"
+                <Stack
+                    direction={{
+                        xs: "column",
+                        sm: "row",
+                    }}
+                    alignItems={{
+                        xs: "flex-start",
+                        sm: "center",
+                    }}
+                    justifyContent="space-between"
                 >
-                    {props.editor}
-                </PaperBackground>
-            </Container>
-        </Modal>
+                    <Stack direction="row" alignItems="center">
+                        {<BorderColor />}
+                        {props.editor.title}
+                    </Stack>
+                    <IconButton onClick={props.onClose}>
+                        <Clear />
+                    </IconButton>
+                </Stack>
+            </DialogTitle>
+            <DialogContent>
+                <Box sx={{ paddingY: 2 }}>
+                    {props.editor.component}
+                </Box>
+            </DialogContent>
+        </Dialog>
     );
 };
 // --------------------------------

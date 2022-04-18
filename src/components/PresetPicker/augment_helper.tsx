@@ -1,10 +1,10 @@
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
 
 import StyledAutoCompleteOption from "../StyledAutocompleteOption";
+
 import {
     convertToRoman,
     augmentFromSignature,
@@ -13,7 +13,6 @@ import {
 import { AugmentPreset } from "../../types";
 
 // ---------------------------------------------
-// Make sure to update this
 // For rendering augment preset picker's options
 export const renderOption = (props: any, option: AugmentPreset) => {
     const { name: header, augments: signatures } = option;
@@ -46,35 +45,6 @@ export const renderOption = (props: any, option: AugmentPreset) => {
             />
         </Box>
     );
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-// For rendering input field
-export const renderInput = (params: any) => {
-    return (
-        <TextField
-            {...params}
-            variant="filled"
-            label="Select augment preset"
-        />
-    );
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-// For matching name with augment preset
-export const matchPreset = (
-    value: string,
-    presets: AugmentPreset[],
-) => {
-    const v = value.normalize();
-    for (const preset of presets) {
-        if (preset.name.normalize() === v) {
-            return preset;
-        }
-    }
-    return null;
 };
 // ---------------------------------------------
 

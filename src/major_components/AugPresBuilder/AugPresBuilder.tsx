@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, memo } from "react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -9,7 +9,7 @@ import Clear from "@mui/icons-material/Clear";
 import { prepareInitalStates, prepareStatsToDisplay } from "./helper";
 import StatsDisplay from "../../components/StatsDisplay";
 import AugmentPicker from "../../components/AugmentPicker";
-import { augmentToSignature } from "../../util";
+import { augmentToSignature, propsIsEqual } from "../../util";
 import { AugmentData, AugmentPreset } from "../../types";
 import { NameInputField, DescInputField } from "../InputComponents";
 
@@ -98,4 +98,4 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     );
 };
 
-export default AugPresBuilder;
+export default memo(AugPresBuilder, propsIsEqual);

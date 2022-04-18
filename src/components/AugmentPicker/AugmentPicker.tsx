@@ -1,9 +1,9 @@
 import React from "react";
 
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 
 import {
+    renderInput,
     getOptionLabel,
     validateAugments,
     renderOption,
@@ -11,16 +11,19 @@ import {
 } from "./helper";
 import { AugmentData } from "../../types";
 import DATA from "../../assets/data/augments";
+import { propsIsEqual } from "../../util";
 
 interface AugmentPickerProps {
     values: AugmentData[];
-    disabled: boolean;
+    disabled?: boolean;
     onChange: (values: AugmentData[]) => void;
 }
 
-const AugmentPicker = (props: AugmentPickerProps) => {
-    const { values, disabled } = props;
+const styled = {
+    textTransform: "capitalize",
+};
 
+const AugmentPicker = (props: AugmentPickerProps) => {
     const handleChange = (
         event: React.SyntheticEvent,
         values: (string | AugmentData)[],
@@ -36,27 +39,16 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             multiple
             filterSelectedOptions
             options={DATA}
-            disabled={disabled}
-            value={values}
+            disabled={props.disabled}
+            value={props.values}
+            sx={styled}
             getOptionLabel={getOptionLabel}
             onChange={handleChange}
             renderOption={renderOption}
             filterOptions={filterOptions}
+            renderInput={renderInput}
             groupBy={(option) => option.group}
-            renderInput={(params: any) => {
-                return (
-                    <TextField
-                        {...params}
-                        variant="filled"
-                        label="Augment"
-                        placeholder='try "pp + rng + 3"'
-                    />
-                );
-            }}
-            sx={{
-                textTransform: "capitalize",
-            }}
         />
     );
 };
-export default AugmentPicker;
+export default React.memo(AugmentPicker, propsIsEqual);

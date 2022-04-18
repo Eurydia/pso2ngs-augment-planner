@@ -14,8 +14,7 @@ import CopyAll from "@mui/icons-material/CopyAll";
 import Delete from "@mui/icons-material/Delete";
 import Download from "@mui/icons-material/Download";
 
-import blue from "@mui/material/colors/blue";
-import pink from "@mui/material/colors/pink";
+import { propsIsEqual } from "../../util";
 
 import {
     augmentFromSignature,
@@ -80,7 +79,7 @@ interface CustomCardProps {
     onDelete: (index: number) => void;
 }
 // Card to display an augment preset
-export const CustomCard = (props: CustomCardProps) => {
+export const CustomCard = React.memo((props: CustomCardProps) => {
     const theme = useTheme();
 
     const augment_to_display = prepareAugmentDisplay(props.augments);
@@ -137,5 +136,5 @@ export const CustomCard = (props: CustomCardProps) => {
             </CardContent>
         </Card>
     );
-};
+}, propsIsEqual);
 // -------------------------------------------------------

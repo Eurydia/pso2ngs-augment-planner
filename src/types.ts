@@ -1,10 +1,10 @@
-// describe an effect e.g. HP, PP, mel pot etc.
+// describe an effect [HP, PP, mel pot etc.]
 export interface Effect {
     eff: string;
     amt: number;
 }
 
-// describe an augment e.g. stamina I, addis
+// describe an augment [stamina, spirit etc.]
 export interface AugmentData {
     name: string;
     level: number;
@@ -14,23 +14,47 @@ export interface AugmentData {
     condition: string;
 }
 
-// describe an equipment e.g. weapons and units
+// describe an equipment [weapons and units]
 export interface EquipmentData {
     name: string;
     effs: Effect[];
     group: string;
 }
 
+export interface EquipmentWithAugments {
+    equipment: EquipmentData | null;
+    augments: AugmentData[];
+}
+
+// describe an augment's signature
+// which will be use to reconstruct the augment data
 export interface AugmentSignature {
     name: string;
     level: number;
 }
 
 // describe an augment preset
+// THIS STRUCTURE WILL BE EXPORTED
 export interface AugmentPreset {
     name: string;
     description: string;
     augments: AugmentSignature[];
+}
+
+// describe an equipment signature
+// which will be use to reconstruct the equipment setup
+export interface EquipmentSignature {
+    name: string;
+    augments: AugmentSignature[];
+}
+
+// describe a loadout preset
+// THIS STRUCTURE WILL BE EXPORTED
+export interface LoadoutPreset {
+    name: string;
+    description: string;
+    weapon: EquipmentSignature | null;
+    units: EquipmentSignature[];
 }
 
 // -------------------------------------------
@@ -47,23 +71,51 @@ export const TypeguardAugmentSignature = (obj: any) => {
 export const TypeguardAugmentPreset = (obj: any) => {
     // check basic property
     const name_is_string = typeof obj.name === "string";
-    const desc_is_string = typeof obj.description;
+    const desc_is_string = typeof obj.description === "string";
 
-    // make sure the `augments` prop is an array first
+    // make sure the property `augments` is an array
     // before iterating over it
     const augments_is_array = Array.isArray(obj.augments);
     if (name_is_string && desc_is_string && augments_is_array) {
+        // typeguard every item in array `augments`
         for (const item of obj.augments) {
-            // perform typeguard check on every item of the array
-            // if an item is not an augment signature, return false
             const item_is_signature = TypeguardAugmentSignature(item);
             if (!item_is_signature) {
+                // an item in array is not an augment signature
                 return false;
             }
         }
-        // if all cases passed, return true
+        // all cases passed, return true
         return true;
     }
+    // property `augments` is not an array
+    return false;
+};
+
+export const TypeGuardEquipmentSignature = (obj: any) => {};
+
+// for loadout preset
+export const TypeguardLoadoutPreset = (obj: any) => {
+    // check basic property
+    const name_is_string = typeof obj.name === "string";
+    const desc_is_string = typeof obj.description === "string";
+
+    // make sure the property `augments` is an array
+    // before iterating over it
+    const augments_is_array = Array.isArray(obj.augments);
+    if (name_is_string && desc_is_string && augments_is_array) {
+        // typeguard every item in array `augments`
+        for (const item of obj.augments) {
+            const item_is_signature = TypeguardAugmentSignature(item);
+            if (!item_is_signature) {
+                // an item in array is not an augment signature
+                return false;
+            }
+        }
+        // all cases passed, return true
+        return true;
+    }
+    // property `augments` is not an array
     return false;
 };
 

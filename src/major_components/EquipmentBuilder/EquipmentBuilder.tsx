@@ -1,63 +1,96 @@
-import { useState } from "react";
+import { useState, useEffect, memo } from "react";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { collectAugments } from "./helper";
+import { collectAugmentsFromPreset } from "./helper";
+
 import EquipmentPicker, {
-    EquipmentPickerVariant,
+    EquipmentPickerMode,
 } from "../../components/EquipmentPicker";
-import AugmentPresetPicker from "../../components/AugmentPresetPicker";
+import { AugmentPresetPicker } from "../../components/PresetPicker";
 import AugmentPicker from "../../components/AugmentPicker";
+
 import {
     EquipmentData,
     AugmentPreset,
     AugmentData,
+    EquipmentWithAugments,
 } from "../../types";
+import { propsIsEqual } from "../../util";
 
 interface EquipmentBuilderProps {
-    header?: string;
-    variant: EquipmentPickerVariant;
-    allowEmptyEquipment: boolean;
-    augPresets: AugmentPreset[];
-    equipmentValue: EquipmentData | null;
-    augsValues: AugmentData[];
-    onEquipmentChange: (value: EquipmentData | null) => void;
-    onAugsChange: (value: AugmentData[]) => void;
+    allowEmptyEquipment?: boolean;
+    header: string;
+    mode: EquipmentPickerMode;
+    augmentPresets: AugmentPreset[];
+    initEquipment?: EquipmentData | null;
+    initAugments?: AugmentData[];
+    onChange: (value: EquipmentWithAugments) => void;
 }
 
 const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     const theme = useTheme();
     // -----------------------------
+    // prapare initial states
+    const initial_equipment = props.initEquipment
+        ? props.initEquipment
+        : null;
+    const initial_augments = props.initAugments
+        ? props.initAugments
+        : [];
+    // -----------------------------
+
+    // -----------------------------
     // prepare state
-    const [augPresVal, setAugPresVal] =
-        useState<AugmentPreset | null>(null);
+    const [equipment, setEquipment] = useState<EquipmentData | null>(
+        initial_equipment,
+    );
+    const [augments, setAugments] =
+        useState<AugmentData[]>(initial_augments);
+    const [augPreset, setAugPreset] = useState<AugmentPreset | null>(
+        null,
+    );
     // -----------------------------
 
     // -----------------------------
     // handlers
-    const handlePresetChange = (preset: AugmentPreset | null) => {
-        if (preset) {
-            const augments = collectAugments(preset);
-            props.onAugsChange(augments);
+    useEffect(() => {
+        const value = {
+            equipment,
+            augments,
+        };
+        props.onChange(value);
+    }, [equipment, augments, props]);
+
+    const handleEquipmentChange = (
+        equipment: EquipmentData | null,
+    ) => {
+        setEquipment(equipment);
+    };
+    const handleAugmentChange = (augments: AugmentData[]) => {
+        // reset selected preset if augment chages
+        if (augPreset && augPreset !== null) {
+            setAugPreset(null);
         }
-        setAugPresVal(preset);
+        setAugments(augments);
+    };
+    const handlePresetChange = (preset: AugmentPreset | null) => {
+        setAugPreset(preset);
+        if (preset) {
+            const augments = collectAugmentsFromPreset(preset);
+            handleAugmentChange(augments);
+        }
     };
 
-    const handleAugmentChange = (values: AugmentData[]) => {
-        if (augPresVal) {
-            setAugPresVal(null);
-        }
-        props.onAugsChange(values);
-    };
     // -----------------------------
 
     // if no equipment is selected, then augment picker
     // and augment preset pick should be disable.
     // However, this is ignored if the allowEmptyEquipment flag is true
     const disabled =
-        props.equipmentValue === null && !props.allowEmptyEquipment;
+        props.initEquipment === null && !props.allowEmptyEquipment;
 
     return (
         <Stack width={1} spacing={1}>
@@ -69,26 +102,26 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
                     color: theme.palette.primary.main,
                 }}
             >
-                {props.header || ""}
+                {props.header}
             </Typography>
             <EquipmentPicker
-                variant={props.variant}
-                value={props.equipmentValue}
-                onChange={props.onEquipmentChange}
+                variant={props.mode}
+                value={equipment}
+                onChange={handleEquipmentChange}
             />
             <AugmentPresetPicker
-                presets={props.augPresets}
+                presets={props.augmentPresets}
                 disabled={disabled}
-                value={augPresVal}
+                value={augPreset}
                 onChange={handlePresetChange}
             />
             <AugmentPicker
                 disabled={disabled}
-                values={props.augsValues}
+                values={augments}
                 onChange={handleAugmentChange}
             />
         </Stack>
     );
 };
 
-export default EquipmentBuilder;
+export default memo(EquipmentBuilder, propsIsEqual);

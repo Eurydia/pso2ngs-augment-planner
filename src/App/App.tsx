@@ -19,17 +19,24 @@ import {
     typeguardPresets,
     addPreset,
     editSavePreset,
-    uploadPreset,
+    importPreset,
 } from "./helper_functions";
 import {
     PaperBackground,
     ImportExportButtons,
-    EditModal,
+    EditDialog as EditModal,
 } from "./helper_components";
-import AugPresBuilder from "../major_components/AugPresBuilder/AugPresBuilder";
-import AugPresCompare from "../major_components/AugPresCompare/AugPresCompare";
+
+import AugPresBuilder from "../major_components/AugPresBuilder";
+import AugPresCompare from "../major_components/AugPresCompare";
 import AugPresManager from "../major_components/AugPresManager";
-import { AugmentPreset, TypeguardAugmentPreset } from "../types";
+import LoPresBuilder from "../major_components/LoPresBuilder";
+
+import {
+    AugmentPreset,
+    LoadoutPreset,
+    TypeguardAugmentPreset,
+} from "../types";
 
 const App = () => {
     const theme = useTheme();
@@ -37,13 +44,16 @@ const App = () => {
 
     // -------------------------------------
     // MODAL STATES
-    const [modalEditor, setModalEditor] =
-        useState<React.ReactElement>(
-            <React.Fragment></React.Fragment>,
-        );
-    const [modalOpen, setModalOpen] = useState(false);
-    const openModal = () => setModalOpen(true);
-    const closeModal = () => setModalOpen(false);
+    const [dialogEditor, setDialogEditor] = useState<{
+        title: string;
+        component: React.ReactElement;
+    }>({
+        title: "",
+        component: <React.Fragment></React.Fragment>,
+    });
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const openDialog = () => setDialogOpen(true);
+    const closeDialog = () => setDialogOpen(false);
     // -------------------------------------
 
     // -------------------------------------
@@ -61,6 +71,7 @@ const App = () => {
         setAugPresets(to_update);
         saveSession<AugmentPreset>("augmentPreset", to_update);
     };
+    // -------------------------------------
 
     // -------------------------------------
     // AUGMENT PRESETS HANDLERS
@@ -76,7 +87,7 @@ const App = () => {
     // when a preset is going to be edited
     const editAugmentPreset = (index: number) => {
         const handleEditSave = (edited_preset: AugmentPreset) => {
-            closeModal();
+            closeDialog();
             const { text, options } = editSavePreset(
                 edited_preset,
                 augPresets,
@@ -86,14 +97,15 @@ const App = () => {
             enqueueSnackbar(text, options);
         };
         const target_preset = augPresets[index];
-        const editor = (
+        const title = "Augment Preset Edit";
+        const component = (
             <AugPresBuilder
                 initPreset={target_preset}
                 onPresetSave={handleEditSave}
             />
         );
-        setModalEditor(editor);
-        openModal();
+        setDialogEditor({ title, component });
+        openDialog();
     };
     // when a preset is duplicated
     const duplicateAugmentPreset = (index: number) => {
@@ -116,7 +128,7 @@ const App = () => {
     };
     // when presets is imported to the manager
     const importAugmentPreset = (text_data: string) => {
-        const { text, options } = uploadPreset(
+        const { text, options } = importPreset(
             text_data,
             augPresets,
             updateAugmentPreset,
@@ -140,6 +152,35 @@ const App = () => {
         });
         saveAs(blob, "augment presets.json");
         enqueueSnackbar("Presets exported.", { variant: "success" });
+    };
+    // -------------------------------------
+
+    // -------------------------------------
+    // LOADOUT PRESET STATES
+    // // load augment presets saved in local storage
+    // const loadout_preset_init = typeguardPresets(
+    //     loadSession<LoadoutPreset>("loadoutPreset"),
+    //     TypeguardAugmentPreset,
+    // );
+    // // and use the saved presets as initial values
+    const [loPresets, setLoPresets] = useState<LoadoutPreset[]>([]);
+    // // updating value on memory and in local storage
+    const updateLoadoutPresets = (to_update: LoadoutPreset[]) => {
+        setLoPresets(to_update);
+        saveSession<LoadoutPreset>("loadoutPreset", to_update);
+    };
+    // -------------------------------------
+
+    // -------------------------------------
+    // LOADOUT PRESETS HANDLERS
+    // when a new preset is added
+    const addLoadoutPreset = (new_preset: LoadoutPreset) => {
+        const { text, options } = addPreset(
+            new_preset,
+            loPresets,
+            updateLoadoutPresets,
+        );
+        enqueueSnackbar(text, options);
     };
     // -------------------------------------
 
@@ -183,10 +224,19 @@ const App = () => {
                         onDelete={deleteAugmentPreset}
                     />
                 </PaperBackground>
+                <PaperBackground
+                    title="Loadout Preset Builder"
+                    titleIcon={<Construction fontSize="inherit" />}
+                >
+                    <LoPresBuilder
+                        augmentPresets={augPresets}
+                        onPresetSave={addLoadoutPreset}
+                    />
+                </PaperBackground>
                 <EditModal
-                    open={modalOpen}
-                    onClose={closeModal}
-                    editor={modalEditor}
+                    open={dialogOpen}
+                    onClose={closeDialog}
+                    editor={dialogEditor}
                 />
             </Stack>
         </ThemeProvider>

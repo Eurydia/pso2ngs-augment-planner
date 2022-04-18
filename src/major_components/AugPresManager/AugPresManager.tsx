@@ -1,7 +1,10 @@
-import { Grid } from "@mui/material";
+import { memo } from "react";
+
+import Grid from "@mui/material/Grid";
 
 import { CustomCard } from "./helper";
 import { AugmentPreset } from "../../types";
+import { propsIsEqual } from "../../util";
 
 interface AugPresManagerProps {
     augmentPresets: AugmentPreset[];
@@ -42,4 +45,4 @@ const AugPresManager = (props: AugPresManagerProps) => {
     );
 };
 
-export default AugPresManager;
+export default memo(AugPresManager, propsIsEqual);

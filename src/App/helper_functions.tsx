@@ -71,7 +71,8 @@ export const addPreset = <T extends { name: string }>(
     existing_presets: T[],
     action: (values: T[]) => void,
 ) => {
-    new_preset.name = new_preset.name.trim();
+    const new_preset_name = new_preset.name.normalize().trim();
+    new_preset.name = new_preset_name;
     const used_name = existing_presets.map((preset) => preset.name);
     const validated_name = checkNameAvailability(
         new_preset.name,
@@ -82,7 +83,7 @@ export const addPreset = <T extends { name: string }>(
 
     let text: string;
     let options: { variant: "warning" | "success" };
-    if (validated_name !== new_preset.name) {
+    if (validated_name !== new_preset_name) {
         text = `Your preset was saved as "${validated_name}".`;
         options = { variant: "warning" };
     } else {
@@ -125,7 +126,7 @@ export const editSavePreset = <T extends { name: string }>(
     return { text, options };
 };
 
-export const uploadPreset = <T extends { name: string }>(
+export const importPreset = <T extends { name: string }>(
     text_data: string,
     existing_presets: T[],
     action: (values: T[]) => void,

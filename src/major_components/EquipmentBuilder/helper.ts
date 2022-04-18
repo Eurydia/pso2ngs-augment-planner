@@ -2,7 +2,7 @@ import { augmentFromSignature } from "../../util";
 import { AugmentPreset, AugmentData } from "../../types";
 
 // -----------------------------------
-export const collectAugments = (preset: AugmentPreset) => {
+export const collectAugmentsFromPreset = (preset: AugmentPreset) => {
     const signatures = preset.augments;
     let augments: AugmentData[] = [];
     for (const signature of signatures) {

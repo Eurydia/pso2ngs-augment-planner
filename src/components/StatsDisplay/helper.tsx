@@ -1,7 +1,8 @@
+import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
-import React from "react";
+import { propsIsEqual } from "../../util";
 
 // ----------------------------------------------
 // stats item
@@ -18,7 +19,7 @@ interface StatItemProps {
     column?: number;
 }
 
-export const StatItem = (props: StatItemProps) => {
+export const StatItem = React.memo((props: StatItemProps) => {
     const theme = useTheme();
 
     let _value: string;
@@ -62,16 +63,19 @@ export const StatItem = (props: StatItemProps) => {
             </Typography>
         </Grid>
     );
-};
+}, propsIsEqual);
 // ----------------------------------------------
 
 // ----------------------------------------------
 // group the stats
-export const StatsGroup = (props: { children: React.ReactNode }) => {
-    return (
-        <Grid container columns={2}>
-            {props.children}
-        </Grid>
-    );
-};
+export const StatsGroup = React.memo(
+    (props: { children: React.ReactNode }) => {
+        return (
+            <Grid container columns={2}>
+                {props.children}
+            </Grid>
+        );
+    },
+    propsIsEqual,
+);
 // ----------------------------------------------

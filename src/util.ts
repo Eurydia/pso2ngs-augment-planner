@@ -82,6 +82,7 @@ export const convertToRoman = (num: number) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
+// pick out effect from array
 export const collectEffects = (
     objs: (AugmentData | EquipmentData | null)[],
 ) => {
@@ -97,7 +98,7 @@ export const collectEffects = (
     return effects;
 };
 
-// collect total stats
+// generate effect object from array of effects
 export const getTotalStats = (effects: Effect[]) => {
     let total_stats: { [key: string]: number } = {};
     for (const effect of effects) {
@@ -159,7 +160,7 @@ export const augmentToSignature = (augment: AugmentData) => {
     };
 };
 
-// get augmentData
+// get augmentData from signature
 export const augmentFromSignature = (signature: AugmentSignature) => {
     for (let i = 0; i < DATA.length; i++) {
         const augment = DATA[i];
@@ -169,5 +170,27 @@ export const augmentFromSignature = (signature: AugmentSignature) => {
         }
     }
     return null;
+};
+// ---------------------------------------------
+
+// ---------------------------------------------
+// prop checking for React.memo()
+export const propsIsEqual = <T extends { [keys: string]: any }>(
+    prev: T,
+    next: T,
+) => {
+    if (
+        prev instanceof Object &&
+        next instanceof Object &&
+        Object.keys(prev).length === Object.keys(next).length
+    ) {
+        for (const key of Object.keys(prev)) {
+            if (next[key] === undefined || next[key] !== prev[key]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
 };
 // ---------------------------------------------

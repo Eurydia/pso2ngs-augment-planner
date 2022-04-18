@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -11,11 +11,12 @@ import {
     filterOptions,
 } from "./helper";
 import { EquipmentData } from "../../types";
+import { propsIsEqual } from "../../util";
 
-export type EquipmentPickerVariant = "both" | "weapons" | "armors";
+export type EquipmentPickerMode = "both" | "weapons" | "armors";
 
 interface EquipmentPickerProps {
-    variant: EquipmentPickerVariant;
+    variant: EquipmentPickerMode;
     value: EquipmentData | null;
     onChange: (value: EquipmentData | null) => void;
 }
@@ -60,4 +61,4 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
         />
     );
 };
-export default EquipmentPicker;
+export default memo(EquipmentPicker, propsIsEqual);

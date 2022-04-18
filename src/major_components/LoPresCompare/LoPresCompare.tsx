@@ -1,12 +1,12 @@
-import { useState, memo } from "react";
+import { useState, useEffect, memo } from "react";
 
 import Stack from "@mui/material/Stack";
 
 import { compareStats } from "./helper";
-
 import EquipmentBuilder from "../EquipmentBuilder/EquipmentBuilder";
-import StatsDisplay from "../../components/StatsDisplay";
-
+import StatsDisplay, {
+    StatItemValue,
+} from "../../components/StatsDisplay";
 import { AugmentPreset, EquipmentWithAugments } from "../../types";
 import { propsIsEqual } from "../../util";
 
