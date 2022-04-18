@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
@@ -12,20 +11,6 @@ import {
     parseStat,
     isAddEffect,
 } from "../../util";
-
-// ---------------------------------------------
-
-export const renderInput = (params: any) => {
-    return (
-        <TextField
-            {...params}
-            variant="filled"
-            label="Augment"
-            placeholder='try "pp + rng + 3"'
-        />
-    );
-};
-// ---------------------------------------------
 
 // ---------------------------------------------
 // For rendering options on dropdown
@@ -66,15 +51,6 @@ export const getOptionLabel = (option: AugmentData) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-// Move this to `types.tsx`
-// const typeGuardAugmentData = (obj: any) => {
-//     return (
-//         obj.name !== undefined &&
-//         obj.level !== undefined &&
-//         obj.group !== undefined
-//     );
-// };
-
 // for validating selected augments
 export const validateAugments = (
     values: (string | AugmentData)[],

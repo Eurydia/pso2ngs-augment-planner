@@ -2,7 +2,6 @@ import React from "react";
 
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import useTheme from "@mui/material/styles/useTheme";
 
 interface StyledAutocompleteOptionProps {

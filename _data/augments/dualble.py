@@ -24,6 +24,7 @@ for name, effs in zip(_name, combinations(OFFENSIVE_POT, 2)):
         augment_from_list(
             f"{name} dualble",
             3,
+            (4, 5, 6),
             multi_with_amount(effs, _amount),
             GROUP,
             CONFLICT,

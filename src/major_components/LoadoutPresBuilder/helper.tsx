@@ -1,21 +1,16 @@
-import React from "react";
-
-import Grid from "@mui/material/Grid";
-
 import { StatItemValue } from "../../components/StatsDisplay";
+
 import {
     AugmentData,
-    AugmentPreset,
     EquipmentData,
     EquipmentWithAugments,
 } from "../../types";
 import {
-    augmentFromSignature,
-    augmentToSignature,
     collectEffects,
     getTotalStats,
     isAddEffect,
     parseStat,
+    augmentToSignature,
 } from "../../util";
 
 // -------------------------------------
@@ -45,6 +40,7 @@ import {
 export const prepareStatsToDisplay = (
     data: EquipmentWithAugments[],
 ) => {
+    let bp = 0;
     let effs: (AugmentData | EquipmentData)[] = [];
     for (const d of data) {
         if (d.equipment === null) {
@@ -52,8 +48,11 @@ export const prepareStatsToDisplay = (
         }
         effs.push(d.equipment);
         effs = effs.concat(d.augments);
-    }
 
+        for (const aug of d.augments) {
+            bp += aug.bp;
+        }
+    }
     const tallied_effs = collectEffects(effs);
     const total_stats = getTotalStats(tallied_effs);
 
@@ -62,33 +61,17 @@ export const prepareStatsToDisplay = (
         const value = parseStat(total_stats[key], isAddEffect(key));
         parsed_stats[key] = { value };
     }
+
+    if (bp > 0) {
+        parsed_stats["BP"] = { value: bp.toString() };
+    }
+
     return parsed_stats;
 };
 // -------------------------------------
 
 // -------------------------------------
-// grid container and item macro
-export const GridContainer = (props: {
-    children: React.ReactNode;
-}) => {
-    return (
-        <Grid container columns={{ xs: 1, sm: 2 }} rowSpacing={2}>
-            {props.children}
-        </Grid>
-    );
-};
-
-export const GridItem = (props: { children: React.ReactNode }) => {
-    return (
-        <Grid item xs={1} padding={1}>
-            {props.children}
-        </Grid>
-    );
-};
-// -------------------------------------
-
-// -------------------------------------
-
+// macro for getting the signature
 export const toSignature = (value: EquipmentWithAugments) => {
     if (value.equipment === null) {
         return null;
@@ -97,5 +80,4 @@ export const toSignature = (value: EquipmentWithAugments) => {
     const augments = value.augments.map(augmentToSignature);
     return { name, augments };
 };
-
 // -------------------------------------

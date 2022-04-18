@@ -172,6 +172,20 @@ const DATA = [
         group: "5*",
     },
     {
+        name: "viosel armor",
+        effs: [
+            { eff: "PP", amt: 14 },
+            { eff: "BURN_RES", amt: 1.2 },
+            { eff: "FREEZE_RES", amt: 1.2 },
+            { eff: "SHOCK_RES", amt: 1.2 },
+            { eff: "BLIND_RES", amt: 1.2 },
+            { eff: "PANIC_RES", amt: 1.2 },
+            { eff: "POISON_RES", amt: 1.2 },
+            { eff: "PHYDOWN_RES", amt: 1.2 },
+        ],
+        group: "5*",
+    },
+    {
         name: "greas armor",
         effs: [
             { eff: "HP", amt: -40 },

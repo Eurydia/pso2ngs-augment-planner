@@ -1,15 +1,14 @@
 import { memo } from "react";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
 import { StatsGroup, StatItem, StatItemValue } from "./helper";
-import {
-    EFFECT_NAME_TRANSLATE as name,
-    propsIsEqual,
-} from "../../util";
+import { EFFECT_NAME_TRANSLATE as name } from "../../util";
 
 interface StatsProps {
+    BP?: StatItemValue;
     HP?: StatItemValue;
     PP?: StatItemValue;
     MEL_POT?: StatItemValue;
@@ -38,6 +37,12 @@ const StatsDisplay = (props: StatsProps) => {
             }}
         >
             <StatsGroup>
+                <StatItem
+                    isAdd
+                    head={{ emoji: "🔢", name: "BP*" }}
+                    value={props.BP}
+                    column={2}
+                />
                 <StatItem isAdd head={name.HP} value={props.HP} />
                 <StatItem isAdd head={name.PP} value={props.PP} />
             </StatsGroup>
@@ -87,8 +92,17 @@ const StatsDisplay = (props: StatsProps) => {
                     value={props.PHYDOWN_RES}
                 />
             </StatsGroup>
+            <Typography
+                fontWeight={theme.typography.fontWeightMedium}
+            >
+                *BP counted from augments only.
+            </Typography>
         </Stack>
     );
 };
 
-export default memo(StatsDisplay, propsIsEqual);
+// const shouldStatsNOTRerender = (prev: StatsProps,  next: StatsProps) => {
+//     return
+// }
+
+export default memo(StatsDisplay);

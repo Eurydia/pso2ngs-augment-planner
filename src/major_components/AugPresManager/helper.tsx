@@ -14,14 +14,12 @@ import CopyAll from "@mui/icons-material/CopyAll";
 import Delete from "@mui/icons-material/Delete";
 import Download from "@mui/icons-material/Download";
 
-import { propsIsEqual } from "../../util";
-
 import {
     augmentFromSignature,
     EFFECT_NAME_TRANSLATE,
     convertToRoman,
 } from "../../util";
-import { AugmentSignature } from "../../types";
+import { AugmentDataSignature } from "../../types";
 
 // -------------------------------------------------------
 // icon with tool tip macro
@@ -44,7 +42,7 @@ const IconWithTooltip = (props: IconWithTooltipProps) => {
 
 // -------------------------------------------------------
 // prepare string with augment name and icons to represent its effects
-const prepareAugmentDisplay = (augments: AugmentSignature[]) => {
+const prepareAugmentDisplay = (augments: AugmentDataSignature[]) => {
     let to_display: JSX.Element[] = [];
     for (const augment of augments) {
         const full_augment = augmentFromSignature(augment);
@@ -71,7 +69,7 @@ const prepareAugmentDisplay = (augments: AugmentSignature[]) => {
 interface CustomCardProps {
     header: string;
     desc: string;
-    augments: AugmentSignature[];
+    augments: AugmentDataSignature[];
     index: number;
     onEdit: (index: number) => void;
     onExport: (index: number) => void;
@@ -136,5 +134,5 @@ export const CustomCard = React.memo((props: CustomCardProps) => {
             </CardContent>
         </Card>
     );
-}, propsIsEqual);
+});
 // -------------------------------------------------------

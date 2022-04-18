@@ -8,10 +8,18 @@ export interface Effect {
 export interface AugmentData {
     name: string;
     level: number;
+    bp: number;
     effs: Effect[];
     group: string;
     conflict: string[];
     condition: string;
+}
+
+// describe an augment's signature
+// which will be use to reconstruct the augment data
+export interface AugmentDataSignature {
+    name: string;
+    level: number;
 }
 
 // describe an equipment [weapons and units]
@@ -21,16 +29,20 @@ export interface EquipmentData {
     group: string;
 }
 
+export interface EquipmentDataSignature {
+    name: string;
+}
+
 export interface EquipmentWithAugments {
     equipment: EquipmentData | null;
     augments: AugmentData[];
 }
 
-// describe an augment's signature
-// which will be use to reconstruct the augment data
-export interface AugmentSignature {
+// describe an equipment signature
+// which will be use to reconstruct the equipment SETUP
+export interface EquipmentWithAugmentSignature {
     name: string;
-    level: number;
+    augments: AugmentDataSignature[];
 }
 
 // describe an augment preset
@@ -38,14 +50,7 @@ export interface AugmentSignature {
 export interface AugmentPreset {
     name: string;
     description: string;
-    augments: AugmentSignature[];
-}
-
-// describe an equipment signature
-// which will be use to reconstruct the equipment setup
-export interface EquipmentSignature {
-    name: string;
-    augments: AugmentSignature[];
+    augments: AugmentDataSignature[];
 }
 
 // describe a loadout preset
@@ -53,8 +58,8 @@ export interface EquipmentSignature {
 export interface LoadoutPreset {
     name: string;
     description: string;
-    weapon: EquipmentSignature | null;
-    units: EquipmentSignature[];
+    weapon: EquipmentWithAugmentSignature | null;
+    units: EquipmentWithAugmentSignature[];
 }
 
 // -------------------------------------------

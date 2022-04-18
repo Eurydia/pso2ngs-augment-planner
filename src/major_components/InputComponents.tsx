@@ -1,8 +1,6 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 
-import { propsIsEqual } from "../util";
-
 interface PresetInputProps {
     value: string;
     color?:
@@ -13,6 +11,7 @@ interface PresetInputProps {
         | "success"
         | "warning";
     maxLength: number;
+    rows?: number;
     onChange: (value: string) => void;
 }
 
@@ -44,7 +43,6 @@ export const NameInputField = React.memo(
             />
         );
     },
-    propsIsEqual,
 );
 
 export const DescInputField = React.memo(
@@ -52,7 +50,7 @@ export const DescInputField = React.memo(
         return (
             <TextField
                 multiline
-                rows={5}
+                rows={props.rows || 5}
                 variant="filled"
                 label="Description"
                 helperText={`(max ${props.maxLength} characters)`}
@@ -67,5 +65,4 @@ export const DescInputField = React.memo(
             />
         );
     },
-    propsIsEqual,
 );

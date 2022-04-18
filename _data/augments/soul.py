@@ -19,6 +19,7 @@ augments.extend(
     augment_from_list(
         f"alts soul",
         3,
+        (5, 7, 9),
         (
             EffectMultiLevel(HP, (5, 10, 15)),
             EffectMultiLevel(DMG_RES, (1.01, 1.02, 1.025)),
@@ -32,6 +33,7 @@ augments.extend(
     augment_from_list(
         f"dolz soul",
         3,
+        (5, 6, 7),
         (
             EffectMultiLevel(PP, (5, 5, 5)),
             EffectMultiLevel(FLOOR_POT, (1.01, 1.02, 1.025)),
@@ -48,6 +50,7 @@ for name, eff in zip(_forms_name, OFFENSIVE_POT):
         augment_from_list(
             f"{name} soul",
             3,
+            (6, 8, 9),
             (
                 EffectMultiLevel(eff, (1.02, 1.02, 1.02)),
                 EffectMultiLevel(DMG_RES, (1, 1.02, 1.025)),
@@ -64,6 +67,7 @@ for name, eff in zip(_boss_one, OFFENSIVE_POT):
         augment_from_list(
             f"{name} soul",
             3,
+            (7, 8, 10),
             (
                 EffectMultiLevel(PP, (5, 5, 5)),
                 EffectMultiLevel(eff, (1.01, 1.02, 1.025)),
@@ -80,6 +84,7 @@ for name, eff in zip(_boss_two, OFFENSIVE_POT):
         augment_from_list(
             f"{name} soul",
             3,
+            (7, 8, 10),
             (
                 EffectMultiLevel(HP, (15, 15, 15)),
                 EffectMultiLevel(eff, (1.01, 1.02, 1.025)),
@@ -94,12 +99,11 @@ augments.extend(
     augment_from_list(
         "eradi soul",
         3,
+        (7, 8, 10),
         (
             EffectMultiLevel(HP, (10, 10, 10)),
             EffectMultiLevel(PP, (4, 4, 4)),
-            *multi_with_amount(
-                OFFENSIVE_POT, (1.0125, 1.0175, 1.0225)
-            ),
+            *multi_with_amount(OFFENSIVE_POT, (1.0125, 1.0175, 1.0225)),
         ),
         GROUP,
         CONFLICT,

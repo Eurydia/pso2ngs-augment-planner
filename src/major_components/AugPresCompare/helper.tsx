@@ -40,7 +40,7 @@ export const compareStats = (
     const keys = Array.from(keys_without_duplicate);
     // -----------------------
 
-    let stats: { [key: string]: StatItemValue } = {};
+    let parsed_stats: { [key: string]: StatItemValue } = {};
     for (const key of keys) {
         const is_add_eff = isAddEffect(key);
         const default_value = is_add_eff ? 0 : 1;
@@ -53,12 +53,31 @@ export const compareStats = (
         const parsed_s_value = parseStat(s_value, is_add_eff);
         const parsed_difference = parseStat(difference, is_add_eff);
 
-        stats[key] = {
+        parsed_stats[key] = {
             value: parsed_s_value,
             diff: parsed_difference,
             negative: difference < default_value,
         };
     }
-    return stats;
+
+    let subject_bp = 0;
+    let comparand_bp = 0;
+    for (let i = 0; i < 5; i++) {
+        subject_bp += subject.augments[i]
+            ? subject.augments[i].bp
+            : 0;
+        comparand_bp += comparand.augments[i]
+            ? comparand.augments[i].bp
+            : 0;
+    }
+    const bp_diff = subject_bp - comparand_bp;
+    if (subject_bp > 0) {
+        parsed_stats["BP"] = {
+            value: subject_bp.toString(),
+            diff: bp_diff.toString(),
+            negative: bp_diff < 0,
+        };
+    }
+    return parsed_stats;
 };
 // ---------------------------------------------

@@ -7,11 +7,13 @@ import Save from "@mui/icons-material/Save";
 import Clear from "@mui/icons-material/Clear";
 
 import { prepareInitalStates, prepareStatsToDisplay } from "./helper";
+
 import StatsDisplay from "../../components/StatsDisplay";
 import AugmentPicker from "../../components/AugmentPicker";
-import { augmentToSignature, propsIsEqual } from "../../util";
-import { AugmentData, AugmentPreset } from "../../types";
 import { NameInputField, DescInputField } from "../InputComponents";
+
+import { augmentToSignature } from "../../util";
+import { AugmentData, AugmentPreset } from "../../types";
 
 interface AugPresBuilderProps {
     initPreset?: AugmentPreset;
@@ -98,4 +100,4 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     );
 };
 
-export default memo(AugPresBuilder, propsIsEqual);
+export default memo(AugPresBuilder);

@@ -9,6 +9,7 @@ from effect import Effect
 class Augment:
     name: str
     level: int
+    bp: int | float
     effs: Tuple[Effect, ...]
     group: str
     conflict: Tuple[str, ...]
@@ -42,6 +43,7 @@ def multi_with_amount(
 def augment_from_list(
     name: str,
     levels: int,
+    bp: List[int | float],
     multi_level_effs: Tuple[EffectMultiLevel, ...],
     group: str,
     conflict: Tuple[str, ...],
@@ -56,13 +58,12 @@ def augment_from_list(
 
     for level in range(levels):
 
-        effs = tuple(
-            (eff.getLevel(level) for eff in multi_level_effs)
-        )
+        effs = tuple((eff.getLevel(level) for eff in multi_level_effs))
 
         aug = Augment(
             name,
             level + 1,
+            bp[level],
             effs,
             group,
             _conflict,

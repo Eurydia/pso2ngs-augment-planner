@@ -4,8 +4,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 import * as augment from "./augment_helper";
+
 import { AugmentPreset, LoadoutPreset } from "../../types";
-import { propsIsEqual } from "../../util";
 
 // ---------------------------------------------
 // For matching name with augment preset
@@ -23,7 +23,14 @@ const matchPreset = <T extends { name: string }>(
 };
 // ---------------------------------------------
 
-interface PresetPickerProps<T> {
+const shouldPresetPickerNOTRerender = <T extends { name: string }>(
+    prev: PresetPickerProps<T>,
+    next: PresetPickerProps<T>,
+) => {
+    return prev.value?.name === next.value?.name;
+};
+
+interface PresetPickerProps<T extends { name: string }> {
     disabled?: boolean;
     value: T | null;
     presets: T[];
@@ -63,7 +70,7 @@ export const AugmentPresetPicker = memo(
             />
         );
     },
-    propsIsEqual,
+    shouldPresetPickerNOTRerender,
 );
 
 // export const LoadoutPresetPicker = memo(

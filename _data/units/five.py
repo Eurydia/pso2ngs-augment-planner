@@ -53,6 +53,14 @@ units.append(
 
 units.append(
     Unit(
+        "viosel armor",
+        (Effect(PP, 14), *effects_with_amount(AILMENT_RES, 1.20)),
+        RARITY,
+    )
+)
+
+units.append(
+    Unit(
         "greas armor",
         (
             Effect(HP, -40),

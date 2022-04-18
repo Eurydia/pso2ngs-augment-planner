@@ -1,8 +1,8 @@
 import React from "react";
+
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
-import { propsIsEqual } from "../../util";
 
 // ----------------------------------------------
 // stats item
@@ -18,6 +18,17 @@ interface StatItemProps {
     isAdd?: boolean;
     column?: number;
 }
+
+const shouldStatItemNOTRerender = (
+    prev: StatItemProps,
+    next: StatItemProps,
+) => {
+    return (
+        prev.value?.value === next.value?.value &&
+        prev.value?.diff === next.value?.diff &&
+        prev.value?.negative === next.value?.negative
+    );
+};
 
 export const StatItem = React.memo((props: StatItemProps) => {
     const theme = useTheme();
@@ -63,7 +74,7 @@ export const StatItem = React.memo((props: StatItemProps) => {
             </Typography>
         </Grid>
     );
-}, propsIsEqual);
+}, shouldStatItemNOTRerender);
 // ----------------------------------------------
 
 // ----------------------------------------------
@@ -76,6 +87,5 @@ export const StatsGroup = React.memo(
             </Grid>
         );
     },
-    propsIsEqual,
 );
 // ----------------------------------------------

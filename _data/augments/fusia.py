@@ -16,6 +16,7 @@ augments.append(
     Augment(
         f"megas fusia",
         0,
+        4,
         effects_with_amount(OFFENSIVE_POT, 1.01),
         GROUP,
         CONFLICT,

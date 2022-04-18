@@ -41,6 +41,11 @@ export const prepareStatsToDisplay = (augments: AugmentData[]) => {
         const value = parseStat(total_stats[key], isAddEffect(key));
         parsed_stats[key] = { value };
     }
+    let bp = 0;
+    for (const augment of augments) {
+        bp += augment.bp;
+    }
+    parsed_stats["BP"] = { value: bp.toString() };
     return parsed_stats;
 };
 // -------------------------------------

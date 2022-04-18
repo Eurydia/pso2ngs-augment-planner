@@ -20,11 +20,11 @@ for name, eff in zip(_names, OFFENSIVE_POT):
         augment_from_list(
             f"gigas {name}",
             3,
+            (6, 8, 10),
             (
                 EffectMultiLevel(HP, (10, 15, 30)),
                 EffectMultiLevel(eff, (1.015, 1.02, 1.025)),
             ),
-            
             GROUP,
             CONFLICT,
         )

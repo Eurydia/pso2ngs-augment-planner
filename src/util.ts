@@ -1,9 +1,13 @@
-import DATA from "./assets/data/augments";
+import { default as AUG_DATA } from "./assets/data/augments";
+import { default as UNIT_DATA } from "./assets/data/units";
+import { default as WEAPON_DATA } from "./assets/data/weapons";
+
 import {
     Effect,
     AugmentData,
-    AugmentSignature,
+    AugmentDataSignature,
     EquipmentData,
+    EquipmentWithAugmentSignature,
 } from "./types";
 
 export const EFFECT_NAME: { [keys: string]: string } = {
@@ -161,9 +165,11 @@ export const augmentToSignature = (augment: AugmentData) => {
 };
 
 // get augmentData from signature
-export const augmentFromSignature = (signature: AugmentSignature) => {
-    for (let i = 0; i < DATA.length; i++) {
-        const augment = DATA[i];
+export const augmentFromSignature = (
+    signature: AugmentDataSignature,
+) => {
+    for (let i = 0; i < AUG_DATA.length; i++) {
+        const augment = AUG_DATA[i];
         const { name, level } = augment;
         if (name === signature.name && level === signature.level) {
             return augment;
@@ -174,23 +180,48 @@ export const augmentFromSignature = (signature: AugmentSignature) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-// prop checking for React.memo()
-export const propsIsEqual = <T extends { [keys: string]: any }>(
-    prev: T,
-    next: T,
+// strip equipment data
+export const equipmentToSignature = (
+    equipment: EquipmentData | null,
 ) => {
-    if (
-        prev instanceof Object &&
-        next instanceof Object &&
-        Object.keys(prev).length === Object.keys(next).length
-    ) {
-        for (const key of Object.keys(prev)) {
-            if (next[key] === undefined || next[key] !== prev[key]) {
-                return false;
-            }
+    const name = equipment ? equipment.name : null;
+    return {
+        name,
+    };
+};
+
+export const equipmentFromSignature = (equipment_name: string) => {
+    for (const weapon of WEAPON_DATA) {
+        if (weapon.name === equipment_name) {
+            return weapon;
         }
-        return true;
     }
-    return false;
+
+    for (const unit of UNIT_DATA) {
+        if (unit.name === equipment_name) {
+            return unit;
+        }
+    }
+
+    return null;
+};
+
+// get equipment with augment from signature
+export const equipmentWithAugmentFromSignature = (
+    signature: EquipmentWithAugmentSignature,
+) => {
+    const equipment = equipmentFromSignature(signature.name);
+    let augments: AugmentData[] = [];
+    for (const aug_sig of signature.augments) {
+        const aug = augmentFromSignature(aug_sig);
+        if (aug) {
+            augments.push(aug);
+        }
+    }
+
+    return {
+        equipment,
+        augments,
+    };
 };
 // ---------------------------------------------

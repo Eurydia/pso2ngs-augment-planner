@@ -2,6 +2,7 @@ const DATA = [
     {
         name: "stamina",
         level: 1,
+        bp: 3,
         effs: [{ eff: "HP", amt: 5 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -10,6 +11,7 @@ const DATA = [
     {
         name: "stamina",
         level: 2,
+        bp: 4,
         effs: [{ eff: "HP", amt: 10 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -18,6 +20,7 @@ const DATA = [
     {
         name: "stamina",
         level: 3,
+        bp: 5,
         effs: [{ eff: "HP", amt: 15 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -26,6 +29,7 @@ const DATA = [
     {
         name: "spirit",
         level: 1,
+        bp: 2,
         effs: [{ eff: "PP", amt: 3 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -34,6 +38,7 @@ const DATA = [
     {
         name: "spirit",
         level: 2,
+        bp: 3,
         effs: [{ eff: "PP", amt: 4 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -42,6 +47,7 @@ const DATA = [
     {
         name: "spirit",
         level: 3,
+        bp: 4,
         effs: [{ eff: "PP", amt: 5 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -50,6 +56,7 @@ const DATA = [
     {
         name: "might",
         level: 1,
+        bp: 4,
         effs: [{ eff: "MEL_POT", amt: 1.01 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -58,6 +65,7 @@ const DATA = [
     {
         name: "might",
         level: 2,
+        bp: 5,
         effs: [{ eff: "MEL_POT", amt: 1.015 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -66,6 +74,7 @@ const DATA = [
     {
         name: "might",
         level: 3,
+        bp: 6,
         effs: [{ eff: "MEL_POT", amt: 1.02 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -74,6 +83,7 @@ const DATA = [
     {
         name: "precision",
         level: 1,
+        bp: 4,
         effs: [{ eff: "RNG_POT", amt: 1.01 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -82,6 +92,7 @@ const DATA = [
     {
         name: "precision",
         level: 2,
+        bp: 5,
         effs: [{ eff: "RNG_POT", amt: 1.015 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -90,6 +101,7 @@ const DATA = [
     {
         name: "precision",
         level: 3,
+        bp: 6,
         effs: [{ eff: "RNG_POT", amt: 1.02 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -98,6 +110,7 @@ const DATA = [
     {
         name: "technique",
         level: 1,
+        bp: 4,
         effs: [{ eff: "TEC_POT", amt: 1.01 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -106,6 +119,7 @@ const DATA = [
     {
         name: "technique",
         level: 2,
+        bp: 5,
         effs: [{ eff: "TEC_POT", amt: 1.015 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -114,6 +128,7 @@ const DATA = [
     {
         name: "technique",
         level: 3,
+        bp: 6,
         effs: [{ eff: "TEC_POT", amt: 1.02 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -122,6 +137,7 @@ const DATA = [
     {
         name: "deftness",
         level: 1,
+        bp: 3,
         effs: [{ eff: "FLOOR_POT", amt: 1.01 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -130,6 +146,7 @@ const DATA = [
     {
         name: "deftness",
         level: 2,
+        bp: 4,
         effs: [{ eff: "FLOOR_POT", amt: 1.015 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -138,6 +155,7 @@ const DATA = [
     {
         name: "deftness",
         level: 3,
+        bp: 5,
         effs: [{ eff: "FLOOR_POT", amt: 1.02 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -146,6 +164,7 @@ const DATA = [
     {
         name: "guard",
         level: 1,
+        bp: 2,
         effs: [{ eff: "DAMAGE_RES", amt: 1.01 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -154,6 +173,7 @@ const DATA = [
     {
         name: "guard",
         level: 2,
+        bp: 3,
         effs: [{ eff: "DAMAGE_RES", amt: 1.015 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -162,6 +182,7 @@ const DATA = [
     {
         name: "guard",
         level: 3,
+        bp: 4,
         effs: [{ eff: "DAMAGE_RES", amt: 1.02 }],
         group: "BASIC",
         conflict: ["FUSED"],
@@ -170,6 +191,7 @@ const DATA = [
     {
         name: "mastery",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.005 },
             { eff: "RNG_POT", amt: 1.005 },
@@ -184,6 +206,7 @@ const DATA = [
     {
         name: "mastery",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "RNG_POT", amt: 1.01 },
@@ -198,6 +221,7 @@ const DATA = [
     {
         name: "mastery",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "MEL_POT", amt: 1.015 },
             { eff: "RNG_POT", amt: 1.015 },
@@ -212,6 +236,7 @@ const DATA = [
     {
         name: "mastery",
         level: 4,
+        bp: 12,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -226,6 +251,7 @@ const DATA = [
     {
         name: "burn ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "BURN_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -234,6 +260,7 @@ const DATA = [
     {
         name: "burn ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "BURN_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -242,6 +269,7 @@ const DATA = [
     {
         name: "burn ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "BURN_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -250,6 +278,7 @@ const DATA = [
     {
         name: "freeze ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "FREEZE_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -258,6 +287,7 @@ const DATA = [
     {
         name: "freeze ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "FREEZE_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -266,6 +296,7 @@ const DATA = [
     {
         name: "freeze ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "FREEZE_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -274,6 +305,7 @@ const DATA = [
     {
         name: "shock ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "SHOCK_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -282,6 +314,7 @@ const DATA = [
     {
         name: "shock ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "SHOCK_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -290,6 +323,7 @@ const DATA = [
     {
         name: "shock ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "SHOCK_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -298,6 +332,7 @@ const DATA = [
     {
         name: "blind ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "BLIND_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -306,6 +341,7 @@ const DATA = [
     {
         name: "blind ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "BLIND_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -314,6 +350,7 @@ const DATA = [
     {
         name: "blind ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "BLIND_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -322,6 +359,7 @@ const DATA = [
     {
         name: "panic ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "PANIC_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -330,6 +368,7 @@ const DATA = [
     {
         name: "panic ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "PANIC_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -338,6 +377,7 @@ const DATA = [
     {
         name: "panic ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "PANIC_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -346,6 +386,7 @@ const DATA = [
     {
         name: "poison ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "POISON_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -354,6 +395,7 @@ const DATA = [
     {
         name: "poison ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "POISON_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -362,6 +404,7 @@ const DATA = [
     {
         name: "poison ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "POISON_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -370,6 +413,7 @@ const DATA = [
     {
         name: "pain ward",
         level: 1,
+        bp: 4,
         effs: [{ eff: "PHYDOWN_RES", amt: 1.2 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -378,6 +422,7 @@ const DATA = [
     {
         name: "pain ward",
         level: 2,
+        bp: 5,
         effs: [{ eff: "PHYDOWN_RES", amt: 1.25 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -386,6 +431,7 @@ const DATA = [
     {
         name: "pain ward",
         level: 3,
+        bp: 6,
         effs: [{ eff: "PHYDOWN_RES", amt: 1.3 }],
         group: "WARD",
         conflict: ["WARD"],
@@ -394,6 +440,7 @@ const DATA = [
     {
         name: "sovereign ward",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "BURN_RES", amt: 1.2 },
             { eff: "FREEZE_RES", amt: 1.2 },
@@ -410,6 +457,7 @@ const DATA = [
     {
         name: "sovereign ward",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "BURN_RES", amt: 1.25 },
             { eff: "FREEZE_RES", amt: 1.25 },
@@ -426,6 +474,7 @@ const DATA = [
     {
         name: "sovereign ward",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "BURN_RES", amt: 1.3 },
             { eff: "FREEZE_RES", amt: 1.3 },
@@ -442,6 +491,7 @@ const DATA = [
     {
         name: "melra dualble",
         level: 1,
+        bp: 4,
         effs: [
             { eff: "MEL_POT", amt: 1.0075 },
             { eff: "RNG_POT", amt: 1.0075 },
@@ -453,6 +503,7 @@ const DATA = [
     {
         name: "melra dualble",
         level: 2,
+        bp: 5,
         effs: [
             { eff: "MEL_POT", amt: 1.0125 },
             { eff: "RNG_POT", amt: 1.0125 },
@@ -464,6 +515,7 @@ const DATA = [
     {
         name: "melra dualble",
         level: 3,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.0175 },
             { eff: "RNG_POT", amt: 1.0175 },
@@ -475,6 +527,7 @@ const DATA = [
     {
         name: "meltech dualble",
         level: 1,
+        bp: 4,
         effs: [
             { eff: "MEL_POT", amt: 1.0075 },
             { eff: "TEC_POT", amt: 1.0075 },
@@ -486,6 +539,7 @@ const DATA = [
     {
         name: "meltech dualble",
         level: 2,
+        bp: 5,
         effs: [
             { eff: "MEL_POT", amt: 1.0125 },
             { eff: "TEC_POT", amt: 1.0125 },
@@ -497,6 +551,7 @@ const DATA = [
     {
         name: "meltech dualble",
         level: 3,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.0175 },
             { eff: "TEC_POT", amt: 1.0175 },
@@ -508,6 +563,7 @@ const DATA = [
     {
         name: "ratech dualble",
         level: 1,
+        bp: 4,
         effs: [
             { eff: "RNG_POT", amt: 1.0075 },
             { eff: "TEC_POT", amt: 1.0075 },
@@ -519,6 +575,7 @@ const DATA = [
     {
         name: "ratech dualble",
         level: 2,
+        bp: 5,
         effs: [
             { eff: "RNG_POT", amt: 1.0125 },
             { eff: "TEC_POT", amt: 1.0125 },
@@ -530,6 +587,7 @@ const DATA = [
     {
         name: "ratech dualble",
         level: 3,
+        bp: 6,
         effs: [
             { eff: "RNG_POT", amt: 1.0175 },
             { eff: "TEC_POT", amt: 1.0175 },
@@ -541,6 +599,7 @@ const DATA = [
     {
         name: "alts soul",
         level: 1,
+        bp: 5,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "DAMAGE_RES", amt: 1.01 },
@@ -552,6 +611,7 @@ const DATA = [
     {
         name: "alts soul",
         level: 2,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -563,6 +623,7 @@ const DATA = [
     {
         name: "alts soul",
         level: 3,
+        bp: 9,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -574,6 +635,7 @@ const DATA = [
     {
         name: "dolz soul",
         level: 1,
+        bp: 5,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "FLOOR_POT", amt: 1.01 },
@@ -585,6 +647,7 @@ const DATA = [
     {
         name: "dolz soul",
         level: 2,
+        bp: 6,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "FLOOR_POT", amt: 1.02 },
@@ -596,6 +659,7 @@ const DATA = [
     {
         name: "dolz soul",
         level: 3,
+        bp: 7,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "FLOOR_POT", amt: 1.025 },
@@ -607,6 +671,7 @@ const DATA = [
     {
         name: "forms soul",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1 },
@@ -618,6 +683,7 @@ const DATA = [
     {
         name: "forms soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -629,6 +695,7 @@ const DATA = [
     {
         name: "forms soul",
         level: 3,
+        bp: 9,
         effs: [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -640,6 +707,7 @@ const DATA = [
     {
         name: "forms machini soul",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1 },
@@ -651,6 +719,7 @@ const DATA = [
     {
         name: "forms machini soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -662,6 +731,7 @@ const DATA = [
     {
         name: "forms machini soul",
         level: 3,
+        bp: 9,
         effs: [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -673,6 +743,7 @@ const DATA = [
     {
         name: "form sand soul",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1 },
@@ -684,6 +755,7 @@ const DATA = [
     {
         name: "form sand soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -695,6 +767,7 @@ const DATA = [
     {
         name: "form sand soul",
         level: 3,
+        bp: 9,
         effs: [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -706,6 +779,7 @@ const DATA = [
     {
         name: "daityl soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "MEL_POT", amt: 1.01 },
@@ -717,6 +791,7 @@ const DATA = [
     {
         name: "daityl soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -728,6 +803,7 @@ const DATA = [
     {
         name: "daityl soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "MEL_POT", amt: 1.025 },
@@ -739,6 +815,7 @@ const DATA = [
     {
         name: "pettas soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "RNG_POT", amt: 1.01 },
@@ -750,6 +827,7 @@ const DATA = [
     {
         name: "pettas soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "RNG_POT", amt: 1.02 },
@@ -761,6 +839,7 @@ const DATA = [
     {
         name: "pettas soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -772,6 +851,7 @@ const DATA = [
     {
         name: "nex soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "TEC_POT", amt: 1.01 },
@@ -783,6 +863,7 @@ const DATA = [
     {
         name: "nex soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "TEC_POT", amt: 1.02 },
@@ -794,6 +875,7 @@ const DATA = [
     {
         name: "nex soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "TEC_POT", amt: 1.025 },
@@ -805,6 +887,7 @@ const DATA = [
     {
         name: "dust soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.01 },
@@ -816,6 +899,7 @@ const DATA = [
     {
         name: "dust soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -827,6 +911,7 @@ const DATA = [
     {
         name: "dust soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.025 },
@@ -838,6 +923,7 @@ const DATA = [
     {
         name: "ragras soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "RNG_POT", amt: 1.01 },
@@ -849,6 +935,7 @@ const DATA = [
     {
         name: "ragras soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "RNG_POT", amt: 1.02 },
@@ -860,6 +947,7 @@ const DATA = [
     {
         name: "ragras soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -871,6 +959,7 @@ const DATA = [
     {
         name: "renus soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "TEC_POT", amt: 1.01 },
@@ -882,6 +971,7 @@ const DATA = [
     {
         name: "renus soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "TEC_POT", amt: 1.02 },
@@ -893,6 +983,7 @@ const DATA = [
     {
         name: "renus soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "TEC_POT", amt: 1.025 },
@@ -904,6 +995,7 @@ const DATA = [
     {
         name: "eradi soul",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 4 },
@@ -918,6 +1010,7 @@ const DATA = [
     {
         name: "eradi soul",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 4 },
@@ -932,6 +1025,7 @@ const DATA = [
     {
         name: "eradi soul",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 4 },
@@ -946,6 +1040,7 @@ const DATA = [
     {
         name: "ael note a",
         level: 0,
+        bp: 5,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "PP", amt: 3 },
@@ -957,6 +1052,7 @@ const DATA = [
     {
         name: "ael note b",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "RNG_POT", amt: 1.01 },
@@ -968,6 +1064,7 @@ const DATA = [
     {
         name: "ael note c",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
@@ -979,6 +1076,7 @@ const DATA = [
     {
         name: "ael note d",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
@@ -990,6 +1088,7 @@ const DATA = [
     {
         name: "magnus note",
         level: 0,
+        bp: 5,
         effs: [{ eff: "MEL_POT", amt: 1.015 }],
         group: "NOTE",
         conflict: ["NOTE"],
@@ -998,6 +1097,7 @@ const DATA = [
     {
         name: "lab note",
         level: 0,
+        bp: 5,
         effs: [{ eff: "RNG_POT", amt: 1.015 }],
         group: "NOTE",
         conflict: ["NOTE"],
@@ -1006,6 +1106,7 @@ const DATA = [
     {
         name: "resola note",
         level: 0,
+        bp: 5,
         effs: [{ eff: "TEC_POT", amt: 1.015 }],
         group: "NOTE",
         conflict: ["NOTE"],
@@ -1014,6 +1115,7 @@ const DATA = [
     {
         name: "ret note a",
         level: 0,
+        bp: 5,
         effs: [{ eff: "HP", amt: 10 }],
         group: "NOTE",
         conflict: ["NOTE"],
@@ -1022,6 +1124,7 @@ const DATA = [
     {
         name: "ret note b",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "MEL_POT", amt: 1.0075 },
@@ -1034,6 +1137,7 @@ const DATA = [
     {
         name: "ret note c",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "MEL_POT", amt: 1.0075 },
@@ -1046,6 +1150,7 @@ const DATA = [
     {
         name: "ret note d",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "RNG_POT", amt: 1.0075 },
@@ -1058,6 +1163,7 @@ const DATA = [
     {
         name: "alno note",
         level: 0,
+        bp: 5,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 3 },
@@ -1070,6 +1176,7 @@ const DATA = [
     {
         name: "maqea note",
         level: 0,
+        bp: 5,
         effs: [
             { eff: "MEL_POT", amt: 1.0125 },
             { eff: "RNG_POT", amt: 1.0125 },
@@ -1082,6 +1189,7 @@ const DATA = [
     {
         name: "ael domina",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 5 },
             { eff: "PP", amt: 3 },
@@ -1096,6 +1204,7 @@ const DATA = [
     {
         name: "ret domina",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.015 },
@@ -1109,6 +1218,7 @@ const DATA = [
     {
         name: "alts secreta",
         level: 1,
+        bp: 3,
         effs: [
             { eff: "HP", amt: -10 },
             { eff: "MEL_POT", amt: 1.01 },
@@ -1124,6 +1234,7 @@ const DATA = [
     {
         name: "alts secreta",
         level: 2,
+        bp: 4,
         effs: [
             { eff: "HP", amt: -10 },
             { eff: "MEL_POT", amt: 1.015 },
@@ -1139,6 +1250,7 @@ const DATA = [
     {
         name: "alts secreta",
         level: 3,
+        bp: 5,
         effs: [
             { eff: "HP", amt: -10 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -1154,6 +1266,7 @@ const DATA = [
     {
         name: "dread keeper",
         level: 1,
+        bp: 7,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 3 },
@@ -1167,6 +1280,7 @@ const DATA = [
     {
         name: "dread keeper",
         level: 2,
+        bp: 7.5,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "PP", amt: 4 },
@@ -1180,6 +1294,7 @@ const DATA = [
     {
         name: "dread keeper",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 30 },
             { eff: "PP", amt: 7 },
@@ -1193,6 +1308,7 @@ const DATA = [
     {
         name: "gigas might",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "MEL_POT", amt: 1.015 },
@@ -1204,6 +1320,7 @@ const DATA = [
     {
         name: "gigas might",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -1215,6 +1332,7 @@ const DATA = [
     {
         name: "gigas might",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 30 },
             { eff: "MEL_POT", amt: 1.025 },
@@ -1226,6 +1344,7 @@ const DATA = [
     {
         name: "gigas precision",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "RNG_POT", amt: 1.015 },
@@ -1237,6 +1356,7 @@ const DATA = [
     {
         name: "gigas precision",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "RNG_POT", amt: 1.02 },
@@ -1248,6 +1368,7 @@ const DATA = [
     {
         name: "gigas precision",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 30 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1259,6 +1380,7 @@ const DATA = [
     {
         name: "gigas technique",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "TEC_POT", amt: 1.015 },
@@ -1270,6 +1392,7 @@ const DATA = [
     {
         name: "gigas technique",
         level: 2,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "TEC_POT", amt: 1.02 },
@@ -1281,6 +1404,7 @@ const DATA = [
     {
         name: "gigas technique",
         level: 3,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 30 },
             { eff: "TEC_POT", amt: 1.025 },
@@ -1292,6 +1416,7 @@ const DATA = [
     {
         name: "fire exploit",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1304,6 +1429,7 @@ const DATA = [
     {
         name: "ice exploit",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1316,6 +1442,7 @@ const DATA = [
     {
         name: "lightning exploit",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1328,6 +1455,7 @@ const DATA = [
     {
         name: "wind exploit",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1340,6 +1468,7 @@ const DATA = [
     {
         name: "light exploit",
         level: 1,
+        bp: 6,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1352,6 +1481,7 @@ const DATA = [
     {
         name: "megas fusia",
         level: 0,
+        bp: 4,
         effs: [
             { eff: "MEL_POT", amt: 1.01 },
             { eff: "RNG_POT", amt: 1.01 },
@@ -1364,6 +1494,7 @@ const DATA = [
     {
         name: "sta might",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -1375,6 +1506,7 @@ const DATA = [
     {
         name: "spi might",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "MEL_POT", amt: 1.02 },
@@ -1386,6 +1518,7 @@ const DATA = [
     {
         name: "deft might",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "FLOOR_POT", amt: 1.02 },
@@ -1397,6 +1530,7 @@ const DATA = [
     {
         name: "gua might",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "MEL_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -1408,6 +1542,7 @@ const DATA = [
     {
         name: "sta precision",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "RNG_POT", amt: 1.02 },
@@ -1419,6 +1554,7 @@ const DATA = [
     {
         name: "spi precision",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "RNG_POT", amt: 1.02 },
@@ -1430,6 +1566,7 @@ const DATA = [
     {
         name: "deft precision",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "FLOOR_POT", amt: 1.02 },
@@ -1441,6 +1578,7 @@ const DATA = [
     {
         name: "gua precision",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "RNG_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -1452,6 +1590,7 @@ const DATA = [
     {
         name: "sta technique",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "HP", amt: 15 },
             { eff: "TEC_POT", amt: 1.02 },
@@ -1463,6 +1602,7 @@ const DATA = [
     {
         name: "spi technique",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "PP", amt: 5 },
             { eff: "TEC_POT", amt: 1.02 },
@@ -1474,6 +1614,7 @@ const DATA = [
     {
         name: "deft technique",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "FLOOR_POT", amt: 1.02 },
@@ -1485,6 +1626,7 @@ const DATA = [
     {
         name: "gua technique",
         level: 0,
+        bp: 8,
         effs: [
             { eff: "TEC_POT", amt: 1.02 },
             { eff: "DAMAGE_RES", amt: 1.02 },
@@ -1496,6 +1638,7 @@ const DATA = [
     {
         name: "addi stamel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 20 },
             { eff: "MEL_POT", amt: 1.025 },
@@ -1507,6 +1650,7 @@ const DATA = [
     {
         name: "addi spimel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 6 },
             { eff: "MEL_POT", amt: 1.025 },
@@ -1518,6 +1662,7 @@ const DATA = [
     {
         name: "addi deftmel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "FLOOR_POT", amt: 1.025 },
@@ -1529,6 +1674,7 @@ const DATA = [
     {
         name: "addi guamel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -1540,6 +1686,7 @@ const DATA = [
     {
         name: "addi stara",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 20 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1551,6 +1698,7 @@ const DATA = [
     {
         name: "addi spira",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 6 },
             { eff: "RNG_POT", amt: 1.025 },
@@ -1562,6 +1710,7 @@ const DATA = [
     {
         name: "addi deftra",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "RNG_POT", amt: 1.025 },
             { eff: "FLOOR_POT", amt: 1.025 },
@@ -1573,6 +1722,7 @@ const DATA = [
     {
         name: "addi guara",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "RNG_POT", amt: 1.025 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -1584,6 +1734,7 @@ const DATA = [
     {
         name: "addi statech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 20 },
             { eff: "TEC_POT", amt: 1.025 },
@@ -1595,6 +1746,7 @@ const DATA = [
     {
         name: "addi spitech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "PP", amt: 6 },
             { eff: "TEC_POT", amt: 1.025 },
@@ -1606,6 +1758,7 @@ const DATA = [
     {
         name: "addi defttech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "TEC_POT", amt: 1.025 },
             { eff: "FLOOR_POT", amt: 1.025 },
@@ -1617,6 +1770,7 @@ const DATA = [
     {
         name: "addi guatech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "TEC_POT", amt: 1.025 },
             { eff: "DAMAGE_RES", amt: 1.025 },
@@ -1628,6 +1782,7 @@ const DATA = [
     {
         name: "addi staspimel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 3 },
@@ -1640,6 +1795,7 @@ const DATA = [
     {
         name: "addi staspira",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 3 },
@@ -1652,6 +1808,7 @@ const DATA = [
     {
         name: "addi staspitech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "HP", amt: 10 },
             { eff: "PP", amt: 3 },
@@ -1664,6 +1821,7 @@ const DATA = [
     {
         name: "addi wardmel",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "MEL_POT", amt: 1.025 },
             { eff: "BURN_RES", amt: 1.2 },
@@ -1681,6 +1839,7 @@ const DATA = [
     {
         name: "addi wardra",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "RNG_POT", amt: 1.025 },
             { eff: "BURN_RES", amt: 1.2 },
@@ -1698,6 +1857,7 @@ const DATA = [
     {
         name: "addi wardtech",
         level: 0,
+        bp: 10,
         effs: [
             { eff: "TEC_POT", amt: 1.025 },
             { eff: "BURN_RES", amt: 1.2 },

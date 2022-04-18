@@ -20,6 +20,7 @@ augments.extend(
     augment_from_list(
         "dread keeper",
         3,
+        (7, 7.5, 10),
         (
             EffectMultiLevel(HP, (10, 15, 30)),
             EffectMultiLevel(PP, (3, 4, 7)),

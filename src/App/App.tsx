@@ -30,7 +30,8 @@ import {
 import AugPresBuilder from "../major_components/AugPresBuilder";
 import AugPresCompare from "../major_components/AugPresCompare";
 import AugPresManager from "../major_components/AugPresManager";
-import LoPresBuilder from "../major_components/LoPresBuilder";
+import LoadoutPresBuilder from "../major_components/LoadoutPresBuilder";
+import LoadoutPresCompare from "../major_components/LoadoutPresCompare";
 
 import {
     AugmentPreset,
@@ -163,10 +164,12 @@ const App = () => {
     //     TypeguardAugmentPreset,
     // );
     // // and use the saved presets as initial values
-    const [loPresets, setLoPresets] = useState<LoadoutPreset[]>([]);
+    const [loadoutPresets, setLoadPresets] = useState<
+        LoadoutPreset[]
+    >([]);
     // // updating value on memory and in local storage
     const updateLoadoutPresets = (to_update: LoadoutPreset[]) => {
-        setLoPresets(to_update);
+        setLoadPresets(to_update);
         saveSession<LoadoutPreset>("loadoutPreset", to_update);
     };
     // -------------------------------------
@@ -177,7 +180,7 @@ const App = () => {
     const addLoadoutPreset = (new_preset: LoadoutPreset) => {
         const { text, options } = addPreset(
             new_preset,
-            loPresets,
+            loadoutPresets,
             updateLoadoutPresets,
         );
         enqueueSnackbar(text, options);
@@ -228,9 +231,18 @@ const App = () => {
                     title="Loadout Preset Builder"
                     titleIcon={<Construction fontSize="inherit" />}
                 >
-                    <LoPresBuilder
+                    <LoadoutPresBuilder
                         augmentPresets={augPresets}
                         onPresetSave={addLoadoutPreset}
+                    />
+                </PaperBackground>
+                <PaperBackground
+                    title="Loadout Preset Compare"
+                    titleIcon={<Compare fontSize="inherit" />}
+                >
+                    <LoadoutPresCompare
+                        loadoutPresets={loadoutPresets}
+                        augmentPresets={augPresets}
                     />
                 </PaperBackground>
                 <EditModal

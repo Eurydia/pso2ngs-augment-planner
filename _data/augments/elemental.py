@@ -18,6 +18,7 @@ for element in elements:
         Augment(
             f"{element} exploit",
             1,
+            6,
             effects_with_amount(
                 OFFENSIVE_POT,
                 1.025,

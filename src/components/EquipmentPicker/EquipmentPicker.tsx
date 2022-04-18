@@ -11,7 +11,6 @@ import {
     filterOptions,
 } from "./helper";
 import { EquipmentData } from "../../types";
-import { propsIsEqual } from "../../util";
 
 export type EquipmentPickerMode = "both" | "weapons" | "armors";
 
@@ -49,16 +48,33 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
                 return (
                     <TextField
                         {...params}
+                        inputProps={{
+                            ...params.inputProps,
+                            sx: {
+                                textTransform: "capitalize",
+                            },
+                        }}
                         variant="filled"
                         label={label}
                         placeholder={placeholder}
                     />
                 );
             }}
-            sx={{
-                textTransform: "capitalize",
-            }}
         />
     );
 };
-export default memo(EquipmentPicker, propsIsEqual);
+
+const propsAreEqual = (
+    prev: EquipmentPickerProps,
+    next: EquipmentPickerProps,
+) => {
+    const prev_val = prev.value;
+    const next_val = next.value;
+
+    return (
+        prev_val?.name === next_val?.name &&
+        prev_val?.group === next_val?.group
+    );
+};
+
+export default memo(EquipmentPicker, propsAreEqual);

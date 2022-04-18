@@ -7,8 +7,12 @@ import { compareStats } from "./helper";
 import EquipmentBuilder from "../EquipmentBuilder/EquipmentBuilder";
 import StatsDisplay from "../../components/StatsDisplay";
 
-import { AugmentPreset, EquipmentWithAugments } from "../../types";
-import { propsIsEqual } from "../../util";
+import {
+    AugmentData,
+    AugmentPreset,
+    EquipmentData,
+    EquipmentWithAugments,
+} from "../../types";
 
 interface AugPresCompareProps {
     augmentPresets: AugmentPreset[];
@@ -29,7 +33,31 @@ const AugPresCompare = (props: AugPresCompareProps) => {
         useState<EquipmentWithAugments>(init_states);
     // ------------------------------------
 
+    // ------------------------------------
+    // handlers
+    const handleAugmentChange = (
+        augments: AugmentData[],
+        old_value: EquipmentWithAugments,
+        updater: (new_value: EquipmentWithAugments) => void,
+    ) => {
+        let updated: EquipmentWithAugments = Object.create(old_value);
+        updated.augments = augments;
+        updater(updated);
+    };
+
+    const handleEquipmentChange = (
+        equipment: EquipmentData | null,
+        old_value: EquipmentWithAugments,
+        updater: (new_value: EquipmentWithAugments) => void,
+    ) => {
+        let updated: EquipmentWithAugments = Object.create(old_value);
+        updated.equipment = equipment;
+        updater(updated);
+    };
+    // ------------------------------------
+
     const stats = compareStats(subject, comparand);
+
     return (
         <Stack spacing={2}>
             <Stack
@@ -41,15 +69,43 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                     allowEmptyEquipment
                     header="Subject"
                     mode="both"
+                    value={subject}
                     augmentPresets={props.augmentPresets}
-                    onChange={setSubject}
+                    onAugmentsChange={(augments) =>
+                        handleAugmentChange(
+                            augments,
+                            subject,
+                            setSubject,
+                        )
+                    }
+                    onEquipmentChange={(equipment) =>
+                        handleEquipmentChange(
+                            equipment,
+                            subject,
+                            setSubject,
+                        )
+                    }
                 />
                 <EquipmentBuilder
                     allowEmptyEquipment
                     header="Comparand"
                     mode="both"
+                    value={comparand}
                     augmentPresets={props.augmentPresets}
-                    onChange={setComparand}
+                    onAugmentsChange={(augments) =>
+                        handleAugmentChange(
+                            augments,
+                            comparand,
+                            setComparand,
+                        )
+                    }
+                    onEquipmentChange={(equipment) =>
+                        handleEquipmentChange(
+                            equipment,
+                            comparand,
+                            setComparand,
+                        )
+                    }
                 />
             </Stack>
             <StatsDisplay {...stats} />
@@ -57,4 +113,4 @@ const AugPresCompare = (props: AugPresCompareProps) => {
     );
 };
 
-export default memo(AugPresCompare, propsIsEqual);
+export default memo(AugPresCompare);

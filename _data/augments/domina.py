@@ -16,6 +16,7 @@ augments.append(
     Augment(
         "ael domina",
         0,
+        8,
         (
             Effect(HP, 5),
             Effect(PP, 3),
@@ -30,6 +31,7 @@ augments.append(
     Augment(
         "ret domina",
         0,
+        10,
         (
             Effect(HP, 15),
             *effects_with_amount(OFFENSIVE_POT, 1.015),

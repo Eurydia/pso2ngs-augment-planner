@@ -37,19 +37,7 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
                     backgroundColor: theme.palette.background.default,
                 }}
             >
-                <Stack
-                    direction={{
-                        xs: "column",
-                        sm: "column",
-                        md: "row",
-                    }}
-                    alignItems={{
-                        xs: "flex-start",
-                        sm: "flex-start",
-                        md: "center",
-                    }}
-                    justifyContent="space-between"
-                >
+                <Stack alignItems="flex-start" justifyContent="start">
                     <Typography
                         component="h2"
                         sx={{

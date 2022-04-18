@@ -36,6 +36,7 @@ for pri_name, pri_eff in zip(_primary_names, _primary_effs):
             Augment(
                 f"addi {sec_name}{pri_name}",
                 0,
+                10,
                 effects,
                 GROUP,
                 CONFLICT,
@@ -48,6 +49,7 @@ for name, eff in zip(_primary_names, _primary_effs):
         Augment(
             f"addi staspi{name}",
             0,
+            10,
             (
                 Effect(HP, 10),
                 Effect(PP, 3),
@@ -65,6 +67,7 @@ for name, eff in zip(_primary_names, _primary_effs):
         Augment(
             f"addi ward{name}",
             0,
+            10,
             (
                 eff,
                 *effects_with_amount(AILMENT_RES, _ward_amount),

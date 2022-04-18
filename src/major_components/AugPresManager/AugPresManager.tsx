@@ -3,8 +3,8 @@ import { memo } from "react";
 import Grid from "@mui/material/Grid";
 
 import { CustomCard } from "./helper";
+
 import { AugmentPreset } from "../../types";
-import { propsIsEqual } from "../../util";
 
 interface AugPresManagerProps {
     augmentPresets: AugmentPreset[];
@@ -45,4 +45,28 @@ const AugPresManager = (props: AugPresManagerProps) => {
     );
 };
 
-export default memo(AugPresManager, propsIsEqual);
+// const shouldAugPresManagerNOTRerender = (
+//     prev: AugPresManagerProps,
+//     next: AugPresManagerProps,
+// ) => {
+//     const p_s = prev.augmentPresets;
+//     const n_s = next.augmentPresets;
+//     if (p_s.length !== n_s.length) {
+//         return false;
+//     }
+
+//     for (let i = 0; i < p_s.length; i++) {
+//         const p_s_s = p_s[i];
+//         const n_s_s = n_s[i];
+//         if (p_s_s.name !== n_s_s.name || p_s_s.description !== n_s_s.description) {
+//             return false
+//         }
+
+//         const p_s_a = p_s_s.augments;
+//         for ()
+//     }
+
+//     return true;
+// };
+
+export default memo(AugPresManager);

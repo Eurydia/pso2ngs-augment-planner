@@ -41,6 +41,7 @@ for pri_name, pri_eff in zip(_primary_names, _primary_effs):
             Augment(
                 f"{sec_name} {pri_name}",
                 0,
+                8,
                 effect,
                 GROUP,
                 CONFLICT,

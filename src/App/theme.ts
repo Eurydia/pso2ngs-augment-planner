@@ -10,14 +10,6 @@ import {
     indigo,
 } from "@mui/material/colors";
 
-// declare module "@mui/material/styles" {
-//     interface Theme {
-//         status: {
-//             dange
-//         }
-//     }
-// }
-
 const theme = createTheme({
     palette: {
         primary: {
