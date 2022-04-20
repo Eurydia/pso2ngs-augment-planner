@@ -16,6 +16,8 @@ import Upload from "@mui/icons-material/Upload";
 import Download from "@mui/icons-material/Download";
 import Clear from "@mui/icons-material/Clear";
 
+import { exportAllPresets } from "./handlers";
+
 // ---------------------------------
 // resuable paper for background
 interface PaperBackgroundProps {
@@ -72,9 +74,10 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
 // ---------------------------------
 // Import export button combo
 interface ImportExportButtonsProps {
-    importAction: (text: string) => void;
+    importAction: (data_string: string) => void;
     exportAction: () => void;
 }
+
 export const ImportExportButtons = (
     props: ImportExportButtonsProps,
 ) => {

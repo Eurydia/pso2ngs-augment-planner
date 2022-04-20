@@ -5,13 +5,33 @@ import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
 // ----------------------------------------------
-// stats item
+/**
+ * Macro for grid container
+ */
+export const StatsGroup = React.memo(
+    (props: { children: React.ReactNode }) => {
+        return (
+            <Grid container columns={2}>
+                {props.children}
+            </Grid>
+        );
+    },
+);
+// ----------------------------------------------
+
+// ----------------------------------------------
+/**
+ * Describes how each stats should look like.
+ */
 export interface StatItemValue {
     value: string;
     diff?: string;
     negative?: boolean;
 }
 
+/**
+ * Props for the grid item
+ */
 interface StatItemProps {
     head: { emoji: string; name: string };
     value?: StatItemValue;
@@ -19,20 +39,30 @@ interface StatItemProps {
     column?: number;
 }
 
+/**
+ *
+ * @param prev
+ * @param next
+ * @returns
+ */
 const shouldStatItemNOTRerender = (
     prev: StatItemProps,
     next: StatItemProps,
 ) => {
+    const p = prev.value;
+    const n = next.value;
     return (
-        prev.value?.value === next.value?.value &&
-        prev.value?.diff === next.value?.diff &&
-        prev.value?.negative === next.value?.negative
+        p?.value === n?.value &&
+        p?.diff === n?.diff &&
+        p?.negative === n?.negative
     );
 };
 
+/**
+ * Macro for grid item
+ */
 export const StatItem = React.memo((props: StatItemProps) => {
     const theme = useTheme();
-
     let _value: string;
     if (props.value === undefined) {
         if (props.isAdd) {
@@ -75,17 +105,4 @@ export const StatItem = React.memo((props: StatItemProps) => {
         </Grid>
     );
 }, shouldStatItemNOTRerender);
-// ----------------------------------------------
-
-// ----------------------------------------------
-// group the stats
-export const StatsGroup = React.memo(
-    (props: { children: React.ReactNode }) => {
-        return (
-            <Grid container columns={2}>
-                {props.children}
-            </Grid>
-        );
-    },
-);
 // ----------------------------------------------

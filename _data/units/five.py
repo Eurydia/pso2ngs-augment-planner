@@ -1,4 +1,3 @@
-from itertools import combinations
 from typing import List
 
 from ._unit import Unit, SUFFIX
@@ -22,7 +21,7 @@ units.append(
     )
 )
 
-for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
+for suf, effs in SUFFIX:
     _effs = (
         Effect(HP, 20),
         Effect(PP, 7),

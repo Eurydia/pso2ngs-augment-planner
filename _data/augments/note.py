@@ -1,5 +1,3 @@
-from itertools import combinations
-
 from typing import List
 
 from ._augment import (
@@ -23,10 +21,13 @@ _ael_effs = (
     (Effect(HP, 5), Effect(PP, 3)),
     *map(
         lambda effs: effects_with_amount(effs, 1.01),
-        combinations(OFFENSIVE_POT, 2),
+        (
+            (MEL_POT, RNG_POT),
+            (MEL_POT, TEC_POT),
+            (RNG_POT, TEC_POT),
+        ),
     ),
 )
-
 for name, bp, effs in zip(_names, _bp, _ael_effs):
     augments.append(Augment(f"ael note {name}", 0, bp, effs, GROUP, CONFLICT))
 # -----------------------------------------------
@@ -52,10 +53,13 @@ _ret_effs = (
             Effect(HP, 5),
             *effects_with_amount(effs, 1.0075),
         ),
-        combinations(OFFENSIVE_POT, 2),
+        (
+            (MEL_POT, RNG_POT),
+            (MEL_POT, TEC_POT),
+            (RNG_POT, TEC_POT),
+        ),
     ),
 )
-
 for name, bp, effs in zip(_names, _bp, _ret_effs):
     augments.append(
         Augment(

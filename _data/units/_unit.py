@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from effect import Effect
+from effect import Effect, MEL_POT, RNG_POT, TEC_POT
 
 
 @dataclass
@@ -11,4 +11,8 @@ class Unit:
     group: str
 
 
-SUFFIX = ("arga", "belta", "sheza")
+SUFFIX = (
+    ("arga", (MEL_POT, RNG_POT)),
+    ("belta", (RNG_POT, TEC_POT)),
+    ("sheza", (MEL_POT, TEC_POT)),
+)

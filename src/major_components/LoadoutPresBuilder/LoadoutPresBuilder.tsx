@@ -1,26 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 import Save from "@mui/icons-material/Save";
 import Clear from "@mui/icons-material/Clear";
 
-import { prepareStatsToDisplay, toSignature } from "./helper";
+import { prepareStats } from "./helper";
 
-import LoadoutLayout from "../../components/2x2GridLayout";
 import EquipmentBuilder from "../EquipmentBuilder";
 import StatsDisplay from "../../components/StatsDisplay";
 import { NameInputField, DescInputField } from "../InputComponents";
 
-import {
-    AugmentPreset,
-    LoadoutPreset,
-    EquipmentWithAugments,
-    EquipmentWithAugmentSignature,
-    AugmentData,
-    EquipmentData,
-} from "../../types";
+import { AugmentPreset, LoadoutPreset, Equipment } from "../../types";
 
 interface LoadoutPresBuilderProps {
     // initPreset?: AugmentPreset;
@@ -28,10 +21,12 @@ interface LoadoutPresBuilderProps {
     onPresetSave: (preset: LoadoutPreset) => void;
 }
 
-const init_equipment = {
-    equipment: null,
-    augments: [],
-};
+const init_equipment = [
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+];
 
 const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
     // // -------------------------------------
@@ -44,123 +39,61 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
     // prepare states
     const [name, setName] = useState("");
     const [description, setDesc] = useState("");
-    const [weapon, setWeapon] =
-        useState<EquipmentWithAugments>(init_equipment);
-    const [unitOne, setUnitOne] =
-        useState<EquipmentWithAugments>(init_equipment);
-    const [unitTwo, setUnitTwo] =
-        useState<EquipmentWithAugments>(init_equipment);
-    const [unitThree, setUnitThree] =
-        useState<EquipmentWithAugments>(init_equipment);
+    const [equipment, setEquipment] =
+        useState<Equipment[]>(init_equipment);
     // -------------------------------------
 
     // -------------------------------------
-    // handler
-    const handleEquipmentChange = (
-        equipment: EquipmentData | null,
-        old_value: EquipmentWithAugments,
-        setter: (new_value: EquipmentWithAugments) => void,
-    ) => {
-        let updated: EquipmentWithAugments = Object.create(old_value);
-        updated.equipment = equipment;
-        setter(updated);
-    };
-
-    const handleAugmentChange = (
-        augments: AugmentData[],
-        old_value: EquipmentWithAugments,
-        setter: (new_value: EquipmentWithAugments) => void,
-    ) => {
-        let updated: EquipmentWithAugments = Object.create(old_value);
-        updated.augments = augments;
-        setter(updated);
-    };
-
+    // handlers;
     const handleResetFields = () => {
         setName("");
         setDesc("");
-        setWeapon(init_equipment);
-        setUnitOne(init_equipment);
-        setUnitTwo(init_equipment);
-        setUnitThree(init_equipment);
+        setEquipment(init_equipment);
     };
-
     const handlePresetSave = () => {
-        // -------------------------
-        // prepareing preset before call the props callback
-        const weapon_signature = toSignature(weapon);
-
-        const units = [unitOne, unitTwo, unitThree];
-        let unit_signatures: EquipmentWithAugmentSignature[] = [];
-        for (const u of units) {
-            const u_signature = toSignature(u);
-            if (u_signature) {
-                unit_signatures.push(u_signature);
-            }
-        }
         const preset: LoadoutPreset = {
             name,
             description,
-            weapon: weapon_signature,
-            units: unit_signatures,
+            equipment,
         };
-        // -------------------------
         handleResetFields();
         props.onPresetSave(preset);
     };
     // -------------------------------------
 
-    const stats = prepareStatsToDisplay([
-        weapon,
-        unitOne,
-        unitTwo,
-        unitThree,
-    ]);
-
-    // -------------------------------------
+    //  -------------------------------------
     // prepare the augment builders
-    const equipment_headers = [
-        "weapon",
-        "unit #1",
-        "unit #2",
-        "unit #3",
-    ];
-    const equipment_setters = [
-        setWeapon,
-        setUnitOne,
-        setUnitTwo,
-        setUnitThree,
-    ];
-    const equipment_states = [weapon, unitOne, unitTwo, unitThree];
-
-    const equipment_builders = equipment_headers.map(
-        (header, index) => {
-            return (
+    const headers = ["weapon", "unit #1", "unit #2", "unit #3"];
+    const equipment_builders = headers.map((header, index) => {
+        const mode = index === 0 ? "weapons" : "armors";
+        return (
+            <Grid key={`${header} ${index}`} item xs={1} paddingX={1}>
                 <EquipmentBuilder
-                    key={`${header} ${index}`}
                     header={header}
-                    mode={index === 0 ? "weapons" : "armors"}
-                    value={equipment_states[index]}
+                    mode={mode}
+                    value={equipment[index]}
                     augmentPresets={props.augmentPresets}
                     onAugmentsChange={(augments) =>
-                        handleAugmentChange(
-                            augments,
-                            equipment_states[index],
-                            equipment_setters[index],
-                        )
+                        setEquipment((prev) => {
+                            let update = [...prev];
+                            update[index].augments = augments;
+                            return update;
+                        })
                     }
                     onEquipmentChange={(equipment) =>
-                        handleEquipmentChange(
-                            equipment,
-                            equipment_states[index],
-                            equipment_setters[index],
-                        )
+                        setEquipment((prev) => {
+                            let update = [...prev];
+                            update[index].equipment = equipment;
+                            return update;
+                        })
                     }
                 />
-            );
-        },
-    );
+            </Grid>
+        );
+    });
     // -------------------------------------
+
+    const stats = prepareStats(equipment);
 
     return (
         <Stack spacing={1}>
@@ -175,7 +108,13 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
                 value={description}
                 onChange={setDesc}
             />
-            <LoadoutLayout>{equipment_builders}</LoadoutLayout>
+            <Grid
+                container
+                columns={{ xs: 1, sm: 2 }}
+                rowSpacing={1.5}
+            >
+                {equipment_builders}
+            </Grid>
             <Stack direction="row" spacing={1}>
                 <Button
                     sx={{ width: 0.62 }}
@@ -189,8 +128,8 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
                 <Button
                     sx={{ width: 0.38 }}
                     startIcon={<Clear />}
-                    variant="outlined"
                     onClick={handleResetFields}
+                    variant="outlined"
                 >
                     clear
                 </Button>

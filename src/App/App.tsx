@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
@@ -9,22 +9,28 @@ import Compare from "@mui/icons-material/Compare";
 import Dashboard from "@mui/icons-material/Dashboard";
 
 import { useSnackbar } from "notistack";
-import { saveAs } from "file-saver";
 
 import { default as main_theme } from "./theme";
 import {
-    checkNameAvailability,
     saveSession,
     loadSession,
-    typeguardPresets,
+    loadPresets,
+    augmentPresetFromSignatures,
+    loadoutPresetsFromSignatures,
+    loadoutPresetToSignatures,
+    augmentPresetToSignature,
+} from "./save_and_load";
+import {
     addPreset,
-    editSavePreset,
+    editPreset,
     importPreset,
-} from "./helper_functions";
+    exportPreset,
+    exportAllPresets,
+} from "./handlers";
 import {
     PaperBackground,
     ImportExportButtons,
-    EditDialog as EditModal,
+    EditDialog,
 } from "./helper_components";
 
 import AugPresBuilder from "../major_components/AugPresBuilder";
@@ -35,9 +41,14 @@ import LoadoutPresCompare from "../major_components/LoadoutPresCompare";
 
 import {
     AugmentPreset,
+    AugmentPresetSignature,
     LoadoutPreset,
-    TypeguardAugmentPreset,
+    LoadoutPresetSignature,
 } from "../types";
+import {
+    TypeguardAugmentPresetSignature,
+    TypeguardLoadoutPresetSignature,
+} from "../typeguards";
 
 const App = () => {
     const theme = useTheme();
@@ -60,40 +71,34 @@ const App = () => {
     // -------------------------------------
     // AUGMENT PRESET STATES
     // load augment presets saved in local storage
-    const aug_preset_init = typeguardPresets(
-        loadSession<AugmentPreset>("augmentPreset"),
-        TypeguardAugmentPreset,
+    const loaded_aug_pres = loadPresets(
+        loadSession<AugmentPresetSignature>("augmentPreset"),
+        TypeguardAugmentPresetSignature,
+        augmentPresetFromSignatures,
     );
-    // and use the saved presets as initial values
-    const [augPresets, setAugPresets] =
-        useState<AugmentPreset[]>(aug_preset_init);
-    const updateAugmentPreset = (to_update: AugmentPreset[]) => {
-        // updating value on memory and in local storage
-        setAugPresets(to_update);
-        saveSession<AugmentPreset>("augmentPreset", to_update);
-    };
+    // and use the loaded presets as initial values
+    const [augPresets, setAugPresets] = useState(loaded_aug_pres);
+    // updating value on memory and in local storage
     // -------------------------------------
 
     // -------------------------------------
     // AUGMENT PRESETS HANDLERS
-    // when a new preset is added
-    const addAugmentPreset = (new_preset: AugmentPreset) => {
-        const { text, options } = addPreset(
-            new_preset,
-            augPresets,
-            updateAugmentPreset,
+    // when a change is made to the augment
+    // update local storage
+    useEffect(() => {
+        saveSession(
+            "augmentPreset",
+            augmentPresetToSignature(augPresets),
         );
-        enqueueSnackbar(text, options);
-    };
+    }, [augPresets]);
     // when a preset is going to be edited
     const editAugmentPreset = (index: number) => {
         const handleEditSave = (edited_preset: AugmentPreset) => {
             closeDialog();
-            const { text, options } = editSavePreset(
-                edited_preset,
-                augPresets,
+            const { text, options } = editPreset(
                 index,
-                updateAugmentPreset,
+                edited_preset,
+                setAugPresets,
             );
             enqueueSnackbar(text, options);
         };
@@ -108,83 +113,30 @@ const App = () => {
         setDialogEditor({ title, component });
         openDialog();
     };
-    // when a preset is duplicated
-    const duplicateAugmentPreset = (index: number) => {
-        let target_preset = Object.create(augPresets[index]);
-        let used_name = augPresets.map((preset) => preset.name);
-        const validated_name = checkNameAvailability(
-            `${target_preset.name}`,
-            used_name,
-        );
-        target_preset.name = validated_name;
-        updateAugmentPreset([...augPresets, target_preset]);
-        enqueueSnackbar("Preset duplicated.", { variant: "success" });
-    };
-    // when a preset is deleted
-    const deleteAugmentPreset = (index: number) => {
-        let preset_removed = Array.from(augPresets);
-        preset_removed.splice(index, 1);
-        updateAugmentPreset(preset_removed);
-        enqueueSnackbar("Preset deleted.", { variant: "success" });
-    };
-    // when presets is imported to the manager
-    const importAugmentPreset = (text_data: string) => {
-        const { text, options } = importPreset(
-            text_data,
-            augPresets,
-            updateAugmentPreset,
-            TypeguardAugmentPreset,
-        );
-        enqueueSnackbar(text, options);
-    };
-    // when a single perset is exported
-    const exportAugmentPreset = (index: number) => {
-        const target_preset = augPresets[index];
-        const blob = new Blob([JSON.stringify([target_preset])], {
-            type: "application/json;charset=utf-8",
-        });
-        saveAs(blob, `${target_preset.name}.json`);
-        enqueueSnackbar("Preset exported.", { variant: "success" });
-    };
-    // when all presets is exported
-    const exportAllAugmentPresets = () => {
-        const blob = new Blob([JSON.stringify(augPresets)], {
-            type: "application/json;charset=utf-8",
-        });
-        saveAs(blob, "augment presets.json");
-        enqueueSnackbar("Presets exported.", { variant: "success" });
-    };
-    // -------------------------------------
 
     // -------------------------------------
     // LOADOUT PRESET STATES
-    // // load augment presets saved in local storage
-    // const loadout_preset_init = typeguardPresets(
-    //     loadSession<LoadoutPreset>("loadoutPreset"),
-    //     TypeguardAugmentPreset,
-    // );
-    // // and use the saved presets as initial values
-    const [loadoutPresets, setLoadPresets] = useState<
-        LoadoutPreset[]
-    >([]);
-    // // updating value on memory and in local storage
-    const updateLoadoutPresets = (to_update: LoadoutPreset[]) => {
-        setLoadPresets(to_update);
-        saveSession<LoadoutPreset>("loadoutPreset", to_update);
-    };
+    // load augment presets saved in local storage
+    const loaded_loadout_pres = loadPresets(
+        loadSession<LoadoutPresetSignature>("loadoutPreset"),
+        TypeguardLoadoutPresetSignature,
+        loadoutPresetsFromSignatures,
+    );
+    // and use the saved presets as initial values
+    const [loadoutPresets, setLoadoutPresets] = useState(
+        loaded_loadout_pres,
+    );
+    // updating value on memory and in local storage
     // -------------------------------------
 
     // -------------------------------------
-    // LOADOUT PRESETS HANDLERS
-    // when a new preset is added
-    const addLoadoutPreset = (new_preset: LoadoutPreset) => {
-        const { text, options } = addPreset(
-            new_preset,
-            loadoutPresets,
-            updateLoadoutPresets,
+    // handlers
+    useEffect(() => {
+        saveSession(
+            "loadoutPreset",
+            loadoutPresetToSignatures(loadoutPresets),
         );
-        enqueueSnackbar(text, options);
-    };
+    }, [loadoutPresets]);
     // -------------------------------------
 
     return (
@@ -201,7 +153,15 @@ const App = () => {
                     title="Augment Preset Builder"
                     titleIcon={<Construction fontSize="inherit" />}
                 >
-                    <AugPresBuilder onPresetSave={addAugmentPreset} />
+                    <AugPresBuilder
+                        onPresetSave={(new_preset) => {
+                            const { text, options } = addPreset(
+                                new_preset,
+                                setAugPresets,
+                            );
+                            enqueueSnackbar(text, options);
+                        }}
+                    />
                 </PaperBackground>
                 <PaperBackground
                     title="Augment Preset Comparison"
@@ -214,17 +174,61 @@ const App = () => {
                     titleIcon={<Dashboard fontSize="inherit" />}
                     headerOther={
                         <ImportExportButtons
-                            importAction={importAugmentPreset}
-                            exportAction={exportAllAugmentPresets}
+                            importAction={(data_string) => {
+                                const { text, options } =
+                                    importPreset(
+                                        data_string,
+                                        setAugPresets,
+                                        TypeguardAugmentPresetSignature,
+                                        augmentPresetFromSignatures,
+                                    );
+                                enqueueSnackbar(text, options);
+                            }}
+                            exportAction={() => {
+                                exportAllPresets(
+                                    augPresets,
+                                    augmentPresetToSignature,
+                                );
+                                enqueueSnackbar(
+                                    "All presets exported.",
+                                    {
+                                        variant: "success",
+                                    },
+                                );
+                            }}
                         />
                     }
                 >
                     <AugPresManager
                         augmentPresets={augPresets}
                         onEdit={editAugmentPreset}
-                        onExport={exportAugmentPreset}
-                        onDuplicate={duplicateAugmentPreset}
-                        onDelete={deleteAugmentPreset}
+                        onExport={(index) => {
+                            exportPreset(
+                                augPresets[index],
+                                augmentPresetToSignature,
+                            );
+                            enqueueSnackbar("Preset exported.", {
+                                variant: "success",
+                            });
+                        }}
+                        onDuplicate={(index) => {
+                            setAugPresets((prev) => {
+                                return [...prev, prev[index]];
+                            });
+                            enqueueSnackbar("Preset duplicated.", {
+                                variant: "success",
+                            });
+                        }}
+                        onDelete={(index) => {
+                            setAugPresets((prev) => {
+                                let updated = [...prev];
+                                updated.splice(index, 1);
+                                return updated;
+                            });
+                            enqueueSnackbar("Preset deleted.", {
+                                variant: "success",
+                            });
+                        }}
                     />
                 </PaperBackground>
                 <PaperBackground
@@ -233,7 +237,13 @@ const App = () => {
                 >
                     <LoadoutPresBuilder
                         augmentPresets={augPresets}
-                        onPresetSave={addLoadoutPreset}
+                        onPresetSave={(new_preset) => {
+                            const { text, options } = addPreset(
+                                new_preset,
+                                setLoadoutPresets,
+                            );
+                            enqueueSnackbar(text, options);
+                        }}
                     />
                 </PaperBackground>
                 <PaperBackground
@@ -241,11 +251,11 @@ const App = () => {
                     titleIcon={<Compare fontSize="inherit" />}
                 >
                     <LoadoutPresCompare
-                        loadoutPresets={loadoutPresets}
                         augmentPresets={augPresets}
+                        loadoutPresets={loadoutPresets}
                     />
                 </PaperBackground>
-                <EditModal
+                <EditDialog
                     open={dialogOpen}
                     onClose={closeDialog}
                     editor={dialogEditor}

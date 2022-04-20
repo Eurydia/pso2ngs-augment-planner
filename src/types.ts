@@ -1,10 +1,16 @@
-// describe an effect [HP, PP, mel pot etc.]
+// ------------------------------------------------
+// BASIC DATA STRUCTURES
+/**
+ * Describes how effects look like.
+ */
 export interface Effect {
     eff: string;
     amt: number;
 }
 
-// describe an augment [stamina, spirit etc.]
+/**
+ * Describes how augments look like.
+ */
 export interface AugmentData {
     name: string;
     level: number;
@@ -15,113 +21,89 @@ export interface AugmentData {
     condition: string;
 }
 
-// describe an augment's signature
-// which will be use to reconstruct the augment data
-export interface AugmentDataSignature {
-    name: string;
-    level: number;
-}
-
-// describe an equipment [weapons and units]
+/**
+ * Describes how weapons and units look like.
+ */
 export interface EquipmentData {
     name: string;
     effs: Effect[];
     group: string;
 }
+// ------------------------------------------------
 
-export interface EquipmentDataSignature {
-    name: string;
-}
-
-export interface EquipmentWithAugments {
+// ------------------------------------------------
+// COMPOSITE STRUCTURE
+/**
+ * Describes an `EquipmentData` and the `AugmentData` on it.
+ */
+export interface Equipment {
     equipment: EquipmentData | null;
     augments: AugmentData[];
 }
 
-// describe an equipment signature
-// which will be use to reconstruct the equipment SETUP
-export interface EquipmentWithAugmentSignature {
-    name: string;
-    augments: AugmentDataSignature[];
-}
-
-// describe an augment preset
-// THIS STRUCTURE WILL BE EXPORTED
+/**
+ * Describes a `named` group of `AugmentData`.
+ */
 export interface AugmentPreset {
     name: string;
     description: string;
-    augments: AugmentDataSignature[];
+    augments: AugmentData[];
 }
 
-// describe a loadout preset
-// THIS STRUCTURE WILL BE EXPORTED
+/**
+ * Describes a `named` group of `Equipment`.
+ */
 export interface LoadoutPreset {
     name: string;
     description: string;
-    weapon: EquipmentWithAugmentSignature | null;
-    units: EquipmentWithAugmentSignature[];
+    equipment: Equipment[];
+}
+// ------------------------------------------------
+
+// ------------------------------------------------
+// SIGNATURES STRUCTURES
+/**
+ * The signatures of an `AugmentData` are its `name` and `level`.
+ */
+export interface AugmentDataSignature {
+    name: string;
+    level: number;
 }
 
-// -------------------------------------------
-// Runtime typeguard
+/**
+ * The signature of `EquipmentData` is its `name`.
+ */
+interface EquipmentDataSignature {
+    name: string;
+}
 
-// For augment signature
-export const TypeguardAugmentSignature = (obj: any) => {
-    const name_is_string = typeof obj.name === "string";
-    const level_is_number = typeof obj.level === "number";
-    return name_is_string && level_is_number;
-};
+/**
+ * Signature version of `Equipment`.
+ */
+export interface EquipmentSignature {
+    equipment: EquipmentDataSignature | null;
+    augments: AugmentDataSignature[];
+}
 
-// For augment preset
-export const TypeguardAugmentPreset = (obj: any) => {
-    // check basic property
-    const name_is_string = typeof obj.name === "string";
-    const desc_is_string = typeof obj.description === "string";
+/**
+ * Signature of an `AugmentPreset`.
+ *
+ *  This will be exposed to the outside.
+ */
+export interface AugmentPresetSignature {
+    name: string;
+    description: string;
+    augments: AugmentDataSignature[];
+}
 
-    // make sure the property `augments` is an array
-    // before iterating over it
-    const augments_is_array = Array.isArray(obj.augments);
-    if (name_is_string && desc_is_string && augments_is_array) {
-        // typeguard every item in array `augments`
-        for (const item of obj.augments) {
-            const item_is_signature = TypeguardAugmentSignature(item);
-            if (!item_is_signature) {
-                // an item in array is not an augment signature
-                return false;
-            }
-        }
-        // all cases passed, return true
-        return true;
-    }
-    // property `augments` is not an array
-    return false;
-};
-
-export const TypeGuardEquipmentSignature = (obj: any) => {};
-
-// for loadout preset
-export const TypeguardLoadoutPreset = (obj: any) => {
-    // check basic property
-    const name_is_string = typeof obj.name === "string";
-    const desc_is_string = typeof obj.description === "string";
-
-    // make sure the property `augments` is an array
-    // before iterating over it
-    const augments_is_array = Array.isArray(obj.augments);
-    if (name_is_string && desc_is_string && augments_is_array) {
-        // typeguard every item in array `augments`
-        for (const item of obj.augments) {
-            const item_is_signature = TypeguardAugmentSignature(item);
-            if (!item_is_signature) {
-                // an item in array is not an augment signature
-                return false;
-            }
-        }
-        // all cases passed, return true
-        return true;
-    }
-    // property `augments` is not an array
-    return false;
-};
-
-// -------------------------------------------
+/**
+ * Signature of a `LoadoutPreset`.
+ *
+ * This structure will be exposed to the outside.
+ */
+export interface LoadoutPresetSignature {
+    name: string;
+    description: string;
+    equipment: EquipmentSignature[];
+}
+// ------------------------------------------------

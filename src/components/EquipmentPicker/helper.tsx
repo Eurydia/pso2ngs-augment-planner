@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
-import { FilterOptionsState } from "@mui/material";
-
-import { matchSorter } from "match-sorter";
 
 import StyledAutocompleteOption from "../StyledAutocompleteOption";
+
 import {
     isAddEffect,
     parseStat,
@@ -40,7 +38,7 @@ export const prepareAdornment = (
 
 // ---------------------------------------------
 // Using the text field value to match with an Equipment Data
-export const findMatching = (
+export const matchEquipment = (
     value: string,
     options: EquipmentData[],
 ) => {
@@ -76,59 +74,5 @@ export const renderOption = (props: any, option: EquipmentData) => {
             />
         </Box>
     );
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-export const getOptionLabel = (option: EquipmentData) => {
-    return option.name;
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-const compare_groups = (a: EquipmentData, b: EquipmentData) => {
-    if (a.group > b.group) {
-        return 1;
-    } else if (a.group < b.group) {
-        return -1;
-    }
-    return 0;
-};
-// Users can search using
-// Equipment name
-// equipment group
-// effect name
-// terms are seperated at evert `+` symbol
-export const filterOptions = (
-    options: EquipmentData[],
-    state: FilterOptionsState<EquipmentData>,
-) => {
-    const value = state.inputValue.normalize();
-    if (!value || !value.length) {
-        return options;
-    }
-
-    const terms = state.inputValue
-        .split("+")
-        .map((term) => term.trim())
-        .filter((term) => Boolean(term));
-    if (!terms) {
-        return options;
-    }
-
-    const found = terms.reduceRight(
-        (res, term) =>
-            matchSorter(res, term, {
-                keys: [
-                    "name",
-                    "group",
-                    (item) =>
-                        item.effs.map((i) => i.eff.replace("_", " ")),
-                ],
-            }),
-        options,
-    );
-    const sorted = found.sort((a, b) => compare_groups(a, b));
-    return sorted;
 };
 // ---------------------------------------------

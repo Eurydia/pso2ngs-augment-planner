@@ -16,10 +16,11 @@ CONFLICT = (GROUP,)
 augments: List[Augment] = []
 
 
-_name = ("melra", "meltech", "ratech")
+_names = ("melra", "meltech", "ratech")
+_effs = ((MEL_POT, RNG_POT), (MEL_POT, TEC_POT), (RNG_POT, TEC_POT))
 _amount = (1.0075, 1.0125, 1.0175)
 
-for name, effs in zip(_name, combinations(OFFENSIVE_POT, 2)):
+for name, effs in zip(_names, _effs):
     augments.extend(
         augment_from_list(
             f"{name} dualble",

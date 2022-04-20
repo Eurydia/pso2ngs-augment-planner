@@ -1,16 +1,11 @@
 import { StatItemValue } from "../../components/StatsDisplay";
 
+import { AugmentData, EquipmentData, Equipment } from "../../types";
 import {
-    AugmentData,
-    EquipmentData,
-    EquipmentWithAugments,
-} from "../../types";
-import {
-    collectEffects,
+    collectEffectsFromArray,
     getTotalStats,
     isAddEffect,
     parseStat,
-    augmentToSignature,
 } from "../../util";
 
 // -------------------------------------
@@ -37,23 +32,20 @@ import {
 
 // -------------------------------------
 // prepare stats to display
-export const prepareStatsToDisplay = (
-    data: EquipmentWithAugments[],
-) => {
+export const prepareStats = (loadout: Equipment[]) => {
     let bp = 0;
     let effs: (AugmentData | EquipmentData)[] = [];
-    for (const d of data) {
-        if (d.equipment === null) {
-            continue;
+    for (const d of loadout) {
+        if (d.equipment) {
+            effs.push(d.equipment);
         }
-        effs.push(d.equipment);
         effs = effs.concat(d.augments);
 
         for (const aug of d.augments) {
             bp += aug.bp;
         }
     }
-    const tallied_effs = collectEffects(effs);
+    const tallied_effs = collectEffectsFromArray(effs);
     const total_stats = getTotalStats(tallied_effs);
 
     let parsed_stats: { [key: string]: StatItemValue } = {};
@@ -67,17 +59,5 @@ export const prepareStatsToDisplay = (
     }
 
     return parsed_stats;
-};
-// -------------------------------------
-
-// -------------------------------------
-// macro for getting the signature
-export const toSignature = (value: EquipmentWithAugments) => {
-    if (value.equipment === null) {
-        return null;
-    }
-    const name = value.equipment.name;
-    const augments = value.augments.map(augmentToSignature);
-    return { name, augments };
 };
 // -------------------------------------

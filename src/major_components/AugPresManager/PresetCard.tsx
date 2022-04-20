@@ -14,21 +14,23 @@ import CopyAll from "@mui/icons-material/CopyAll";
 import Delete from "@mui/icons-material/Delete";
 import Download from "@mui/icons-material/Download";
 
-import {
-    augmentFromSignature,
-    EFFECT_NAME_TRANSLATE,
-    convertToRoman,
-} from "../../util";
-import { AugmentDataSignature } from "../../types";
+import { EFFECT_NAME_TRANSLATE, convertToRoman } from "../../util";
+import { AugmentData } from "../../types";
 
 // -------------------------------------------------------
-// icon with tool tip macro
+/**
+ * Icon button macro props
+ */
 interface IconWithTooltipProps {
     icon: React.ReactElement;
     title: string;
     onClick: () => void;
 }
-
+/**
+ * Button with icon and tooltip props
+ * @param props
+ * @returns
+ */
 const IconWithTooltip = (props: IconWithTooltipProps) => {
     return (
         <Tooltip title={props.title}>
@@ -42,16 +44,11 @@ const IconWithTooltip = (props: IconWithTooltipProps) => {
 
 // -------------------------------------------------------
 // prepare string with augment name and icons to represent its effects
-const prepareAugmentDisplay = (augments: AugmentDataSignature[]) => {
-    let to_display: JSX.Element[] = [];
+const prepareAugmentDisplay = (augments: AugmentData[]) => {
+    let parsed_augments: JSX.Element[] = [];
     for (const augment of augments) {
-        const full_augment = augmentFromSignature(augment);
-        if (full_augment === null) {
-            continue;
-        }
-
         let emojis = "";
-        for (const eff of full_augment.effs) {
+        for (const eff of augment.effs) {
             const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
             emojis = emojis.concat(emoji);
         }
@@ -61,15 +58,15 @@ const prepareAugmentDisplay = (augments: AugmentDataSignature[]) => {
         const display = (
             <Typography key={name}>{`${emojis} ${name}`}</Typography>
         );
-        to_display.push(display);
+        parsed_augments.push(display);
     }
-    return to_display;
+    return parsed_augments;
 };
 
-interface CustomCardProps {
+interface PresetCardProps {
     header: string;
     desc: string;
-    augments: AugmentDataSignature[];
+    augments: AugmentData[];
     index: number;
     onEdit: (index: number) => void;
     onExport: (index: number) => void;
@@ -77,11 +74,9 @@ interface CustomCardProps {
     onDelete: (index: number) => void;
 }
 // Card to display an augment preset
-export const CustomCard = React.memo((props: CustomCardProps) => {
+const PresetCard = React.memo((props: PresetCardProps) => {
     const theme = useTheme();
-
     const augment_to_display = prepareAugmentDisplay(props.augments);
-
     const button_sx = {
         color: theme.palette.primary.light,
     };
@@ -135,4 +130,5 @@ export const CustomCard = React.memo((props: CustomCardProps) => {
         </Card>
     );
 });
+export default PresetCard;
 // -------------------------------------------------------

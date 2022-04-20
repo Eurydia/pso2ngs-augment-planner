@@ -3,13 +3,9 @@ import { memo } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
-import {
-    prepareAdornment,
-    findMatching,
-    renderOption,
-    getOptionLabel,
-    filterOptions,
-} from "./helper";
+import { prepareAdornment, matchEquipment } from "./helper";
+import { filterOptions, renderOption } from "./styles";
+
 import { EquipmentData } from "../../types";
 
 export type EquipmentPickerMode = "both" | "weapons" | "armors";
@@ -29,20 +25,19 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
         v: string,
         r: string,
     ) => {
-        const match_found = findMatching(v, options);
-        props.onChange(match_found);
+        const match = matchEquipment(v, options);
+        props.onChange(match);
     };
 
     return (
         <Autocomplete
             fullWidth
-            filterSelectedOptions
             value={value}
             options={options}
             onInputChange={handleChange}
             renderOption={renderOption}
-            getOptionLabel={getOptionLabel}
             filterOptions={filterOptions}
+            getOptionLabel={(option) => option.name}
             groupBy={(option) => option.group}
             renderInput={(params: any) => {
                 return (
@@ -64,17 +59,17 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
     );
 };
 
-const propsAreEqual = (
+const shouldEquipmentPickerNOTRerender = (
     prev: EquipmentPickerProps,
     next: EquipmentPickerProps,
 ) => {
-    const prev_val = prev.value;
-    const next_val = next.value;
+    const p = prev.value;
+    const n = next.value;
 
-    return (
-        prev_val?.name === next_val?.name &&
-        prev_val?.group === next_val?.group
-    );
+    return p?.name === n?.name;
 };
 
-export default memo(EquipmentPicker, propsAreEqual);
+export default memo(
+    EquipmentPicker,
+    shouldEquipmentPickerNOTRerender,
+);

@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -12,7 +12,6 @@ import StatsDisplay from "../../components/StatsDisplay";
 import AugmentPicker from "../../components/AugmentPicker";
 import { NameInputField, DescInputField } from "../InputComponents";
 
-import { augmentToSignature } from "../../util";
 import { AugmentData, AugmentPreset } from "../../types";
 
 interface AugPresBuilderProps {
@@ -38,13 +37,12 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     // -------------------------------------
     // handlers
     const handlePresetSave = () => {
-        const augment_signatures = augments.map(augmentToSignature);
-        const data = {
+        const preset = {
             name,
             description,
-            augments: augment_signatures,
+            augments,
         };
-        props.onPresetSave(data);
+        props.onPresetSave(preset);
         handleResetFields();
     };
 
@@ -71,7 +69,6 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
                     onChange={setDesc}
                 />
                 <AugmentPicker
-                    disabled={false}
                     values={augments}
                     onChange={setAugments}
                 />
@@ -100,4 +97,4 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
     );
 };
 
-export default memo(AugPresBuilder);
+export default AugPresBuilder;

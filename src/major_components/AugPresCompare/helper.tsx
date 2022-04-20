@@ -1,28 +1,27 @@
 import { StatItemValue } from "../../components/StatsDisplay";
 import {
     getTotalStats,
-    collectEffects,
+    collectEffectsFromArray,
     isAddEffect,
     parseStat,
 } from "../../util";
-import { EquipmentWithAugments } from "../../types";
+import { Equipment } from "../../types";
 
 // ---------------------------------------------
-
 export const compareStats = (
-    subject: EquipmentWithAugments,
-    comparand: EquipmentWithAugments,
+    subject: Equipment,
+    comparand: Equipment,
 ) => {
     // -----------------------
     // collect the effects of subject
     // and comparand
-    const subject_effs = collectEffects(
+    const subject_effs = collectEffectsFromArray(
         [subject.equipment, ...subject.augments].filter((val) =>
             Boolean(val),
         ),
     );
     const subject_stats = getTotalStats(subject_effs);
-    const compar_effs = collectEffects(
+    const compar_effs = collectEffectsFromArray(
         [comparand.equipment, ...comparand.augments].filter((val) =>
             Boolean(val),
         ),

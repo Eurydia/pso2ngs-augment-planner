@@ -1,15 +1,9 @@
-import { default as AUG_DATA } from "./assets/data/augments";
-import { default as UNIT_DATA } from "./assets/data/units";
-import { default as WEAPON_DATA } from "./assets/data/weapons";
+import { Effect, AugmentData, EquipmentData } from "./types";
 
-import {
-    Effect,
-    AugmentData,
-    AugmentDataSignature,
-    EquipmentData,
-    EquipmentWithAugmentSignature,
-} from "./types";
-
+/**
+ * Enums to use when referencing a effect.
+ * So I don't have top write out the string every time.
+ */
 export const EFFECT_NAME: { [keys: string]: string } = {
     HP: "HP",
     PP: "PP",
@@ -27,6 +21,9 @@ export const EFFECT_NAME: { [keys: string]: string } = {
     PHYDOWN_RES: "PHYDOWN_RES",
 };
 
+/**
+ * For converting an effect' internal name to something that is presentable.
+ */
 export const EFFECT_NAME_TRANSLATE: {
     [keys: string]: { emoji: string; name: string };
 } = {
@@ -47,14 +44,23 @@ export const EFFECT_NAME_TRANSLATE: {
 };
 
 // ---------------------------------------------
-// For checking effect type
+/**
+ * Verify if an effect stack by addition or not.
+ * Since different operantions are performed based on the stacking type
+ * @param effect Name of the effect to check
+ * @returns
+ */
 export const isAddEffect = (effect: string) => {
     return effect === EFFECT_NAME.HP || effect === EFFECT_NAME.PP;
 };
 // ---------------------------------------------
 
 // ---------------------------------------------
-// For converting numbers into roman
+/**
+ * For converting numbers into roman.
+ * @param num number in arabic
+ * @returns roman number
+ */
 export const convertToRoman = (num: number) => {
     if (num === 0) {
         return "";
@@ -86,8 +92,12 @@ export const convertToRoman = (num: number) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-// pick out effect from array
-export const collectEffects = (
+/**
+ * Isolate `Effect`s from Array of `AugmentData` and `EquipmentData`.
+ * @param objs Array of objetcs with signature
+ * @returns an array of `Effect`
+ */
+export const collectEffectsFromArray = (
     objs: (AugmentData | EquipmentData | null)[],
 ) => {
     let effects: Effect[] = [];
@@ -102,7 +112,11 @@ export const collectEffects = (
     return effects;
 };
 
-// generate effect object from array of effects
+/**
+ * Generate stats object from array of `Effect`.
+ * @param effects Array of `Effect`
+ * @returns stats object
+ */
 export const getTotalStats = (effects: Effect[]) => {
     let total_stats: { [key: string]: number } = {};
     for (const effect of effects) {
@@ -122,6 +136,13 @@ export const getTotalStats = (effects: Effect[]) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
+/**
+ * Parse the value into a string by adding plus sign if positive,
+ * and percent sign if mutiplicative.
+ * @param value
+ * @param is_add
+ * @returns string of parsed value
+ */
 export const parseStat = (value: number, is_add: boolean) => {
     let parsed_value: string;
     let sign = "+";
@@ -140,7 +161,12 @@ export const parseStat = (value: number, is_add: boolean) => {
     return `${sign}${parsed_value}`;
 };
 
-// parse stats
+/**
+ * Macro for calling multiple `parseStat()`.
+ * Parse every stats in the object.
+ * @param stats a stats object
+ * @returns a stats object with parsed value
+ */
 export const parseStats = (stats: { [key: string]: number }) => {
     let res: { [key: string]: string } = {};
     const keys = Object.keys(stats);
@@ -151,77 +177,5 @@ export const parseStats = (stats: { [key: string]: number }) => {
         res[key] = parsed_value;
     }
     return res;
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-// strip augmentData
-export const augmentToSignature = (augment: AugmentData) => {
-    const { name, level } = augment;
-    return {
-        name,
-        level,
-    };
-};
-
-// get augmentData from signature
-export const augmentFromSignature = (
-    signature: AugmentDataSignature,
-) => {
-    for (let i = 0; i < AUG_DATA.length; i++) {
-        const augment = AUG_DATA[i];
-        const { name, level } = augment;
-        if (name === signature.name && level === signature.level) {
-            return augment;
-        }
-    }
-    return null;
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-// strip equipment data
-export const equipmentToSignature = (
-    equipment: EquipmentData | null,
-) => {
-    const name = equipment ? equipment.name : null;
-    return {
-        name,
-    };
-};
-
-export const equipmentFromSignature = (equipment_name: string) => {
-    for (const weapon of WEAPON_DATA) {
-        if (weapon.name === equipment_name) {
-            return weapon;
-        }
-    }
-
-    for (const unit of UNIT_DATA) {
-        if (unit.name === equipment_name) {
-            return unit;
-        }
-    }
-
-    return null;
-};
-
-// get equipment with augment from signature
-export const equipmentWithAugmentFromSignature = (
-    signature: EquipmentWithAugmentSignature,
-) => {
-    const equipment = equipmentFromSignature(signature.name);
-    let augments: AugmentData[] = [];
-    for (const aug_sig of signature.augments) {
-        const aug = augmentFromSignature(aug_sig);
-        if (aug) {
-            augments.push(aug);
-        }
-    }
-
-    return {
-        equipment,
-        augments,
-    };
 };
 // ---------------------------------------------

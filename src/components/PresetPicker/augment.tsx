@@ -5,42 +5,30 @@ import { matchSorter } from "match-sorter";
 
 import StyledAutoCompleteOption from "../StyledAutocompleteOption";
 
-import {
-    convertToRoman,
-    augmentFromSignature,
-    EFFECT_NAME_TRANSLATE,
-} from "../../util";
+import { convertToRoman, EFFECT_NAME_TRANSLATE } from "../../util";
 import { AugmentPreset } from "../../types";
 
 // ---------------------------------------------
 // For rendering augment preset picker's options
 export const renderOption = (props: any, option: AugmentPreset) => {
-    const { name: header, augments: signatures } = option;
-
     let subheaders: string[] = [];
-    for (const signature of signatures) {
-        const augment = augmentFromSignature(signature);
-        if (augment === null) {
-            continue;
-        }
-        const { name, level, effs } = augment;
-        const parsed_level = convertToRoman(level);
-        const parsed_name = `${name} ${parsed_level}`;
+    for (const aug of option.augments) {
+        const roman_level = convertToRoman(aug.level);
+        const parsed_name = `${aug.name} ${roman_level}`;
 
         let emojis: string = "";
-        for (const eff of effs) {
+        for (const eff of aug.effs) {
             const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
             emojis = emojis.concat(emoji);
         }
         const subheader = `${emojis} ${parsed_name}`;
         subheaders.push(subheader);
     }
-
     return (
         <Box {...props}>
             <StyledAutoCompleteOption
-                key={header}
-                header={header}
+                key={option.name}
+                header={option.name}
                 subheaders={subheaders}
             />
         </Box>

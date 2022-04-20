@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 
 import Stack from "@mui/material/Stack";
 
@@ -7,18 +7,13 @@ import { compareStats } from "./helper";
 import EquipmentBuilder from "../EquipmentBuilder/EquipmentBuilder";
 import StatsDisplay from "../../components/StatsDisplay";
 
-import {
-    AugmentData,
-    AugmentPreset,
-    EquipmentData,
-    EquipmentWithAugments,
-} from "../../types";
+import { AugmentPreset, Equipment } from "../../types";
 
 interface AugPresCompareProps {
     augmentPresets: AugmentPreset[];
 }
 
-const init_states: EquipmentWithAugments = {
+const init_states: Equipment = {
     equipment: null,
     augments: [],
 };
@@ -26,34 +21,10 @@ const init_states: EquipmentWithAugments = {
 const AugPresCompare = (props: AugPresCompareProps) => {
     // ------------------------------------
     // The subject of the comparison
-    const [subject, setSubject] =
-        useState<EquipmentWithAugments>(init_states);
+    const [subject, setSubject] = useState<Equipment>(init_states);
     // The comparand of the comparison
     const [comparand, setComparand] =
-        useState<EquipmentWithAugments>(init_states);
-    // ------------------------------------
-
-    // ------------------------------------
-    // handlers
-    const handleAugmentChange = (
-        augments: AugmentData[],
-        old_value: EquipmentWithAugments,
-        updater: (new_value: EquipmentWithAugments) => void,
-    ) => {
-        let updated: EquipmentWithAugments = Object.create(old_value);
-        updated.augments = augments;
-        updater(updated);
-    };
-
-    const handleEquipmentChange = (
-        equipment: EquipmentData | null,
-        old_value: EquipmentWithAugments,
-        updater: (new_value: EquipmentWithAugments) => void,
-    ) => {
-        let updated: EquipmentWithAugments = Object.create(old_value);
-        updated.equipment = equipment;
-        updater(updated);
-    };
+        useState<Equipment>(init_states);
     // ------------------------------------
 
     const stats = compareStats(subject, comparand);
@@ -72,18 +43,14 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                     value={subject}
                     augmentPresets={props.augmentPresets}
                     onAugmentsChange={(augments) =>
-                        handleAugmentChange(
-                            augments,
-                            subject,
-                            setSubject,
-                        )
+                        setSubject((prev) => {
+                            return { ...prev, augments };
+                        })
                     }
                     onEquipmentChange={(equipment) =>
-                        handleEquipmentChange(
-                            equipment,
-                            subject,
-                            setSubject,
-                        )
+                        setSubject((prev) => {
+                            return { ...prev, equipment };
+                        })
                     }
                 />
                 <EquipmentBuilder
@@ -93,18 +60,20 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                     value={comparand}
                     augmentPresets={props.augmentPresets}
                     onAugmentsChange={(augments) =>
-                        handleAugmentChange(
-                            augments,
-                            comparand,
-                            setComparand,
-                        )
+                        setComparand((prev) => {
+                            return {
+                                ...prev,
+                                augments,
+                            };
+                        })
                     }
                     onEquipmentChange={(equipment) =>
-                        handleEquipmentChange(
-                            equipment,
-                            comparand,
-                            setComparand,
-                        )
+                        setComparand((prev) => {
+                            return {
+                                ...prev,
+                                equipment,
+                            };
+                        })
                     }
                 />
             </Stack>
@@ -113,4 +82,4 @@ const AugPresCompare = (props: AugPresCompareProps) => {
     );
 };
 
-export default memo(AugPresCompare);
+export default AugPresCompare;

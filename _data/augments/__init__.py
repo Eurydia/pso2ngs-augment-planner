@@ -12,6 +12,7 @@ from .elemental import augments as elemental
 from .fusia import augments as fusia
 from .fused import augments as fused
 from .addi import augments as addi
+from .tria import augments as tria
 
 all_augments = (
     basic,
@@ -27,4 +28,5 @@ all_augments = (
     fusia,
     fused,
     addi,
+    tria,
 )

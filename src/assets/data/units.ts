@@ -35,7 +35,7 @@ const DATA = [
         name: "qual de armor belta",
         effs: [
             { eff: "PP", amt: 4 },
-            { eff: "MEL_POT", amt: 1.01 },
+            { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
         group: "4*",
@@ -44,7 +44,7 @@ const DATA = [
         name: "qual de armor sheza",
         effs: [
             { eff: "PP", amt: 4 },
-            { eff: "RNG_POT", amt: 1.01 },
+            { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
         group: "4*",
@@ -79,7 +79,7 @@ const DATA = [
         name: "vialto armor belta",
         effs: [
             { eff: "HP", amt: 25 },
-            { eff: "MEL_POT", amt: 1.01 },
+            { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
@@ -89,7 +89,7 @@ const DATA = [
         name: "vialto armor sheza",
         effs: [
             { eff: "HP", amt: 25 },
-            { eff: "RNG_POT", amt: 1.01 },
+            { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
             { eff: "DAMAGE_RES", amt: 1.01 },
         ],
@@ -141,7 +141,7 @@ const DATA = [
         effs: [
             { eff: "HP", amt: 20 },
             { eff: "PP", amt: 7 },
-            { eff: "MEL_POT", amt: 1.01 },
+            { eff: "RNG_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
         group: "5*",
@@ -151,7 +151,7 @@ const DATA = [
         effs: [
             { eff: "HP", amt: 20 },
             { eff: "PP", amt: 7 },
-            { eff: "RNG_POT", amt: 1.01 },
+            { eff: "MEL_POT", amt: 1.01 },
             { eff: "TEC_POT", amt: 1.01 },
         ],
         group: "5*",

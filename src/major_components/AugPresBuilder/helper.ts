@@ -1,8 +1,7 @@
 import { StatItemValue } from "../../components/StatsDisplay";
 import { AugmentData, AugmentPreset } from "../../types";
 import {
-    augmentFromSignature,
-    collectEffects,
+    collectEffectsFromArray,
     getTotalStats,
     isAddEffect,
     parseStat,
@@ -19,12 +18,7 @@ export const prepareInitalStates = (
     if (preset) {
         initial_name = preset.name;
         initial_desc = preset.description;
-        for (const signature of preset.augments) {
-            const augment = augmentFromSignature(signature);
-            if (augment !== null) {
-                initial_augments.push(augment);
-            }
-        }
+        initial_augments = preset.augments;
     }
     return { initial_name, initial_desc, initial_augments };
 };
@@ -33,7 +27,7 @@ export const prepareInitalStates = (
 // -------------------------------------
 // prepare stats to display
 export const prepareStatsToDisplay = (augments: AugmentData[]) => {
-    const all_effs = collectEffects(augments);
+    const all_effs = collectEffectsFromArray(augments);
     const total_stats = getTotalStats(all_effs);
 
     let parsed_stats: { [key: string]: StatItemValue } = {};

@@ -5,8 +5,8 @@ import Stack from "@mui/material/Stack";
 import useTheme from "@mui/material/styles/useTheme";
 
 interface StyledAutocompleteOptionProps {
-    header: string;
     capitalizeHeader?: boolean;
+    header: string;
     subheaders: string[];
 }
 
@@ -14,9 +14,7 @@ const StyledAutocompleteOption = (
     props: StyledAutocompleteOptionProps,
 ) => {
     const theme = useTheme();
-    const { header, subheaders } = props;
-
-    const typo_subheaders = subheaders.map((text, index) => (
+    const typo_subheaders = props.subheaders.map((text, index) => (
         <Typography
             key={`${text}-${index}`}
             paddingLeft={2}
@@ -26,7 +24,7 @@ const StyledAutocompleteOption = (
             {text}
         </Typography>
     ));
-    const text_transform_header = props.capitalizeHeader
+    const transform_header = props.capitalizeHeader
         ? "capitalize"
         : "none";
 
@@ -36,17 +34,11 @@ const StyledAutocompleteOption = (
                 <Typography
                     fontWeight={theme.typography.fontWeightMedium}
                     fontSize={theme.typography.body1.fontSize}
-                    textTransform={text_transform_header}
+                    textTransform={transform_header}
                 >
-                    {header}
+                    {props.header}
                 </Typography>
                 {typo_subheaders}
-                {/* <Typography
-                    paddingLeft={2}
-                    fontSize={theme.typography.body1.fontSize}
-                    >
-                    {condition || ""}
-                </Typography> */}
             </Stack>
         </React.Fragment>
     );

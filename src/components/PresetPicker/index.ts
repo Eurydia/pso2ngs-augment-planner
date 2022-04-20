@@ -1,2 +1,4 @@
-export { AugmentPresetPicker } from // LoadoutPresetPicker,
-"./PresetPicker";
+export {
+    AugmentPresetPicker,
+    LoadoutPresetPicker,
+} from "./PresetPicker";
