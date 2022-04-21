@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+import Grid from "@mui/material/Grid";
+
+>>>>>>> Stashed changes
 import EquipmentBuilder from "../EquipmentBuilder";
 import { StatItemValue } from "../../components/StatsDisplay";
 
@@ -11,10 +16,19 @@ import {
     equipmentToSignature,
 } from "../../util";
 import {
+<<<<<<< Updated upstream
     AugmentPreset,
     EquipmentWithAugments,
     LoadoutPreset,
 } from "../../types";
+=======
+    AugmentData,
+    AugmentPreset,
+    Equipment,
+    EquipmentData,
+} from "../../types";
+import { ReactNode } from "react";
+>>>>>>> Stashed changes
 
 // ---------------------------------------------
 
@@ -68,11 +82,33 @@ export const compareStats = (
             negative: difference < default_value,
         };
     }
+<<<<<<< Updated upstream
+=======
+    let subj_bp = 0;
+    let comp_bp = 0;
+    for (let i = 0; i < 4; i++) {
+        for (const aug of subject[i].augments) {
+            subj_bp += aug.bp;
+        }
+        for (const aug of comparand[i].augments) {
+            comp_bp += aug.bp;
+        }
+    }
+    if (subj_bp > 0 || comp_bp > 0) {
+        const diff = subj_bp - comp_bp;
+        stats["BP"] = {
+            value: subj_bp.toString(),
+            diff: diff.toString(),
+            negative: diff < 0,
+        };
+    }
+>>>>>>> Stashed changes
     return stats;
 };
 // ---------------------------------------------
 
 // ---------------------------------------------
+<<<<<<< Updated upstream
 export interface Loadout {
     weapon: EquipmentWithAugments;
     units: EquipmentWithAugments[];
@@ -143,5 +179,60 @@ export const prepareEquipmentBuilders = (
         builders.push(builder);
     }
     return builders;
+=======
+interface BuilderGridProps {
+    children: ReactNode[] | ReactNode;
+}
+export const BuilderGridContainer = (props: BuilderGridProps) => {
+    return (
+        <Grid container columns={{ xs: 1, sm: 2 }} rowSpacing={1.5}>
+            {props.children}
+        </Grid>
+    );
+};
+
+const BuilderGridItem = (props: BuilderGridProps) => {
+    return (
+        <Grid item xs={1} paddingX={1}>
+            {props.children}
+        </Grid>
+    );
+};
+
+export const prepareBuilders = (
+    values: Equipment[],
+    presets: AugmentPreset[],
+    setter: React.Dispatch<React.SetStateAction<Equipment[]>>,
+) => {
+    const headers = ["weapon", "unit #1", "unit #2", "unit #3"];
+    return headers.map((header, index) => {
+        const mode = index === 0 ? "weapons" : "armors";
+        const value = values[index];
+        return (
+            <BuilderGridItem key={`${header} ${index}`}>
+                <EquipmentBuilder
+                    header={`${header}`}
+                    mode={mode}
+                    value={value}
+                    augmentPresets={presets}
+                    onAugmentsChange={(augments) =>
+                        setter((prev) => {
+                            let updated = [...prev];
+                            updated[index].augments = augments;
+                            return updated;
+                        })
+                    }
+                    onEquipmentChange={(equipment) =>
+                        setter((prev) => {
+                            let updated = [...prev];
+                            updated[index].equipment = equipment;
+                            return updated;
+                        })
+                    }
+                />
+            </BuilderGridItem>
+        );
+    });
+>>>>>>> Stashed changes
 };
 // ---------------------------------------------

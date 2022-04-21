@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import Box from "@mui/material/Box";
 import { FilterOptionsState } from "@mui/material";
 
@@ -9,50 +10,72 @@ import {
     parseStat,
     EFFECT_NAME_TRANSLATE,
 } from "../../util";
+=======
+>>>>>>> Stashed changes
 import { EquipmentData } from "../../types";
 import { default as WEAPONS } from "../../assets/data/weapons";
 import { default as UNITS } from "../../assets/data/units";
 
 // ---------------------------------------------
-// Return text field adorments
+/**
+ * Return input field adornments according to the variant given.
+ * @param variant
+ * @returns
+ */
 export const prepareAdornment = (
     variant: "both" | "weapons" | "armors",
 ) => {
     let label = "";
     let placeholder = "";
     let options: EquipmentData[];
-    if (variant === "both") {
-        label = "Equipment";
-        placeholder = "No equipment selected";
-        options = [...WEAPONS, ...UNITS];
-    } else if (variant === "armors") {
-        label = "Units";
-        placeholder = "No unit selected";
-        options = UNITS;
-    } else {
-        label = "Weapons";
-        placeholder = "No weapon selected";
-        options = WEAPONS;
+    switch (variant) {
+        case "both":
+            label = "Equipment";
+            placeholder = "No equipment selected";
+            options = [...WEAPONS, ...UNITS];
+            break;
+        case "armors":
+            label = "Units";
+            placeholder = "No unit selected";
+            options = UNITS;
+            break;
+        case "weapons":
+            label = "Weapons";
+            placeholder = "No weapon selected";
+            options = WEAPONS;
+            break;
     }
     return { label, placeholder, options };
 };
 // ---------------------------------------------
 
 // ---------------------------------------------
+<<<<<<< Updated upstream
 // Using the text field value to match with an Equipment Data
 export const findMatching = (
+=======
+/**
+ * Match value on input field with the name of an EquipmentData.
+ * TODO: Implement a better to match signature with data.
+ * @param value
+ * @param options
+ * @returns
+ */
+export const matchEquipment = (
+>>>>>>> Stashed changes
     value: string,
     options: EquipmentData[],
 ) => {
+    const v = value.toLowerCase();
     for (const option of options) {
-        const { name } = option;
-        if (value.toLowerCase() === name) {
+        if (option.name === v) {
             return option;
         }
     }
     return null;
 };
 // ---------------------------------------------
+<<<<<<< Updated upstream
 
 // ---------------------------------------------
 export const renderOption = (props: any, option: EquipmentData) => {
@@ -132,3 +155,5 @@ export const filterOptions = (
     return sorted;
 };
 // ---------------------------------------------
+=======
+>>>>>>> Stashed changes

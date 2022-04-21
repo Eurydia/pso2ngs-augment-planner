@@ -4,14 +4,22 @@ import Stack from "@mui/material/Stack";
 
 import { compareStats } from "./helper";
 
-import EquipmentBuilder from "../EquipmentBuilder/EquipmentBuilder";
+import EquipmentBuilder, {
+    BuilderGridContainer,
+    BuilderGridItem,
+} from "../EquipmentBuilder";
 import StatsDisplay from "../../components/StatsDisplay";
 
 import {
     AugmentData,
     AugmentPreset,
+<<<<<<< Updated upstream
     EquipmentData,
     EquipmentWithAugments,
+=======
+    Equipment,
+    EquipmentData,
+>>>>>>> Stashed changes
 } from "../../types";
 
 interface AugPresCompareProps {
@@ -56,10 +64,36 @@ const AugPresCompare = (props: AugPresCompareProps) => {
     };
     // ------------------------------------
 
+    // ------------------------------------
+    // handlers
+    const handleAugChange = (
+        augments: AugmentData[],
+        setter: React.Dispatch<React.SetStateAction<Equipment>>,
+    ) => {
+        setter((prev) => {
+            let updated = { ...prev };
+            updated.augments = augments;
+            return updated;
+        });
+    };
+    const handleEquipChange = (
+        equipment: EquipmentData | null,
+        setter: React.Dispatch<React.SetStateAction<Equipment>>,
+    ) => {
+        setter((prev) => {
+            let updated = { ...prev };
+            updated.equipment = equipment;
+            return updated;
+        });
+    };
+
+    // ------------------------------------
+
     const stats = compareStats(subject, comparand);
 
     return (
         <Stack spacing={2}>
+<<<<<<< Updated upstream
             <Stack
                 spacing={2}
                 minWidth={0.4}
@@ -108,6 +142,38 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                     }
                 />
             </Stack>
+=======
+            <BuilderGridContainer>
+                <BuilderGridItem>
+                    <EquipmentBuilder
+                        header="subject"
+                        mode="both"
+                        value={subject}
+                        onAugmentsChange={(augs) =>
+                            handleAugChange(augs, setSubject)
+                        }
+                        onEquipmentChange={(eq) =>
+                            handleEquipChange(eq, setSubject)
+                        }
+                        augmentPresets={props.augmentPresets}
+                    />
+                </BuilderGridItem>
+                <BuilderGridItem>
+                    <EquipmentBuilder
+                        header="comparand"
+                        mode="both"
+                        value={subject}
+                        onAugmentsChange={(augs) =>
+                            handleAugChange(augs, setComparand)
+                        }
+                        onEquipmentChange={(eq) =>
+                            handleEquipChange(eq, setComparand)
+                        }
+                        augmentPresets={props.augmentPresets}
+                    />
+                </BuilderGridItem>
+            </BuilderGridContainer>
+>>>>>>> Stashed changes
             <StatsDisplay {...stats} />
         </Stack>
     );

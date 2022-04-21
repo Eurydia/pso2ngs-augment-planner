@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { StatItemValue } from "../../components/StatsDisplay";
 
 import {
@@ -67,6 +68,29 @@ export const prepareStatsToDisplay = (
     }
 
     return parsed_stats;
+=======
+import { Equipment, LoadoutPreset } from "../../types";
+
+// -------------------------------------
+// preparing initial states
+export const prepareInitialStates = (
+    preset: LoadoutPreset | undefined,
+) => {
+    let initial_name = "";
+    let initial_desc = "";
+    let initial_equipment: Equipment[] = [
+        { equipment: null, augments: [] },
+        { equipment: null, augments: [] },
+        { equipment: null, augments: [] },
+        { equipment: null, augments: [] },
+    ];
+    if (preset) {
+        initial_name = preset.name;
+        initial_desc = preset.description;
+        initial_equipment = preset.equipment;
+    }
+    return { initial_name, initial_desc, initial_equipment };
+>>>>>>> Stashed changes
 };
 // -------------------------------------
 

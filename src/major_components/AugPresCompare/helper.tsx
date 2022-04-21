@@ -60,20 +60,18 @@ export const compareStats = (
         };
     }
 
-    let subject_bp = 0;
-    let comparand_bp = 0;
+    let subj_bp = 0;
+    let comp_bp = 0;
     for (let i = 0; i < 5; i++) {
-        subject_bp += subject.augments[i]
-            ? subject.augments[i].bp
-            : 0;
-        comparand_bp += comparand.augments[i]
+        subj_bp += subject.augments[i] ? subject.augments[i].bp : 0;
+        comp_bp += comparand.augments[i]
             ? comparand.augments[i].bp
             : 0;
     }
-    const bp_diff = subject_bp - comparand_bp;
-    if (subject_bp > 0) {
+    if (subj_bp > 0 || comp_bp > 0) {
+        const bp_diff = subj_bp - comp_bp;
         parsed_stats["BP"] = {
-            value: subject_bp.toString(),
+            value: subj_bp.toString(),
             diff: bp_diff.toString(),
             negative: bp_diff < 0,
         };

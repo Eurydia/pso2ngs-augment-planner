@@ -43,20 +43,17 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     // handlers
     const handlePresetChange = (preset: AugmentPreset | null) => {
         if (preset) {
+<<<<<<< Updated upstream
             const augments = collectAugmentsFromPreset(preset);
             props.onAugmentsChange(augments);
+=======
+            props.onAugmentsChange(preset.augments);
+>>>>>>> Stashed changes
         }
         setAugPreset(preset);
     };
-    const handleAugmentChange = (augemnts: AugmentData[]) => {
-        // when a change is made to the augment
-        // reset the augment preset to null
-        if (augPreset !== null) {
-            setAugPreset(null);
-        }
-        props.onAugmentsChange(augemnts);
-    };
     // -------------------------------------------------
+<<<<<<< Updated upstream
 
     // if no equipment is selected, then augment picker
     // and augment preset pick should be disable.
@@ -64,6 +61,8 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     const disabled =
         props.value.equipment === null && !props.allowEmptyEquipment;
 
+=======
+>>>>>>> Stashed changes
     return (
         <Stack width={1} spacing={1}>
             <Typography
@@ -84,18 +83,22 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
             />
             <AugmentPresetPicker
                 presets={props.augmentPresets}
+<<<<<<< Updated upstream
                 disabled={disabled}
+=======
+>>>>>>> Stashed changes
                 value={augPreset}
                 onChange={handlePresetChange}
             />
             <AugmentPicker
                 disabled={disabled}
                 values={props.value.augments}
-                onChange={handleAugmentChange}
+                onChange={props.onAugmentsChange}
             />
         </Stack>
     );
 };
+<<<<<<< Updated upstream
 
 const shouldEquipmentBuilderNOTRerender = (
     prev: EquipmentBuilderProps,
@@ -130,3 +133,6 @@ export default memo(
     EquipmentBuilder,
     shouldEquipmentBuilderNOTRerender,
 );
+=======
+export default EquipmentBuilder;
+>>>>>>> Stashed changes

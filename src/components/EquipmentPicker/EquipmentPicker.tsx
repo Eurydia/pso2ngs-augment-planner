@@ -21,6 +21,7 @@ interface EquipmentPickerProps {
 }
 
 const EquipmentPicker = (props: EquipmentPickerProps) => {
+<<<<<<< Updated upstream
     const { variant, value } = props;
     const { label, placeholder, options } = prepareAdornment(variant);
 
@@ -38,12 +39,27 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
             fullWidth
             filterSelectedOptions
             value={value}
+=======
+    // -----------------------------------------
+    // prepare the adornments on the input field
+    const { label, placeholder, options } = prepareAdornment(
+        props.variant,
+    );
+    // -----------------------------------------
+    return (
+        <Autocomplete
+            fullWidth
+            value={props.value}
+>>>>>>> Stashed changes
             options={options}
-            onInputChange={handleChange}
             renderOption={renderOption}
             getOptionLabel={getOptionLabel}
             filterOptions={filterOptions}
             groupBy={(option) => option.group}
+            onInputChange={(e, v, r) => {
+                const match = matchEquipment(v, options);
+                props.onChange(match);
+            }}
             renderInput={(params: any) => {
                 return (
                     <TextField
@@ -64,6 +80,7 @@ const EquipmentPicker = (props: EquipmentPickerProps) => {
     );
 };
 
+<<<<<<< Updated upstream
 const propsAreEqual = (
     prev: EquipmentPickerProps,
     next: EquipmentPickerProps,
@@ -78,3 +95,15 @@ const propsAreEqual = (
 };
 
 export default memo(EquipmentPicker, propsAreEqual);
+=======
+const shouldNOTRerender = (
+    prev: EquipmentPickerProps,
+    next: EquipmentPickerProps,
+) => {
+    const p = prev.value;
+    const n = next.value;
+    return p?.name === n?.name;
+};
+
+export default memo(EquipmentPicker, shouldNOTRerender);
+>>>>>>> Stashed changes

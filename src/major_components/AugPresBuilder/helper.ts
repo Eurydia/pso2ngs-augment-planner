@@ -9,7 +9,13 @@ import {
 } from "../../util";
 
 // -------------------------------------
-// preparing initial states
+/**
+ * If an initial preset is given,
+ * set the initial states as the preset.
+ * If not, use empty.
+ * @param preset
+ * @returns
+ */
 export const prepareInitalStates = (
     preset: AugmentPreset | undefined,
 ) => {
@@ -31,7 +37,11 @@ export const prepareInitalStates = (
 // -------------------------------------
 
 // -------------------------------------
-// prepare stats to display
+/**
+ * Prepare total stats from array of augments
+ * @param augments
+ * @returns
+ */
 export const prepareStatsToDisplay = (augments: AugmentData[]) => {
     const all_effs = collectEffects(augments);
     const total_stats = getTotalStats(all_effs);
@@ -41,11 +51,13 @@ export const prepareStatsToDisplay = (augments: AugmentData[]) => {
         const value = parseStat(total_stats[key], isAddEffect(key));
         parsed_stats[key] = { value };
     }
+
     let bp = 0;
     for (const augment of augments) {
         bp += augment.bp;
     }
     parsed_stats["BP"] = { value: bp.toString() };
+
     return parsed_stats;
 };
 // -------------------------------------

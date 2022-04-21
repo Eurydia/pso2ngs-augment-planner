@@ -22,11 +22,15 @@ interface PaperBackgroundProps {
     title?: string;
     titleIcon?: React.ReactElement;
     headerOther?: React.ReactElement;
-    children: React.ReactElement;
+    children: React.ReactNode[] | React.ReactNode;
 }
+/**
+ *
+ * @param props
+ * @returns
+ */
 export const PaperBackground = (props: PaperBackgroundProps) => {
     const theme = useTheme();
-
     return (
         <Paper elevation={8}>
             <Box
@@ -100,7 +104,7 @@ export const ImportExportButtons = (
                         accept=".json"
                         onChange={handleChange}
                     />
-                    Import preset(s)
+                    import preset(s)
                 </Button>
                 <Button
                     onClick={props.exportAction}

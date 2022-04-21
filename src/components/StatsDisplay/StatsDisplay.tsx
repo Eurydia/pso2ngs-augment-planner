@@ -1,10 +1,9 @@
-import { memo } from "react";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { StatsGroup, StatItem, StatItemValue } from "./helper";
+import { StatsContainer, StatItem, StatItemValue } from "./StatsItem";
 import { EFFECT_NAME_TRANSLATE as name } from "../../util";
 
 interface StatsProps {
@@ -36,7 +35,7 @@ const StatsDisplay = (props: StatsProps) => {
                 textTransform: "capitalize",
             }}
         >
-            <StatsGroup>
+            <StatsContainer>
                 <StatItem
                     isAdd
                     head={{ emoji: "🔢", name: "BP*" }}
@@ -45,13 +44,13 @@ const StatsDisplay = (props: StatsProps) => {
                 />
                 <StatItem isAdd head={name.HP} value={props.HP} />
                 <StatItem isAdd head={name.PP} value={props.PP} />
-            </StatsGroup>
-            <StatsGroup>
+            </StatsContainer>
+            <StatsContainer>
                 <StatItem head={name.MEL_POT} value={props.MEL_POT} />
                 <StatItem head={name.RNG_POT} value={props.RNG_POT} />
                 <StatItem head={name.TEC_POT} value={props.TEC_POT} />
-            </StatsGroup>
-            <StatsGroup>
+            </StatsContainer>
+            <StatsContainer>
                 <StatItem
                     head={name.FLOOR_POT}
                     value={props.FLOOR_POT}
@@ -60,8 +59,8 @@ const StatsDisplay = (props: StatsProps) => {
                     head={name.DAMAGE_RES}
                     value={props.DAMAGE_RES}
                 />
-            </StatsGroup>
-            <StatsGroup>
+            </StatsContainer>
+            <StatsContainer>
                 <StatItem
                     head={name.BURN_RES}
                     value={props.BURN_RES}
@@ -91,7 +90,7 @@ const StatsDisplay = (props: StatsProps) => {
                     head={name.PHYDOWN_RES}
                     value={props.PHYDOWN_RES}
                 />
-            </StatsGroup>
+            </StatsContainer>
             <Typography
                 fontWeight={theme.typography.fontWeightMedium}
             >
@@ -100,9 +99,4 @@ const StatsDisplay = (props: StatsProps) => {
         </Stack>
     );
 };
-
-// const shouldStatsNOTRerender = (prev: StatsProps,  next: StatsProps) => {
-//     return
-// }
-
-export default memo(StatsDisplay);
+export default StatsDisplay;

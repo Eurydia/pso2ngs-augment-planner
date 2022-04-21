@@ -36,7 +36,7 @@ const AugPresManager = (props: AugPresManagerProps) => {
             container
             columns={{ xs: 1, sm: 2, md: 3 }}
             sx={{
-                maxHeight: "750px",
+                maxHeight: "600px",
                 overflow: "auto",
             }}
         >

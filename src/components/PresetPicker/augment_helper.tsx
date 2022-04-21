@@ -13,7 +13,12 @@ import {
 import { AugmentPreset } from "../../types";
 
 // ---------------------------------------------
-// For rendering augment preset picker's options
+/**
+ * For rendering options on dropdown menu
+ * @param props
+ * @param option
+ * @returns
+ */
 export const renderOption = (props: any, option: AugmentPreset) => {
     const { name: header, augments: signatures } = option;
 
@@ -49,11 +54,15 @@ export const renderOption = (props: any, option: AugmentPreset) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-// Users can search using
-// preset name
-// augment name in preset
-// augment level in preset
-// terms are seperated at evert `+` symbol
+/**
+ * Allow fuzzy search using
+ * Preset name,
+ * Augment name,
+ * Augment level.
+ * @param options
+ * @param state
+ * @returns
+ */
 export const filterOptions = (
     options: AugmentPreset[],
     state: FilterOptionsState<AugmentPreset>,
@@ -62,7 +71,6 @@ export const filterOptions = (
     if (!value || !value.length) {
         return options;
     }
-
     const terms = state.inputValue
         .split("+")
         .map((term) => term.trim())
@@ -70,7 +78,6 @@ export const filterOptions = (
     if (!terms) {
         return options;
     }
-
     const found = terms.reduceRight(
         (res, term) =>
             matchSorter(res, term, {

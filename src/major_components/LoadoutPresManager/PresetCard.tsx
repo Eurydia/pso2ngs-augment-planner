@@ -1,6 +1,7 @@
 import React from "react";
 
 import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -14,21 +15,23 @@ import CopyAll from "@mui/icons-material/CopyAll";
 import Delete from "@mui/icons-material/Delete";
 import Download from "@mui/icons-material/Download";
 
-import {
-    augmentFromSignature,
-    EFFECT_NAME_TRANSLATE,
-    convertToRoman,
-} from "../../util";
-import { AugmentDataSignature } from "../../types";
+import { EFFECT_NAME_TRANSLATE, convertToRoman } from "../../util";
+import { Equipment, EquipmentData, AugmentData } from "../../types";
 
 // -------------------------------------------------------
-// icon with tool tip macro
+/**
+ * Icon button macro props
+ */
 interface IconWithTooltipProps {
     icon: React.ReactElement;
     title: string;
     onClick: () => void;
 }
-
+/**
+ * Button with icon and tooltip props
+ * @param props
+ * @returns
+ */
 const IconWithTooltip = (props: IconWithTooltipProps) => {
     return (
         <Tooltip title={props.title}>
@@ -42,34 +45,52 @@ const IconWithTooltip = (props: IconWithTooltipProps) => {
 
 // -------------------------------------------------------
 // prepare string with augment name and icons to represent its effects
-const prepareAugmentDisplay = (augments: AugmentDataSignature[]) => {
-    let to_display: JSX.Element[] = [];
-    for (const augment of augments) {
-        const full_augment = augmentFromSignature(augment);
-        if (full_augment === null) {
-            continue;
-        }
+// ---------------------------------------------
+// For rendering augment preset picker's options
+interface OptionItemProps {
+    eq: EquipmentData | null;
+    augments: AugmentData[];
+}
+const CardEquipment = (props: OptionItemProps) => {
+    const theme = useTheme();
+    const eq_name = props.eq
+        ? props.eq.name
+        : "[equipment not selected]";
 
-        let emojis = "";
-        for (const eff of full_augment.effs) {
-            const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
-            emojis = emojis.concat(emoji);
-        }
-        const roman_level = convertToRoman(augment.level);
-        const name = `${augment.name} ${roman_level}`.trim();
-
-        const display = (
-            <Typography key={name}>{`${emojis} ${name}`}</Typography>
-        );
-        to_display.push(display);
+    let augments: JSX.Element[] = [];
+    for (const aug of props.augments) {
+        const roman_level = convertToRoman(aug.level);
+        const name = `${aug.name} ${roman_level}`.trim();
+        augments.push(<Typography key={name}>{name}</Typography>);
     }
-    return to_display;
-};
+    const aug_displays =
+        augments.length !== 0 ? augments : "[augment not selected]";
 
-interface CustomCardProps {
+    return (
+        <Grid
+            item
+            xs={1}
+            sx={{
+                padding: 1,
+                fontSize: theme.typography.body1.fontSize,
+            }}
+        >
+            <Typography
+                sx={{
+                    fontSize: theme.typography.body1.fontSize,
+                    fontWeight: theme.typography.fontWeightMedium,
+                }}
+            >
+                {eq_name}
+            </Typography>
+            {aug_displays}
+        </Grid>
+    );
+};
+interface PresetCardProps {
     header: string;
     desc: string;
-    augments: AugmentDataSignature[];
+    equipment: Equipment[];
     index: number;
     onEdit: (index: number) => void;
     onExport: (index: number) => void;
@@ -77,11 +98,15 @@ interface CustomCardProps {
     onDelete: (index: number) => void;
 }
 // Card to display an augment preset
-export const CustomCard = React.memo((props: CustomCardProps) => {
+const PresetCard = (props: PresetCardProps) => {
     const theme = useTheme();
-
-    const augment_to_display = prepareAugmentDisplay(props.augments);
-
+    const eq_to_display = props.equipment.map((preset, index) => (
+        <CardEquipment
+            key={`${index}${index}`}
+            eq={preset.equipment}
+            augments={preset.augments}
+        />
+    ));
     const button_sx = {
         color: theme.palette.primary.light,
     };
@@ -127,12 +152,17 @@ export const CustomCard = React.memo((props: CustomCardProps) => {
                     <Typography fontStyle="italic">
                         {props.desc ? `"${props.desc}"` : "..."}
                     </Typography>
-                    <Stack textTransform="capitalize">
-                        {augment_to_display}
-                    </Stack>
+                    <Grid
+                        container
+                        columns={{ xs: 1, sm: 2, md: 4 }}
+                        sx={{ textTransform: "capitalize" }}
+                    >
+                        {eq_to_display}
+                    </Grid>
                 </Stack>
             </CardContent>
         </Card>
     );
-});
+};
+export default PresetCard;
 // -------------------------------------------------------

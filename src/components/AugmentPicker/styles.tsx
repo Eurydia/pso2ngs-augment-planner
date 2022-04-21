@@ -4,6 +4,7 @@ import { FilterOptionsState } from "@mui/material";
 import { matchSorter } from "match-sorter";
 
 import StyledAutocompleteOption from "../StyledAutocompleteOption";
+
 import { AugmentData } from "../../types";
 import {
     convertToRoman,
@@ -13,19 +14,19 @@ import {
 } from "../../util";
 
 // ---------------------------------------------
-// For rendering options on dropdown
+/**
+ * for rendering the options on dropdown menu
+ * @param props
+ * @param option
+ * @returns
+ */
 export const renderOption = (props: any, option: AugmentData) => {
     const roman_level = convertToRoman(option.level);
     const header = `${option.name} ${roman_level}`.trimEnd();
-
     let subheaders: string[] = [];
-    for (const effect of option.effs) {
-        const parsed_amt = parseStat(
-            effect.amt,
-            isAddEffect(effect.eff),
-        );
-        const { emoji, name } = EFFECT_NAME_TRANSLATE[effect.eff];
-
+    for (const eff of option.effs) {
+        const parsed_amt = parseStat(eff.amt, isAddEffect(eff.eff));
+        const { emoji, name } = EFFECT_NAME_TRANSLATE[eff.eff];
         const subheader = `${emoji} ${name} ${parsed_amt}`;
         subheaders.push(subheader);
     }
@@ -44,65 +45,21 @@ export const renderOption = (props: any, option: AugmentData) => {
 // ---------------------------------------------
 
 // ---------------------------------------------
-// For rendering input on input field
+/**
+ * For rendering input on input field
+ */
 export const getOptionLabel = (option: AugmentData) => {
     return `${option.name} ${convertToRoman(option.level)}`;
 };
 // ---------------------------------------------
 
 // ---------------------------------------------
-// for validating selected augments
-export const validateAugments = (
-    values: (string | AugmentData)[],
-) => {
-    let validated: AugmentData[] = [];
-    for (let i = values.length - 1; i >= 0; i--) {
-        const curr_value = values[i];
-
-        if (typeof curr_value === "string") {
-            continue;
-        }
-        let is_valid = true;
-
-        for (const prev_value of validated) {
-            const same_name = curr_value.name === prev_value.name;
-<<<<<<< Updated upstream
-=======
-            // group conflict
->>>>>>> Stashed changes
-            const group_conflict = prev_value.conflict.includes(
-                curr_value.group,
-            );
-            const fused_and_mastery_exception =
-                (curr_value.name === "mastery" &&
-                    prev_value.group === "fused") ||
-                (curr_value.group === "fused" &&
-                    prev_value.name === "mastery");
-            if (
-                same_name ||
-                (group_conflict && !fused_and_mastery_exception)
-            ) {
-                is_valid = false;
-                break;
-            }
-        }
-        if (is_valid && validated.length < 5) {
-            validated.push(curr_value);
-        }
-    }
-    validated.reverse();
-    return validated;
-};
-// ---------------------------------------------
-
-// ---------------------------------------------
-// for better seach experience
-// with this setup users can search for
-// `name`
-// `level(not roman)`
-// `group`
-// `effects on the augment`
-// terms are seperated at evert `+` symbol
+/**
+ * To stop MUI warning of displaying duplicate group header.
+ * @param a
+ * @param b
+ * @returns
+ */
 const compare_groups = (a: AugmentData, b: AugmentData) => {
     if (a.group > b.group) {
         return 1;
@@ -112,6 +69,12 @@ const compare_groups = (a: AugmentData, b: AugmentData) => {
     return 0;
 };
 
+/**
+ * For filtering options using terms search.
+ * @param options
+ * @param state
+ * @returns
+ */
 export const filterOptions = (
     options: AugmentData[],
     state: FilterOptionsState<AugmentData>,

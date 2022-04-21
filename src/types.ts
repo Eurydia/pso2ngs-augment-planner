@@ -3,8 +3,14 @@ export interface Effect {
     eff: string;
     amt: number;
 }
+<<<<<<< Updated upstream
 
 // describe an augment [stamina, spirit etc.]
+=======
+/**
+ * Describes how augments look like.
+ */
+>>>>>>> Stashed changes
 export interface AugmentData {
     name: string;
     level: number;
@@ -14,22 +20,43 @@ export interface AugmentData {
     conflict: string[];
     condition: string;
 }
+<<<<<<< Updated upstream
 
 // describe an augment's signature
 // which will be use to reconstruct the augment data
 export interface AugmentDataSignature {
+=======
+/**
+ * Describes how weapons and units look like.
+ */
+export interface EquipmentData {
+>>>>>>> Stashed changes
     name: string;
     level: number;
 }
+<<<<<<< Updated upstream
 
 // describe an equipment [weapons and units]
 export interface EquipmentData {
+=======
+/**
+ * Describes a `named` group of `AugmentData`.
+ */
+export interface AugmentPreset {
+>>>>>>> Stashed changes
     name: string;
     effs: Effect[];
     group: string;
 }
+<<<<<<< Updated upstream
 
 export interface EquipmentDataSignature {
+=======
+/**
+ * Describes a `named` group of `Equipment`.
+ */
+export interface LoadoutPreset {
+>>>>>>> Stashed changes
     name: string;
 }
 
@@ -37,6 +64,7 @@ export interface EquipmentWithAugments {
     equipment: EquipmentData | null;
     augments: AugmentData[];
 }
+<<<<<<< Updated upstream
 
 // describe an equipment signature
 // which will be use to reconstruct the equipment SETUP
@@ -48,14 +76,44 @@ export interface EquipmentWithAugmentSignature {
 // describe an augment preset
 // THIS STRUCTURE WILL BE EXPORTED
 export interface AugmentPreset {
+=======
+/**
+ * The signature of `EquipmentData` is its `name`.
+ */
+export interface EquipmentDataSignature {
+    name: string;
+}
+/**
+ * Signature version of `Equipment`.
+ */
+export interface EquipmentSignature {
+    equipment: EquipmentDataSignature | null;
+    augments: AugmentDataSignature[];
+}
+/**
+ * Signature of an `AugmentPreset`.
+ *
+ *  This will be exposed to the outside.
+ */
+export interface AugmentPresetSignature {
+>>>>>>> Stashed changes
     name: string;
     description: string;
     augments: AugmentDataSignature[];
 }
+<<<<<<< Updated upstream
 
 // describe a loadout preset
 // THIS STRUCTURE WILL BE EXPORTED
 export interface LoadoutPreset {
+=======
+/**
+ * Signature of a `LoadoutPreset`.
+ *
+ * This structure will be exposed to the outside.
+ */
+export interface LoadoutPresetSignature {
+>>>>>>> Stashed changes
     name: string;
     description: string;
     weapon: EquipmentWithAugmentSignature | null;

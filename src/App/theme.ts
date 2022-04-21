@@ -1,15 +1,10 @@
 import createTheme from "@mui/material/styles/createTheme";
 
-import {
-    deepPurple,
-    blue,
-    pink,
-    grey,
-    deepOrange,
-    yellow,
-    indigo,
-} from "@mui/material/colors";
+import { deepPurple, pink } from "@mui/material/colors";
 
+/**
+ * Main theme for app
+ */
 const theme = createTheme({
     palette: {
         primary: {

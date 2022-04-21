@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 
 import Stack from "@mui/material/Stack";
+<<<<<<< Updated upstream
 import Button from "@mui/material/Button";
+=======
+>>>>>>> Stashed changes
 
-import Save from "@mui/icons-material/Save";
-import Clear from "@mui/icons-material/Clear";
+import { prepareInitialStates } from "./helper";
 
+<<<<<<< Updated upstream
 import { prepareStatsToDisplay, toSignature } from "./helper";
 
 import LoadoutLayout from "../../components/2x2GridLayout";
 import EquipmentBuilder from "../EquipmentBuilder";
+=======
+import {
+    BuilderGridContainer,
+    prepareBuilders,
+    parseStatsFromMultipleEquipment,
+} from "../EquipmentBuilder";
+>>>>>>> Stashed changes
 import StatsDisplay from "../../components/StatsDisplay";
-import { NameInputField, DescInputField } from "../InputComponents";
+import TabCombo from "../../components/TabCombo";
+import {
+    NameDescFields,
+    SaveClearButtonsCombo,
+} from "../../components/InputComponents";
 
 import {
     AugmentPreset,
@@ -23,25 +37,29 @@ import {
 } from "../../types";
 
 interface LoadoutPresBuilderProps {
-    // initPreset?: AugmentPreset;
+    initPreset?: LoadoutPreset;
     augmentPresets: AugmentPreset[];
     onPresetSave: (preset: LoadoutPreset) => void;
 }
 
+<<<<<<< Updated upstream
 const init_equipment = {
     equipment: null,
     augments: [],
 };
 
+=======
+>>>>>>> Stashed changes
 const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
-    // // -------------------------------------
-    // // prepare initial states
-    // const { initial_name, initial_desc, initial_augments } =
-    //     prepareInitalStates(props.initPreset);
-    // // -------------------------------------
+    // -------------------------------------
+    // prepare initial states
+    const { initial_name, initial_desc, initial_equipment } =
+        prepareInitialStates(props.initPreset);
+    // -------------------------------------
 
     // -------------------------------------
     // prepare states
+<<<<<<< Updated upstream
     const [name, setName] = useState("");
     const [description, setDesc] = useState("");
     const [weapon, setWeapon] =
@@ -52,6 +70,13 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
         useState<EquipmentWithAugments>(init_equipment);
     const [unitThree, setUnitThree] =
         useState<EquipmentWithAugments>(init_equipment);
+=======
+    const [tab, setTab] = useState(0);
+    const [name, setName] = useState(initial_name);
+    const [description, setDesc] = useState(initial_desc);
+    const [equipment, setEquipment] =
+        useState<Equipment[]>(initial_equipment);
+>>>>>>> Stashed changes
     // -------------------------------------
 
     // -------------------------------------
@@ -79,10 +104,19 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
     const handleResetFields = () => {
         setName("");
         setDesc("");
+<<<<<<< Updated upstream
         setWeapon(init_equipment);
         setUnitOne(init_equipment);
         setUnitTwo(init_equipment);
         setUnitThree(init_equipment);
+=======
+        setEquipment([
+            { equipment: null, augments: [] },
+            { equipment: null, augments: [] },
+            { equipment: null, augments: [] },
+            { equipment: null, augments: [] },
+        ]);
+>>>>>>> Stashed changes
     };
 
     const handlePresetSave = () => {
@@ -99,10 +133,16 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
             }
         }
         const preset: LoadoutPreset = {
+<<<<<<< Updated upstream
             name,
             description,
             weapon: weapon_signature,
             units: unit_signatures,
+=======
+            name: name.normalize().trim(),
+            description: description.normalize(),
+            equipment,
+>>>>>>> Stashed changes
         };
         // -------------------------
         handleResetFields();
@@ -119,6 +159,7 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
 
     // -------------------------------------
     // prepare the augment builders
+<<<<<<< Updated upstream
     const equipment_headers = [
         "weapon",
         "unit #1",
@@ -162,19 +203,30 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
     );
     // -------------------------------------
 
+=======
+    const equipment_builders = prepareBuilders(
+        ["weapon", "unit #1", "unit #2", "unit #3"],
+        equipment,
+        setEquipment,
+        props.augmentPresets,
+    );
+    // -------------------------------------
+
+    const stats = parseStatsFromMultipleEquipment(equipment);
+
+>>>>>>> Stashed changes
     return (
         <Stack spacing={1}>
-            <NameInputField
-                maxLength={40}
-                value={name}
-                onChange={setName}
+            <NameDescFields
+                nameLength={40}
+                nameValue={name}
+                onNameChange={setName}
+                descLength={200}
+                descRows={3}
+                descValue={description}
+                onDescChange={setDesc}
             />
-            <DescInputField
-                maxLength={200}
-                rows={3}
-                value={description}
-                onChange={setDesc}
-            />
+<<<<<<< Updated upstream
             <LoadoutLayout>{equipment_builders}</LoadoutLayout>
             <Stack direction="row" spacing={1}>
                 <Button
@@ -196,6 +248,23 @@ const LoPresBuilder = (props: LoadoutPresBuilderProps) => {
                 </Button>
             </Stack>
             <StatsDisplay {...stats} />
+=======
+            <TabCombo
+                value={tab}
+                labels={["builder", "stats"]}
+                onTabChange={setTab}
+            >
+                <BuilderGridContainer>
+                    {equipment_builders}
+                </BuilderGridContainer>
+                <StatsDisplay {...stats} />
+            </TabCombo>
+            <SaveClearButtonsCombo
+                disableSaveButton={!Boolean(name)}
+                onSaveClick={handlePresetSave}
+                onClearClick={handleResetFields}
+            />
+>>>>>>> Stashed changes
         </Stack>
     );
 };
