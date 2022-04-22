@@ -1,6 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { saveAs } from "file-saver";
 
-import { loadPresets } from "./save_and_load";
+import { loadPresets } from "./session";
 
 // ---------------------------------
 /**
@@ -34,9 +36,9 @@ const getValidName = (name: string, used_name: string[]) => {
  */
 export const addPreset = <Preset extends { name: string }>(
     new_preset: Preset,
-    preset_stter: React.Dispatch<React.SetStateAction<Preset[]>>,
-    snackbar_setter: React.Dispatch<
-        React.SetStateAction<{ text: string; options: {} }>
+    preset_stter: Dispatch<SetStateAction<Preset[]>>,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
     >,
 ) => {
     preset_stter((prev) => {
@@ -72,9 +74,9 @@ export const addPreset = <Preset extends { name: string }>(
  */
 export const duplicatePreset = <Preset extends { name: string }>(
     index: number,
-    preset_setter: React.Dispatch<React.SetStateAction<Preset[]>>,
-    snackbar_setter: React.Dispatch<
-        React.SetStateAction<{ text: string; options: {} }>
+    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
     >,
 ) => {
     preset_setter((prev) => {
@@ -99,9 +101,9 @@ export const duplicatePreset = <Preset extends { name: string }>(
  */
 export const deletePreset = <Preset extends { name: string }>(
     index: number,
-    preset_seter: React.Dispatch<React.SetStateAction<Preset[]>>,
-    snackbar_setter: React.Dispatch<
-        React.SetStateAction<{ text: string; options: {} }>
+    preset_seter: Dispatch<SetStateAction<Preset[]>>,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
     >,
 ) => {
     preset_seter((prev) => {
@@ -127,8 +129,10 @@ export const deletePreset = <Preset extends { name: string }>(
 export const editPreset = <Preset extends { name: string }>(
     index: number,
     edited_preset: Preset,
-    preset_setter: React.Dispatch<React.SetStateAction<Preset[]>>,
-    snackbar_setter: (value: { text: string; options: {} }) => void,
+    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
+    >,
 ) => {
     preset_setter((prev) => {
         let used_name = prev.map((pres) => pres.name);
@@ -159,11 +163,11 @@ export const editPreset = <Preset extends { name: string }>(
     });
 };
 /**
- *
+ * When preset array is imported
  * @param text_data text data to parse by `json.parse()`
  * @param preset_setter setter for preset
  * @param snackbar_setter setter for snackbar
- * @param typeguard_checker type guard to perform on the preset signatures
+ * @param type_guard type guard to perform on the preset signatures
  * @param preset_rebuilder rebuilder function signatures.
  * @returns
  */
@@ -172,9 +176,11 @@ export const importPreset = <
     Preset extends { name: string },
 >(
     text_data: string,
-    preset_setter: React.Dispatch<React.SetStateAction<Preset[]>>,
-    snackbar_setter: (value: { text: string; options: {} }) => void,
-    typeguard_checker: (obj: any) => boolean,
+    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
+    >,
+    type_guard: (obj: any) => boolean,
     preset_rebuilder: (obj: Signature[]) => Preset[],
 ) => {
     let text: string = "Import failed.";
@@ -191,7 +197,7 @@ export const importPreset = <
     // sanitize the json data
     const checked_presets: Preset[] = loadPresets(
         json_data,
-        typeguard_checker,
+        type_guard,
         preset_rebuilder,
     );
     // add the sanitized presets to the preset array
@@ -232,6 +238,7 @@ export const exportPreset = <
         type: "application/json;charset=utf-8",
     });
     saveAs(blob, `preset.json`);
+    // snackbar
     snackbar_setter({
         text: "Preset exported.",
         options: {
@@ -251,13 +258,16 @@ export const exportAllPresets = <
 >(
     presets: Preset[],
     preset_stripper: (presets: Preset[]) => Signature[],
-    snackbar_setter: (value: { text: string; options: {} }) => void,
+    snackbar_setter: Dispatch<
+        SetStateAction<{ text: string; options: {} }>
+    >,
 ) => {
     const signatures = preset_stripper(presets);
     const blob = new Blob([JSON.stringify(signatures)], {
         type: "application/json;charset=utf-8",
     });
     saveAs(blob, "presets.json");
+    // snackbar
     snackbar_setter({
         text: "All presets exported.",
         options: {

@@ -24,6 +24,7 @@ _wards = (
     "poison",
     "pain",
 )
+# -----------------------------------------------
 for name, eff in zip(_wards, AILMENT_RES):
     augments.extend(
         augment_from_list(
@@ -35,8 +36,9 @@ for name, eff in zip(_wards, AILMENT_RES):
             CONFLICT,
         )
     )
-# --------------------------------------
+# -----------------------------------------------
 
+# -----------------------------------------------
 augments.extend(
     augment_from_list(
         "sovereign ward",
@@ -47,3 +49,4 @@ augments.extend(
         CONFLICT,
     )
 )
+# -----------------------------------------------

@@ -24,26 +24,27 @@ _secondary_effs = (
     Effect(FLOOR_POT, 1.025),
     Effect(DMG_RES, 1.025),
 )
-
+# addi sta spi deft gau
 for pri_name, pri_eff in zip(_primary_names, _primary_effs):
     for sec_name, sec_eff in zip(_secondary_names, _secondary_effs):
-        if sec_name == "sta" or sec_name == "spi":
-            effects = (sec_eff, pri_eff)
+        if sec_eff.eff in ADDITIVE_EFFECT_TYPE:
+            effs = (sec_eff, pri_eff)
         else:
-            effects = (pri_eff, sec_eff)
-
+            effs = (pri_eff, sec_eff)
         augments.append(
             Augment(
                 f"addi {sec_name}{pri_name}",
                 0,
                 10,
-                effects,
+                effs,
                 GROUP,
                 CONFLICT,
             )
         )
 # ------------------------------------------
 
+# ------------------------------------------
+# addi staspi
 for name, eff in zip(_primary_names, _primary_effs):
     augments.append(
         Augment(
@@ -61,7 +62,8 @@ for name, eff in zip(_primary_names, _primary_effs):
     )
 # ------------------------------------------
 
-_ward_amount = 1.20
+# ------------------------------------------
+# addi ward
 for name, eff in zip(_primary_names, _primary_effs):
     augments.append(
         Augment(
@@ -70,9 +72,10 @@ for name, eff in zip(_primary_names, _primary_effs):
             10,
             (
                 eff,
-                *effects_with_amount(AILMENT_RES, _ward_amount),
+                *effects_with_amount(AILMENT_RES, 1.20),
             ),
             GROUP,
             CONFLICT,
         )
     )
+# ------------------------------------------

@@ -15,6 +15,7 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
+# -----------------------------------------------
 augments.extend(
     augment_from_list(
         f"alts soul",
@@ -28,7 +29,9 @@ augments.extend(
         CONFLICT,
     )
 )
+# -----------------------------------------------
 
+# -----------------------------------------------
 augments.extend(
     augment_from_list(
         f"dolz soul",
@@ -44,6 +47,7 @@ augments.extend(
 )
 # ------------------------------------------------
 
+# -----------------------------------------------
 _forms_name = ("forms", "forms machini", "form sand")
 for name, eff in zip(_forms_name, OFFENSIVE_POT):
     augments.extend(
@@ -61,6 +65,7 @@ for name, eff in zip(_forms_name, OFFENSIVE_POT):
     )
 # ------------------------------------------------
 
+# -----------------------------------------------
 _boss_one = ("daityl", "pettas", "nex")
 for name, eff in zip(_boss_one, OFFENSIVE_POT):
     augments.extend(
@@ -78,6 +83,7 @@ for name, eff in zip(_boss_one, OFFENSIVE_POT):
     )
 # ------------------------------------------------
 
+# -----------------------------------------------
 _boss_two = ("dust", "ragras", "renus")
 for name, eff in zip(_boss_two, OFFENSIVE_POT):
     augments.extend(
@@ -95,6 +101,7 @@ for name, eff in zip(_boss_two, OFFENSIVE_POT):
     )
 # ------------------------------------------------
 
+# -----------------------------------------------
 augments.extend(
     augment_from_list(
         "eradi soul",
@@ -109,3 +116,4 @@ augments.extend(
         CONFLICT,
     )
 )
+# -----------------------------------------------

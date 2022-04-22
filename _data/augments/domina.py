@@ -12,6 +12,8 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
+# -------------------------------------------
+# ael
 augments.append(
     Augment(
         "ael domina",
@@ -26,7 +28,10 @@ augments.append(
         CONFLICT,
     )
 )
+# -------------------------------------------
 
+# -------------------------------------------
+# ret
 augments.append(
     Augment(
         "ret domina",
@@ -40,3 +45,4 @@ augments.append(
         CONFLICT,
     )
 )
+# -------------------------------------------

@@ -9,7 +9,7 @@ units: List[Unit] = []
 
 units.append(
     Unit(
-        "theseus armor/gold primm armor",
+        "theseus armor & gold primm armor",
         (
             Effect(HP, 10),
             Effect(PP, 1),

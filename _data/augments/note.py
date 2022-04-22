@@ -16,7 +16,7 @@ augments: List[Augment] = []
 
 
 _names = ("a", "b", "c", "d")
-_bp = (5, 4, 4, 4)
+_bps = (5, 4, 4, 4)
 
 # -----------------------------------------------
 _ael_effs = (
@@ -27,10 +27,11 @@ _ael_effs = (
     ),
 )
 
-for name, bp, effs in zip(_names, _bp, _ael_effs):
+for name, bp, effs in zip(_names, _bps, _ael_effs):
     augments.append(Augment(f"ael note {name}", 0, bp, effs, GROUP, CONFLICT))
 # -----------------------------------------------
 
+# -----------------------------------------------
 _ael_combat = ("magnus", "lab", "resola")
 for name, eff in zip(_ael_combat, OFFENSIVE_POT):
     augments.append(
@@ -45,6 +46,7 @@ for name, eff in zip(_ael_combat, OFFENSIVE_POT):
     )
 # -----------------------------------------------
 
+# -----------------------------------------------
 _ret_effs = (
     (Effect(HP, 10),),
     *map(
@@ -56,7 +58,7 @@ _ret_effs = (
     ),
 )
 
-for name, bp, effs in zip(_names, _bp, _ret_effs):
+for name, bp, effs in zip(_names, _bps, _ret_effs):
     augments.append(
         Augment(
             f"ret note {name}",
@@ -69,6 +71,7 @@ for name, bp, effs in zip(_names, _bp, _ret_effs):
     )
 # -----------------------------------------------
 
+# -----------------------------------------------
 augments.append(
     Augment(
         "alno note",
@@ -83,7 +86,9 @@ augments.append(
         CONFLICT,
     )
 )
+# -----------------------------------------------
 
+# -----------------------------------------------
 augments.append(
     Augment(
         "maqea note",
@@ -94,3 +99,4 @@ augments.append(
         CONFLICT,
     )
 )
+# -----------------------------------------------

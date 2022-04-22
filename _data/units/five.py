@@ -11,6 +11,7 @@ units: List[Unit] = []
 units.append(Unit("vidal armor", (Effect(HP, 70),), RARITY))
 
 # ------------------------------------------------------
+# vijf and vifj + suffix
 units.append(
     Unit(
         "vijf armor",
@@ -21,8 +22,7 @@ units.append(
         RARITY,
     )
 )
-
-for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
+for suf, effs in SUFFIX:
     _effs = (
         Effect(HP, 20),
         Effect(PP, 7),
@@ -32,6 +32,7 @@ for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
     units.append(Unit(f"vijf armor {suf}", _effs, RARITY))
 # ------------------------------------------------------
 
+# ------------------------------------------------------
 units.append(
     Unit(
         "vios armor",
@@ -42,7 +43,9 @@ units.append(
         RARITY,
     )
 )
+# ------------------------------------------------------
 
+# ------------------------------------------------------
 units.append(
     Unit(
         "vindalun armor",
@@ -50,7 +53,9 @@ units.append(
         RARITY,
     )
 )
+# ------------------------------------------------------
 
+# ------------------------------------------------------
 units.append(
     Unit(
         "viosel armor",
@@ -58,7 +63,9 @@ units.append(
         RARITY,
     )
 )
+# ------------------------------------------------------
 
+# ------------------------------------------------------
 units.append(
     Unit(
         "greas armor",
@@ -71,9 +78,9 @@ units.append(
         RARITY,
     )
 )
-
 # ------------------------------------------------------
 
+# ------------------------------------------------------
 _names = "schwarzest", "schwarzgarde", "schwarzrosso"
 for name, eff_type in zip(_names, OFFENSIVE_POT):
     effs = (

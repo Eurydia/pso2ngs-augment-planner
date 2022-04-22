@@ -9,7 +9,7 @@ units: List[Unit] = []
 
 units.append(
     Unit(
-        "tzvia armor/silver primm armor",
+        "tzvia armor & silver primm armor",
         (Effect(PP, 2),),
         RARITY,
     )

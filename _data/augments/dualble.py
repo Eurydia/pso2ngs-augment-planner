@@ -16,17 +16,18 @@ CONFLICT = (GROUP,)
 augments: List[Augment] = []
 
 
-_name = ("melra", "meltech", "ratech")
-_amount = (1.0075, 1.0125, 1.0175)
-
-for name, effs in zip(_name, combinations(OFFENSIVE_POT, 2)):
+# -------------------------------------------
+_names = ("melra", "meltech", "ratech")
+_amounts = (1.0075, 1.0125, 1.0175)
+for name, effs in zip(_names, combinations(OFFENSIVE_POT, 2)):
     augments.extend(
         augment_from_list(
             f"{name} dualble",
             3,
             (4, 5, 6),
-            multi_with_amount(effs, _amount),
+            multi_with_amount(effs, _amounts),
             GROUP,
             CONFLICT,
         )
     )
+# -------------------------------------------

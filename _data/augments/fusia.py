@@ -12,6 +12,7 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
+# ----------------------------------------------------------------
 augments.append(
     Augment(
         f"megas fusia",
@@ -22,3 +23,4 @@ augments.append(
         CONFLICT,
     )
 )
+# ----------------------------------------------------------------

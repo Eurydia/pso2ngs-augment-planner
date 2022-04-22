@@ -9,6 +9,7 @@ from effect import *
 units: List[Unit] = []
 
 # ------------------------------------------------------
+# qual de and qual de + suffix
 units.append(
     Unit(
         "qual de armor",
@@ -17,7 +18,7 @@ units.append(
     )
 )
 
-for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
+for suf, effs in SUFFIX:
     _effs = (
         Effect(PP, 4),
         *effects_with_amount(effs, 1.01),
@@ -26,13 +27,10 @@ for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
     units.append(Unit(f"qual de armor {suf}", _effs, RARITY))
 # ------------------------------------------------------
 
-units.append(
-    Unit(
-        "cattleya armor", (Effect(HP, 20), Effect(PP, 2)), RARITY
-    )
-)
+units.append(Unit("cattleya armor", (Effect(HP, 20), Effect(PP, 2)), RARITY))
 
 # ------------------------------------------------------
+# vialto and vialto + suffix
 units.append(
     Unit(
         "vialto armor",
@@ -44,7 +42,7 @@ units.append(
     )
 )
 
-for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
+for suf, effs in SUFFIX:
     _effs = (
         Effect(HP, 25),
         *effects_with_amount(effs, 1.01),
@@ -54,6 +52,7 @@ for suf, effs in zip(SUFFIX, combinations(OFFENSIVE_POT, 2)):
     units.append(Unit(f"vialto armor {suf}", _effs, RARITY))
 # ------------------------------------------------------
 
+# ------------------------------------------------------
 units.append(
     Unit(
         "geant armor",
@@ -66,3 +65,4 @@ units.append(
         RARITY,
     )
 )
+# ------------------------------------------------------

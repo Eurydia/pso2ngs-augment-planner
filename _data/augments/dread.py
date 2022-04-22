@@ -14,8 +14,8 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
-
-_amount = (1.01, 1.015, 1.02)
+# -------------------------------------------
+_amounts = (1.01, 1.015, 1.02)
 augments.extend(
     augment_from_list(
         "dread keeper",
@@ -24,10 +24,11 @@ augments.extend(
         (
             EffectMultiLevel(HP, (10, 15, 30)),
             EffectMultiLevel(PP, (3, 4, 7)),
-            EffectMultiLevel(FLOOR_POT, _amount),
-            EffectMultiLevel(DMG_RES, _amount),
+            EffectMultiLevel(FLOOR_POT, _amounts),
+            EffectMultiLevel(DMG_RES, _amounts),
         ),
         GROUP,
         CONFLICT,
     )
 )
+# -------------------------------------------

@@ -13,21 +13,20 @@ CONFLICT = (GROUP, BASIC)
 augments: List[Augment] = []
 
 _primary_names = ("might", "precision", "technique")
-_primary_amount = 1.02
-_primary_effs = effects_with_amount(OFFENSIVE_POT, _primary_amount)
-
+_primary_effs = effects_with_amount(OFFENSIVE_POT, 1.02)
 
 _secondary_names = ("sta", "spi", "deft", "gua")
 _secondary_effs = (
     Effect(HP, 15),
     Effect(PP, 5),
-    Effect(FLOOR_POT, _primary_amount),
-    Effect(DMG_RES, _primary_amount),
+    Effect(FLOOR_POT, 1.02),
+    Effect(DMG_RES, 1.02),
 )
 
+# ----------------------------------------------------------------
 for pri_name, pri_eff in zip(_primary_names, _primary_effs):
     for sec_name, sec_eff in zip(_secondary_names, _secondary_effs):
-        if sec_name == "sta" or sec_name == "spi":
+        if sec_eff.eff in ADDITIVE_EFFECT_TYPE:
             effect = (
                 sec_eff,
                 pri_eff,
@@ -47,3 +46,4 @@ for pri_name, pri_eff in zip(_primary_names, _primary_effs):
                 CONFLICT,
             )
         )
+# ----------------------------------------------------------------

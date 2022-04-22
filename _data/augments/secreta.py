@@ -15,6 +15,7 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
+# -----------------------------------------------
 augments.extend(
     augment_from_list(
         f"alts secreta",
@@ -30,3 +31,4 @@ augments.extend(
         CONFLICT,
     )
 )
+# -----------------------------------------------

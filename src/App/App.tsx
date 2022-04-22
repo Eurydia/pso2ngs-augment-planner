@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
@@ -9,61 +9,47 @@ import Compare from "@mui/icons-material/Compare";
 import Dashboard from "@mui/icons-material/Dashboard";
 
 import { useSnackbar } from "notistack";
-import { saveAs } from "file-saver";
 
 import { default as main_theme } from "./theme";
+import { saveData, loadData, loadPresets } from "./session";
 import {
-<<<<<<< Updated upstream
-    checkNameAvailability,
-    saveSession,
-    loadSession,
-    typeguardPresets,
-=======
-    saveData,
-    loadData,
-    loadPresets,
     augmentPresetFromSignatures,
     loadoutPresetsFromSignatures,
     loadoutPresetToSignatures,
     augmentPresetToSignature,
-} from "./save_and_load";
+} from "./signature_conversion";
 import {
->>>>>>> Stashed changes
     addPreset,
-    editSavePreset,
-    importPreset,
-<<<<<<< Updated upstream
-} from "./helper_functions";
-import {
-    PaperBackground,
-    ImportExportButtons,
-    EditDialog as EditModal,
-} from "./helper_components";
-=======
-    exportPreset,
-    exportAllPresets,
+    editPreset,
     duplicatePreset,
     deletePreset,
+    importPreset,
+    exportPreset,
+    exportAllPresets,
 } from "./handlers";
 import {
     PaperBackground,
     ImportExportButtons,
     EditDialog,
 } from "./components";
->>>>>>> Stashed changes
+import {
+    typeGuardAugmentPresetSignature,
+    TypeguardLoadoutPresetSignature,
+} from "./typeguard";
 
-import TabCombo from "../components/TabCombo";
-import AugPresBuilder from "../major_components/AugPresBuilder";
-import AugPresCompare from "../major_components/AugPresCompare";
-import AugPresManager from "../major_components/AugPresManager";
-import LoadoutPresBuilder from "../major_components/LoadoutPresBuilder";
-import LoadoutPresCompare from "../major_components/LoadoutPresCompare";
-import LoadoutPresManager from "../major_components/LoadoutPresManager";
+import TabCombo from "../components/auxillery/TabCombo";
+import AugPresBuilder from "../components/complete/AugPresBuilder";
+import AugPresCompare from "../components/complete/AugPresCompare";
+import AugPresManager from "../components/complete/AugPresManager";
+import LoadoutPresBuilder from "../components/complete/LoadoutPresBuilder";
+import LoadoutPresCompare from "../components/complete/LoadoutPresCompare";
+import LoadoutPresManager from "../components/complete/LoadoutPresManager";
 
 import {
     AugmentPreset,
+    AugmentPresetSignature,
     LoadoutPreset,
-    TypeguardAugmentPreset,
+    LoadoutPresetSignature,
 } from "../types";
 
 const App = () => {
@@ -100,45 +86,9 @@ const App = () => {
     // -------------------------------------
     // AUGMENT PRESET STATES
     // load augment presets saved in local storage
-<<<<<<< Updated upstream
-    const aug_preset_init = typeguardPresets(
-        loadSession<AugmentPreset>("augmentPreset"),
-        TypeguardAugmentPreset,
-    );
-    // and use the saved presets as initial values
-    const [augPresets, setAugPresets] =
-        useState<AugmentPreset[]>(aug_preset_init);
-    const updateAugmentPreset = (to_update: AugmentPreset[]) => {
-        // updating value on memory and in local storage
-        setAugPresets(to_update);
-        saveSession<AugmentPreset>("augmentPreset", to_update);
-    };
-    // -------------------------------------
-
-    // -------------------------------------
-    // AUGMENT PRESETS HANDLERS
-    // when a new preset is added
-    const addAugmentPreset = (new_preset: AugmentPreset) => {
-        const { text, options } = addPreset(
-            new_preset,
-            augPresets,
-            updateAugmentPreset,
-        );
-        enqueueSnackbar(text, options);
-    };
-    // when a preset is going to be edited
-    const editAugmentPreset = (index: number) => {
-        const handleEditSave = (edited_preset: AugmentPreset) => {
-            closeDialog();
-            const { text, options } = editSavePreset(
-                edited_preset,
-                augPresets,
-                index,
-                updateAugmentPreset,
-=======
     const loaded_aug_pres = loadPresets(
         loadData<AugmentPresetSignature>("augmentPreset"),
-        TypeguardAugmentPresetSignature,
+        typeGuardAugmentPresetSignature,
         augmentPresetFromSignatures,
     );
     // and use the loaded presets as initial values
@@ -165,7 +115,6 @@ const App = () => {
                 edited_preset,
                 setAugPresets,
                 setSnackbar,
->>>>>>> Stashed changes
             );
         };
         const target_preset = augPresets[index];
@@ -179,106 +128,27 @@ const App = () => {
         setDialogEditor({ title, component });
         setDialogOpen(true);
     };
-<<<<<<< Updated upstream
-    // when a preset is duplicated
-    const duplicateAugmentPreset = (index: number) => {
-        let target_preset = Object.create(augPresets[index]);
-        let used_name = augPresets.map((preset) => preset.name);
-        const validated_name = checkNameAvailability(
-            `${target_preset.name}`,
-            used_name,
-        );
-        target_preset.name = validated_name;
-        updateAugmentPreset([...augPresets, target_preset]);
-        enqueueSnackbar("Preset duplicated.", { variant: "success" });
-    };
-    // when a preset is deleted
-    const deleteAugmentPreset = (index: number) => {
-        let preset_removed = Array.from(augPresets);
-        preset_removed.splice(index, 1);
-        updateAugmentPreset(preset_removed);
-        enqueueSnackbar("Preset deleted.", { variant: "success" });
-    };
-    // when presets is imported to the manager
-    const importAugmentPreset = (text_data: string) => {
-        const { text, options } = importPreset(
-            text_data,
-            augPresets,
-            updateAugmentPreset,
-            TypeguardAugmentPreset,
-        );
-        enqueueSnackbar(text, options);
-    };
-    // when a single perset is exported
-    const exportAugmentPreset = (index: number) => {
-        const target_preset = augPresets[index];
-        const blob = new Blob([JSON.stringify([target_preset])], {
-            type: "application/json;charset=utf-8",
-        });
-        saveAs(blob, `${target_preset.name}.json`);
-        enqueueSnackbar("Preset exported.", { variant: "success" });
-    };
-    // when all presets is exported
-    const exportAllAugmentPresets = () => {
-        const blob = new Blob([JSON.stringify(augPresets)], {
-            type: "application/json;charset=utf-8",
-        });
-        saveAs(blob, "augment presets.json");
-        enqueueSnackbar("Presets exported.", { variant: "success" });
-    };
-=======
->>>>>>> Stashed changes
     // -------------------------------------
 
     // -------------------------------------
     // LOADOUT PRESET STATES
-<<<<<<< Updated upstream
-    // // load augment presets saved in local storage
-    // const loadout_preset_init = typeguardPresets(
-    //     loadSession<LoadoutPreset>("loadoutPreset"),
-    //     TypeguardAugmentPreset,
-    // );
-    // // and use the saved presets as initial values
-    const [loadoutPresets, setLoadPresets] = useState<
-        LoadoutPreset[]
-    >([]);
-    // // updating value on memory and in local storage
-    const updateLoadoutPresets = (to_update: LoadoutPreset[]) => {
-        setLoadPresets(to_update);
-        saveSession<LoadoutPreset>("loadoutPreset", to_update);
-    };
-    // -------------------------------------
-
-    // -------------------------------------
-    // LOADOUT PRESETS HANDLERS
-    // when a new preset is added
-    const addLoadoutPreset = (new_preset: LoadoutPreset) => {
-        const { text, options } = addPreset(
-            new_preset,
-            loadoutPresets,
-            updateLoadoutPresets,
-=======
     // load augment presets saved in local storage
-    const loaded_loadout_pres = loadPresets(
+    const loadout_pres_from_session = loadPresets(
         loadData<LoadoutPresetSignature>("loadoutPreset"),
         TypeguardLoadoutPresetSignature,
         loadoutPresetsFromSignatures,
     );
     // and use the saved presets as initial values
     const [loadoutPresets, setLoadoutPresets] = useState(
-        loaded_loadout_pres,
+        loadout_pres_from_session,
     );
     const [loadoutTab, setLoadoutTab] = useState(0);
-
-    // update value in local storage
     useEffect(() => {
         saveData(
             "loadoutPreset",
             loadoutPresetToSignatures(loadoutPresets),
->>>>>>> Stashed changes
         );
-        enqueueSnackbar(text, options);
-    };
+    }, [loadoutPresets]);
     // -------------------------------------
 
     // -------------------------------------
@@ -318,27 +188,6 @@ const App = () => {
                     fontFamily: theme.typography.fontFamily,
                 }}
             >
-<<<<<<< Updated upstream
-                <PaperBackground
-                    title="Augment Preset Builder"
-                    titleIcon={<Construction fontSize="inherit" />}
-                >
-                    <AugPresBuilder onPresetSave={addAugmentPreset} />
-                </PaperBackground>
-                <PaperBackground
-                    title="Augment Preset Comparison"
-                    titleIcon={<Compare fontSize="inherit" />}
-                >
-                    <AugPresCompare augmentPresets={augPresets} />
-                </PaperBackground>
-                <PaperBackground
-                    title="Augment Preset Manager"
-                    titleIcon={<Dashboard fontSize="inherit" />}
-                    headerOther={
-                        <ImportExportButtons
-                            importAction={importAugmentPreset}
-                            exportAction={exportAllAugmentPresets}
-=======
                 <TabCombo
                     value={augTab}
                     onTabChange={setAugTab}
@@ -369,26 +218,6 @@ const App = () => {
                     <PaperBackground
                         title="Augment Preset Manager"
                         titleIcon={<Dashboard fontSize="inherit" />}
-                        headerOther={
-                            <ImportExportButtons
-                                importAction={(data_string) => {
-                                    importPreset(
-                                        data_string,
-                                        setAugPresets,
-                                        setSnackbar,
-                                        TypeguardAugmentPresetSignature,
-                                        augmentPresetFromSignatures,
-                                    );
-                                }}
-                                exportAction={() => {
-                                    exportAllPresets(
-                                        augPresets,
-                                        augmentPresetToSignature,
-                                        setSnackbar,
-                                    );
-                                }}
-                            />
-                        }
                     >
                         <AugPresManager
                             augmentPresets={augPresets}
@@ -414,7 +243,6 @@ const App = () => {
                                     setSnackbar,
                                 )
                             }
->>>>>>> Stashed changes
                         />
                     </PaperBackground>
                 </TabCombo>
@@ -423,39 +251,6 @@ const App = () => {
                     onTabChange={setLoadoutTab}
                     labels={["build", "compare", "manage"]}
                 >
-<<<<<<< Updated upstream
-                    <AugPresManager
-                        augmentPresets={augPresets}
-                        onEdit={editAugmentPreset}
-                        onExport={exportAugmentPreset}
-                        onDuplicate={duplicateAugmentPreset}
-                        onDelete={deleteAugmentPreset}
-                    />
-                </PaperBackground>
-                <PaperBackground
-                    title="Loadout Preset Builder"
-                    titleIcon={<Construction fontSize="inherit" />}
-                >
-                    <LoadoutPresBuilder
-                        augmentPresets={augPresets}
-                        onPresetSave={addLoadoutPreset}
-                    />
-                </PaperBackground>
-                <PaperBackground
-                    title="Loadout Preset Compare"
-                    titleIcon={<Compare fontSize="inherit" />}
-                >
-                    <LoadoutPresCompare
-                        loadoutPresets={loadoutPresets}
-                        augmentPresets={augPresets}
-                    />
-                </PaperBackground>
-                <EditModal
-                    open={dialogOpen}
-                    onClose={closeDialog}
-                    editor={dialogEditor}
-                />
-=======
                     <PaperBackground
                         title="Loadout Preset Builder"
                         titleIcon={
@@ -485,26 +280,6 @@ const App = () => {
                     <PaperBackground
                         title="Loadout Preset Manager"
                         titleIcon={<Dashboard fontSize="inherit" />}
-                        headerOther={
-                            <ImportExportButtons
-                                importAction={(data_string) => {
-                                    importPreset(
-                                        data_string,
-                                        setLoadoutPresets,
-                                        setSnackbar,
-                                        TypeguardLoadoutPresetSignature,
-                                        loadoutPresetsFromSignatures,
-                                    );
-                                }}
-                                exportAction={() => {
-                                    exportAllPresets(
-                                        loadoutPresets,
-                                        loadoutPresetToSignatures,
-                                        setSnackbar,
-                                    );
-                                }}
-                            />
-                        }
                     >
                         <LoadoutPresManager
                             augmentPresets={loadoutPresets}
@@ -538,7 +313,6 @@ const App = () => {
                         editor={dialogEditor}
                     />
                 </TabCombo>
->>>>>>> Stashed changes
             </Stack>
         </ThemeProvider>
     );

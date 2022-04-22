@@ -15,7 +15,8 @@ CONFLICT = (FUSED,)
 
 augments: List[Augment] = []
 
-
+# -------------------------------------------
+# stamina
 augments.extend(
     augment_from_list(
         "stamina",
@@ -26,7 +27,10 @@ augments.extend(
         CONFLICT,
     )
 )
+# -------------------------------------------
 
+# -------------------------------------------
+# spirit
 augments.extend(
     augment_from_list(
         "spirit",
@@ -37,7 +41,10 @@ augments.extend(
         CONFLICT,
     )
 )
+# -------------------------------------------
 
+# -------------------------------------------
+# might precision technique
 _atk_augments = (
     "might",
     "precision",
@@ -54,7 +61,10 @@ for name, eff in zip(_atk_augments, OFFENSIVE_POT):
             CONFLICT,
         )
     )
+# -------------------------------------------
 
+# -------------------------------------------
+# deftness
 augments.extend(
     augment_from_list(
         "deftness",
@@ -65,7 +75,10 @@ augments.extend(
         CONFLICT,
     )
 )
+# -------------------------------------------
 
+# -------------------------------------------
+# guard
 augments.extend(
     augment_from_list(
         "guard",
@@ -76,19 +89,23 @@ augments.extend(
         CONFLICT,
     )
 )
+# -------------------------------------------
 
-_mastery_amount = (1.005, 1.01, 1.015, 1.025)
+# -------------------------------------------
+# mastery
+_mastery_amounts = (1.005, 1.01, 1.015, 1.025)
 augments.extend(
     augment_from_list(
         "mastery",
         4,
         (6, 8, 10, 12),
         (
-            *multi_with_amount(OFFENSIVE_POT, _mastery_amount),
-            EffectMultiLevel(FLOOR_POT, _mastery_amount),
-            EffectMultiLevel(DMG_RES, _mastery_amount),
+            *multi_with_amount(OFFENSIVE_POT, _mastery_amounts),
+            EffectMultiLevel(FLOOR_POT, _mastery_amounts),
+            EffectMultiLevel(DMG_RES, _mastery_amounts),
         ),
         GROUP,
-        [],
+        tuple(),
     )
 )
+# -------------------------------------------

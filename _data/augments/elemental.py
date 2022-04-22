@@ -12,8 +12,9 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
-elements = ("fire", "ice", "lightning", "wind", "light")
-for element in elements:
+# -------------------------------------------
+_eles = ("fire", "ice", "lightning", "wind", "light")
+for element in _eles:
     augments.append(
         Augment(
             f"{element} exploit",
@@ -25,6 +26,7 @@ for element in elements:
             ),
             GROUP,
             CONFLICT,
-            f"against enemies weak to {element}",
+            f"against enemies weak to {element}.",
         )
     )
+# -------------------------------------------

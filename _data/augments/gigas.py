@@ -14,6 +14,7 @@ CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
+# ----------------------------------------------------------------
 _names = ("might", "precision", "technique")
 for name, eff in zip(_names, OFFENSIVE_POT):
     augments.extend(
@@ -29,3 +30,4 @@ for name, eff in zip(_names, OFFENSIVE_POT):
             CONFLICT,
         )
     )
+# ----------------------------------------------------------------
