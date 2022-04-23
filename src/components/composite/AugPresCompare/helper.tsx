@@ -3,8 +3,10 @@ import {
     getTotalStatsFromEffsArr,
     collectEffsFromArr,
     isAddEffect,
-    parseStat,
-    EFFECT_NAME,
+    parseEffectValue,
+    EFFECT_NAMES,
+    collectBPFromAugments,
+    removeDuplicateKeys,
 } from "../../util";
 import { Equipment } from "../../../types";
 
@@ -22,22 +24,12 @@ const getTotalStatsFromEquipment = (equipment: Equipment) => {
     return getTotalStatsFromEffsArr(all_effs);
 };
 /**
- * Iterating over the same key twice will result in
- * an incorrect stats. This function remove any duplicate keys.
- * @param keys_with_duplicates
- * @returns
- */
-const removeDuplicateKeys = (keys_with_duplicates: string[]) => {
-    const duplicates_removed = new Set(keys_with_duplicates);
-    return Array.from(duplicates_removed);
-};
-/**
  * Compare and parse the difference of stats between subj and comp.
  * @param subject
  * @param comparand
  * @returns
  */
-export const compareStats = (
+export const prepareStatsToDisplay = (
     subject: Equipment,
     comparand: Equipment,
 ) => {
@@ -64,29 +56,26 @@ export const compareStats = (
         const diff_value = subj_value - comp_value + default_value;
 
         parsed_stats[key] = {
-            value: parseStat(subj_value, eff_is_add),
-            diff: parseStat(diff_value, eff_is_add),
+            value: parseEffectValue(subj_value, eff_is_add),
+            diff: parseEffectValue(diff_value, eff_is_add),
             negative: diff_value < default_value,
         };
     }
     // -----------------------
+
+    // -----------------------
     // counting BP
-    let subj_bp = 0;
-    for (const aug of subject.augments) {
-        subj_bp += aug.bp;
-    }
-    let comp_bp = 0;
-    for (const aug of comparand.augments) {
-        comp_bp += aug.bp;
-    }
+    const subj_bp = collectBPFromAugments(subject.augments);
+    const comp_bp = collectBPFromAugments(comparand.augments);
     if (subj_bp > 0 || comp_bp > 0) {
         const diff_bp = subj_bp - comp_bp;
-        parsed_stats[EFFECT_NAME.BP] = {
-            value: parseStat(subj_bp, true),
-            diff: parseStat(diff_bp, true),
+        parsed_stats[EFFECT_NAMES.BP] = {
+            value: parseEffectValue(subj_bp, true),
+            diff: parseEffectValue(diff_bp, true),
             negative: diff_bp < 0,
         };
     }
+    // -----------------------
     return parsed_stats;
 };
 // ---------------------------------------------

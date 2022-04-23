@@ -1,18 +1,19 @@
 import { StatItemValue } from "../../basic/StatsDisplay";
 import { AugmentData, AugmentPreset } from "../../../types";
 import {
-    EFFECT_NAME,
+    EFFECT_NAMES,
     collectEffsFromArr,
+    collectBPFromAugments,
     getTotalStatsFromEffsArr,
     isAddEffect,
-    parseStat,
+    parseEffectValue,
 } from "../../util";
 
 // -------------------------------------
 /**
  * If an initial preset is given,
- * set the initial states as the preset.
- * If not, use empty.
+ * set the initial states equal to preset.
+ * If not, use fallback value.
  * @param preset
  * @returns
  */
@@ -38,24 +39,23 @@ export const prepareInitalStates = (
  * @returns
  */
 export const prepareStatsToDisplay = (augments: AugmentData[]) => {
-    const all_effs = collectEffsFromArr(augments);
-    const total_stats = getTotalStatsFromEffsArr(all_effs);
+    const isolated_effs = collectEffsFromArr(augments);
+    const total_stats = getTotalStatsFromEffsArr(isolated_effs);
 
     let parsed_stats: { [key: string]: StatItemValue } = {};
     for (const key of Object.keys(total_stats)) {
-        const parsed_value = parseStat(
+        const parsed_value = parseEffectValue(
             total_stats[key],
             isAddEffect(key),
         );
         parsed_stats[key] = { value: parsed_value };
     }
 
-    let bp = 0;
-    for (const augment of augments) {
-        bp += augment.bp;
-    }
+    const bp = collectBPFromAugments(augments);
     if (bp > 0) {
-        parsed_stats[EFFECT_NAME.BP] = { value: parseStat(bp, true) };
+        parsed_stats[EFFECT_NAMES.BP] = {
+            value: parseEffectValue(bp, true),
+        };
     }
     return parsed_stats;
 };

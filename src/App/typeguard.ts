@@ -18,7 +18,8 @@ const typeGuardAugmentDataSignature = (obj: any) => {
  */
 const typeGuardEquipmentSignature = (obj: any) => {
     const equipment_check =
-        typeof obj.equipment.name === "string" || obj === null;
+        obj.equipment === null ||
+        typeof obj.equipment.name === "string";
     if (!equipment_check) {
         return false;
     }

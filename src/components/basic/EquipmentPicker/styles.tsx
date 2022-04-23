@@ -3,11 +3,11 @@ import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
 
-import StyledAutocompleteOption from "../../StyledAutocompleteOption";
+import PickerOption from "../PickerOption";
 
 import {
     isAddEffect,
-    parseStat,
+    parseEffectValue,
     EFFECT_NAME_TRANSLATE,
 } from "../../util";
 import { EquipmentData } from "../../../types";
@@ -22,14 +22,17 @@ import { EquipmentData } from "../../../types";
 export const renderOption = (props: any, option: EquipmentData) => {
     let subheaders: string[] = [];
     for (const eff of option.effs) {
-        const parsed_amt = parseStat(eff.amt, isAddEffect(eff.eff));
+        const parsed_amt = parseEffectValue(
+            eff.amt,
+            isAddEffect(eff.eff),
+        );
         const { emoji, name } = EFFECT_NAME_TRANSLATE[eff.eff];
         const subheader = `${emoji} ${name} ${parsed_amt}`;
         subheaders.push(subheader);
     }
     return (
         <Box {...props}>
-            <StyledAutocompleteOption
+            <PickerOption
                 capitalizeHeader
                 key={option.name}
                 header={option.name}

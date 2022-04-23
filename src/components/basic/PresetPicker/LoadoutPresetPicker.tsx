@@ -96,7 +96,7 @@ export const filterOptions = (
 
 // ---------------------------------------------
 interface AugmentPresetPickerProps {
-    value: LoadoutPreset;
+    value: LoadoutPreset | null;
     presets: LoadoutPreset[];
     onChange: (value: LoadoutPreset | null) => void;
 }

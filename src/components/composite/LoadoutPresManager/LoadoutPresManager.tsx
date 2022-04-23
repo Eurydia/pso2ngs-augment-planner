@@ -17,7 +17,7 @@ const AugPresManager = (props: LoadoutPresManager) => {
         <Grid item xs={1} padding={1} key={preset.name}>
             <PresetCard
                 index={index}
-                header={preset.name}
+                name={preset.name}
                 desc={preset.description}
                 equipment={preset.equipment}
                 onEdit={props.onEdit}
@@ -30,7 +30,7 @@ const AugPresManager = (props: LoadoutPresManager) => {
     return (
         <Grid
             container
-            columns={1}
+            columns={{ xs: 1, sm: 2 }}
             sx={{
                 maxHeight: "600px",
                 overflowY: "auto",

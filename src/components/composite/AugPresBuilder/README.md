@@ -2,8 +2,8 @@
 
 Build Augment Presets. 
 
-A layout of
- - Augment Picker.
- - Stats Display.
- - Name and description fields.
- - Save and clear buttons.
+Build from
+ - `AugmentPicker`,
+ - `StatsDisplay`,
+ - `NameDescFields`, and
+ - `SaveClearbuttons`.

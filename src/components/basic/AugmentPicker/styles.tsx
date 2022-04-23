@@ -9,7 +9,7 @@ import { AugmentData } from "../../../types";
 import {
     convertToRoman,
     EFFECT_NAME_TRANSLATE,
-    parseStat,
+    parseEffectValue,
     isAddEffect,
 } from "../../util";
 
@@ -25,7 +25,10 @@ export const renderOption = (props: any, option: AugmentData) => {
     const header = `${option.name} ${roman_level}`.trimEnd();
     let subheaders: string[] = [];
     for (const eff of option.effs) {
-        const parsed_amt = parseStat(eff.amt, isAddEffect(eff.eff));
+        const parsed_amt = parseEffectValue(
+            eff.amt,
+            isAddEffect(eff.eff),
+        );
         const { emoji, name } = EFFECT_NAME_TRANSLATE[eff.eff];
         const subheader = `${emoji} ${name} ${parsed_amt}`;
         subheaders.push(subheader);

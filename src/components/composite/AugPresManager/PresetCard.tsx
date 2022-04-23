@@ -1,3 +1,5 @@
+import React from "react";
+
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -5,56 +7,47 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import useTheme from "@mui/material/styles/useTheme";
 
-import { convertToRoman } from "../../util";
-import {
-    Equipment,
-    EquipmentData,
-    AugmentData,
-} from "../../../types";
 import ActionButtons from "../../basic/ActionButtons";
-import { Fragment } from "react";
+
+import { EFFECT_NAME_TRANSLATE, convertToRoman } from "../../util";
+import { AugmentData } from "../../../types";
 
 // -------------------------------------------------------
-// For rendering augment preset picker's options
-interface OptionItemProps {
-    eq: EquipmentData | null;
-    augments: AugmentData[];
-}
-const CardEquipment = (props: OptionItemProps) => {
-    const theme = useTheme();
-    const eq_name = props.eq
-        ? props.eq.name
-        : "[equipment not selected]";
-
-    let augments: JSX.Element[] = [];
-    for (const aug of props.augments) {
+// prepare string with augment name and icons to represent its effects
+const prepareAugmentString = (augments: AugmentData[]) => {
+    let displays: string[] = [];
+    for (const aug of augments) {
         const roman_level = convertToRoman(aug.level);
         const name = `${aug.name} ${roman_level}`.trim();
-        augments.push(<Typography key={name}>{name}</Typography>);
-    }
-    const aug_displays =
-        augments.length !== 0 ? augments : "[augment not selected]";
 
-    return (
-        <Fragment>
-            <Typography
-                sx={{
-                    fontSize: theme.typography.body1.fontSize,
-                    fontWeight: theme.typography.fontWeightMedium,
-                }}
-            >
-                {eq_name}
-            </Typography>
-            {aug_displays}
-        </Fragment>
-    );
+        let emojis = "";
+        for (const eff of aug.effs) {
+            const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
+            emojis = emojis.concat(emoji);
+        }
+        displays.push(`${emojis} ${name}`);
+    }
+    return displays;
+};
+const getAugmentTypo = (augment: AugmentData[]) => {
+    let aug_string = ["[augment not selected]"];
+    if (augment.length > 0) {
+        aug_string = prepareAugmentString(augment);
+    }
+
+    return aug_string.map((aug_str, index) => (
+        <Typography key={`${index}${index}`}>{aug_str}</Typography>
+    ));
 };
 
+// -------------------------------------------------------
+
+// -------------------------------------------------------
 // Card to display an augment preset
 interface PresetCardProps {
     name: string;
     desc: string;
-    equipment: Equipment[];
+    augments: AugmentData[];
     index: number;
     onEdit: (index: number) => void;
     onExport: (index: number) => void;
@@ -63,14 +56,9 @@ interface PresetCardProps {
 }
 const PresetCard = (props: PresetCardProps) => {
     const theme = useTheme();
+
     const desc = props.desc ? `"${props.desc}"` : "...";
-    const eq_to_display = props.equipment.map((preset, index) => (
-        <CardEquipment
-            key={`${index}${index}`}
-            eq={preset.equipment}
-            augments={preset.augments}
-        />
-    ));
+    const augs = getAugmentTypo(props.augments);
     return (
         <Card raised>
             <CardActions>
@@ -91,13 +79,10 @@ const PresetCard = (props: PresetCardProps) => {
                         {props.name}
                     </Typography>
                     <Typography fontStyle="italic">{desc}</Typography>
-                    <Stack sx={{ textTransform: "capitalize" }}>
-                        {eq_to_display}
-                    </Stack>
+                    <Stack textTransform="capitalize">{augs}</Stack>
                 </Stack>
             </CardContent>
         </Card>
     );
 };
 export default PresetCard;
-// -------------------------------------------------------

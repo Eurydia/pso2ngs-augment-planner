@@ -1,6 +1,6 @@
 import { Effect, AugmentData, EquipmentData } from "../types";
 
-export const EFFECT_NAME = {
+export const EFFECT_NAMES = {
     BP: "BP",
     HP: "HP",
     PP: "PP",
@@ -46,9 +46,9 @@ export const EFFECT_NAME_TRANSLATE: {
  */
 export const isAddEffect = (effect: string) => {
     return (
-        effect === EFFECT_NAME.BP ||
-        effect === EFFECT_NAME.HP ||
-        effect === EFFECT_NAME.PP
+        effect === EFFECT_NAMES.BP ||
+        effect === EFFECT_NAMES.HP ||
+        effect === EFFECT_NAMES.PP
     );
 };
 // ---------------------------------------------
@@ -91,6 +91,18 @@ export const convertToRoman = (num: number) => {
 
 // ---------------------------------------------
 /**
+ * Collect total BP from Array of Augments
+ * @param augments
+ * @returns
+ */
+export const collectBPFromAugments = (augments: AugmentData[]) => {
+    let bp = 0;
+    for (const aug of augments) {
+        bp += aug.bp;
+    }
+    return bp;
+};
+/**
  * Isolate effects from array of objects
  * @param objs
  * @returns
@@ -108,6 +120,18 @@ export const collectEffsFromArr = (
         }
     }
     return effects;
+};
+/**
+ * Iterating over the same key twice will result in
+ * an incorrect stats. This function remove any duplicate keys.
+ * @param keys_with_duplicates
+ * @returns
+ */
+export const removeDuplicateKeys = (
+    keys_with_duplicates: string[],
+) => {
+    const duplicates_removed = new Set(keys_with_duplicates);
+    return Array.from(duplicates_removed);
 };
 /**
  * Tally the total effects from array of Effects.
@@ -133,26 +157,24 @@ export const getTotalStatsFromEffsArr = (effects: Effect[]) => {
 // ---------------------------------------------
 // ---------------------------------------------
 /**
- * Parse a single stat into something a `StatItem` can understand.
+ * Parse value according to the stacking type.
  * @param value
  * @param is_add
  * @returns
  */
-export const parseStat = (value: number, is_add: boolean) => {
+export const parseEffectValue = (value: number, is_add: boolean) => {
     let parsed_value: string;
-    let sign = "+";
+    let default_value: number;
     if (is_add) {
-        if (value < 0) {
-            sign = "";
-        }
+        default_value = 0;
         parsed_value = value.toString();
     } else {
-        if (value < 1) {
-            sign = "";
-        }
-        const _value = value * 100 - 100;
-        parsed_value = `${_value.toPrecision(3)}%`;
+        default_value = 1;
+        const temp = value * 100 - 100;
+        parsed_value = `${temp.toPrecision(3)}%`;
     }
+
+    let sign = value < default_value ? "" : "+";
     return `${sign}${parsed_value}`;
 };
 // ---------------------------------------------

@@ -19,7 +19,7 @@ import {
 
 interface EquipmentBuilderProps {
     allowEmptyEquipment?: boolean;
-    header: string;
+    name: string;
     mode: EquipmentPickerMode;
     value: Equipment;
     augmentPresets: AugmentPreset[];
@@ -31,9 +31,7 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
     const theme = useTheme();
     // -------------------------------------------------
     // states
-    const [augPreset, setAugPreset] = useState<AugmentPreset | null>(
-        null,
-    );
+    const [preset, setPreset] = useState<AugmentPreset | null>(null);
     // -------------------------------------------------
 
     // -------------------------------------------------
@@ -42,7 +40,15 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
         if (preset) {
             props.onAugmentsChange(preset.augments);
         }
-        setAugPreset(preset);
+        setPreset(preset);
+    };
+    const handleAugmentChange = (augments: AugmentData[]) => {
+        if (preset) {
+            // if the augment picker changes without preset
+            // then reset the preset back to null.
+            setPreset(null);
+        }
+        props.onAugmentsChange(augments);
     };
     // -------------------------------------------------
 
@@ -57,7 +63,7 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
                     textTransform: "capitalize",
                 }}
             >
-                {props.header}
+                {props.name}
             </Typography>
             <EquipmentPicker
                 variant={props.mode}
@@ -66,12 +72,12 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
             />
             <AugmentPresetPicker
                 presets={props.augmentPresets}
-                value={augPreset}
+                value={preset}
                 onChange={handlePresetChange}
             />
             <AugmentPicker
                 values={props.value.augments}
-                onChange={props.onAugmentsChange}
+                onChange={handleAugmentChange}
             />
         </Stack>
     );

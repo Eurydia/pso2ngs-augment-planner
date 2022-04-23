@@ -3,6 +3,11 @@ import { Dispatch, SetStateAction } from "react";
 import { saveAs } from "file-saver";
 
 import { loadPresets } from "./session";
+import {
+    OptionsObject,
+    SnackbarKey,
+    SnackbarMessage,
+} from "notistack";
 
 // ---------------------------------
 /**
@@ -32,14 +37,15 @@ const getValidName = (name: string, used_name: string[]) => {
  * check its name and add it to the end.
  * @param new_preset
  * @param preset_stter
- * @param snackbar_setter
+ * @param enqueue_snackbar
  */
 export const addPreset = <Preset extends { name: string }>(
     new_preset: Preset,
     preset_stter: Dispatch<SetStateAction<Preset[]>>,
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     preset_stter((prev) => {
         const used_name = prev.map((preset) => preset.name);
@@ -50,15 +56,17 @@ export const addPreset = <Preset extends { name: string }>(
         // ----------------------
         // for snackbar
         let text: string;
-        let options: { variant: "warning" | "success" };
+        let variant: "warning" | "success";
         if (valid_name !== new_preset.name) {
             text = `Your preset was saved as "${valid_name}".`;
-            options = { variant: "warning" };
+            variant = "warning";
         } else {
             text = "Preset saved 👍.";
-            options = { variant: "success" };
+            variant = "success";
         }
-        snackbar_setter({ text, options });
+        enqueue_snackbar(text, {
+            variant,
+        });
         // ----------------------
         let updated = [...prev];
         updated.push({ ...new_preset, name: valid_name });
@@ -75,9 +83,10 @@ export const addPreset = <Preset extends { name: string }>(
 export const duplicatePreset = <Preset extends { name: string }>(
     index: number,
     preset_setter: Dispatch<SetStateAction<Preset[]>>,
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     preset_setter((prev) => {
         const preset = prev[index];
@@ -85,12 +94,7 @@ export const duplicatePreset = <Preset extends { name: string }>(
         const valid_name = getValidName(preset.name, used_name);
         return [...prev, { ...preset, name: valid_name }];
     });
-    snackbar_setter({
-        text: "Preset duplicated.",
-        options: {
-            variant: "success",
-        },
-    });
+    enqueue_snackbar("Preset duplicated.", { variant: "success" });
 };
 /**
  * When an existing augment is removed,
@@ -102,21 +106,17 @@ export const duplicatePreset = <Preset extends { name: string }>(
 export const deletePreset = <Preset extends { name: string }>(
     index: number,
     preset_seter: Dispatch<SetStateAction<Preset[]>>,
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     preset_seter((prev) => {
         let updated = [...prev];
         updated.splice(index, 1);
         return updated;
     });
-    snackbar_setter({
-        text: "Preset deleted.",
-        options: {
-            variant: "success",
-        },
-    });
+    enqueue_snackbar("Preset deleted.", { variant: "success" });
 };
 /**
  * When an existing preset is edited,
@@ -130,9 +130,10 @@ export const editPreset = <Preset extends { name: string }>(
     index: number,
     edited_preset: Preset,
     preset_setter: Dispatch<SetStateAction<Preset[]>>,
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     preset_setter((prev) => {
         let used_name = prev.map((pres) => pres.name);
@@ -145,17 +146,17 @@ export const editPreset = <Preset extends { name: string }>(
         // ------------------------
         // for snackbar
         let text: string;
-        let options: { variant: "warning" | "success" };
+        let variant: "warning" | "success";
         if (valid_name !== edited_preset.name) {
             text = `Your preset was saved as "${valid_name}".`;
-            options = { variant: "warning" };
+            variant = "warning";
         } else {
             text = "Preset saved 👍.";
-            options = {
-                variant: "success",
-            };
+            variant = "success";
         }
-        snackbar_setter({ text, options });
+        enqueue_snackbar(text, {
+            variant,
+        });
         // ------------------------
         let updated = [...prev];
         updated[index].name = valid_name;
@@ -177,21 +178,22 @@ export const importPreset = <
 >(
     text_data: string,
     preset_setter: Dispatch<SetStateAction<Preset[]>>,
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
     type_guard: (obj: any) => boolean,
     preset_rebuilder: (obj: Signature[]) => Preset[],
 ) => {
     let text: string = "Import failed.";
-    let options: { variant: "error" | "success" } = {
-        variant: "error",
-    };
-    const json_data = JSON.parse(text_data);
+    let variant: "error" | "success" = "error";
     // if json data isn't an array,
     // then don't proceed any further.
+    const json_data = JSON.parse(text_data);
     if (!Array.isArray(json_data)) {
-        snackbar_setter({ text, options });
+        enqueue_snackbar(text, {
+            variant,
+        });
         return;
     }
     // sanitize the json data
@@ -213,10 +215,8 @@ export const importPreset = <
     });
     // for snackbar
     text = "Preset(s) imported.";
-    options = {
-        variant: "success",
-    };
-    snackbar_setter({ text, options });
+    variant = "success";
+    enqueue_snackbar(text, { variant });
 };
 /**
  * When a preset is exported,
@@ -231,19 +231,18 @@ export const exportPreset = <
 >(
     preset: Preset,
     preset_stripper: (presets: Preset[]) => Signature[],
-    snackbar_setter: (value: { text: string; options: {} }) => void,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     const signatures = preset_stripper([preset]);
     const blob = new Blob([JSON.stringify(signatures)], {
         type: "application/json;charset=utf-8",
     });
     saveAs(blob, `preset.json`);
-    // snackbar
-    snackbar_setter({
-        text: "Preset exported.",
-        options: {
-            variant: "success",
-        },
+    enqueue_snackbar("Preset exported.", {
+        variant: "success",
     });
 };
 /**
@@ -258,21 +257,18 @@ export const exportAllPresets = <
 >(
     presets: Preset[],
     preset_stripper: (presets: Preset[]) => Signature[],
-    snackbar_setter: Dispatch<
-        SetStateAction<{ text: string; options: {} }>
-    >,
+    enqueue_snackbar: (
+        text: SnackbarMessage,
+        options: OptionsObject,
+    ) => SnackbarKey,
 ) => {
     const signatures = preset_stripper(presets);
     const blob = new Blob([JSON.stringify(signatures)], {
         type: "application/json;charset=utf-8",
     });
     saveAs(blob, "presets.json");
-    // snackbar
-    snackbar_setter({
-        text: "All presets exported.",
-        options: {
-            variant: "success",
-        },
+    enqueue_snackbar("All presets exported.", {
+        variant: "success",
     });
 };
 // -------------------------------------

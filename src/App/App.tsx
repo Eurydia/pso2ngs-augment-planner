@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import useTheme from "@mui/material/styles/useTheme";
 
 import Construction from "@mui/icons-material/Construction";
@@ -10,7 +9,6 @@ import Dashboard from "@mui/icons-material/Dashboard";
 
 import { useSnackbar } from "notistack";
 
-import { default as main_theme } from "./theme";
 import { saveData, loadData, loadPresets } from "./session";
 import {
     augmentPresetFromSignatures,
@@ -37,7 +35,7 @@ import {
     TypeguardLoadoutPresetSignature,
 } from "./typeguard";
 
-import TabCombo from "../components/auxillery/TabCombo";
+import TabCombo from "../components/basic/TabCombo";
 import AugPresBuilder from "../components/composite/AugPresBuilder";
 import AugPresCompare from "../components/composite/AugPresCompare";
 import AugPresManager from "../components/composite/AugPresManager";
@@ -54,22 +52,7 @@ import {
 
 const App = () => {
     const theme = useTheme();
-
-    // -------------------------------------
-    // SNACKBAR FEEDBACK
     const { enqueueSnackbar } = useSnackbar();
-    const [snackbar, setSnackbar] = useState({
-        text: "",
-        options: {},
-    });
-    useEffect(() => {
-        if (snackbar.text) {
-            enqueueSnackbar(snackbar.text, snackbar.options);
-            setSnackbar({ text: "", options: {} });
-        }
-    }, [snackbar, enqueueSnackbar]);
-
-    // -------------------------------------
 
     // -------------------------------------
     // MODAL STATES
@@ -114,14 +97,14 @@ const App = () => {
                 index,
                 edited_preset,
                 setAugPresets,
-                setSnackbar,
+                enqueueSnackbar,
             );
         };
-        const target_preset = augPresets[index];
+        const init_preset = augPresets[index];
         const title = "Augment Preset Edit";
         const component = (
             <AugPresBuilder
-                initPreset={target_preset}
+                initPreset={init_preset}
                 onPresetSave={handleEditSave}
             />
         );
@@ -160,14 +143,14 @@ const App = () => {
                 index,
                 edited_preset,
                 setLoadoutPresets,
-                setSnackbar,
+                enqueueSnackbar,
             );
         };
-        const target_preset = loadoutPresets[index];
+        const init_preset = loadoutPresets[index];
         const title = "Loadout Preset Edit";
         const component = (
             <LoadoutPresBuilder
-                initPreset={target_preset}
+                initPreset={init_preset}
                 augmentPresets={augPresets}
                 onPresetSave={handleEditSave}
             />
@@ -175,146 +158,139 @@ const App = () => {
         setDialogEditor({ title, component });
         setDialogOpen(true);
     };
-
     // -------------------------------------
 
     return (
-        <ThemeProvider theme={main_theme}>
-            <Stack
-                spacing={2}
-                sx={{
-                    marginX: "auto",
-                    maxWidth: "md",
-                    fontFamily: theme.typography.fontFamily,
-                }}
+        <Stack
+            spacing={2}
+            sx={{
+                marginX: "auto",
+                maxWidth: "md",
+                fontFamily: theme.typography.fontFamily,
+            }}
+        >
+            <TabCombo
+                value={augTab}
+                onTabChange={setAugTab}
+                labels={["build", "compare", "manage"]}
             >
-                <TabCombo
-                    value={augTab}
-                    onTabChange={setAugTab}
-                    labels={["build", "compare", "manage"]}
+                <PaperBackground
+                    title="Augment Preset Builder"
+                    titleIcon={<Construction fontSize="inherit" />}
                 >
-                    <PaperBackground
-                        title="Augment Preset Builder"
-                        titleIcon={
-                            <Construction fontSize="inherit" />
-                        }
-                    >
-                        <AugPresBuilder
-                            onPresetSave={(new_preset) => {
-                                addPreset(
-                                    new_preset,
-                                    setAugPresets,
-                                    setSnackbar,
-                                );
-                            }}
-                        />
-                    </PaperBackground>
-                    <PaperBackground
-                        title="Augment Preset Comparison"
-                        titleIcon={<Compare fontSize="inherit" />}
-                    >
-                        <AugPresCompare augmentPresets={augPresets} />
-                    </PaperBackground>
-                    <PaperBackground
-                        title="Augment Preset Manager"
-                        titleIcon={<Dashboard fontSize="inherit" />}
-                    >
-                        <AugPresManager
-                            augmentPresets={augPresets}
-                            onEdit={editAugmentPreset}
-                            onExport={(index) => {
-                                exportPreset(
-                                    augPresets[index],
-                                    augmentPresetToSignature,
-                                    setSnackbar,
-                                );
-                            }}
-                            onDuplicate={(index) =>
-                                duplicatePreset(
-                                    index,
-                                    setAugPresets,
-                                    setSnackbar,
-                                )
-                            }
-                            onDelete={(index) =>
-                                deletePreset(
-                                    index,
-                                    setAugPresets,
-                                    setSnackbar,
-                                )
-                            }
-                        />
-                    </PaperBackground>
-                </TabCombo>
-                <TabCombo
-                    value={loadoutTab}
-                    onTabChange={setLoadoutTab}
-                    labels={["build", "compare", "manage"]}
-                >
-                    <PaperBackground
-                        title="Loadout Preset Builder"
-                        titleIcon={
-                            <Construction fontSize="inherit" />
-                        }
-                    >
-                        <LoadoutPresBuilder
-                            augmentPresets={augPresets}
-                            onPresetSave={(new_preset) => {
-                                addPreset(
-                                    new_preset,
-                                    setLoadoutPresets,
-                                    setSnackbar,
-                                );
-                            }}
-                        />
-                    </PaperBackground>
-                    <PaperBackground
-                        title="Loadout Preset Compare"
-                        titleIcon={<Compare fontSize="inherit" />}
-                    >
-                        <LoadoutPresCompare
-                            augmentPresets={augPresets}
-                            loadoutPresets={loadoutPresets}
-                        />
-                    </PaperBackground>
-                    <PaperBackground
-                        title="Loadout Preset Manager"
-                        titleIcon={<Dashboard fontSize="inherit" />}
-                    >
-                        <LoadoutPresManager
-                            augmentPresets={loadoutPresets}
-                            onEdit={editLoadoutPreset}
-                            onExport={(index) =>
-                                exportPreset(
-                                    loadoutPresets[index],
-                                    loadoutPresetToSignatures,
-                                    setSnackbar,
-                                )
-                            }
-                            onDuplicate={(index) =>
-                                duplicatePreset(
-                                    index,
-                                    setLoadoutPresets,
-                                    setSnackbar,
-                                )
-                            }
-                            onDelete={(index) =>
-                                deletePreset(
-                                    index,
-                                    setLoadoutPresets,
-                                    setSnackbar,
-                                )
-                            }
-                        />
-                    </PaperBackground>
-                    <EditDialog
-                        open={dialogOpen}
-                        onClose={() => setDialogOpen(true)}
-                        editor={dialogEditor}
+                    <AugPresBuilder
+                        onPresetSave={(new_preset) => {
+                            addPreset(
+                                new_preset,
+                                setAugPresets,
+                                enqueueSnackbar,
+                            );
+                        }}
                     />
-                </TabCombo>
-            </Stack>
-        </ThemeProvider>
+                </PaperBackground>
+                <PaperBackground
+                    title="Augment Preset Comparison"
+                    titleIcon={<Compare fontSize="inherit" />}
+                >
+                    <AugPresCompare augmentPresets={augPresets} />
+                </PaperBackground>
+                <PaperBackground
+                    title="Augment Preset Manager"
+                    titleIcon={<Dashboard fontSize="inherit" />}
+                >
+                    <AugPresManager
+                        augmentPresets={augPresets}
+                        onEdit={editAugmentPreset}
+                        onExport={(index) => {
+                            exportPreset(
+                                augPresets[index],
+                                augmentPresetToSignature,
+                                enqueueSnackbar,
+                            );
+                        }}
+                        onDuplicate={(index) =>
+                            duplicatePreset(
+                                index,
+                                setAugPresets,
+                                enqueueSnackbar,
+                            )
+                        }
+                        onDelete={(index) =>
+                            deletePreset(
+                                index,
+                                setAugPresets,
+                                enqueueSnackbar,
+                            )
+                        }
+                    />
+                </PaperBackground>
+            </TabCombo>
+            <TabCombo
+                value={loadoutTab}
+                onTabChange={setLoadoutTab}
+                labels={["build", "compare", "manage"]}
+            >
+                <PaperBackground
+                    title="Loadout Preset Builder"
+                    titleIcon={<Construction fontSize="inherit" />}
+                >
+                    <LoadoutPresBuilder
+                        augmentPresets={augPresets}
+                        onPresetSave={(new_preset) => {
+                            addPreset(
+                                new_preset,
+                                setLoadoutPresets,
+                                enqueueSnackbar,
+                            );
+                        }}
+                    />
+                </PaperBackground>
+                <PaperBackground
+                    title="Loadout Preset Compare"
+                    titleIcon={<Compare fontSize="inherit" />}
+                >
+                    <LoadoutPresCompare
+                        augmentPresets={augPresets}
+                        loadoutPresets={loadoutPresets}
+                    />
+                </PaperBackground>
+                <PaperBackground
+                    title="Loadout Preset Manager"
+                    titleIcon={<Dashboard fontSize="inherit" />}
+                >
+                    <LoadoutPresManager
+                        augmentPresets={loadoutPresets}
+                        onEdit={editLoadoutPreset}
+                        onExport={(index) =>
+                            exportPreset(
+                                loadoutPresets[index],
+                                loadoutPresetToSignatures,
+                                enqueueSnackbar,
+                            )
+                        }
+                        onDuplicate={(index) =>
+                            duplicatePreset(
+                                index,
+                                setLoadoutPresets,
+                                enqueueSnackbar,
+                            )
+                        }
+                        onDelete={(index) =>
+                            deletePreset(
+                                index,
+                                setLoadoutPresets,
+                                enqueueSnackbar,
+                            )
+                        }
+                    />
+                </PaperBackground>
+                <EditDialog
+                    open={dialogOpen}
+                    onClose={() => setDialogOpen(true)}
+                    editor={dialogEditor}
+                />
+            </TabCombo>
+        </Stack>
     );
 };
 export default App;

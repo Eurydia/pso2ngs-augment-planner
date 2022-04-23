@@ -1,87 +1,63 @@
-import { useState, memo } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import Stack from "@mui/material/Stack";
-<<<<<<< Updated upstream
-import Typography from "@mui/material/Typography";
 
-import { prepareEquipmentBuilders, Loadout } from "./helper";
+import { Builders, prepareStatsToDisplay } from "./helper";
 
+import TabCombo from "../../basic/TabCombo";
 import StatsDisplay from "../../basic/StatsDisplay";
-import TwobyTwoGridLayout from "../../components/2x2GridLayout";
+import { LoadoutPresetPicker } from "../../basic/PresetPicker";
 
 import {
-    AugmentPreset,
-    EquipmentWithAugments,
     LoadoutPreset,
+    AugmentPreset,
+    Equipment,
 } from "../../../types";
-=======
 
-import {
-    compareStats,
-    prepareBuilders,
-    BuilderGridContainer,
-} from "./helper";
-
-import { LoadoutPresetPicker } from "../../components/PresetPicker";
-import StatsDisplay from "../../components/StatsDisplay";
-import TabCombo from "../../components/TabCombo";
-
-import { AugmentPreset, Equipment, LoadoutPreset } from "../../types";
->>>>>>> Stashed changes
+const init_loadout: Equipment[] = [
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+    { equipment: null, augments: [] },
+];
 
 interface LoadoutPresCompareProps {
     loadoutPresets: LoadoutPreset[];
     augmentPresets: AugmentPreset[];
 }
-
-const init_loadout: Loadout = {
-    weapon: { equipment: null, augments: [] },
-    units: [],
-};
-
 const LoadoutPresCompare = (props: LoadoutPresCompareProps) => {
     // ------------------------------------
     // prepare states
-    // The subject of the comparison
-<<<<<<< Updated upstream
-    const [subject, setSubject] = useState<Loadout>(init_loadout);
-=======
+    const [tab, setTab] = useState(0);
+
     const [subjPreset, setSubjPreset] =
         useState<LoadoutPreset | null>(null);
-    const [subject, setSubject] =
-        useState<Equipment[]>(init_equipment);
+    const [subject, setSubject] = useState<Equipment[]>(init_loadout);
 
->>>>>>> Stashed changes
-    // The comparand of the comparison
-    const [comparand, setComparand] = useState<Loadout>(init_loadout);
+    const [compPreset, setCompPreset] =
+        useState<LoadoutPreset | null>(null);
+    const [comparand, setComparand] =
+        useState<Equipment[]>(init_loadout);
     // ------------------------------------
 
-<<<<<<< Updated upstream
     // ------------------------------------
     // handlers
+    useEffect(() => {}, [subject]);
+    const handlePresetChange = (
+        preset: LoadoutPreset | null,
+        loadout_setter: Dispatch<SetStateAction<Equipment[]>>,
+        preset_setter: Dispatch<SetStateAction<LoadoutPreset | null>>,
+    ) => {
+        if (preset) {
+            loadout_setter(preset.equipment);
+        }
+        preset_setter(preset);
+    };
     // ------------------------------------
 
-    // const stats = compareStats(subject, comparand);
-=======
-    const stats = compareStats(subject, comparand);
->>>>>>> Stashed changes
+    const parsed_stats = prepareStatsToDisplay(subject, comparand);
 
-    const subject_builders = prepareEquipmentBuilders(
-        "subject",
-        subject,
-        props.augmentPresets,
-        setSubject,
-    );
     return (
-<<<<<<< Updated upstream
-        <Stack spacing={2}>
-            <TwobyTwoGridLayout>
-                {subject_builders}
-            </TwobyTwoGridLayout>
-            {/* <TwobyTwoGridLayout></TwobyTwoGridLayout> */}
-            {/* <StatsDisplay {...stats} /> */}
-        </Stack>
-=======
         <TabCombo
             value={tab}
             onTabChange={setTab}
@@ -90,45 +66,44 @@ const LoadoutPresCompare = (props: LoadoutPresCompareProps) => {
             <Stack>
                 <LoadoutPresetPicker
                     value={subjPreset}
+                    onChange={(preset) =>
+                        handlePresetChange(
+                            preset,
+                            setSubject,
+                            setSubjPreset,
+                        )
+                    }
                     presets={props.loadoutPresets}
-                    onChange={(preset) => {
-                        if (preset) {
-                            setSubject(preset.equipment);
-                        }
-                        setSubjPreset(preset);
-                    }}
                 />
-                <BuilderGridContainer>
-                    {prepareBuilders(
-                        subject,
-                        props.augmentPresets,
-                        setSubject,
-                    )}
-                </BuilderGridContainer>
+                <Builders
+                    values={subject}
+                    loadout_setter={setSubject}
+                    preset_setter={setSubjPreset}
+                    augmentPreset={props.augmentPresets}
+                />
             </Stack>
             <Stack>
                 <LoadoutPresetPicker
                     value={compPreset}
-                    presets={props.loadoutPresets}
                     onChange={(preset) => {
-                        if (preset) {
-                            setComparand(preset.equipment);
-                        }
-                        setCompPreset(preset);
+                        handlePresetChange(
+                            preset,
+                            setComparand,
+                            setCompPreset,
+                        );
                     }}
+                    presets={props.loadoutPresets}
                 />
-                <BuilderGridContainer>
-                    {prepareBuilders(
-                        comparand,
-                        props.augmentPresets,
-                        setComparand,
-                    )}
-                </BuilderGridContainer>
+                <Builders
+                    values={comparand}
+                    loadout_setter={setComparand}
+                    preset_setter={setCompPreset}
+                    augmentPreset={props.augmentPresets}
+                />
             </Stack>
-            <StatsDisplay {...stats} />
+            <StatsDisplay {...parsed_stats} />
         </TabCombo>
->>>>>>> Stashed changes
     );
 };
 
-export default memo(LoadoutPresCompare);
+export default LoadoutPresCompare;

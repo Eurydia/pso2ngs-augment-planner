@@ -2,7 +2,7 @@ import { useState, Dispatch, SetStateAction } from "react";
 
 import Stack from "@mui/material/Stack";
 
-import { compareStats } from "./helper";
+import { prepareStatsToDisplay } from "./helper";
 
 import EquipmentBuilder, {
     BuilderGridItem,
@@ -17,15 +17,14 @@ import {
     EquipmentData,
 } from "../../../types";
 
-interface AugPresCompareProps {
-    augmentPresets: AugmentPreset[];
-}
-
 const init_states: Equipment = {
     equipment: null,
     augments: [],
 };
 
+interface AugPresCompareProps {
+    augmentPresets: AugmentPreset[];
+}
 const AugPresCompare = (props: AugPresCompareProps) => {
     // ------------------------------------
     // The subject of the comparison
@@ -59,14 +58,14 @@ const AugPresCompare = (props: AugPresCompareProps) => {
     };
     // ------------------------------------
 
-    const parsed_stats = compareStats(subject, comparand);
+    const parsed_stats = prepareStatsToDisplay(subject, comparand);
 
     return (
         <Stack spacing={2}>
             <BuilderGridContainer>
                 <BuilderGridItem>
                     <EquipmentBuilder
-                        header="subject"
+                        name="subject"
                         mode="both"
                         value={subject}
                         onAugmentsChange={(augs) =>
@@ -80,7 +79,7 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                 </BuilderGridItem>
                 <BuilderGridItem>
                     <EquipmentBuilder
-                        header="comparand"
+                        name="comparand"
                         mode="both"
                         value={subject}
                         onAugmentsChange={(augs) =>
