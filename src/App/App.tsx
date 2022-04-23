@@ -38,12 +38,12 @@ import {
 } from "./typeguard";
 
 import TabCombo from "../components/auxillery/TabCombo";
-import AugPresBuilder from "../components/complete/AugPresBuilder";
-import AugPresCompare from "../components/complete/AugPresCompare";
-import AugPresManager from "../components/complete/AugPresManager";
-import LoadoutPresBuilder from "../components/complete/LoadoutPresBuilder";
-import LoadoutPresCompare from "../components/complete/LoadoutPresCompare";
-import LoadoutPresManager from "../components/complete/LoadoutPresManager";
+import AugPresBuilder from "../components/composite/AugPresBuilder";
+import AugPresCompare from "../components/composite/AugPresCompare";
+import AugPresManager from "../components/composite/AugPresManager";
+import LoadoutPresBuilder from "../components/composite/LoadoutPresBuilder";
+import LoadoutPresCompare from "../components/composite/LoadoutPresCompare";
+import LoadoutPresManager from "../components/composite/LoadoutPresManager";
 
 import {
     AugmentPreset,

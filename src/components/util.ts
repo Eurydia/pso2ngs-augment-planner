@@ -1,6 +1,6 @@
 import { Effect, AugmentData, EquipmentData } from "../types";
 
-export const EFFECT_NAME: { [keys: string]: string } = {
+export const EFFECT_NAME = {
     BP: "BP",
     HP: "HP",
     PP: "PP",
@@ -95,7 +95,7 @@ export const convertToRoman = (num: number) => {
  * @param objs
  * @returns
  */
-export const collectEffectsFromArray = (
+export const collectEffsFromArr = (
     objs: (AugmentData | EquipmentData | null)[],
 ) => {
     let effects: Effect[] = [];
@@ -114,7 +114,7 @@ export const collectEffectsFromArray = (
  * @param effects
  * @returns
  */
-export const getTotalStatsFromEffs = (effects: Effect[]) => {
+export const getTotalStatsFromEffsArr = (effects: Effect[]) => {
     let total_stats: { [key: string]: number } = {};
     for (const effect of effects) {
         const { eff, amt } = effect;
@@ -154,21 +154,5 @@ export const parseStat = (value: number, is_add: boolean) => {
         parsed_value = `${_value.toPrecision(3)}%`;
     }
     return `${sign}${parsed_value}`;
-};
-/**
- * Macro. Calling parseStat on all values of a stat object.
- * @param stats_bobj
- * @returns
- */
-export const parseStats = (stats_obj: { [key: string]: number }) => {
-    let parsed_obj: { [key: string]: string } = {};
-    const keys = Object.keys(parsed_obj);
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = stats_obj[key];
-        const parsed_value = parseStat(value, isAddEffect(key));
-        parsed_obj[key] = parsed_value;
-    }
-    return parsed_obj;
 };
 // ---------------------------------------------
