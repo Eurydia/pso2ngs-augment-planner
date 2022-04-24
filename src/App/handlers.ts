@@ -56,10 +56,10 @@ export const addPreset = <Preset extends { name: string }>(
         // ----------------------
         // for snackbar
         let text: string;
-        let variant: "warning" | "success";
+        let variant: "info" | "success";
         if (valid_name !== new_preset.name) {
             text = `Your preset was saved as "${valid_name}".`;
-            variant = "warning";
+            variant = "info";
         } else {
             text = "Preset saved 👍.";
             variant = "success";
@@ -78,7 +78,7 @@ export const addPreset = <Preset extends { name: string }>(
  * rename and add it to the end.
  * @param index index to duplicate
  * @param preset_setter
- * @param snackbar_setter
+ * @param enqueue_snackbar
  */
 export const duplicatePreset = <Preset extends { name: string }>(
     index: number,
@@ -92,7 +92,10 @@ export const duplicatePreset = <Preset extends { name: string }>(
         const preset = prev[index];
         const used_name = prev.map((preset) => preset.name);
         const valid_name = getValidName(preset.name, used_name);
-        return [...prev, { ...preset, name: valid_name }];
+
+        let updated = [...prev];
+        updated.push({ ...preset, name: valid_name });
+        return updated;
     });
     enqueue_snackbar("Preset duplicated.", { variant: "success" });
 };
@@ -100,18 +103,18 @@ export const duplicatePreset = <Preset extends { name: string }>(
  * When an existing augment is removed,
  * splice it from the preset array.
  * @param index
- * @param preset_seter
- * @param snackbar_setter
+ * @param preset_setter
+ * @param enqueue_snackbar
  */
 export const deletePreset = <Preset extends { name: string }>(
     index: number,
-    preset_seter: Dispatch<SetStateAction<Preset[]>>,
+    preset_setter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    preset_seter((prev) => {
+    preset_setter((prev) => {
         let updated = [...prev];
         updated.splice(index, 1);
         return updated;
@@ -124,7 +127,7 @@ export const deletePreset = <Preset extends { name: string }>(
  * @param index index to edit
  * @param edited_preset
  * @param preset_setter
- * @param snackbar_setter
+ * @param enqueue_snackbar
  */
 export const editPreset = <Preset extends { name: string }>(
     index: number,
@@ -146,10 +149,10 @@ export const editPreset = <Preset extends { name: string }>(
         // ------------------------
         // for snackbar
         let text: string;
-        let variant: "warning" | "success";
+        let variant: "info" | "success";
         if (valid_name !== edited_preset.name) {
             text = `Your preset was saved as "${valid_name}".`;
-            variant = "warning";
+            variant = "info";
         } else {
             text = "Preset saved 👍.";
             variant = "success";
@@ -167,7 +170,7 @@ export const editPreset = <Preset extends { name: string }>(
  * When preset array is imported
  * @param text_data text data to parse by `json.parse()`
  * @param preset_setter setter for preset
- * @param snackbar_setter setter for snackbar
+ * @param enqueue_snackbar setter for snackbar
  * @param type_guard type guard to perform on the preset signatures
  * @param preset_rebuilder rebuilder function signatures.
  * @returns
@@ -223,7 +226,7 @@ export const importPreset = <
  * convert it to signature and use `file-saver` to download.
  * @param preset
  * @param preset_stripper
- * @param snackbar_setter
+ * @param enqueue_snackbar
  */
 export const exportPreset = <
     Signature,
@@ -249,7 +252,7 @@ export const exportPreset = <
  * Same as export one but takes an array of presets instead.
  * @param presets
  * @param preset_stripper
- * @param snackbar_setter
+ * @param enqueue_snackbar
  */
 export const exportAllPresets = <
     Signature,

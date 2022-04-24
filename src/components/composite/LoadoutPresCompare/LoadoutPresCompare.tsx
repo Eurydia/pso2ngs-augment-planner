@@ -2,6 +2,10 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import Stack from "@mui/material/Stack";
 
+import Equalizer from "@mui/icons-material/Equalizer";
+import Hexagon from "@mui/icons-material/Hexagon";
+import HexagonOutlined from "@mui/icons-material/HexagonOutlined";
+
 import { Builders, prepareStatsToDisplay } from "./helper";
 
 import TabCombo from "../../basic/TabCombo";
@@ -61,7 +65,11 @@ const LoadoutPresCompare = (props: LoadoutPresCompareProps) => {
         <TabCombo
             value={tab}
             onTabChange={setTab}
-            labels={["subject", "comparand", "stats"]}
+            labels={[
+                { text: "subject", icon: <Hexagon /> },
+                { text: "comparand", icon: <HexagonOutlined /> },
+                { text: "stats", icon: <Equalizer /> },
+            ]}
         >
             <Stack>
                 <LoadoutPresetPicker

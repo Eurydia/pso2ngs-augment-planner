@@ -1,3 +1,2 @@
-export * from "./EditDialog";
-export * from "./ImportExportButtons";
-export * from "./PaperBackground";
+export { EditDialog } from "./EditDialog";
+export { PaperBackground } from "./PaperBackground";

@@ -5,7 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 interface TabComboProps {
-    labels: string[];
+    labels: { icon?: JSX.Element; text: string }[];
     children: ReactNode[] | ReactNode;
     value: number;
     onTabChange: (value: number) => void;
@@ -15,7 +15,9 @@ const TabCombo = (props: TabComboProps) => {
         return (
             <Tab
                 key={`${index}${index}`}
-                label={label}
+                icon={label.icon}
+                iconPosition="start"
+                label={label.text}
                 value={index}
             />
         );
@@ -36,9 +38,4 @@ const TabCombo = (props: TabComboProps) => {
         </Stack>
     );
 };
-export default memo(
-    TabCombo,
-    (prev: TabComboProps, next: TabComboProps) => {
-        return prev.value === next.value;
-    },
-);
+export default TabCombo;

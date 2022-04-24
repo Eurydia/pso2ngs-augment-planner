@@ -17,7 +17,7 @@ import {
     EquipmentData,
 } from "../../../types";
 
-const init_states: Equipment = {
+const init_equipment = {
     equipment: null,
     augments: [],
 };
@@ -28,10 +28,10 @@ interface AugPresCompareProps {
 const AugPresCompare = (props: AugPresCompareProps) => {
     // ------------------------------------
     // The subject of the comparison
-    const [subject, setSubject] = useState<Equipment>(init_states);
+    const [subject, setSubject] = useState<Equipment>(init_equipment);
     // The comparand of the comparison
     const [comparand, setComparand] =
-        useState<Equipment>(init_states);
+        useState<Equipment>(init_equipment);
     // ------------------------------------
 
     // ------------------------------------
@@ -81,7 +81,7 @@ const AugPresCompare = (props: AugPresCompareProps) => {
                     <EquipmentBuilder
                         name="comparand"
                         mode="both"
-                        value={subject}
+                        value={comparand}
                         onAugmentsChange={(augs) =>
                             handleAugChange(augs, setComparand)
                         }

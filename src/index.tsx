@@ -7,6 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import { Grow } from "@mui/material";
 
 import { SnackbarProvider } from "notistack";
 
@@ -20,7 +21,12 @@ giveGift();
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <SnackbarProvider>
+            <SnackbarProvider
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                }}
+            >
                 <App />
             </SnackbarProvider>
         </ThemeProvider>

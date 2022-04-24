@@ -1,6 +1,6 @@
-import { default as AUG_DATA } from "../assets/data/augments";
-import { default as WEAPON_DATA } from "../assets/data/weapons";
-import { default as UNIT_DATA } from "../assets/data/units";
+import { DATA_SIGNATURE as AUG_SIG } from "../assets/data/augments";
+import { DATA_SIGNATURE as WEAPON_SIG } from "../assets/data/weapons";
+import { DATA_SIGNATURE as UNIT_SIG } from "../assets/data/units";
 
 import {
     AugmentData,
@@ -26,18 +26,14 @@ import {
 const augmentDataFromSignatures = (
     signatures: AugmentDataSignature[],
 ): AugmentData[] => {
-    let augs_data: AugmentData[] = [];
+    let aug_data: AugmentData[] = [];
     for (const sig of signatures) {
-        // TODO: implement some kind of dictionary to make matching more efficient
-        // iterate through all augments to find a match
-        for (const aug of AUG_DATA) {
-            if (aug.name === sig.name && aug.level === sig.level) {
-                augs_data.push(aug);
-                break;
-            }
+        const aug = AUG_SIG[`${sig.name}${sig.level}`];
+        if (aug) {
+            aug_data.push(aug);
         }
     }
-    return augs_data;
+    return aug_data;
 };
 /**
  * Strip `AugmentData` down to their signature.
@@ -69,12 +65,15 @@ const augmentDataToSignatures = (
 const equipmentDataFromSignature = (
     signature: EquipmentDataSignature,
 ): EquipmentData | null => {
-    // Iterate over all equipment to find a match.
-    // TODO: Again implement some kind of dictionary please.
-    for (const eq of [...WEAPON_DATA, ...UNIT_DATA]) {
-        if (eq.name === signature.name) {
-            return eq;
-        }
+    let equipment: EquipmentData | undefined;
+
+    equipment = WEAPON_SIG[signature.name];
+    if (equipment) {
+        return equipment;
+    }
+    equipment = UNIT_SIG[signature.name];
+    if (equipment) {
+        return equipment;
     }
     return null;
 };

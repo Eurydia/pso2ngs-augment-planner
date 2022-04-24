@@ -11,6 +11,7 @@ interface ImportButtonProps {
     onClick: (value: string) => void;
 }
 const ImportButton = (props: ImportButtonProps) => {
+    // Change this thing and import won't work.
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const fileReader = new FileReader();
@@ -23,7 +24,7 @@ const ImportButton = (props: ImportButtonProps) => {
         <Button
             variant="contained"
             component="label"
-            endIcon={<Upload />}
+            startIcon={<Upload />}
         >
             <input
                 hidden
@@ -36,14 +37,16 @@ const ImportButton = (props: ImportButtonProps) => {
     );
 };
 interface ExportButtonProps {
+    disabled?: boolean;
     onClick: () => void;
 }
 const ExportButton = (props: ExportButtonProps) => {
     return (
         <Button
+            disabled={props.disabled}
             onClick={props.onClick}
             variant="outlined"
-            endIcon={<Download />}
+            startIcon={<Download />}
         >
             export all
         </Button>
@@ -53,6 +56,7 @@ const ExportButton = (props: ExportButtonProps) => {
 
 // ---------------------------------
 interface ImportExportButtonsProps {
+    disableExportButton: boolean;
     importAction: (text: string) => void;
     exportAction: () => void;
 }
@@ -61,14 +65,16 @@ interface ImportExportButtonsProps {
  * @param props
  * @returns
  */
-export const ImportExportButtons = (
-    props: ImportExportButtonsProps,
-) => {
+const ImportExportButtons = (props: ImportExportButtonsProps) => {
     return (
         <Stack direction="row" spacing={1}>
             <ImportButton onClick={props.importAction} />
-            <ExportButton onClick={props.exportAction} />
+            <ExportButton
+                disabled={props.disableExportButton}
+                onClick={props.exportAction}
+            />
         </Stack>
     );
 };
+export default ImportExportButtons;
 // ---------------------------------

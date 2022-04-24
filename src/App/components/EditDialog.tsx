@@ -53,7 +53,7 @@ export const EditDialog = (props: EditDialogProps) => {
                     justifyContent="space-between"
                 >
                     <Stack direction="row" alignItems="center">
-                        {<BorderColor />}
+                        <BorderColor />
                         {props.editor.title}
                     </Stack>
                     <IconButton onClick={props.onClose}>
@@ -62,7 +62,7 @@ export const EditDialog = (props: EditDialogProps) => {
                 </Stack>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{ paddingY: 2 }}>
+                <Box sx={{ padding: 2 }}>
                     {props.editor.component}
                 </Box>
             </DialogContent>

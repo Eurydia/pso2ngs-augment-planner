@@ -46,7 +46,7 @@ export const StatItem = React.memo(
 
         let diff_value = "";
         if (props.value?.diff) {
-            diff_value = props.value?.diff;
+            diff_value = `(${props.value.diff})`;
         }
 
         let diff_color = theme.palette.primary.main;
@@ -69,18 +69,18 @@ export const StatItem = React.memo(
                         }}
                     >
                         {`${props.head.emoji} ${props.head.name}: ${_value}`}
-                    </Typography>
-                    <Typography
-                        component="span"
-                        sx={{
-                            color: diff_color,
-                            paddingLeft: 1,
-                            fontSize: "inherit",
-                            fontWeight:
-                                theme.typography.fontWeightBold,
-                        }}
-                    >
-                        {diff_value}
+                        <Typography
+                            component="span"
+                            sx={{
+                                color: diff_color,
+                                paddingLeft: 1,
+                                fontSize: "inherit",
+                                fontWeight:
+                                    theme.typography.fontWeightBold,
+                            }}
+                        >
+                            {diff_value}
+                        </Typography>
                     </Typography>
                 </Stack>
             </Grid>

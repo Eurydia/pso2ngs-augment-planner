@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Stack from "@mui/material/Stack";
+
+import Hardware from "@mui/icons-material/Hardware";
+import Equalizer from "@mui/icons-material/Equalizer";
 
 import {
     prepareInitialStates,
@@ -78,7 +81,10 @@ const LoadoutPresBuilder = (props: LoadoutPresBuilderProps) => {
             />
             <TabCombo
                 value={tab}
-                labels={["equipment builder", "stats"]}
+                labels={[
+                    { text: "builder", icon: <Hardware /> },
+                    { text: "stats", icon: <Equalizer /> },
+                ]}
                 onTabChange={setTab}
             >
                 <Builders

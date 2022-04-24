@@ -25,11 +25,7 @@ import {
     exportPreset,
     exportAllPresets,
 } from "./handlers";
-import {
-    PaperBackground,
-    ImportExportButtons,
-    EditDialog,
-} from "./components";
+import { PaperBackground, EditDialog } from "./components";
 import {
     typeGuardAugmentPresetSignature,
     TypeguardLoadoutPresetSignature,
@@ -172,7 +168,11 @@ const App = () => {
             <TabCombo
                 value={augTab}
                 onTabChange={setAugTab}
-                labels={["build", "compare", "manage"]}
+                labels={[
+                    { text: "build", icon: <Construction /> },
+                    { text: "compare", icon: <Compare /> },
+                    { text: "manage", icon: <Dashboard /> },
+                ]}
             >
                 <PaperBackground
                     title="Augment Preset Builder"
@@ -222,13 +222,33 @@ const App = () => {
                                 enqueueSnackbar,
                             )
                         }
+                        onImport={(data) =>
+                            importPreset(
+                                data,
+                                setAugPresets,
+                                enqueueSnackbar,
+                                typeGuardAugmentPresetSignature,
+                                augmentPresetFromSignatures,
+                            )
+                        }
+                        onExportAll={() =>
+                            exportAllPresets(
+                                augPresets,
+                                augmentPresetToSignature,
+                                enqueueSnackbar,
+                            )
+                        }
                     />
                 </PaperBackground>
             </TabCombo>
             <TabCombo
                 value={loadoutTab}
                 onTabChange={setLoadoutTab}
-                labels={["build", "compare", "manage"]}
+                labels={[
+                    { text: "build", icon: <Construction /> },
+                    { text: "compare", icon: <Compare /> },
+                    { text: "manage", icon: <Dashboard /> },
+                ]}
             >
                 <PaperBackground
                     title="Loadout Preset Builder"
@@ -259,7 +279,7 @@ const App = () => {
                     titleIcon={<Dashboard fontSize="inherit" />}
                 >
                     <LoadoutPresManager
-                        augmentPresets={loadoutPresets}
+                        loadoutPresets={loadoutPresets}
                         onEdit={editLoadoutPreset}
                         onExport={(index) =>
                             exportPreset(
@@ -279,6 +299,22 @@ const App = () => {
                             deletePreset(
                                 index,
                                 setLoadoutPresets,
+                                enqueueSnackbar,
+                            )
+                        }
+                        onImport={(data) =>
+                            importPreset(
+                                data,
+                                setLoadoutPresets,
+                                enqueueSnackbar,
+                                TypeguardLoadoutPresetSignature,
+                                loadoutPresetsFromSignatures,
+                            )
+                        }
+                        onExportAll={() =>
+                            exportAllPresets(
+                                loadoutPresets,
+                                loadoutPresetToSignatures,
                                 enqueueSnackbar,
                             )
                         }

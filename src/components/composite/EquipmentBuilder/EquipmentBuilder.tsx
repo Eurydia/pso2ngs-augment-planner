@@ -36,19 +36,19 @@ const EquipmentBuilder = (props: EquipmentBuilderProps) => {
 
     // -------------------------------------------------
     // handlers
-    const handlePresetChange = (preset: AugmentPreset | null) => {
-        if (preset) {
-            props.onAugmentsChange(preset.augments);
+    const handlePresetChange = (new_preset: AugmentPreset | null) => {
+        if (new_preset) {
+            props.onAugmentsChange(new_preset.augments);
         }
-        setPreset(preset);
+        setPreset(new_preset);
     };
     const handleAugmentChange = (augments: AugmentData[]) => {
+        props.onAugmentsChange(augments);
         if (preset) {
             // if the augment picker changes without preset
             // then reset the preset back to null.
             setPreset(null);
         }
-        props.onAugmentsChange(augments);
     };
     // -------------------------------------------------
 
