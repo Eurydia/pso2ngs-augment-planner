@@ -37,7 +37,7 @@ const getValidName = (name: string, used_name: string[]) => {
  * check its name and add it to the end.
  * @param new_preset
  * @param preset_stter
- * @param enqueue_snackbar
+ * @param snackbar_setter
  */
 export const addPreset = <Preset extends { name: string }>(
     new_preset: Preset,
@@ -53,26 +53,15 @@ export const addPreset = <Preset extends { name: string }>(
             new_preset.name.normalize().trim(),
             used_name,
         );
-        // ----------------------
-        // for snackbar
-        let text: string;
-        let variant: "info" | "success";
-        if (valid_name !== new_preset.name) {
-            text = `Your preset was saved as "${valid_name}".`;
-            variant = "info";
-        } else {
-            text = "Preset saved 👍.";
-            variant = "success";
-        }
-        enqueue_snackbar(text, {
-            variant,
-        });
-        // ----------------------
         let updated = [...prev];
         updated.push({ ...new_preset, name: valid_name });
         return updated;
     });
+    enqueue_snackbar("Preset saved 👍.", {
+        variant: "success",
+    });
 };
+
 /**
  * When an existing preset is duplicated,
  * rename and add it to the end.
@@ -146,25 +135,11 @@ export const editPreset = <Preset extends { name: string }>(
             edited_preset.name,
             used_name,
         );
-        // ------------------------
-        // for snackbar
-        let text: string;
-        let variant: "info" | "success";
-        if (valid_name !== edited_preset.name) {
-            text = `Your preset was saved as "${valid_name}".`;
-            variant = "info";
-        } else {
-            text = "Preset saved 👍.";
-            variant = "success";
-        }
-        enqueue_snackbar(text, {
-            variant,
-        });
-        // ------------------------
         let updated = [...prev];
         updated[index].name = valid_name;
         return updated;
     });
+    enqueue_snackbar("Preset saved 👍.", { variant: "success" });
 };
 /**
  * When preset array is imported

@@ -4,33 +4,10 @@ import {
     EFFECT_NAMES,
     collectEffsFromArr,
     collectBPFromAugments,
-    getTotalStatsFromEffsArr,
+    collectTotalStatsFromEffsArr,
     isAddEffect,
     parseEffectValue,
 } from "../../util";
-
-// -------------------------------------
-/**
- * If an initial preset is given,
- * set the initial states equal to preset.
- * If not, use fallback value.
- * @param preset
- * @returns
- */
-export const prepareInitalStates = (
-    preset: AugmentPreset | undefined,
-) => {
-    let initial_name = "";
-    let initial_desc = "";
-    let initial_augments: AugmentData[] = [];
-    if (preset) {
-        initial_name = preset.name;
-        initial_desc = preset.description;
-        initial_augments = preset.augments;
-    }
-    return { initial_name, initial_desc, initial_augments };
-};
-// -------------------------------------
 
 // -------------------------------------
 /**
@@ -40,7 +17,7 @@ export const prepareInitalStates = (
  */
 export const prepareStatsToDisplay = (augments: AugmentData[]) => {
     const isolated_effs = collectEffsFromArr(augments);
-    const total_stats = getTotalStatsFromEffsArr(isolated_effs);
+    const total_stats = collectTotalStatsFromEffsArr(isolated_effs);
 
     let parsed_stats: { [key: string]: StatItemValue } = {};
     for (const key of Object.keys(total_stats)) {

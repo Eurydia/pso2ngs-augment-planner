@@ -15,7 +15,7 @@ import {
     collectBPFromAugments,
     collectEffsFromArr,
     EFFECT_NAMES,
-    getTotalStatsFromEffsArr,
+    collectTotalStatsFromEffsArr,
     isAddEffect,
     parseEffectValue,
 } from "../../util";
@@ -97,7 +97,7 @@ export const prepareStatsToDisplay = (loadout: Equipment[]) => {
         obj_with_effs = obj_with_effs.concat(eq.augments);
     }
     const isolated_effs = collectEffsFromArr(obj_with_effs);
-    const total_stats = getTotalStatsFromEffsArr(isolated_effs);
+    const total_stats = collectTotalStatsFromEffsArr(isolated_effs);
 
     let parsed_stats: { [key: string]: StatItemValue } = {};
     for (const key of Object.keys(total_stats)) {

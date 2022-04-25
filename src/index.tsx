@@ -7,7 +7,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import { Grow } from "@mui/material";
 
 import { SnackbarProvider } from "notistack";
 

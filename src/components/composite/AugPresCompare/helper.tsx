@@ -1,6 +1,6 @@
 import { StatItemValue } from "../../basic/StatsDisplay";
 import {
-    getTotalStatsFromEffsArr,
+    collectTotalStatsFromEffsArr,
     collectEffsFromArr,
     isAddEffect,
     parseEffectValue,
@@ -21,7 +21,7 @@ const getTotalStatsFromEquipment = (equipment: Equipment) => {
         equipment.equipment,
         ...equipment.augments,
     ]);
-    return getTotalStatsFromEffsArr(all_effs);
+    return collectTotalStatsFromEffsArr(all_effs);
 };
 /**
  * Compare and parse the difference of stats between subj and comp.

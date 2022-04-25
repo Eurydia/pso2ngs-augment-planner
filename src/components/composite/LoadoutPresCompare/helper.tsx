@@ -9,7 +9,7 @@ import { StatItemValue } from "../../basic/StatsDisplay";
 import {
     isAddEffect,
     collectEffsFromArr,
-    getTotalStatsFromEffsArr,
+    collectTotalStatsFromEffsArr,
     parseEffectValue,
     EFFECT_NAMES,
     removeDuplicateKeys,
@@ -81,7 +81,7 @@ const getTotalStatsFromLoadout = (loadout: Equipment[]) => {
         obj_with_effs = obj_with_effs.concat(eq.augments);
     }
     const isolated_effs = collectEffsFromArr(obj_with_effs);
-    const total_stats = getTotalStatsFromEffsArr(isolated_effs);
+    const total_stats = collectTotalStatsFromEffsArr(isolated_effs);
     return total_stats;
 };
 /**

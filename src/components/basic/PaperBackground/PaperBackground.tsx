@@ -17,7 +17,7 @@ interface PaperBackgroundProps {
  * @param props
  * @returns
  */
-export const PaperBackground = (props: PaperBackgroundProps) => {
+const PaperBackground = (props: PaperBackgroundProps) => {
     const theme = useTheme();
     return (
         <Paper elevation={8}>
@@ -55,4 +55,5 @@ export const PaperBackground = (props: PaperBackgroundProps) => {
         </Paper>
     );
 };
+export default PaperBackground;
 // ---------------------------------

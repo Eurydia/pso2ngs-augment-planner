@@ -12,7 +12,6 @@ import {
     AugmentData,
 } from "../../../types";
 import ActionButtons from "../../basic/ActionButtons";
-import { Fragment } from "react";
 
 // -------------------------------------------------------
 // For rendering augment preset picker's options
@@ -26,17 +25,23 @@ const CardEquipment = (props: OptionItemProps) => {
         ? props.eq.name
         : "[equipment not selected]";
 
-    let augments: JSX.Element[] = [];
+    let augments: string[] = [];
     for (const aug of props.augments) {
+        let emojis = "";
+        // for (const eff of aug.effs) {
+        //     const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
+        //     emojis = emojis.concat(emoji);
+        // }
         const roman_level = convertToRoman(aug.level);
-        const name = `${aug.name} ${roman_level}`.trim();
-        augments.push(<Typography key={name}>{name}</Typography>);
+        const name = `${emojis} ${aug.name} ${roman_level}`.trim();
+        augments.push(name);
     }
     const aug_displays =
-        augments.length !== 0 ? augments : "[augment not selected]";
-
+        augments.length !== 0
+            ? augments.join(" & ")
+            : "[augment not selected]";
     return (
-        <Fragment>
+        <Stack>
             <Typography
                 sx={{
                     fontSize: theme.typography.body1.fontSize,
@@ -45,8 +50,15 @@ const CardEquipment = (props: OptionItemProps) => {
             >
                 {eq_name}
             </Typography>
-            {aug_displays}
-        </Fragment>
+            <Typography
+                sx={{
+                    wordWrap: "break-word",
+                    wordBreak: "keep-all",
+                }}
+            >
+                {aug_displays}
+            </Typography>
+        </Stack>
     );
 };
 
@@ -91,7 +103,10 @@ const PresetCard = (props: PresetCardProps) => {
                         {props.name}
                     </Typography>
                     <Typography fontStyle="italic">{desc}</Typography>
-                    <Stack sx={{ textTransform: "capitalize" }}>
+                    <Stack
+                        spacing={1.25}
+                        sx={{ textTransform: "capitalize" }}
+                    >
                         {eq_to_display}
                     </Stack>
                 </Stack>

@@ -60,7 +60,7 @@ export const StatItem = React.memo(
                     spacing={2}
                 >
                     <Typography
-                        component="p"
+                        component="span"
                         sx={{
                             padding: 1,
                             fontWeight:
@@ -70,11 +70,11 @@ export const StatItem = React.memo(
                     >
                         {`${props.head.emoji} ${props.head.name}: ${_value}`}
                         <Typography
-                            component="span"
                             sx={{
+                                display: "inline",
+                                fontSize: "inherit",
                                 color: diff_color,
                                 paddingLeft: 1,
-                                fontSize: "inherit",
                                 fontWeight:
                                     theme.typography.fontWeightBold,
                             }}

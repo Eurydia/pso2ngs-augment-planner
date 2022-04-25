@@ -138,7 +138,7 @@ export const removeDuplicateKeys = (
  * @param effects
  * @returns
  */
-export const getTotalStatsFromEffsArr = (effects: Effect[]) => {
+export const collectTotalStatsFromEffsArr = (effects: Effect[]) => {
     let total_stats: { [key: string]: number } = {};
     for (const effect of effects) {
         const { eff, amt } = effect;

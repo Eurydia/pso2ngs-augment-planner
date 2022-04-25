@@ -14,12 +14,6 @@ const NameField = (props: InputProps) => {
     if (props.value === "") {
         color = "warning";
     }
-    const handleChange = (
-        e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-    ) => {
-        const value = e.target.value.slice(0, props.maxLength);
-        props.onChange(value);
-    };
     return (
         <TextField
             required
@@ -28,7 +22,13 @@ const NameField = (props: InputProps) => {
             helperText={`(max ${props.maxLength} characters)`}
             value={props.value}
             color={color}
-            onChange={handleChange}
+            onChange={(e) => {
+                const value = e.target.value.slice(
+                    0,
+                    props.maxLength,
+                );
+                props.onChange(value);
+            }}
         />
     );
 };

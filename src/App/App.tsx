@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
-import useTheme from "@mui/material/styles/useTheme";
 
 import Construction from "@mui/icons-material/Construction";
 import Compare from "@mui/icons-material/Compare";
@@ -25,13 +24,14 @@ import {
     exportPreset,
     exportAllPresets,
 } from "./handlers";
-import { PaperBackground, EditDialog } from "./components";
 import {
     typeGuardAugmentPresetSignature,
     TypeguardLoadoutPresetSignature,
 } from "./typeguard";
 
 import TabCombo from "../components/basic/TabCombo";
+import PaperBackground from "../components/basic/PaperBackground";
+import EditDialog from "../components/basic/EditDialog";
 import AugPresBuilder from "../components/composite/AugPresBuilder";
 import AugPresCompare from "../components/composite/AugPresCompare";
 import AugPresManager from "../components/composite/AugPresManager";
@@ -47,31 +47,29 @@ import {
 } from "../types";
 
 const App = () => {
-    const theme = useTheme();
     const { enqueueSnackbar } = useSnackbar();
 
     // -------------------------------------
     // MODAL STATES
-    const [dialogEditor, setDialogEditor] = useState<{
-        title: string;
-        component: React.ReactElement;
-    }>({
-        title: "",
-        component: <React.Fragment></React.Fragment>,
-    });
+    const [dialogEditor, setDialogEditor] =
+        useState<React.ReactElement>(
+            <React.Fragment></React.Fragment>,
+        );
     const [dialogOpen, setDialogOpen] = useState(false);
     // -------------------------------------
 
     // -------------------------------------
     // AUGMENT PRESET STATES
     // load augment presets saved in local storage
-    const loaded_aug_pres = loadPresets(
+    const aug_pres_from_session = loadPresets(
         loadData<AugmentPresetSignature>("augmentPreset"),
         typeGuardAugmentPresetSignature,
         augmentPresetFromSignatures,
     );
     // and use the loaded presets as initial values
-    const [augPresets, setAugPresets] = useState(loaded_aug_pres);
+    const [augPresets, setAugPresets] = useState(
+        aug_pres_from_session,
+    );
     const [augTab, setAugTab] = useState(0);
     // when a change is made to the augment
     // update local storage
@@ -97,14 +95,13 @@ const App = () => {
             );
         };
         const init_preset = augPresets[index];
-        const title = "Augment Preset Edit";
         const component = (
             <AugPresBuilder
                 initPreset={init_preset}
-                onPresetSave={handleEditSave}
+                onSave={handleEditSave}
             />
         );
-        setDialogEditor({ title, component });
+        setDialogEditor(component);
         setDialogOpen(true);
     };
     // -------------------------------------
@@ -143,15 +140,14 @@ const App = () => {
             );
         };
         const init_preset = loadoutPresets[index];
-        const title = "Loadout Preset Edit";
         const component = (
             <LoadoutPresBuilder
                 initPreset={init_preset}
                 augmentPresets={augPresets}
-                onPresetSave={handleEditSave}
+                onSave={handleEditSave}
             />
         );
-        setDialogEditor({ title, component });
+        setDialogEditor(component);
         setDialogOpen(true);
     };
     // -------------------------------------
@@ -162,7 +158,6 @@ const App = () => {
             sx={{
                 marginX: "auto",
                 maxWidth: "md",
-                fontFamily: theme.typography.fontFamily,
             }}
         >
             <TabCombo
@@ -179,7 +174,7 @@ const App = () => {
                     titleIcon={<Construction fontSize="inherit" />}
                 >
                     <AugPresBuilder
-                        onPresetSave={(new_preset) => {
+                        onSave={(new_preset) => {
                             addPreset(
                                 new_preset,
                                 setAugPresets,
@@ -256,7 +251,7 @@ const App = () => {
                 >
                     <LoadoutPresBuilder
                         augmentPresets={augPresets}
-                        onPresetSave={(new_preset) => {
+                        onSave={(new_preset) => {
                             addPreset(
                                 new_preset,
                                 setLoadoutPresets,
@@ -320,12 +315,13 @@ const App = () => {
                         }
                     />
                 </PaperBackground>
-                <EditDialog
-                    open={dialogOpen}
-                    onClose={() => setDialogOpen(true)}
-                    editor={dialogEditor}
-                />
             </TabCombo>
+            <EditDialog
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+            >
+                {dialogEditor}
+            </EditDialog>
         </Stack>
     );
 };

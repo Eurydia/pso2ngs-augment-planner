@@ -1,16 +1,52 @@
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import useTheme from "@mui/material/styles/useTheme";
 import { FilterOptionsState } from "@mui/material";
 
 import { matchSorter } from "match-sorter";
 
 import BasePresetPicker from "./BasePresetPicker";
 
-import PickerOption from "../PickerOption";
-
-import { convertToRoman, EFFECT_NAME_TRANSLATE } from "../../util";
+import { convertToRoman } from "../../util";
 import { LoadoutPreset } from "../../../types";
 
 // ---------------------------------------------
+interface EquipmentOptionProps {
+    equipment: string;
+    augments: string[];
+}
+const EquipnentOption = (props: EquipmentOptionProps) => {
+    const theme = useTheme();
+    const aug_displays = props.augments.join(" & ");
+    return (
+        <Stack
+            sx={{
+                paddingLeft: 1.2,
+                textTransform: "capitalize",
+            }}
+        >
+            <Typography
+                sx={{
+                    fontSize: theme.typography.body1.fontSize,
+                    fontWeight: theme.typography.fontWeightMedium,
+                }}
+            >
+                {props.equipment}
+            </Typography>
+            <Typography
+                sx={{
+                    paddingLeft: 1.5,
+                    wordWrap: "break-word",
+                    wordBreak: "keep-all",
+                }}
+            >
+                {aug_displays}
+            </Typography>
+        </Stack>
+    );
+};
+
 /**
  * For rendering options on dropdown menu
  * @param props
@@ -18,35 +54,45 @@ import { LoadoutPreset } from "../../../types";
  * @returns
  */
 export const renderOption = (props: any, option: LoadoutPreset) => {
-    let subheaders: string[] = [];
+    let equipment: JSX.Element[] = [];
+    let i = 0;
     for (const eq of option.equipment) {
-        let eq_name = "[Equipment not selected]";
-        if (eq.equipment) {
-            eq_name = eq.equipment.name;
-        }
-        subheaders.push(eq_name);
+        const eq_name = eq.equipment
+            ? eq.equipment.name
+            : "[Equipment not selected]";
 
         let aug_names: string[] = [];
         for (const aug of eq.augments) {
             const roman_lvl = convertToRoman(aug.level);
-            const parsed_name = `${aug.name} ${roman_lvl}`.trim();
-
-            let emojis: string = "";
-            for (const eff of aug.effs) {
-                const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
-                emojis = emojis.concat(emoji);
-            }
-            aug_names.push(`>>${emojis} ${parsed_name}`);
+            const name = `${aug.name} ${roman_lvl}`.trim();
+            aug_names.push(name);
         }
-        subheaders = subheaders.concat(aug_names.join(" "));
+        equipment.push(
+            <EquipnentOption
+                key={`#${i}`}
+                equipment={eq_name}
+                augments={aug_names}
+            />,
+        );
+        i++;
     }
     return (
         <Box {...props}>
-            <PickerOption
-                key={option.name}
-                header={option.name}
-                subheaders={subheaders}
-            />
+            <Stack
+                sx={{
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                }}
+            >
+                <Typography
+                    sx={{
+                        fontWeight: "medium",
+                    }}
+                >
+                    {option.name}
+                </Typography>
+                {equipment}
+            </Stack>
         </Box>
     );
 };

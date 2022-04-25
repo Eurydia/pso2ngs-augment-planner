@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -12,16 +12,13 @@ import BorderColor from "@mui/icons-material/BorderColor";
 import Clear from "@mui/icons-material/Clear";
 
 // ---------------------------------
-// modal to bring up when editing presets
+// dialog to bring up when editing presets
 interface EditDialogProps {
     open: boolean;
     onClose: () => void;
-    editor: {
-        title: string;
-        component: React.ReactElement;
-    };
+    children: ReactNode;
 }
-export const EditDialog = (props: EditDialogProps) => {
+const EditDialog = (props: EditDialogProps) => {
     const theme = useTheme();
     return (
         <Dialog
@@ -54,7 +51,7 @@ export const EditDialog = (props: EditDialogProps) => {
                 >
                     <Stack direction="row" alignItems="center">
                         <BorderColor />
-                        {props.editor.title}
+                        edit preset
                     </Stack>
                     <IconButton onClick={props.onClose}>
                         <Clear />
@@ -62,11 +59,10 @@ export const EditDialog = (props: EditDialogProps) => {
                 </Stack>
             </DialogTitle>
             <DialogContent>
-                <Box sx={{ padding: 2 }}>
-                    {props.editor.component}
-                </Box>
+                <Box sx={{ padding: 2 }}>{props.children}</Box>
             </DialogContent>
         </Dialog>
     );
 };
+export default EditDialog;
 // --------------------------------

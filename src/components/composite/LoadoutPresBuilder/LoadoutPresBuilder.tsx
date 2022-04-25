@@ -25,7 +25,7 @@ import {
 interface LoadoutPresBuilderProps {
     initPreset?: LoadoutPreset;
     augmentPresets: AugmentPreset[];
-    onPresetSave: (preset: LoadoutPreset) => void;
+    onSave: (preset: LoadoutPreset) => void;
 }
 
 const LoadoutPresBuilder = (props: LoadoutPresBuilderProps) => {
@@ -57,7 +57,7 @@ const LoadoutPresBuilder = (props: LoadoutPresBuilderProps) => {
         ]);
     };
     const handlePresetSave = () => {
-        props.onPresetSave({
+        props.onSave({
             name: name.normalize().trim(),
             description: description.normalize(),
             equipment,

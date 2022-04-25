@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 import Stack from "@mui/material/Stack";
-
-import { prepareInitalStates, prepareStatsToDisplay } from "./helper";
+import { prepareStatsToDisplay } from "./helper";
 
 import StatsDisplay from "../../basic/StatsDisplay";
 import AugmentPicker from "../../basic/AugmentPicker";
@@ -13,35 +12,31 @@ import { AugmentData, AugmentPreset } from "../../../types";
 
 interface AugPresBuilderProps {
     initPreset?: AugmentPreset;
-    onPresetSave: (preset: AugmentPreset) => void;
+    onSave: (preset: AugmentPreset) => void;
 }
 const AugPresBuilder = (props: AugPresBuilderProps) => {
     // -------------------------------------
-    // prepare initial states
-    const { initial_name, initial_desc, initial_augments } =
-        prepareInitalStates(props.initPreset);
-    // -------------------------------------
-
-    // -------------------------------------
     // prepare states
-    const [name, setName] = useState(initial_name);
-    const [desc, setDesc] = useState(initial_desc);
-    const [augments, setAugments] =
-        useState<AugmentData[]>(initial_augments);
+    const [name, setName] = useState(props.initPreset?.name || "");
+    const [desc, setDesc] = useState(
+        props.initPreset?.description || "",
+    );
+    const [augments, setAugments] = useState<AugmentData[]>(
+        props.initPreset?.augments || [],
+    );
     // -------------------------------------
 
     // -------------------------------------
     // handlers
-    const handlePresetSave = () => {
-        props.onPresetSave({
+    const handleSave = () => {
+        props.onSave({
             name: name.normalize().trim(),
             description: desc.normalize(),
             augments,
         });
-        handleResetFields();
+        resetFields();
     };
-
-    const handleResetFields = () => {
+    const resetFields = () => {
         setName("");
         setDesc("");
         setAugments([]);
@@ -68,8 +63,8 @@ const AugPresBuilder = (props: AugPresBuilderProps) => {
                 />
                 <SaveClearButtons
                     disableSaveButton={!Boolean(name)}
-                    onSaveClick={handlePresetSave}
-                    onClearClick={handleResetFields}
+                    onSaveClick={() => handleSave()}
+                    onClearClick={() => resetFields()}
                 />
             </Stack>
             <StatsDisplay {...parsed_stats} />
