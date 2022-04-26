@@ -2,14 +2,14 @@ import { AugmentData } from "../../types";
 const fetch = require("sync-fetch");
 
 /**
- * Fect data from public
+ * Fetch data from public/assets/data
  */
-const DATA: AugmentData[] = fetch(
+export const DATA: AugmentData[] = fetch(
     `${process.env.PUBLIC_URL}/assets/data/augments.json`,
 ).json();
-export default DATA;
 /**
- * Lookup table
+ * Build lookup dictionary
+ * to make conversion from signature easier.
  */
 export let DATA_SIGNATURE: { [key: string]: AugmentData } = {};
 for (const aug of DATA) {

@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 
 import Construction from "@mui/icons-material/Construction";
 import Compare from "@mui/icons-material/Compare";
 import Dashboard from "@mui/icons-material/Dashboard";
+import InfoOutlined from "@mui/icons-material/InfoOutlined";
 
 import { useSnackbar } from "notistack";
 
-import { saveData, loadData, loadPresets } from "./session";
 import {
-    augmentPresetFromSignatures,
+    setPresetData,
+    getPresetData,
+    sanitizePresetSignatures,
+} from "./session";
+import {
+    augmentPresetsFromSignatures,
     loadoutPresetsFromSignatures,
-    loadoutPresetToSignatures,
-    augmentPresetToSignature,
-} from "./signature_conversion";
+    loadoutPresetsToSignatures,
+    augmentPresetsToSignatures,
+} from "./conversion";
 import {
     addPreset,
     editPreset,
@@ -46,11 +53,16 @@ import {
     LoadoutPresetSignature,
 } from "../types";
 
+const tab_labels = [
+    { text: "build", icon: <Construction /> },
+    { text: "compare", icon: <Compare /> },
+    { text: "manage", icon: <Dashboard /> },
+];
+
 const App = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     // -------------------------------------
-    // MODAL STATES
     const [dialogEditor, setDialogEditor] =
         useState<React.ReactElement>(
             <React.Fragment></React.Fragment>,
@@ -59,46 +71,60 @@ const App = () => {
     // -------------------------------------
 
     // -------------------------------------
-    // AUGMENT PRESET STATES
-    // load augment presets saved in local storage
-    const aug_pres_from_session = loadPresets(
-        loadData<AugmentPresetSignature>("augmentPreset"),
+    // load and sanitized preset signatures from
+    // local storage.
+    const aug_pres_sigs = sanitizePresetSignatures(
+        getPresetData<AugmentPresetSignature>("augmentPreset"),
         typeGuardAugmentPresetSignature,
-        augmentPresetFromSignatures,
     );
-    // and use the loaded presets as initial values
-    const [augPresets, setAugPresets] = useState(
-        aug_pres_from_session,
-    );
+    // build presets from signatures and use them
+    // as initial state.
+    const init_aug_pres = augmentPresetsFromSignatures(aug_pres_sigs);
+    const [augPresets, setAugPresets] = useState(init_aug_pres);
     const [augTab, setAugTab] = useState(0);
-    // when a change is made to the augment
-    // update local storage
+    // when a change is made to preset array
+    // update local storage.
     useEffect(() => {
-        saveData(
+        setPresetData(
             "augmentPreset",
-            augmentPresetToSignature(augPresets),
+            augmentPresetsToSignatures(augPresets),
         );
     }, [augPresets]);
     // -------------------------------------
 
     // -------------------------------------
-    // AUGMENT PRESETS HANDLERS
-    // when a preset is going to be edited
+    const loadout_pres_sigs = sanitizePresetSignatures(
+        getPresetData<LoadoutPresetSignature>("loadoutPreset"),
+        TypeguardLoadoutPresetSignature,
+    );
+    const init_loadout_pres =
+        loadoutPresetsFromSignatures(loadout_pres_sigs);
+    const [loadoutPresets, setLoadoutPresets] =
+        useState(init_loadout_pres);
+    const [loadoutTab, setLoadoutTab] = useState(0);
+    useEffect(() => {
+        setPresetData(
+            "loadoutPreset",
+            loadoutPresetsToSignatures(loadoutPresets),
+        );
+    }, [loadoutPresets]);
+    // -------------------------------------
+
+    // -------------------------------------
     const editAugmentPreset = (index: number) => {
-        const handleEditSave = (edited_preset: AugmentPreset) => {
-            setDialogOpen(false);
-            editPreset(
-                index,
-                edited_preset,
-                setAugPresets,
-                enqueueSnackbar,
-            );
-        };
-        const init_preset = augPresets[index];
+        const preset_to_edit = augPresets[index];
         const component = (
             <AugPresBuilder
-                initPreset={init_preset}
-                onSave={handleEditSave}
+                initPreset={preset_to_edit}
+                onSave={(edited_preset: AugmentPreset) => {
+                    setDialogOpen(false);
+                    editPreset(
+                        index,
+                        edited_preset,
+                        setAugPresets,
+                        enqueueSnackbar,
+                    );
+                }}
             />
         );
         setDialogEditor(component);
@@ -107,44 +133,21 @@ const App = () => {
     // -------------------------------------
 
     // -------------------------------------
-    // LOADOUT PRESET STATES
-    // load augment presets saved in local storage
-    const loadout_pres_from_session = loadPresets(
-        loadData<LoadoutPresetSignature>("loadoutPreset"),
-        TypeguardLoadoutPresetSignature,
-        loadoutPresetsFromSignatures,
-    );
-    // and use the saved presets as initial values
-    const [loadoutPresets, setLoadoutPresets] = useState(
-        loadout_pres_from_session,
-    );
-    const [loadoutTab, setLoadoutTab] = useState(0);
-    useEffect(() => {
-        saveData(
-            "loadoutPreset",
-            loadoutPresetToSignatures(loadoutPresets),
-        );
-    }, [loadoutPresets]);
-    // -------------------------------------
-
-    // -------------------------------------
-    // handlers
     const editLoadoutPreset = (index: number) => {
-        const handleEditSave = (edited_preset: LoadoutPreset) => {
-            setDialogOpen(false);
-            editPreset(
-                index,
-                edited_preset,
-                setLoadoutPresets,
-                enqueueSnackbar,
-            );
-        };
-        const init_preset = loadoutPresets[index];
+        const preset_to_edit = loadoutPresets[index];
         const component = (
             <LoadoutPresBuilder
-                initPreset={init_preset}
+                initPreset={preset_to_edit}
                 augmentPresets={augPresets}
-                onSave={handleEditSave}
+                onSave={(edited_preset: LoadoutPreset) => {
+                    setDialogOpen(false);
+                    editPreset(
+                        index,
+                        edited_preset,
+                        setLoadoutPresets,
+                        enqueueSnackbar,
+                    );
+                }}
             />
         );
         setDialogEditor(component);
@@ -163,11 +166,7 @@ const App = () => {
             <TabCombo
                 value={augTab}
                 onTabChange={setAugTab}
-                labels={[
-                    { text: "build", icon: <Construction /> },
-                    { text: "compare", icon: <Compare /> },
-                    { text: "manage", icon: <Dashboard /> },
-                ]}
+                labels={tab_labels}
             >
                 <PaperBackground
                     title="Augment Preset Builder"
@@ -199,7 +198,7 @@ const App = () => {
                         onExport={(index) => {
                             exportPreset(
                                 augPresets[index],
-                                augmentPresetToSignature,
+                                augmentPresetsToSignatures,
                                 enqueueSnackbar,
                             );
                         }}
@@ -223,13 +222,13 @@ const App = () => {
                                 setAugPresets,
                                 enqueueSnackbar,
                                 typeGuardAugmentPresetSignature,
-                                augmentPresetFromSignatures,
+                                augmentPresetsFromSignatures,
                             )
                         }
                         onExportAll={() =>
                             exportAllPresets(
                                 augPresets,
-                                augmentPresetToSignature,
+                                augmentPresetsToSignatures,
                                 enqueueSnackbar,
                             )
                         }
@@ -239,11 +238,7 @@ const App = () => {
             <TabCombo
                 value={loadoutTab}
                 onTabChange={setLoadoutTab}
-                labels={[
-                    { text: "build", icon: <Construction /> },
-                    { text: "compare", icon: <Compare /> },
-                    { text: "manage", icon: <Dashboard /> },
-                ]}
+                labels={tab_labels}
             >
                 <PaperBackground
                     title="Loadout Preset Builder"
@@ -279,7 +274,7 @@ const App = () => {
                         onExport={(index) =>
                             exportPreset(
                                 loadoutPresets[index],
-                                loadoutPresetToSignatures,
+                                loadoutPresetsToSignatures,
                                 enqueueSnackbar,
                             )
                         }
@@ -309,13 +304,31 @@ const App = () => {
                         onExportAll={() =>
                             exportAllPresets(
                                 loadoutPresets,
-                                loadoutPresetToSignatures,
+                                loadoutPresetsToSignatures,
                                 enqueueSnackbar,
                             )
                         }
                     />
                 </PaperBackground>
             </TabCombo>
+            <PaperBackground
+                title="about"
+                titleIcon={<InfoOutlined fontSize="inherit" />}
+            >
+                <Typography>
+                    Check out more information about this project
+                    <Link
+                        variant="body1"
+                        target="_blank"
+                        rel="noopener"
+                        href="https://meteor-danger-942.notion.site/PSO2NGS-Augment-Planner-116ef1dba12245279d1e00133b1bfa35"
+                        sx={{ paddingX: 1 }}
+                    >
+                        {">here<"}
+                    </Link>
+                    .
+                </Typography>
+            </PaperBackground>
             <EditDialog
                 open={dialogOpen}
                 onClose={() => setDialogOpen(false)}

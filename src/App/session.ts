@@ -1,65 +1,63 @@
-// ---------------------------------
-// setting and retrieving data from local storage
 type AugmentKey = "augmentPreset";
 type LoadoutKey = "loadoutPreset";
-
+// ---------------------------------
 /**
  * Retrieve and parse preset data from local storage.
+ *
  * Returns empty array if there's not data to retrieve or
  * the data failed the array check.
  * @warning Presets are not sanitized.
  * @param key
  * @returns
  */
-export const loadData = <T>(key: AugmentKey | LoadoutKey): T[] => {
-    const unparsed_value = localStorage.getItem(key);
-    if (unparsed_value === null) {
+export const getPresetData = <PresetSignature>(
+    key: AugmentKey | LoadoutKey,
+): PresetSignature[] => {
+    const data_string = localStorage.getItem(key);
+    if (data_string === null) {
         return [];
     }
-    const uncheck_presets = JSON.parse(unparsed_value);
-    // check if the uncheck is an array or not
-    // before iterating over
-    if (!Array.isArray(uncheck_presets)) {
+    const parsed_string = JSON.parse(data_string);
+    if (!Array.isArray(parsed_string)) {
         return [];
     }
-    return uncheck_presets;
+    return parsed_string;
 };
 /**
- * Parse and save preset `signatures` to local storage.
+ * Parse and save `PresetSignature`s to local storage.
  * @param key
  * @param signatures
  */
-export const saveData = <Signature>(
+export const setPresetData = <PresetSignature>(
     key: AugmentKey | LoadoutKey,
-    signatures: Signature[],
+    signatures: PresetSignature[],
 ) => {
-    const json_data = JSON.stringify(signatures);
-    localStorage.setItem(key, json_data);
+    // TODO: This function in particular is called quite often.
+    // Everytime there's a change to the preset array to be exact.
+    // It's probably a good idea to implement a better system
+    // for saving data to local without using the `stringify` method.
+    const string_data = JSON.stringify(signatures);
+    localStorage.setItem(key, string_data);
 };
 // ---------------------------------
 
 // ---------------------------------
 /**
- * Macro for checking unsanitized presets.
- * Use in conjunction with `loadData`
- * to sanitize the presets.
- * @param uncheck_signatures unsanitzied preset signatures.
- * @param typeguard_checker runtime type gaurd to perform on the signatures.
- * @param preset_rebuilder function to convert signatures into their preset form.
+ * Sanitize preset signautures.
+ * @param type_guard .
  * @returns
  */
-export const loadPresets = <Signature, Preset>(
+export const sanitizePresetSignatures = <Signature>(
     uncheck_signatures: Signature[],
-    typeguard_checker: (obj: any) => boolean,
-    preset_rebuilder: (obj: Signature[]) => Preset[],
+    type_guard: (obj: any) => boolean,
 ) => {
-    let checked_sigs: Signature[] = [];
+    let checked_signatures: Signature[] = [];
     for (const uncheck_sig of uncheck_signatures) {
-        const is_good = typeguard_checker(uncheck_sig);
+        const is_good = type_guard(uncheck_sig);
         if (is_good) {
-            checked_sigs.push(uncheck_sig);
+            checked_signatures.push(uncheck_sig);
         }
     }
-    return preset_rebuilder(checked_sigs);
+    return checked_signatures;
 };
 // ---------------------------------

@@ -1,5 +1,3 @@
-// Runtime typeguard
-
 // -------------------------------------------------------------
 /**
  * Type guard `AugmentDataSignature`.
@@ -12,15 +10,27 @@ const typeGuardAugmentDataSignature = (obj: any) => {
     return name_is_string && level_is_number;
 };
 /**
+ * Type guard `EquipmentDataSignature`.
+ * @param obj
+ * @returns
+ */
+const typeGuardEquipmentDataSignature = (obj: any) => {
+    if (obj === null) {
+        return true;
+    }
+    const name_is_string = typeof obj.name === "string";
+    return name_is_string;
+};
+/**
  * Type guard `EquipmentSignature`.
  * @param obj
  * @returns
  */
 const typeGuardEquipmentSignature = (obj: any) => {
-    const equipment_check =
-        obj.equipment === null ||
-        typeof obj.equipment.name === "string";
-    if (!equipment_check) {
+    const equipment_data_check = typeGuardEquipmentDataSignature(
+        obj.equipment,
+    );
+    if (!equipment_data_check) {
         return false;
     }
     if (Array.isArray(obj.augments)) {
@@ -39,6 +49,8 @@ const typeGuardEquipmentSignature = (obj: any) => {
 // -------------------------------------------------------------
 /**
  * Type guard `AugmentPresetSignature`.
+ *
+ * Uses `typeGuardAugmentDataSignature()`.
  * @param obj
  * @returns
  */
@@ -49,7 +61,6 @@ export const typeGuardAugmentPresetSignature = (obj: any) => {
     if (!name_check || !desc_check) {
         return false;
     }
-
     if (Array.isArray(obj.augments)) {
         for (const item of obj.augments) {
             const is_signature = typeGuardAugmentDataSignature(item);
@@ -63,6 +74,8 @@ export const typeGuardAugmentPresetSignature = (obj: any) => {
 };
 /**
  * Type guard `LoadoutPresetSignature`.
+ *
+ * Uses `typeGuardEquipmentSignature()`.
  * @param obj
  * @returns
  */

@@ -16,69 +16,63 @@ import {
 } from "../types";
 
 // ---------------------------------
-// `AugmentData` and `AugmentDataSignature` conversion
 /**
- * Match `AugmentDataSignature` signatures with their `AugmentData` counterpart.
- * If a signature failed to match, it won't be included in the result.
+ * Match `AugmentDataSignature`s with `AugmentData`s.
  * @param signatures
  * @returns
  */
 const augmentDataFromSignatures = (
     signatures: AugmentDataSignature[],
 ): AugmentData[] => {
-    let aug_data: AugmentData[] = [];
+    let data: AugmentData[] = [];
     for (const sig of signatures) {
         const aug = AUG_SIG[`${sig.name}${sig.level}`];
-        if (aug) {
-            aug_data.push(aug);
+        // Signature that doesn't match won't be included.
+        if (aug !== undefined) {
+            data.push(aug);
         }
     }
-    return aug_data;
+    return data;
 };
 /**
- * Strip `AugmentData` down to their signature.
+ * Strip `AugmentData`s down to signatures.
  * @param data
  * @returns
  */
 const augmentDataToSignatures = (
     data: AugmentData[],
 ): AugmentDataSignature[] => {
-    let sigs: AugmentDataSignature[] = [];
+    let signatures: AugmentDataSignature[] = [];
     for (const aug of data) {
-        sigs.push({
+        signatures.push({
             name: aug.name,
             level: aug.level,
         });
     }
-    return sigs;
+    return signatures;
 };
 // ---------------------------------
 
 // ---------------------------------
-// `EquipmentData` and `EquipmentDataSignature` conversion
 /**
- * Match an `EquipmentDataSignature` with its counterpart.
- * Return `null` when failed to match.
+ * Match an `EquipmentDataSignature` with `EquipmentData`.
+ * Return `null` when failed to match with any.
  * @param signature
  * @returns
  */
 const equipmentDataFromSignature = (
     signature: EquipmentDataSignature,
 ): EquipmentData | null => {
-    let equipment: EquipmentData | undefined;
-
-    equipment = WEAPON_SIG[signature.name];
-    if (equipment) {
-        return equipment;
+    let data: EquipmentData | null = null;
+    if (signature.name in Object.keys(WEAPON_SIG)) {
+        data = WEAPON_SIG[signature.name];
+    } else if (signature.name in Object.keys(UNIT_SIG)) {
+        data = UNIT_SIG[signature.name];
     }
-    equipment = UNIT_SIG[signature.name];
-    if (equipment) {
-        return equipment;
-    }
-    return null;
+    return data;
 };
 /**
- * Strip `EquipmentData` to its signature.
+ * Strip `EquipmentData`s down to signatures.
  * @param data
  * @returns
  */
@@ -92,10 +86,11 @@ const equipmentDataToSignature = (
 // ---------------------------------
 
 // ---------------------------------
-// `Equipment` and `EquipmentSignature` conversion
 /**
- * `EquipmentSignature` contains two properties which are both signatures.
- * To reconstruct the `Equipment`, I just reconstruct its properties.
+ * Build `Equipment`s from signatures.
+ *
+ * Uses `equipmentDataFromSignature()` and
+ * `augmentDataFromSignature()`.
  * @param signatures
  * @returns
  */
@@ -116,15 +111,18 @@ const equipmentFromSignatures = (
     return equipment;
 };
 /**
- * The signature of an `Equipment` is just the signatures of its property.
- * @param equipment
+ * Strip array of `Equipment` down to signatures.
+ *
+ * Uses `equimentDataToSignature()` and
+ * `augmentDataToSignatures()`.
+ * @param data
  * @returns
  */
 const equipmentToSignatures = (
-    equipment: Equipment[],
+    data: Equipment[],
 ): EquipmentSignature[] => {
     let sigs: EquipmentSignature[] = [];
-    for (const eq of equipment) {
+    for (const eq of data) {
         let eq_data_sig: EquipmentDataSignature | null = null;
         if (eq.equipment) {
             eq_data_sig = equipmentDataToSignature(eq.equipment);
@@ -139,13 +137,14 @@ const equipmentToSignatures = (
 // ---------------------------------
 
 // ---------------------------------
-// `AugmentPreset` and `AugmentPresetSignature` conversion
 /**
- * Uses the `augmentDataFromSignatures` to reconstruct the presets.
+ * Build `AugmentPreset` from signatures.
+ *
+ * Uses `augmentDataFromSignatures()`.
  * @param signatures
  * @returns
  */
-export const augmentPresetFromSignatures = (
+export const augmentPresetsFromSignatures = (
     signatures: AugmentPresetSignature[],
 ): AugmentPreset[] => {
     let presets: AugmentPreset[] = [];
@@ -159,11 +158,13 @@ export const augmentPresetFromSignatures = (
     return presets;
 };
 /**
- * Uses `augmentDataToSignatures` to strip `AugmentData`.
+ * Strip `AugmentPreset`s down to signatures.
+ *
+ * Uses `augmentDataToSignatures()`.
  * @param presets
  * @returns
  */
-export const augmentPresetToSignature = (
+export const augmentPresetsToSignatures = (
     presets: AugmentPreset[],
 ): AugmentPresetSignature[] => {
     let signatures: AugmentPresetSignature[] = [];
@@ -179,9 +180,10 @@ export const augmentPresetToSignature = (
 // ---------------------------------
 
 // ---------------------------------
-// `LoadoutPreset` and `LoadoutPresetSignature` conversion
 /**
- * Uses `equipmentFromSignatures` to reconstruct the presets.
+ * Build `LoadoutPreset`s from signatures.
+ *
+ * Uses `equipmentFromSignatures()`.
  * @param signatures
  * @returns
  */
@@ -199,11 +201,13 @@ export const loadoutPresetsFromSignatures = (
     return presets;
 };
 /**
- * Uses `equipmentToSignatures` to strip `Equipment`.
+ * Strip `LoadoutEquipment`s down to signatures.
+ *
+ * Uses `equipmentToSignatures()`.
  * @param presets
  * @returns
  */
-export const loadoutPresetToSignatures = (
+export const loadoutPresetsToSignatures = (
     presets: LoadoutPreset[],
 ): LoadoutPresetSignature[] => {
     let signatures: LoadoutPresetSignature[] = [];

@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { saveAs } from "file-saver";
 
-import { loadPresets } from "./session";
+import { sanitizePresetSignatures } from "./session";
 import {
     OptionsObject,
     SnackbarKey,
@@ -36,18 +36,18 @@ const getValidName = (name: string, used_name: string[]) => {
  * When a new preset would be added to preset array,
  * check its name and add it to the end.
  * @param new_preset
- * @param preset_stter
- * @param snackbar_setter
+ * @param presetSetter
+ * @param enqueue_snackbar
  */
 export const addPreset = <Preset extends { name: string }>(
     new_preset: Preset,
-    preset_stter: Dispatch<SetStateAction<Preset[]>>,
+    presetSetter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    preset_stter((prev) => {
+    presetSetter((prev) => {
         const used_name = prev.map((preset) => preset.name);
         const valid_name = getValidName(
             new_preset.name.normalize().trim(),
@@ -64,20 +64,20 @@ export const addPreset = <Preset extends { name: string }>(
 
 /**
  * When an existing preset is duplicated,
- * rename and add it to the end.
+ * rename and add it to the end of preset array.
  * @param index index to duplicate
- * @param preset_setter
+ * @param presetSetter
  * @param enqueue_snackbar
  */
 export const duplicatePreset = <Preset extends { name: string }>(
     index: number,
-    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    presetSetter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    preset_setter((prev) => {
+    presetSetter((prev) => {
         const preset = prev[index];
         const used_name = prev.map((preset) => preset.name);
         const valid_name = getValidName(preset.name, used_name);
@@ -92,18 +92,18 @@ export const duplicatePreset = <Preset extends { name: string }>(
  * When an existing augment is removed,
  * splice it from the preset array.
  * @param index
- * @param preset_setter
+ * @param presetSetter
  * @param enqueue_snackbar
  */
 export const deletePreset = <Preset extends { name: string }>(
     index: number,
-    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    presetSetter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    preset_setter((prev) => {
+    presetSetter((prev) => {
         let updated = [...prev];
         updated.splice(index, 1);
         return updated;
@@ -113,21 +113,21 @@ export const deletePreset = <Preset extends { name: string }>(
 /**
  * When an existing preset is edited,
  * make sure the name isn't taken.
- * @param index index to edit
+ * @param index
  * @param edited_preset
- * @param preset_setter
+ * @param presetSetter
  * @param enqueue_snackbar
  */
 export const editPreset = <Preset extends { name: string }>(
     index: number,
     edited_preset: Preset,
-    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    presetSetter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    preset_setter((prev) => {
+    presetSetter((prev) => {
         let used_name = prev.map((pres) => pres.name);
         // remove current name from used name
         used_name.splice(index, 1);
@@ -142,12 +142,12 @@ export const editPreset = <Preset extends { name: string }>(
     enqueue_snackbar("Preset saved 👍.", { variant: "success" });
 };
 /**
- * When preset array is imported
- * @param text_data text data to parse by `json.parse()`
- * @param preset_setter setter for preset
- * @param enqueue_snackbar setter for snackbar
- * @param type_guard type guard to perform on the preset signatures
- * @param preset_rebuilder rebuilder function signatures.
+ * When preset array is imported.
+ * @param text_data
+ * @param presetSetter
+ * @param enqueue_snackbar
+ * @param typeGuard
+ * @param presetsFromSignatures
  * @returns
  */
 export const importPreset = <
@@ -155,36 +155,31 @@ export const importPreset = <
     Preset extends { name: string },
 >(
     text_data: string,
-    preset_setter: Dispatch<SetStateAction<Preset[]>>,
+    presetSetter: Dispatch<SetStateAction<Preset[]>>,
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
-    type_guard: (obj: any) => boolean,
-    preset_rebuilder: (obj: Signature[]) => Preset[],
+    typeGuard: (obj: any) => boolean,
+    presetsFromSignatures: (obj: Signature[]) => Preset[],
 ) => {
-    let text: string = "Import failed.";
-    let variant: "error" | "success" = "error";
-    // if json data isn't an array,
+    // if text data isn't an array,
     // then don't proceed any further.
     const json_data = JSON.parse(text_data);
     if (!Array.isArray(json_data)) {
-        enqueue_snackbar(text, {
-            variant,
+        enqueue_snackbar("Import failed.", {
+            variant: "error",
         });
         return;
     }
-    // sanitize the json data
-    const checked_presets: Preset[] = loadPresets(
-        json_data,
-        type_guard,
-        preset_rebuilder,
-    );
-    // add the sanitized presets to the preset array
+    const sanitized_signatures: Signature[] =
+        sanitizePresetSignatures(json_data, typeGuard);
+    const presets = presetsFromSignatures(sanitized_signatures);
+    // add sanitized presets to preset array
     // all at once.
-    preset_setter((prev) => {
+    presetSetter((prev) => {
         let updated = [...prev];
-        for (const preset of checked_presets) {
+        for (const preset of presets) {
             const used_name = updated.map((preset) => preset.name);
             const valid_name = getValidName(preset.name, used_name);
             updated.push({ ...preset, name: valid_name });
@@ -192,15 +187,13 @@ export const importPreset = <
         return updated;
     });
     // for snackbar
-    text = "Preset(s) imported.";
-    variant = "success";
-    enqueue_snackbar(text, { variant });
+    enqueue_snackbar("Preset(s) imported.", { variant: "success" });
 };
 /**
  * When a preset is exported,
  * convert it to signature and use `file-saver` to download.
  * @param preset
- * @param preset_stripper
+ * @param presetsToSignatures
  * @param enqueue_snackbar
  */
 export const exportPreset = <
@@ -208,13 +201,13 @@ export const exportPreset = <
     Preset extends { name: string },
 >(
     preset: Preset,
-    preset_stripper: (presets: Preset[]) => Signature[],
+    presetsToSignatures: (presets: Preset[]) => Signature[],
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    const signatures = preset_stripper([preset]);
+    const signatures = presetsToSignatures([preset]);
     const blob = new Blob([JSON.stringify(signatures)], {
         type: "application/json;charset=utf-8",
     });
@@ -226,7 +219,7 @@ export const exportPreset = <
 /**
  * Same as export one but takes an array of presets instead.
  * @param presets
- * @param preset_stripper
+ * @param presetsToSignatures
  * @param enqueue_snackbar
  */
 export const exportAllPresets = <
@@ -234,13 +227,13 @@ export const exportAllPresets = <
     Preset extends { name: string },
 >(
     presets: Preset[],
-    preset_stripper: (presets: Preset[]) => Signature[],
+    presetsToSignatures: (presets: Preset[]) => Signature[],
     enqueue_snackbar: (
         text: SnackbarMessage,
         options: OptionsObject,
     ) => SnackbarKey,
 ) => {
-    const signatures = preset_stripper(presets);
+    const signatures = presetsToSignatures(presets);
     const blob = new Blob([JSON.stringify(signatures)], {
         type: "application/json;charset=utf-8",
     });
