@@ -1,4 +1,4 @@
-# units/
+# weapons/
 
 ## Files
 
