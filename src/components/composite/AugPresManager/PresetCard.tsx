@@ -9,7 +9,7 @@ import useTheme from "@mui/material/styles/useTheme";
 
 import ActionButtons from "../../basic/ActionButtons";
 
-import { EFFECT_NAME_TRANSLATE, convertToRoman } from "../../util";
+import { convertToRoman } from "../../util";
 import { AugmentData } from "../../../types";
 
 // -------------------------------------------------------
@@ -19,13 +19,7 @@ const prepareAugmentString = (augments: AugmentData[]) => {
     for (const aug of augments) {
         const roman_level = convertToRoman(aug.level);
         const name = `${aug.name} ${roman_level}`.trim();
-
-        let emojis = "";
-        for (const eff of aug.effs) {
-            const { emoji } = EFFECT_NAME_TRANSLATE[eff.eff];
-            emojis = emojis.concat(emoji);
-        }
-        displays.push(`${emojis} ${name}`);
+        displays.push(name);
     }
     return displays;
 };
@@ -34,7 +28,6 @@ const getAugmentTypo = (augment: AugmentData[]) => {
     if (augment.length > 0) {
         aug_string = prepareAugmentString(augment);
     }
-
     return aug_string.map((aug_str, index) => (
         <Typography key={`${index}${index}`}>{aug_str}</Typography>
     ));

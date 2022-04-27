@@ -12,7 +12,7 @@ import {
 } from "./styles";
 
 import { AugmentData } from "../../../types";
-import DATA from "../../../assets/data/augments";
+import { DATA } from "../../../assets/data/augments";
 
 interface AugmentPickerProps {
     values: AugmentData[];
@@ -41,7 +41,7 @@ const AugmentPicker = (props: AugmentPickerProps) => {
             ChipProps={{
                 sx: {
                     fontWeight: theme.typography.fontWeightBold,
-                    // the chips should have 100% width
+                    // chips should have 100% width
                     // or else they will be impossible to read.
                     width: 1,
                 },

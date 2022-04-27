@@ -1,6 +1,6 @@
 import { EquipmentData } from "../../../types";
-import { default as WEAPONS } from "../../../assets/data/weapons";
-import { default as UNITS } from "../../../assets/data/units";
+import { DATA as WEAPONS } from "../../../assets/data/weapons";
+import { DATA as UNITS } from "../../../assets/data/units";
 
 // ---------------------------------------------
 /**
