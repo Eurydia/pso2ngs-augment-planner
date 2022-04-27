@@ -1,16 +1,17 @@
 from typing import List
 
 from ._unit import Unit
-from ._unit_groups import TWO_STAR as RARITY
-from effect import *
+from ._unit_groups import UnitGroups
+from effect import EffectTypes as ET, Effect
 
+RARITY = UnitGroups.TWO_STAR
 
 units: List[Unit] = []
 
 units.append(
     Unit(
         "tzvia armor & silver primm armor",
-        (Effect(PP, 2),),
+        (Effect(ET.PP, 2),),
         RARITY,
     )
 )

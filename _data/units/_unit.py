@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from effect import *
+from effect import EffectTypes as ET, Effect
 
 
 @dataclass
@@ -14,7 +14,7 @@ class Unit:
 
 
 SUFFIX = (
-    ("arga", (MEL_POT, RNG_POT)),
-    ("belta", (RNG_POT, TEC_POT)),
-    ("sheza", (MEL_POT, TEC_POT)),
+    ("arga", (ET.MEL_POT, ET.RNG_POT)),
+    ("belta", (ET.RNG_POT, ET.TEC_POT)),
+    ("sheza", (ET.MEL_POT, ET.TEC_POT)),
 )

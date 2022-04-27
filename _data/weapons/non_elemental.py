@@ -1,15 +1,17 @@
 from typing import List
 
 from ._weapon import Weapon
-from ._weapon_groups import NON_ELEMENTRAL as WEAPON_GRP
-from effect import *
+from ._weapon_groups import WeaponGroup
+from effect import EffectTypes as ET, Effect
+
+TYPE = WeaponGroup.NORMAL
 
 weapons: List[Weapon] = []
 
 weapons.append(
     Weapon(
         "non elemental weapon",
-        (Effect(FLOOR_POT, 1.75),),
-        WEAPON_GRP,
+        (Effect(ET.FLOOR_POT, 1.75),),
+        TYPE,
     )
 )

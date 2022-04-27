@@ -1,13 +1,11 @@
 from typing import List
 
-from ._augment import (
-    Augment,
-)
-from ._augment_groups import FUSIA
-from effect import *
+from ._augment import Augment
+from ._augment_groups import AugmentGroups
+from effect import OFFENSIVE_POT
+from util import many_effs_with_same_amount
 
-
-GROUP = FUSIA
+GROUP = AugmentGroups.FUSIA
 CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
@@ -18,7 +16,7 @@ augments.append(
         f"megas fusia",
         0,
         4,
-        effects_with_amount(OFFENSIVE_POT, 1.01),
+        many_effs_with_same_amount(OFFENSIVE_POT, 1.01),
         GROUP,
         CONFLICT,
     )

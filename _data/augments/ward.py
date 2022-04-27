@@ -4,7 +4,7 @@ from ._augment import (
     Augment,
     EffectMultiLevel,
     augment_from_list,
-    multi_with_amount,
+    many_effs_with_same_many_amounts,
 )
 from ._augment_groups import WARD
 from effect import *
@@ -31,7 +31,7 @@ for name, eff in zip(_wards, AILMENT_RES):
             f"{name} ward",
             3,
             (4, 5, 6),
-            (EffectMultiLevel(eff, (1.2, 1.25, 1.3)),),
+            (EffectWithManyAmount(eff, (1.2, 1.25, 1.3)),),
             GROUP,
             CONFLICT,
         )
@@ -44,7 +44,7 @@ augments.extend(
         "sovereign ward",
         3,
         (6, 8, 10),
-        multi_with_amount(AILMENT_RES, (1.2, 1.25, 1.3)),
+        many_effs_with_same_many_amounts(AILMENT_RES, (1.2, 1.25, 1.3)),
         GROUP,
         CONFLICT,
     )

@@ -1,30 +1,29 @@
 from dataclasses import dataclass
-from typing import Iterable, List, Tuple
+from typing import Tuple
 
-# ADD = "ADD"
-# MULTIPLY = "MUL"
-
-
-# @dataclass
-# class EffectType:
-#     name: str
-#     stacking: str = MULTIPLY
+from effect_types import EffectTypes
 
 
 @dataclass
 class Effect:
-    eff: str
+    """An effect needs to have two types information.
+    1. What kind of effect type it is, and
+    2. What is the magnitude.
+    """
+
+    eff: EffectTypes
     amt: float
 
 
-def effects_with_amount(
-    effs: Iterable[str],
-    amount: float,
-) -> Tuple[Effect]:
+@dataclass
+class EffectWithManyAmount:
+    """Effect with more than many amount."""
 
-    res: List[Effect] = []
-    for eff in effs:
-        new_effect = Effect(eff, amount)
-        res.append(new_effect)
+    eff: str
+    amts: Tuple[float, ...]
 
-    return tuple(res)
+    def getLevel(self, level: int) -> Effect:
+        return Effect(
+            self.eff,
+            self.amts[level],
+        )

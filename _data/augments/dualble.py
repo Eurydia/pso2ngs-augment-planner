@@ -1,31 +1,31 @@
-from itertools import combinations
 from typing import List
 
-from ._augment import (
-    Augment,
-    augment_from_list,
-    multi_with_amount,
-)
-from ._augment_groups import DUALBLE
+from ._augment import Augment
+from ._augment_groups import AugmentGroups
 from effect import *
+from effect import EffectTypes as ET
+from util import many_effs_with_same_many_amounts
 
-
-GROUP = DUALBLE
+GROUP = AugmentGroups.DUALBLE
 CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
 
 
 # -------------------------------------------
-_names = ("melra", "meltech", "ratech")
-_amounts = (1.0075, 1.0125, 1.0175)
-for name, effs in zip(_names, combinations(OFFENSIVE_POT, 2)):
+# implicite is better than explicite
+_dualble = (
+    ("melra", (ET.MEL_POT, ET.RNG_POT)),
+    ("meltech", (ET.MEL_POT, ET.TEC_POT)),
+    ("ratech", (ET.RNG_POT, ET.MEL_POT)),
+)
+for name, effs in _dualble:
     augments.extend(
-        augment_from_list(
+        Augment.from_list(
             f"{name} dualble",
             3,
             (4, 5, 6),
-            multi_with_amount(effs, _amounts),
+            many_effs_with_same_many_amounts(effs, (1.0075, 1.0125, 1.0175)),
             GROUP,
             CONFLICT,
         )

@@ -1,15 +1,12 @@
-from itertools import combinations
-
 from typing import List
 
-from ._augment import (
-    Augment,
-)
-from ._augment_groups import NOTE
+from ._augment import Augment
+from ._augment_groups import AugmentGroups
 from effect import *
+from effect import EffectTypes as ET
+from util import many_effs_with_same_amount
 
-
-GROUP = NOTE
+GROUP = AugmentGroups.NOTE
 CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
@@ -19,12 +16,12 @@ _names = ("a", "b", "c", "d")
 _bps = (5, 4, 4, 4)
 
 # -----------------------------------------------
+_ael_amt = 1.01
 _ael_effs = (
-    (Effect(HP, 5), Effect(PP, 3)),
-    *map(
-        lambda effs: effects_with_amount(effs, 1.01),
-        combinations(OFFENSIVE_POT, 2),
-    ),
+    (Effect(ET.HP, 5), Effect(ET.PP, 3)),
+    many_effs_with_same_amount((ET.MEL_POT, ET.RNG_POT), _ael_amt),
+    many_effs_with_same_amount((ET.MEL_POT, ET.TEC_POT), _ael_amt),
+    many_effs_with_same_amount((ET.RNG_POT, ET.TEC_POT), _ael_amt),
 )
 
 for name, bp, effs in zip(_names, _bps, _ael_effs):
@@ -32,8 +29,8 @@ for name, bp, effs in zip(_names, _bps, _ael_effs):
 # -----------------------------------------------
 
 # -----------------------------------------------
-_ael_combat = ("magnus", "lab", "resola")
-for name, eff in zip(_ael_combat, OFFENSIVE_POT):
+_ael_combat_names = ("magnus", "lab", "resola")
+for name, eff in zip(_ael_combat_names, OFFENSIVE_POT):
     augments.append(
         Augment(
             f"{name} note",
@@ -47,15 +44,12 @@ for name, eff in zip(_ael_combat, OFFENSIVE_POT):
 # -----------------------------------------------
 
 # -----------------------------------------------
+_ret_amt = 1.0075
 _ret_effs = (
-    (Effect(HP, 10),),
-    *map(
-        lambda effs: (
-            Effect(HP, 5),
-            *effects_with_amount(effs, 1.0075),
-        ),
-        combinations(OFFENSIVE_POT, 2),
-    ),
+    (Effect(ET.HP, 10),),
+    (Effect(ET.HP, 5), *many_effs_with_same_amount((ET.MEL_POT, ET.RNG_POT), _ret_amt)),
+    (Effect(ET.HP, 5), *many_effs_with_same_amount((ET.MEL_POT, ET.TEC_POT), _ret_amt)),
+    (Effect(ET.HP, 5), *many_effs_with_same_amount((ET.RNG_POT, ET.TEC_POT), _ret_amt)),
 )
 
 for name, bp, effs in zip(_names, _bps, _ret_effs):
@@ -78,23 +72,20 @@ augments.append(
         0,
         5,
         (
-            Effect(HP, 10),
-            Effect(PP, 3),
-            Effect(FLOOR_POT, 1.02),
+            Effect(ET.HP, 10),
+            Effect(ET.PP, 3),
+            Effect(ET.FLOOR_POT, 1.02),
         ),
         GROUP,
         CONFLICT,
     )
 )
-# -----------------------------------------------
-
-# -----------------------------------------------
 augments.append(
     Augment(
         "maqea note",
         0,
         5,
-        effects_with_amount(OFFENSIVE_POT, 1.0125),
+        many_effs_with_same_amount(OFFENSIVE_POT, 1.0125),
         GROUP,
         CONFLICT,
     )

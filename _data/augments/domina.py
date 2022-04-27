@@ -1,13 +1,14 @@
 from typing import List
 
-from ._augment import (
-    Augment,
-)
-from ._augment_groups import DOMINA
+from _data.util import many_effs_with_same_amount
+
+from ._augment import Augment
+from ._augment_groups import AugmentGroups
 from effect import *
+from effect import EffectTypes as ET
 
 
-GROUP = DOMINA
+GROUP = AugmentGroups.DOMINA
 CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
@@ -20,9 +21,9 @@ augments.append(
         0,
         8,
         (
-            Effect(HP, 5),
-            Effect(PP, 3),
-            *effects_with_amount(OFFENSIVE_POT, 1.015),
+            Effect(ET.HP, 5),
+            Effect(ET.PP, 3),
+            *many_effs_with_same_amount(OFFENSIVE_POT, 1.015),
         ),
         GROUP,
         CONFLICT,
@@ -38,8 +39,8 @@ augments.append(
         0,
         10,
         (
-            Effect(HP, 15),
-            *effects_with_amount(OFFENSIVE_POT, 1.015),
+            Effect(ET.HP, 15),
+            *many_effs_with_same_amount(OFFENSIVE_POT, 1.015),
         ),
         GROUP,
         CONFLICT,

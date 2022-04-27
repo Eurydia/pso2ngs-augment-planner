@@ -2,27 +2,25 @@ from typing import List
 
 from ._augment import (
     Augment,
-    EffectMultiLevel,
-    augment_from_list,
-    multi_with_amount,
+    many_effs_with_same_many_amounts,
 )
-from ._augment_groups import BASIC, FUSED
+from ._augment_groups import AugmentGroups
 from effect import *
+from effect import EffectTypes as ET
 
-
-GROUP = BASIC
-CONFLICT = (FUSED,)
+GROUP = AugmentGroups.BASIC
+CONFLICT = (AugmentGroups.FUSED,)
 
 augments: List[Augment] = []
 
 # -------------------------------------------
 # stamina
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "stamina",
         3,
         (3, 4, 5),
-        (EffectMultiLevel(HP, (5, 10, 15)),),
+        (EffectWithManyAmount(ET.HP, (5, 10, 15)),),
         GROUP,
         CONFLICT,
     )
@@ -32,11 +30,11 @@ augments.extend(
 # -------------------------------------------
 # spirit
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "spirit",
         3,
         (2, 3, 4),
-        (EffectMultiLevel(PP, (3, 4, 5)),),
+        (EffectWithManyAmount(ET.PP, (3, 4, 5)),),
         GROUP,
         CONFLICT,
     )
@@ -45,18 +43,18 @@ augments.extend(
 
 # -------------------------------------------
 # might precision technique
-_atk_augments = (
+_off_aug_names = (
     "might",
     "precision",
     "technique",
 )
-for name, eff in zip(_atk_augments, OFFENSIVE_POT):
+for name, eff in zip(_off_aug_names, OFFENSIVE_POT):
     augments.extend(
-        augment_from_list(
+        Augment.from_list(
             name,
             3,
             (4, 5, 6),
-            (EffectMultiLevel(eff, (1.01, 1.015, 1.02)),),
+            (EffectWithManyAmount(eff, (1.01, 1.015, 1.02)),),
             GROUP,
             CONFLICT,
         )
@@ -66,11 +64,11 @@ for name, eff in zip(_atk_augments, OFFENSIVE_POT):
 # -------------------------------------------
 # deftness
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "deftness",
         3,
         (3, 4, 5),
-        (EffectMultiLevel(FLOOR_POT, (1.01, 1.015, 1.02)),),
+        (EffectWithManyAmount(ET.FLOOR_POT, (1.01, 1.015, 1.02)),),
         GROUP,
         CONFLICT,
     )
@@ -80,11 +78,11 @@ augments.extend(
 # -------------------------------------------
 # guard
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "guard",
         3,
         (2, 3, 4),
-        (EffectMultiLevel(DMG_RES, (1.01, 1.015, 1.02)),),
+        (EffectWithManyAmount(ET.DMG_RES, (1.01, 1.015, 1.02)),),
         GROUP,
         CONFLICT,
     )
@@ -93,16 +91,16 @@ augments.extend(
 
 # -------------------------------------------
 # mastery
-_mastery_amounts = (1.005, 1.01, 1.015, 1.025)
+_mastery_amts = (1.005, 1.01, 1.015, 1.025)
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "mastery",
         4,
         (6, 8, 10, 12),
         (
-            *multi_with_amount(OFFENSIVE_POT, _mastery_amounts),
-            EffectMultiLevel(FLOOR_POT, _mastery_amounts),
-            EffectMultiLevel(DMG_RES, _mastery_amounts),
+            *many_effs_with_same_many_amounts(OFFENSIVE_POT, _mastery_amts),
+            EffectWithManyAmount(ET.FLOOR_POT, _mastery_amts),
+            EffectWithManyAmount(ET.DMG_RES, _mastery_amts),
         ),
         GROUP,
         tuple(),
