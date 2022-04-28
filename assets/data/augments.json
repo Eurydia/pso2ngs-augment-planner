@@ -3,7 +3,7 @@
         "name": "stamina",
         "level": 1,
         "bp": 3,
-        "effs": [{ "eff": "EffectTypes.HP", "amt": 5 }],
+        "effs": [{ "eff": "HP", "amt": 5 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -12,7 +12,7 @@
         "name": "stamina",
         "level": 2,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.HP", "amt": 10 }],
+        "effs": [{ "eff": "HP", "amt": 10 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -21,7 +21,7 @@
         "name": "stamina",
         "level": 3,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.HP", "amt": 15 }],
+        "effs": [{ "eff": "HP", "amt": 15 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -30,7 +30,7 @@
         "name": "spirit",
         "level": 1,
         "bp": 2,
-        "effs": [{ "eff": "EffectTypes.PP", "amt": 3 }],
+        "effs": [{ "eff": "PP", "amt": 3 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -39,7 +39,7 @@
         "name": "spirit",
         "level": 2,
         "bp": 3,
-        "effs": [{ "eff": "EffectTypes.PP", "amt": 4 }],
+        "effs": [{ "eff": "PP", "amt": 4 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -48,7 +48,7 @@
         "name": "spirit",
         "level": 3,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.PP", "amt": 5 }],
+        "effs": [{ "eff": "PP", "amt": 5 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -57,7 +57,7 @@
         "name": "might",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.MEL_POT", "amt": 1.01 }],
+        "effs": [{ "eff": "MEL_POT", "amt": 1.01 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -66,7 +66,7 @@
         "name": "might",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.MEL_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "MEL_POT", "amt": 1.015 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -75,7 +75,7 @@
         "name": "might",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.MEL_POT", "amt": 1.02 }],
+        "effs": [{ "eff": "MEL_POT", "amt": 1.02 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -84,7 +84,7 @@
         "name": "precision",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.RNG_POT", "amt": 1.01 }],
+        "effs": [{ "eff": "RNG_POT", "amt": 1.01 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -93,7 +93,7 @@
         "name": "precision",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.RNG_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "RNG_POT", "amt": 1.015 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -102,7 +102,7 @@
         "name": "precision",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.RNG_POT", "amt": 1.02 }],
+        "effs": [{ "eff": "RNG_POT", "amt": 1.02 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -111,7 +111,7 @@
         "name": "technique",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.TEC_POT", "amt": 1.01 }],
+        "effs": [{ "eff": "TEC_POT", "amt": 1.01 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -120,7 +120,7 @@
         "name": "technique",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.TEC_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "TEC_POT", "amt": 1.015 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -129,7 +129,7 @@
         "name": "technique",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.TEC_POT", "amt": 1.02 }],
+        "effs": [{ "eff": "TEC_POT", "amt": 1.02 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -138,7 +138,7 @@
         "name": "deftness",
         "level": 1,
         "bp": 3,
-        "effs": [{ "eff": "EffectTypes.FLOOR_POT", "amt": 1.01 }],
+        "effs": [{ "eff": "FLOOR_POT", "amt": 1.01 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -147,7 +147,7 @@
         "name": "deftness",
         "level": 2,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.FLOOR_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "FLOOR_POT", "amt": 1.015 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -156,7 +156,7 @@
         "name": "deftness",
         "level": 3,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }],
+        "effs": [{ "eff": "FLOOR_POT", "amt": 1.02 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -165,7 +165,7 @@
         "name": "guard",
         "level": 1,
         "bp": 2,
-        "effs": [{ "eff": "EffectTypes.DMG_RES", "amt": 1.01 }],
+        "effs": [{ "eff": "DAMAGE_RES", "amt": 1.01 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -174,7 +174,7 @@
         "name": "guard",
         "level": 2,
         "bp": 3,
-        "effs": [{ "eff": "EffectTypes.DMG_RES", "amt": 1.015 }],
+        "effs": [{ "eff": "DAMAGE_RES", "amt": 1.015 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -183,7 +183,7 @@
         "name": "guard",
         "level": 3,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.DMG_RES", "amt": 1.02 }],
+        "effs": [{ "eff": "DAMAGE_RES", "amt": 1.02 }],
         "group": "BASIC",
         "conflict": ["FUSED"],
         "condition": ""
@@ -193,11 +193,11 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.005 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.005 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.005 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.005 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.005 }
+            { "eff": "MEL_POT", "amt": 1.005 },
+            { "eff": "RNG_POT", "amt": 1.005 },
+            { "eff": "TEC_POT", "amt": 1.005 },
+            { "eff": "FLOOR_POT", "amt": 1.005 },
+            { "eff": "DAMAGE_RES", "amt": 1.005 }
         ],
         "group": "BASIC",
         "conflict": [],
@@ -208,11 +208,11 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.01 }
+            { "eff": "MEL_POT", "amt": 1.01 },
+            { "eff": "RNG_POT", "amt": 1.01 },
+            { "eff": "TEC_POT", "amt": 1.01 },
+            { "eff": "FLOOR_POT", "amt": 1.01 },
+            { "eff": "DAMAGE_RES", "amt": 1.01 }
         ],
         "group": "BASIC",
         "conflict": [],
@@ -223,11 +223,11 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.015 }
+            { "eff": "MEL_POT", "amt": 1.015 },
+            { "eff": "RNG_POT", "amt": 1.015 },
+            { "eff": "TEC_POT", "amt": 1.015 },
+            { "eff": "FLOOR_POT", "amt": 1.015 },
+            { "eff": "DAMAGE_RES", "amt": 1.015 }
         ],
         "group": "BASIC",
         "conflict": [],
@@ -238,11 +238,11 @@
         "level": 4,
         "bp": 12,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.025 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.025 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.025 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.025 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 },
+            { "eff": "FLOOR_POT", "amt": 1.025 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
         ],
         "group": "BASIC",
         "conflict": [],
@@ -252,7 +252,7 @@
         "name": "burn ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.BURN_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "BURN_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -261,7 +261,7 @@
         "name": "burn ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.BURN_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "BURN_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -270,7 +270,7 @@
         "name": "burn ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.BURN_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "BURN_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -279,7 +279,7 @@
         "name": "freeze ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.FREEZE_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "FREEZE_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -288,7 +288,7 @@
         "name": "freeze ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.FREEZE_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "FREEZE_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -297,7 +297,7 @@
         "name": "freeze ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.FREEZE_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "FREEZE_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -306,7 +306,7 @@
         "name": "shock ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.SHOCK_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "SHOCK_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -315,7 +315,7 @@
         "name": "shock ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.SHOCK_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "SHOCK_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -324,7 +324,7 @@
         "name": "shock ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.SHOCK_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "SHOCK_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -333,7 +333,7 @@
         "name": "blind ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.BLIND_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "BLIND_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -342,7 +342,7 @@
         "name": "blind ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.BLIND_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "BLIND_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -351,7 +351,7 @@
         "name": "blind ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.BLIND_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "BLIND_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -360,7 +360,7 @@
         "name": "panic ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.PANIC_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "PANIC_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -369,7 +369,7 @@
         "name": "panic ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.PANIC_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "PANIC_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -378,7 +378,7 @@
         "name": "panic ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.PANIC_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "PANIC_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -387,7 +387,7 @@
         "name": "poison ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.POISON_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "POISON_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -396,7 +396,7 @@
         "name": "poison ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.POISON_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "POISON_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -405,7 +405,7 @@
         "name": "poison ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.POISON_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "POISON_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -414,7 +414,7 @@
         "name": "pain ward",
         "level": 1,
         "bp": 4,
-        "effs": [{ "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.2 }],
+        "effs": [{ "eff": "PHYDOWN_RES", "amt": 1.2 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -423,7 +423,7 @@
         "name": "pain ward",
         "level": 2,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.25 }],
+        "effs": [{ "eff": "PHYDOWN_RES", "amt": 1.25 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -432,7 +432,7 @@
         "name": "pain ward",
         "level": 3,
         "bp": 6,
-        "effs": [{ "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.3 }],
+        "effs": [{ "eff": "PHYDOWN_RES", "amt": 1.3 }],
         "group": "WARD",
         "conflict": ["WARD"],
         "condition": ""
@@ -442,13 +442,13 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.BURN_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.FREEZE_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.SHOCK_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.BLIND_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.PANIC_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.POISON_RES", "amt": 1.2 },
-            { "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.2 }
+            { "eff": "BURN_RES", "amt": 1.2 },
+            { "eff": "FREEZE_RES", "amt": 1.2 },
+            { "eff": "SHOCK_RES", "amt": 1.2 },
+            { "eff": "BLIND_RES", "amt": 1.2 },
+            { "eff": "PANIC_RES", "amt": 1.2 },
+            { "eff": "POISON_RES", "amt": 1.2 },
+            { "eff": "PHYDOWN_RES", "amt": 1.2 }
         ],
         "group": "WARD",
         "conflict": ["WARD"],
@@ -459,13 +459,13 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.BURN_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.FREEZE_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.SHOCK_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.BLIND_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.PANIC_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.POISON_RES", "amt": 1.25 },
-            { "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.25 }
+            { "eff": "BURN_RES", "amt": 1.25 },
+            { "eff": "FREEZE_RES", "amt": 1.25 },
+            { "eff": "SHOCK_RES", "amt": 1.25 },
+            { "eff": "BLIND_RES", "amt": 1.25 },
+            { "eff": "PANIC_RES", "amt": 1.25 },
+            { "eff": "POISON_RES", "amt": 1.25 },
+            { "eff": "PHYDOWN_RES", "amt": 1.25 }
         ],
         "group": "WARD",
         "conflict": ["WARD"],
@@ -476,13 +476,13 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.BURN_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.FREEZE_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.SHOCK_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.BLIND_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.PANIC_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.POISON_RES", "amt": 1.3 },
-            { "eff": "EffectTypes.PHYDOWN_RES", "amt": 1.3 }
+            { "eff": "BURN_RES", "amt": 1.3 },
+            { "eff": "FREEZE_RES", "amt": 1.3 },
+            { "eff": "SHOCK_RES", "amt": 1.3 },
+            { "eff": "BLIND_RES", "amt": 1.3 },
+            { "eff": "PANIC_RES", "amt": 1.3 },
+            { "eff": "POISON_RES", "amt": 1.3 },
+            { "eff": "PHYDOWN_RES", "amt": 1.3 }
         ],
         "group": "WARD",
         "conflict": ["WARD"],
@@ -493,8 +493,8 @@
         "level": 1,
         "bp": 4,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0075 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0075 }
+            { "eff": "MEL_POT", "amt": 1.0075 },
+            { "eff": "RNG_POT", "amt": 1.0075 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -505,8 +505,8 @@
         "level": 2,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0125 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0125 }
+            { "eff": "MEL_POT", "amt": 1.0125 },
+            { "eff": "RNG_POT", "amt": 1.0125 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -517,8 +517,8 @@
         "level": 3,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0175 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0175 }
+            { "eff": "MEL_POT", "amt": 1.0175 },
+            { "eff": "RNG_POT", "amt": 1.0175 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -529,8 +529,8 @@
         "level": 1,
         "bp": 4,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0075 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0075 }
+            { "eff": "MEL_POT", "amt": 1.0075 },
+            { "eff": "TEC_POT", "amt": 1.0075 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -541,8 +541,8 @@
         "level": 2,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0125 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0125 }
+            { "eff": "MEL_POT", "amt": 1.0125 },
+            { "eff": "TEC_POT", "amt": 1.0125 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -553,8 +553,8 @@
         "level": 3,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0175 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0175 }
+            { "eff": "MEL_POT", "amt": 1.0175 },
+            { "eff": "TEC_POT", "amt": 1.0175 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -565,8 +565,8 @@
         "level": 1,
         "bp": 4,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0075 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0075 }
+            { "eff": "RNG_POT", "amt": 1.0075 },
+            { "eff": "MEL_POT", "amt": 1.0075 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -577,8 +577,8 @@
         "level": 2,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0125 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0125 }
+            { "eff": "RNG_POT", "amt": 1.0125 },
+            { "eff": "MEL_POT", "amt": 1.0125 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -589,8 +589,8 @@
         "level": 3,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0175 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0175 }
+            { "eff": "RNG_POT", "amt": 1.0175 },
+            { "eff": "MEL_POT", "amt": 1.0175 }
         ],
         "group": "DUALBLE",
         "conflict": ["DUALBLE"],
@@ -601,8 +601,8 @@
         "level": 1,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.01 }
+            { "eff": "HP", "amt": 5 },
+            { "eff": "DAMAGE_RES", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -613,8 +613,8 @@
         "level": 2,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -625,8 +625,8 @@
         "level": 3,
         "bp": 9,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -637,8 +637,8 @@
         "level": 1,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.01 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "FLOOR_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -649,8 +649,8 @@
         "level": 2,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "FLOOR_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -661,8 +661,8 @@
         "level": 3,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.025 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "FLOOR_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -673,8 +673,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1 }
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -685,8 +685,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -697,8 +697,8 @@
         "level": 3,
         "bp": 9,
         "effs": [
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -709,8 +709,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1 }
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -721,8 +721,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -733,8 +733,8 @@
         "level": 3,
         "bp": 9,
         "effs": [
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -745,8 +745,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1 }
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -757,8 +757,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -769,8 +769,8 @@
         "level": 3,
         "bp": 9,
         "effs": [
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -781,8 +781,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.01 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -793,8 +793,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -805,8 +805,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.025 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -817,8 +817,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.01 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -829,8 +829,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -841,8 +841,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.025 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -853,8 +853,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.01 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "TEC_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -865,8 +865,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "TEC_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -877,8 +877,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.025 }
+            { "eff": "PP", "amt": 5 },
+            { "eff": "TEC_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -889,8 +889,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.01 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "MEL_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -901,8 +901,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "MEL_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -913,8 +913,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "MEL_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -925,8 +925,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.01 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "RNG_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -937,8 +937,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "RNG_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -949,8 +949,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "RNG_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -961,8 +961,8 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.01 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "TEC_POT", "amt": 1.01 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -973,8 +973,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "TEC_POT", "amt": 1.02 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -985,8 +985,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "TEC_POT", "amt": 1.025 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -997,11 +997,11 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 4 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0125 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0125 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0125 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 4 },
+            { "eff": "MEL_POT", "amt": 1.0125 },
+            { "eff": "RNG_POT", "amt": 1.0125 },
+            { "eff": "TEC_POT", "amt": 1.0125 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -1012,11 +1012,11 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 4 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0175 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0175 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0175 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 4 },
+            { "eff": "MEL_POT", "amt": 1.0175 },
+            { "eff": "RNG_POT", "amt": 1.0175 },
+            { "eff": "TEC_POT", "amt": 1.0175 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -1027,11 +1027,11 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 4 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.0225 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.0225 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.0225 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 4 },
+            { "eff": "MEL_POT", "amt": 1.0225 },
+            { "eff": "RNG_POT", "amt": 1.0225 },
+            { "eff": "TEC_POT", "amt": 1.0225 }
         ],
         "group": "SOUL",
         "conflict": ["SOUL"],
@@ -1042,8 +1042,8 @@
         "level": 0,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.PP", "amt": 3 }
+            { "eff": "HP", "amt": 5 },
+            { "eff": "PP", "amt": 3 }
         ],
         "group": "NOTE",
         "conflict": ["NOTE"],
@@ -1053,7 +1053,7 @@
         "name": "ael note b",
         "level": 0,
         "bp": 4,
-        "effs": ["EffectTypes.MEL_POT", "EffectTypes.RNG_POT"],
+        "effs": ["MEL_POT", "RNG_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1062,7 +1062,7 @@
         "name": "ael note c",
         "level": 0,
         "bp": 4,
-        "effs": ["EffectTypes.MEL_POT", "EffectTypes.TEC_POT"],
+        "effs": ["MEL_POT", "TEC_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1071,7 +1071,7 @@
         "name": "ael note d",
         "level": 0,
         "bp": 4,
-        "effs": ["EffectTypes.RNG_POT", "EffectTypes.TEC_POT"],
+        "effs": ["RNG_POT", "TEC_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1080,7 +1080,7 @@
         "name": "magnus note",
         "level": 0,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.MEL_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "MEL_POT", "amt": 1.015 }],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1089,7 +1089,7 @@
         "name": "lab note",
         "level": 0,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.RNG_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "RNG_POT", "amt": 1.015 }],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1098,7 +1098,7 @@
         "name": "resola note",
         "level": 0,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.TEC_POT", "amt": 1.015 }],
+        "effs": [{ "eff": "TEC_POT", "amt": 1.015 }],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1107,7 +1107,7 @@
         "name": "ret note a",
         "level": 0,
         "bp": 5,
-        "effs": [{ "eff": "EffectTypes.HP", "amt": 10 }],
+        "effs": [{ "eff": "HP", "amt": 10 }],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1116,11 +1116,7 @@
         "name": "ret note b",
         "level": 0,
         "bp": 4,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 5 }, "MEL_POT", "RNG_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1129,11 +1125,7 @@
         "name": "ret note c",
         "level": 0,
         "bp": 4,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            "EffectTypes.MEL_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 5 }, "MEL_POT", "TEC_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1142,11 +1134,7 @@
         "name": "ret note d",
         "level": 0,
         "bp": 4,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 5 }, "RNG_POT", "TEC_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1156,9 +1144,9 @@
         "level": 0,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 3 },
+            { "eff": "FLOOR_POT", "amt": 1.02 }
         ],
         "group": "NOTE",
         "conflict": ["NOTE"],
@@ -1168,11 +1156,7 @@
         "name": "maqea note",
         "level": 0,
         "bp": 5,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1182,11 +1166,11 @@
         "level": 0,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
+            { "eff": "HP", "amt": 5 },
+            { "eff": "PP", "amt": 3 },
+            "MEL_POT",
+            "RNG_POT",
+            "TEC_POT"
         ],
         "group": "DOMINA",
         "conflict": ["DOMINA"],
@@ -1197,10 +1181,10 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
+            { "eff": "HP", "amt": 15 },
+            "MEL_POT",
+            "RNG_POT",
+            "TEC_POT"
         ],
         "group": "DOMINA",
         "conflict": ["DOMINA"],
@@ -1211,12 +1195,12 @@
         "level": 1,
         "bp": 3,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": -10 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.985 }
+            { "eff": "HP", "amt": -10 },
+            { "eff": "MEL_POT", "amt": 1.01 },
+            { "eff": "RNG_POT", "amt": 1.01 },
+            { "eff": "TEC_POT", "amt": 1.01 },
+            { "eff": "FLOOR_POT", "amt": 1.01 },
+            { "eff": "DAMAGE_RES", "amt": 0.985 }
         ],
         "group": "SECRETA",
         "conflict": ["SECRETA"],
@@ -1227,12 +1211,12 @@
         "level": 2,
         "bp": 4,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": -10 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.985 }
+            { "eff": "HP", "amt": -10 },
+            { "eff": "MEL_POT", "amt": 1.015 },
+            { "eff": "RNG_POT", "amt": 1.015 },
+            { "eff": "TEC_POT", "amt": 1.015 },
+            { "eff": "FLOOR_POT", "amt": 1.015 },
+            { "eff": "DAMAGE_RES", "amt": 0.985 }
         ],
         "group": "SECRETA",
         "conflict": ["SECRETA"],
@@ -1243,12 +1227,12 @@
         "level": 3,
         "bp": 5,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": -10 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.985 }
+            { "eff": "HP", "amt": -10 },
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "FLOOR_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 0.985 }
         ],
         "group": "SECRETA",
         "conflict": ["SECRETA"],
@@ -1259,10 +1243,10 @@
         "level": 1,
         "bp": 7,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.01 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.01 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 3 },
+            { "eff": "FLOOR_POT", "amt": 1.01 },
+            { "eff": "DAMAGE_RES", "amt": 1.01 }
         ],
         "group": "DREAD",
         "conflict": ["DREAD"],
@@ -1273,10 +1257,10 @@
         "level": 2,
         "bp": 7.5,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.PP", "amt": 4 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.015 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.015 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "PP", "amt": 4 },
+            { "eff": "FLOOR_POT", "amt": 1.015 },
+            { "eff": "DAMAGE_RES", "amt": 1.015 }
         ],
         "group": "DREAD",
         "conflict": ["DREAD"],
@@ -1287,10 +1271,10 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 30 },
-            { "eff": "EffectTypes.PP", "amt": 7 },
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 },
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
+            { "eff": "HP", "amt": 30 },
+            { "eff": "PP", "amt": 7 },
+            { "eff": "FLOOR_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
         ],
         "group": "DREAD",
         "conflict": ["DREAD"],
@@ -1301,8 +1285,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.015 }
+            { "eff": "HP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.015 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1313,8 +1297,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "MEL_POT", "amt": 1.02 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1325,8 +1309,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.MEL_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "MEL_POT", "amt": 1.025 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1337,8 +1321,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.015 }
+            { "eff": "HP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.015 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1349,8 +1333,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "RNG_POT", "amt": 1.02 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1361,8 +1345,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.RNG_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "RNG_POT", "amt": 1.025 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1373,8 +1357,8 @@
         "level": 1,
         "bp": 6,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 5 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.015 }
+            { "eff": "HP", "amt": 5 },
+            { "eff": "TEC_POT", "amt": 1.015 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1385,8 +1369,8 @@
         "level": 2,
         "bp": 8,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.02 }
+            { "eff": "HP", "amt": 10 },
+            { "eff": "TEC_POT", "amt": 1.02 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1397,8 +1381,8 @@
         "level": 3,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            { "eff": "EffectTypes.TEC_POT", "amt": 1.025 }
+            { "eff": "HP", "amt": 15 },
+            { "eff": "TEC_POT", "amt": 1.025 }
         ],
         "group": "GIGAS",
         "conflict": ["GIGAS"],
@@ -1408,11 +1392,7 @@
         "name": "fire exploit",
         "level": 1,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to fire."
@@ -1421,11 +1401,7 @@
         "name": "ice exploit",
         "level": 1,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to ice."
@@ -1434,11 +1410,7 @@
         "name": "lightning exploit",
         "level": 1,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to lightning."
@@ -1447,11 +1419,7 @@
         "name": "wind exploit",
         "level": 1,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to wind."
@@ -1460,11 +1428,7 @@
         "name": "light exploit",
         "level": 1,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to light."
@@ -1473,11 +1437,7 @@
         "name": "megas fusia",
         "level": 0,
         "bp": 4,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.RNG_POT",
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
         "group": "FUSIA",
         "conflict": ["FUSIA"],
         "condition": ""
@@ -1486,10 +1446,7 @@
         "name": "sta might",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 15 }, "MEL_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1498,10 +1455,7 @@
         "name": "spi might",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 5 }, "MEL_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1510,10 +1464,7 @@
         "name": "deft might",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }
-        ],
+        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1522,10 +1473,7 @@
         "name": "gua might",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
-        ],
+        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1534,10 +1482,7 @@
         "name": "sta precision",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 15 }, "RNG_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1546,10 +1491,7 @@
         "name": "spi precision",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 5 }, "RNG_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1558,10 +1500,7 @@
         "name": "deft precision",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }
-        ],
+        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1570,10 +1509,7 @@
         "name": "gua precision",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
-        ],
+        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1582,10 +1518,7 @@
         "name": "sta technique",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 15 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 15 }, "TEC_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1594,10 +1527,7 @@
         "name": "spi technique",
         "level": 0,
         "bp": 8,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 5 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 5 }, "TEC_POT"],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1606,10 +1536,7 @@
         "name": "deft technique",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.02 }
-        ],
+        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1618,10 +1545,7 @@
         "name": "gua technique",
         "level": 0,
         "bp": 8,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.02 }
-        ],
+        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1630,10 +1554,7 @@
         "name": "addi stamel",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 20 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 20 }, "MEL_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1642,10 +1563,7 @@
         "name": "addi spimel",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 6 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 6 }, "MEL_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1654,10 +1572,7 @@
         "name": "addi deftmel",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.025 }
-        ],
+        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1666,10 +1581,7 @@
         "name": "addi guamel",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
-        ],
+        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1678,10 +1590,7 @@
         "name": "addi stara",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 20 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 20 }, "RNG_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1690,10 +1599,7 @@
         "name": "addi spira",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 6 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 6 }, "RNG_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1702,10 +1608,7 @@
         "name": "addi deftra",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.025 }
-        ],
+        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1714,10 +1617,7 @@
         "name": "addi guara",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
-        ],
+        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1726,10 +1626,7 @@
         "name": "addi statech",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": 20 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": 20 }, "TEC_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1738,10 +1635,7 @@
         "name": "addi spitech",
         "level": 0,
         "bp": 10,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": 6 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": 6 }, "TEC_POT"],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1750,10 +1644,7 @@
         "name": "addi defttech",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 1.025 }
-        ],
+        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1762,10 +1653,7 @@
         "name": "addi guatech",
         "level": 0,
         "bp": 10,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 1.025 }
-        ],
+        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1775,9 +1663,9 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            "EffectTypes.MEL_POT"
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 3 },
+            "MEL_POT"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1788,9 +1676,9 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            "EffectTypes.RNG_POT"
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 3 },
+            "RNG_POT"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1801,9 +1689,9 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            { "eff": "EffectTypes.HP", "amt": 10 },
-            { "eff": "EffectTypes.PP", "amt": 3 },
-            "EffectTypes.TEC_POT"
+            { "eff": "HP", "amt": 10 },
+            { "eff": "PP", "amt": 3 },
+            "TEC_POT"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1814,14 +1702,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "EffectTypes.MEL_POT",
-            "EffectTypes.BURN_RES",
-            "EffectTypes.FREEZE_RES",
-            "EffectTypes.SHOCK_RES",
-            "EffectTypes.BLIND_RES",
-            "EffectTypes.PANIC_RES",
-            "EffectTypes.POISON_RES",
-            "EffectTypes.PHYDOWN_RES"
+            "MEL_POT",
+            "BURN_RES",
+            "FREEZE_RES",
+            "SHOCK_RES",
+            "BLIND_RES",
+            "PANIC_RES",
+            "POISON_RES",
+            "PHYDOWN_RES"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1832,14 +1720,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "EffectTypes.RNG_POT",
-            "EffectTypes.BURN_RES",
-            "EffectTypes.FREEZE_RES",
-            "EffectTypes.SHOCK_RES",
-            "EffectTypes.BLIND_RES",
-            "EffectTypes.PANIC_RES",
-            "EffectTypes.POISON_RES",
-            "EffectTypes.PHYDOWN_RES"
+            "RNG_POT",
+            "BURN_RES",
+            "FREEZE_RES",
+            "SHOCK_RES",
+            "BLIND_RES",
+            "PANIC_RES",
+            "POISON_RES",
+            "PHYDOWN_RES"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1850,14 +1738,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "EffectTypes.TEC_POT",
-            "EffectTypes.BURN_RES",
-            "EffectTypes.FREEZE_RES",
-            "EffectTypes.SHOCK_RES",
-            "EffectTypes.BLIND_RES",
-            "EffectTypes.PANIC_RES",
-            "EffectTypes.POISON_RES",
-            "EffectTypes.PHYDOWN_RES"
+            "TEC_POT",
+            "BURN_RES",
+            "FREEZE_RES",
+            "SHOCK_RES",
+            "BLIND_RES",
+            "PANIC_RES",
+            "POISON_RES",
+            "PHYDOWN_RES"
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1867,10 +1755,7 @@
         "name": "tria staromel",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": -5 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": -5 }, "MEL_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1879,10 +1764,7 @@
         "name": "tria spiromel",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": -3 },
-            "EffectTypes.MEL_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": -3 }, "MEL_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1891,10 +1773,7 @@
         "name": "tria deftromel",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 0.99 }
-        ],
+        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1903,10 +1782,7 @@
         "name": "tria guaromel",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.MEL_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.99 }
-        ],
+        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1915,10 +1791,7 @@
         "name": "tria starora",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": -5 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": -5 }, "RNG_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1927,10 +1800,7 @@
         "name": "tria spirora",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": -3 },
-            "EffectTypes.RNG_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": -3 }, "RNG_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1939,10 +1809,7 @@
         "name": "tria deftrora",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 0.99 }
-        ],
+        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1951,10 +1818,7 @@
         "name": "tria guarora",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.RNG_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.99 }
-        ],
+        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1963,10 +1827,7 @@
         "name": "tria starotech",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.HP", "amt": -5 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "HP", "amt": -5 }, "TEC_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1975,10 +1836,7 @@
         "name": "tria spirotech",
         "level": 0,
         "bp": 6,
-        "effs": [
-            { "eff": "EffectTypes.PP", "amt": -3 },
-            "EffectTypes.TEC_POT"
-        ],
+        "effs": [{ "eff": "PP", "amt": -3 }, "TEC_POT"],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1987,10 +1845,7 @@
         "name": "tria deftrotech",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.FLOOR_POT", "amt": 0.99 }
-        ],
+        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1999,10 +1854,7 @@
         "name": "tria guarotech",
         "level": 0,
         "bp": 6,
-        "effs": [
-            "EffectTypes.TEC_POT",
-            { "eff": "EffectTypes.DMG_RES", "amt": 0.99 }
-        ],
+        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
