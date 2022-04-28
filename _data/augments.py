@@ -10,4 +10,4 @@ with open(f"./_data/result/augments.json", "w") as f:
     for group in all_augments:
         augs.extend(group)
 
-    json.dump([*map(lambda aug: asdict(aug), augs)], f, default=str)
+    json.dump([*map(lambda aug: asdict(aug), augs)], f)

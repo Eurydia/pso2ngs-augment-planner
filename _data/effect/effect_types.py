@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class EffectTypes(Enum):
+class EffectTypes(str, Enum):
     """Enum for types of effect."""
 
     HP = "HP"

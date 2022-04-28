@@ -75,6 +75,6 @@ typings/
 # FuseBox cache
 .fusebox/
 
-_data/result/.
+_data/result/*
 *.pyc
-venv/
+venv

@@ -1,8 +1,6 @@
 from ctypes import util
 from typing import List
 
-from numpy import fromfunction
-
 from ._augment import Augment
 from ._augment_groups import AugmentGroups
 from effect import *
@@ -29,13 +27,11 @@ _secondary_effs = (
 # -----------------------------------------------
 for pri_name, pri_eff in zip(_primary_names, _primary_effs):
     for sec_name, sec_eff in zip(_secondary_names, _secondary_effs):
-
         # make sure order of the effects is correct.
         if sec_eff.eff in ADDITIVE_EFFECT_TYPE:
             effs = (sec_eff, pri_eff)
         else:
             effs = (pri_eff, sec_eff)
-
         augments.append(
             Augment(
                 f"tria {sec_name}{pri_name}",

@@ -13,8 +13,7 @@ def many_effs_with_same_amount(
     effs: List[Effect] = []
     for eff_type in eff_types:
         effs.append(Effect(eff_type, amount))
-
-    return tuple(eff_types)
+    return tuple(effs)
 
 
 def many_effs_with_same_many_amounts(
