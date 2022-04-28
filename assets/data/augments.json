@@ -1053,7 +1053,10 @@
         "name": "ael note b",
         "level": 0,
         "bp": 4,
-        "effs": ["MEL_POT", "RNG_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.01 },
+            { "eff": "RNG_POT", "amt": 1.01 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1062,7 +1065,10 @@
         "name": "ael note c",
         "level": 0,
         "bp": 4,
-        "effs": ["MEL_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.01 },
+            { "eff": "TEC_POT", "amt": 1.01 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1071,7 +1077,10 @@
         "name": "ael note d",
         "level": 0,
         "bp": 4,
-        "effs": ["RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.01 },
+            { "eff": "TEC_POT", "amt": 1.01 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1116,7 +1125,11 @@
         "name": "ret note b",
         "level": 0,
         "bp": 4,
-        "effs": [{ "eff": "HP", "amt": 5 }, "MEL_POT", "RNG_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.0075 },
+            { "eff": "RNG_POT", "amt": 1.0075 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1125,7 +1138,11 @@
         "name": "ret note c",
         "level": 0,
         "bp": 4,
-        "effs": [{ "eff": "HP", "amt": 5 }, "MEL_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.0075 },
+            { "eff": "TEC_POT", "amt": 1.0075 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1134,7 +1151,11 @@
         "name": "ret note d",
         "level": 0,
         "bp": 4,
-        "effs": [{ "eff": "HP", "amt": 5 }, "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.0075 },
+            { "eff": "TEC_POT", "amt": 1.0075 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1156,7 +1177,11 @@
         "name": "maqea note",
         "level": 0,
         "bp": 5,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.0125 },
+            { "eff": "RNG_POT", "amt": 1.0125 },
+            { "eff": "TEC_POT", "amt": 1.0125 }
+        ],
         "group": "NOTE",
         "conflict": ["NOTE"],
         "condition": ""
@@ -1168,9 +1193,9 @@
         "effs": [
             { "eff": "HP", "amt": 5 },
             { "eff": "PP", "amt": 3 },
-            "MEL_POT",
-            "RNG_POT",
-            "TEC_POT"
+            { "eff": "MEL_POT", "amt": 1.015 },
+            { "eff": "RNG_POT", "amt": 1.015 },
+            { "eff": "TEC_POT", "amt": 1.015 }
         ],
         "group": "DOMINA",
         "conflict": ["DOMINA"],
@@ -1182,9 +1207,9 @@
         "bp": 10,
         "effs": [
             { "eff": "HP", "amt": 15 },
-            "MEL_POT",
-            "RNG_POT",
-            "TEC_POT"
+            { "eff": "MEL_POT", "amt": 1.015 },
+            { "eff": "RNG_POT", "amt": 1.015 },
+            { "eff": "TEC_POT", "amt": 1.015 }
         ],
         "group": "DOMINA",
         "conflict": ["DOMINA"],
@@ -1392,7 +1417,11 @@
         "name": "fire exploit",
         "level": 1,
         "bp": 6,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to fire."
@@ -1401,7 +1430,11 @@
         "name": "ice exploit",
         "level": 1,
         "bp": 6,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to ice."
@@ -1410,7 +1443,11 @@
         "name": "lightning exploit",
         "level": 1,
         "bp": 6,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to lightning."
@@ -1419,7 +1456,11 @@
         "name": "wind exploit",
         "level": 1,
         "bp": 6,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to wind."
@@ -1428,7 +1469,11 @@
         "name": "light exploit",
         "level": 1,
         "bp": 6,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ELEMENTAL",
         "conflict": ["ELEMENTAL"],
         "condition": "against enemies weak to light."
@@ -1437,7 +1482,11 @@
         "name": "megas fusia",
         "level": 0,
         "bp": 4,
-        "effs": ["MEL_POT", "RNG_POT", "TEC_POT"],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.01 },
+            { "eff": "RNG_POT", "amt": 1.01 },
+            { "eff": "TEC_POT", "amt": 1.01 }
+        ],
         "group": "FUSIA",
         "conflict": ["FUSIA"],
         "condition": ""
@@ -1446,7 +1495,10 @@
         "name": "sta might",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "HP", "amt": 15 }, "MEL_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 15 },
+            { "eff": "MEL_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1455,7 +1507,10 @@
         "name": "spi might",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "PP", "amt": 5 }, "MEL_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 5 },
+            { "eff": "MEL_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1464,7 +1519,10 @@
         "name": "deft might",
         "level": 0,
         "bp": 8,
-        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "FLOOR_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1473,7 +1531,10 @@
         "name": "gua might",
         "level": 0,
         "bp": 8,
-        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1482,7 +1543,10 @@
         "name": "sta precision",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "HP", "amt": 15 }, "RNG_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 15 },
+            { "eff": "RNG_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1491,7 +1555,10 @@
         "name": "spi precision",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "PP", "amt": 5 }, "RNG_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 5 },
+            { "eff": "RNG_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1500,7 +1567,10 @@
         "name": "deft precision",
         "level": 0,
         "bp": 8,
-        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "FLOOR_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1509,7 +1579,10 @@
         "name": "gua precision",
         "level": 0,
         "bp": 8,
-        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1518,7 +1591,10 @@
         "name": "sta technique",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "HP", "amt": 15 }, "TEC_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 15 },
+            { "eff": "TEC_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1527,7 +1603,10 @@
         "name": "spi technique",
         "level": 0,
         "bp": 8,
-        "effs": [{ "eff": "PP", "amt": 5 }, "TEC_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 5 },
+            { "eff": "TEC_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1536,7 +1615,10 @@
         "name": "deft technique",
         "level": 0,
         "bp": 8,
-        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 1.02 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "FLOOR_POT", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1545,7 +1627,10 @@
         "name": "gua technique",
         "level": 0,
         "bp": 8,
-        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 1.02 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.02 },
+            { "eff": "DAMAGE_RES", "amt": 1.02 }
+        ],
         "group": "FUSED",
         "conflict": ["FUSED", "BASIC"],
         "condition": ""
@@ -1554,7 +1639,10 @@
         "name": "addi stamel",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "HP", "amt": 20 }, "MEL_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 20 },
+            { "eff": "MEL_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1563,7 +1651,10 @@
         "name": "addi spimel",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "PP", "amt": 6 }, "MEL_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 6 },
+            { "eff": "MEL_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1572,7 +1663,10 @@
         "name": "addi deftmel",
         "level": 0,
         "bp": 10,
-        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "FLOOR_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1581,7 +1675,10 @@
         "name": "addi guamel",
         "level": 0,
         "bp": 10,
-        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1590,7 +1687,10 @@
         "name": "addi stara",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "HP", "amt": 20 }, "RNG_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 20 },
+            { "eff": "RNG_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1599,7 +1699,10 @@
         "name": "addi spira",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "PP", "amt": 6 }, "RNG_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 6 },
+            { "eff": "RNG_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1608,7 +1711,10 @@
         "name": "addi deftra",
         "level": 0,
         "bp": 10,
-        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "FLOOR_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1617,7 +1723,10 @@
         "name": "addi guara",
         "level": 0,
         "bp": 10,
-        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1626,7 +1735,10 @@
         "name": "addi statech",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "HP", "amt": 20 }, "TEC_POT"],
+        "effs": [
+            { "eff": "HP", "amt": 20 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1635,7 +1747,10 @@
         "name": "addi spitech",
         "level": 0,
         "bp": 10,
-        "effs": [{ "eff": "PP", "amt": 6 }, "TEC_POT"],
+        "effs": [
+            { "eff": "PP", "amt": 6 },
+            { "eff": "TEC_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1644,7 +1759,10 @@
         "name": "addi defttech",
         "level": 0,
         "bp": 10,
-        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 1.025 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.025 },
+            { "eff": "FLOOR_POT", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1653,7 +1771,10 @@
         "name": "addi guatech",
         "level": 0,
         "bp": 10,
-        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 1.025 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.025 },
+            { "eff": "DAMAGE_RES", "amt": 1.025 }
+        ],
         "group": "ADDI",
         "conflict": ["ADDI"],
         "condition": ""
@@ -1665,7 +1786,7 @@
         "effs": [
             { "eff": "HP", "amt": 10 },
             { "eff": "PP", "amt": 3 },
-            "MEL_POT"
+            { "eff": "MEL_POT", "amt": 1.025 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1678,7 +1799,7 @@
         "effs": [
             { "eff": "HP", "amt": 10 },
             { "eff": "PP", "amt": 3 },
-            "RNG_POT"
+            { "eff": "RNG_POT", "amt": 1.025 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1691,7 +1812,7 @@
         "effs": [
             { "eff": "HP", "amt": 10 },
             { "eff": "PP", "amt": 3 },
-            "TEC_POT"
+            { "eff": "TEC_POT", "amt": 1.025 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1702,14 +1823,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "MEL_POT",
-            "BURN_RES",
-            "FREEZE_RES",
-            "SHOCK_RES",
-            "BLIND_RES",
-            "PANIC_RES",
-            "POISON_RES",
-            "PHYDOWN_RES"
+            { "eff": "MEL_POT", "amt": 1.025 },
+            { "eff": "BURN_RES", "amt": 1.2 },
+            { "eff": "FREEZE_RES", "amt": 1.2 },
+            { "eff": "SHOCK_RES", "amt": 1.2 },
+            { "eff": "BLIND_RES", "amt": 1.2 },
+            { "eff": "PANIC_RES", "amt": 1.2 },
+            { "eff": "POISON_RES", "amt": 1.2 },
+            { "eff": "PHYDOWN_RES", "amt": 1.2 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1720,14 +1841,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "RNG_POT",
-            "BURN_RES",
-            "FREEZE_RES",
-            "SHOCK_RES",
-            "BLIND_RES",
-            "PANIC_RES",
-            "POISON_RES",
-            "PHYDOWN_RES"
+            { "eff": "RNG_POT", "amt": 1.025 },
+            { "eff": "BURN_RES", "amt": 1.2 },
+            { "eff": "FREEZE_RES", "amt": 1.2 },
+            { "eff": "SHOCK_RES", "amt": 1.2 },
+            { "eff": "BLIND_RES", "amt": 1.2 },
+            { "eff": "PANIC_RES", "amt": 1.2 },
+            { "eff": "POISON_RES", "amt": 1.2 },
+            { "eff": "PHYDOWN_RES", "amt": 1.2 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1738,14 +1859,14 @@
         "level": 0,
         "bp": 10,
         "effs": [
-            "TEC_POT",
-            "BURN_RES",
-            "FREEZE_RES",
-            "SHOCK_RES",
-            "BLIND_RES",
-            "PANIC_RES",
-            "POISON_RES",
-            "PHYDOWN_RES"
+            { "eff": "TEC_POT", "amt": 1.025 },
+            { "eff": "BURN_RES", "amt": 1.2 },
+            { "eff": "FREEZE_RES", "amt": 1.2 },
+            { "eff": "SHOCK_RES", "amt": 1.2 },
+            { "eff": "BLIND_RES", "amt": 1.2 },
+            { "eff": "PANIC_RES", "amt": 1.2 },
+            { "eff": "POISON_RES", "amt": 1.2 },
+            { "eff": "PHYDOWN_RES", "amt": 1.2 }
         ],
         "group": "ADDI",
         "conflict": ["ADDI"],
@@ -1755,7 +1876,10 @@
         "name": "tria staromel",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "HP", "amt": -5 }, "MEL_POT"],
+        "effs": [
+            { "eff": "HP", "amt": -5 },
+            { "eff": "MEL_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1764,7 +1888,10 @@
         "name": "tria spiromel",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "PP", "amt": -3 }, "MEL_POT"],
+        "effs": [
+            { "eff": "PP", "amt": -3 },
+            { "eff": "MEL_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1773,7 +1900,10 @@
         "name": "tria deftromel",
         "level": 0,
         "bp": 6,
-        "effs": ["MEL_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.0225 },
+            { "eff": "FLOOR_POT", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1782,7 +1912,10 @@
         "name": "tria guaromel",
         "level": 0,
         "bp": 6,
-        "effs": ["MEL_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
+        "effs": [
+            { "eff": "MEL_POT", "amt": 1.0225 },
+            { "eff": "DAMAGE_RES", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1791,7 +1924,10 @@
         "name": "tria starora",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "HP", "amt": -5 }, "RNG_POT"],
+        "effs": [
+            { "eff": "HP", "amt": -5 },
+            { "eff": "RNG_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1800,7 +1936,10 @@
         "name": "tria spirora",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "PP", "amt": -3 }, "RNG_POT"],
+        "effs": [
+            { "eff": "PP", "amt": -3 },
+            { "eff": "RNG_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1809,7 +1948,10 @@
         "name": "tria deftrora",
         "level": 0,
         "bp": 6,
-        "effs": ["RNG_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.0225 },
+            { "eff": "FLOOR_POT", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1818,7 +1960,10 @@
         "name": "tria guarora",
         "level": 0,
         "bp": 6,
-        "effs": ["RNG_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
+        "effs": [
+            { "eff": "RNG_POT", "amt": 1.0225 },
+            { "eff": "DAMAGE_RES", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1827,7 +1972,10 @@
         "name": "tria starotech",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "HP", "amt": -5 }, "TEC_POT"],
+        "effs": [
+            { "eff": "HP", "amt": -5 },
+            { "eff": "TEC_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1836,7 +1984,10 @@
         "name": "tria spirotech",
         "level": 0,
         "bp": 6,
-        "effs": [{ "eff": "PP", "amt": -3 }, "TEC_POT"],
+        "effs": [
+            { "eff": "PP", "amt": -3 },
+            { "eff": "TEC_POT", "amt": 1.0225 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1845,7 +1996,10 @@
         "name": "tria deftrotech",
         "level": 0,
         "bp": 6,
-        "effs": ["TEC_POT", { "eff": "FLOOR_POT", "amt": 0.99 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.0225 },
+            { "eff": "FLOOR_POT", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
@@ -1854,7 +2008,10 @@
         "name": "tria guarotech",
         "level": 0,
         "bp": 6,
-        "effs": ["TEC_POT", { "eff": "DAMAGE_RES", "amt": 0.99 }],
+        "effs": [
+            { "eff": "TEC_POT", "amt": 1.0225 },
+            { "eff": "DAMAGE_RES", "amt": 0.99 }
+        ],
         "group": "TRIA",
         "conflict": ["TRIA"],
         "condition": ""
