@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from effect_types import EffectTypes
+from .effect_types import EffectTypes
 
 
 @dataclass

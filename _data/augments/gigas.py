@@ -20,7 +20,7 @@ for name, eff in zip(_names, OFFENSIVE_POT):
             3,
             (6, 8, 10),
             (
-                EffectWithManyAmount(ET.HP, (10, 15, 30)),
+                EffectWithManyAmount(ET.HP, (5, 10, 15)),
                 EffectWithManyAmount(eff, (1.015, 1.02, 1.025)),
             ),
             GROUP,

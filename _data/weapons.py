@@ -9,4 +9,4 @@ with open(f"./_data/result/weapons.json", "w") as f:
     for group in all_weapons:
         weapons.extend(group)
 
-    json.dump([*map(lambda weapon: asdict(weapon), weapons)], f)
+    json.dump([*map(lambda weapon: asdict(weapon), weapons)], f, default=str)

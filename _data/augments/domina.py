@@ -1,11 +1,10 @@
 from typing import List
 
-from _data.util import many_effs_with_same_amount
-
 from ._augment import Augment
 from ._augment_groups import AugmentGroups
 from effect import *
 from effect import EffectTypes as ET
+from util import many_effs_with_same_amount
 
 
 GROUP = AugmentGroups.DOMINA

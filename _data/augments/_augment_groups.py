@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class AugmentGroups(Enum):
+class AugmentGroups(str, Enum):
     """Enums for augment groups."""
 
     BASIC = "BASIC"

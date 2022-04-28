@@ -1,7 +1,6 @@
 from typing import Iterable, Tuple, List
-from _data.effect.effect import EffectWithManyAmount
 
-from effect import EffectTypes, Effect
+from effect import EffectTypes, Effect, EffectWithManyAmount
 
 
 def many_effs_with_same_amount(

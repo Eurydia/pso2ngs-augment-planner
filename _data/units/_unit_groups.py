@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class UnitGroups(Enum):
+class UnitGroups(str, Enum):
     """Enum for unit groups."""
 
     ONE_STAR = "1*"

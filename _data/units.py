@@ -9,4 +9,4 @@ with open(f"./_data/result/units.json", "w") as f:
     for group in all_units:
         units.extend(group)
 
-    json.dump([*map(lambda unit: asdict(unit), units)], f)
+    json.dump([*map(lambda unit: asdict(unit), units)], f, default=str)

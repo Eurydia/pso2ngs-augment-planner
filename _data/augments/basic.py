@@ -1,12 +1,10 @@
 from typing import List
 
-from ._augment import (
-    Augment,
-    many_effs_with_same_many_amounts,
-)
+from ._augment import Augment
 from ._augment_groups import AugmentGroups
 from effect import *
 from effect import EffectTypes as ET
+from util import many_effs_with_same_many_amounts
 
 GROUP = AugmentGroups.BASIC
 CONFLICT = (AugmentGroups.FUSED,)

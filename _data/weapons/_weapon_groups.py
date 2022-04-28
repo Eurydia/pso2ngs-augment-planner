@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class WeaponGroup(Enum):
+class WeaponGroup(str, Enum):
     """Enum for weapon groups."""
 
     ELEMENTRAL = "ELEMENTAL"

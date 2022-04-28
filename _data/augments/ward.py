@@ -1,16 +1,11 @@
 from typing import List
 
-from ._augment import (
-    Augment,
-    EffectMultiLevel,
-    augment_from_list,
-    many_effs_with_same_many_amounts,
-)
-from ._augment_groups import WARD
+from ._augment import Augment
+from ._augment_groups import AugmentGroups
 from effect import *
+from util import many_effs_with_same_many_amounts
 
-
-GROUP = WARD
+GROUP = AugmentGroups.WARD
 CONFLICT = (GROUP,)
 
 augments: List[Augment] = []
@@ -27,7 +22,7 @@ _wards = (
 # -----------------------------------------------
 for name, eff in zip(_wards, AILMENT_RES):
     augments.extend(
-        augment_from_list(
+        Augment.from_list(
             f"{name} ward",
             3,
             (4, 5, 6),
@@ -40,7 +35,7 @@ for name, eff in zip(_wards, AILMENT_RES):
 
 # -----------------------------------------------
 augments.extend(
-    augment_from_list(
+    Augment.from_list(
         "sovereign ward",
         3,
         (6, 8, 10),

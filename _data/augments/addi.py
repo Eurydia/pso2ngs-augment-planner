@@ -1,8 +1,6 @@
 from typing import List
 
-from ._augment import (
-    Augment,
-)
+from ._augment import Augment
 from ._augment_groups import AugmentGroups
 from effect import *
 from effect import EffectTypes as ET
